@@ -12,6 +12,13 @@ _scripts/vendor/
 # 抓取过程的临时清单（每次扫描都会重写）
 _scripts/_data/inbox_manifest.json
 
+# 图像语义索引：生成物，几 MB，换台机器重建即可
+#   python3 artvault_vision.py build
+_scripts/_data/vision_index.json
+
+# Vision 特征提取器的编译产物（架构相关，首次使用时自动编译）
+_scripts/vision/vision_feat
+
 # Pinterest 抓来的图版权归原作者、无统一授权，**不要提交也不要公开**
 # （10-流派/ 里的 CC0 图不受影响，那是可以随便分发的）
 99-附件/images/pinterest/
