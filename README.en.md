@@ -428,6 +428,7 @@ need only Python 3 + Pillow.
 | `image_analysis_ext.py` | **Optional**: face framing / Hough lines / spectral-residual saliency. Needs numpy + opencv, skipped automatically if absent |
 | `artvault_vision.py` | **Optional**: macOS Vision semantic search (search by image / near-duplicates / similar movements) |
 | `ingest_inbox.py` | Processes the `pinterest/` inbox, including the dimensions above in its scan |
+| `verify_vault.py` | **Acceptance checks**: broken links / duplicate names / AI images / frontmatter / near-duplicates / licences / orphans |
 | `pinterest_grab.py` / `pinterest_export.py` | Pinterest scraping and export (local use only, images are **not** committed) |
 
 ### Two conventions that are easy to miss

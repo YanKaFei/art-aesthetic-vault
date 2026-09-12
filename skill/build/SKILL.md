@@ -165,39 +165,39 @@ cd <仓库>/skill && ./install.sh
 ### 阶段 6：验收（必做）
 
 ```bash
-cd <仓库>
-python3 - <<'EOF'
-import os, re, glob, json
-from collections import Counter
-miss = [m for md in glob.glob('10-流派/*.md')
-        for m in re.findall(r'!\[\[([^\]]+)\]\]', open(md, encoding='utf-8').read())
-        if not glob.glob('99-附件/images/**/'+m, recursive=True)]
-print("断链:", len(miss))
-names = [p.split('/')[-1] for p in glob.glob('99-附件/images/**/*.*', recursive=True)]
-print("重名:", [k for k,v in Counter(names).items() if v>1])
-import sys; sys.path.insert(0,'_scripts')
-from providers import is_ai_generated
-ai = [w['title'] for j in glob.glob('_scripts/_data/*.json')
-      for w in json.load(open(j, encoding='utf-8')) if is_ai_generated(w)]
-print("AI 生成图残留:", len(ai), ai[:3])
-EOF
+cd _scripts
+python3 verify_vault.py            # 全部检查
+python3 verify_vault.py --quick    # 只跑不需要 Vision 索引的前四项
 ```
 
-**四项必须全过：断链 0 · 重名 0 · AI 图 0 · frontmatter 合法。**
+七项检查：**断链 · 重名 · AI 生成图 · frontmatter · 近重复 · 授权字段 · 孤儿图**。
+退出码 0 = 全过，1 = 有问题（可以直接写进 CI 或 pre-commit）。
 
-第 5 项（可选，仅 macOS）：近重复检测。它一次就找出过 `abstract-art`
-仅有 2 张图、却和 `de-stijl` 一模一样的问题。
+**必须全过的是前四项**（不需要任何可选依赖）：
+
+```
+1 断链        每个 ![[...]] 都能在 99-附件/images/ 下找到文件
+2 重名        全库 basename 唯一 —— Obsidian 的 ![[名]] 按 basename 解析，
+              重名会让嵌入指向错误的那张
+3 AI 图       全库 0 命中 —— 用模型的输出当模型的参考是致命的
+4 frontmatter 合法 YAML，且无 HTML 注释（`<` 开头的行）
+```
+
+后三项里，第 5 项「近重复」值钱但要人工判断：
 
 ```bash
-cd _scripts
 python3 artvault_vision.py build              # 600 张约 8 秒
-python3 artvault_vision.py dups --thresh 0.08
+python3 verify_vault.py                       # 会自动带上第 5 项
 ```
 
-**注意大部分跨流派重复是合理的**，不是 bug —— 一件作品本来就可以同时是多个
+它一次就找出过 `abstract-art` 仅有 2 张图、却和 `de-stijl` 一模一样的问题。
+但**大部分跨流派重复是合理的**，不是 bug —— 一件作品本来就可以同时是多个
 流派的例证（Caravaggisti 属巴洛克、Diego Rivera 同属壁画运动与社会现实主义）。
 人工过的时候判断的是：重叠说得通 → 保留；还是关键词选错了（该流派真正该有的
 作品一张都没有）→ 改关键词。详见 `reference/pitfalls.md` 的 4.5。
+
+第 6 项「授权字段」是发布的前提：每件作品都要能说清来源与授权。
+第 7 项「孤儿图」通常意味着某次抓取中途断了，重建笔记即可。
 
 ---
 
