@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/post-impressionism/01-post-impressionism-adeline-ravoux.jpg"
  },
  {
+  "title": "A Sunday on La Grande Jatte — 1884",
+  "artist": "Georges Seurat",
+  "date": "1884–86, border added 1888–89",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/2d484387-2509-5e8e-2c43-22f9981972eb/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/2d484387-2509-5e8e-2c43-22f9981972eb/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/27992",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/post-impressionism/02-post-impressionism-a-sunday-on-la-grande-jatte-1884.jpg"
+ },
+ {
+  "title": "L'Arlésienne: Madame Joseph-Michel Ginoux (Marie Julien, 1848–1911)",
+  "artist": "Vincent van Gogh",
+  "date": "1888–89",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1396.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DT1396.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/436529",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/post-impressionism/03-post-impressionism-larlésienne-madame-joseph-michel-ginoux-mari.jpg"
+ },
+ {
   "title": "The Pigeon Tower at Bellevue",
   "artist": "Paul Cezanne",
   "date": "1890",
@@ -23,58 +49,32 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/post-impressionism/02-post-impressionism-the-pigeon-tower-at-bellevue.jpg"
+  "local_image": "99-附件/images/post-impressionism/04-post-impressionism-the-pigeon-tower-at-bellevue.jpg"
  },
  {
-  "title": "The Call",
-  "artist": "Paul Gauguin",
-  "date": "1902",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1943.392/1943.392_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1943.392/1943.392_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1943.392",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Jane Avril",
+  "artist": "Henri de Toulouse-Lautrec",
+  "date": "1893",
+  "medium": "Color lithograph on tan wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/4d57383a-0f32-20d0-b09a-afb9c81357d3/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/4d57383a-0f32-20d0-b09a-afb9c81357d3/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/67170",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/post-impressionism/03-post-impressionism-the-call.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/post-impressionism/05-post-impressionism-jane-avril.jpg"
  },
  {
-  "title": "The Brook",
-  "artist": "Paul Cezanne",
-  "date": "c. 1895–1900",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1958.20/1958.20_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1958.20/1958.20_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1958.20",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/post-impressionism/04-post-impressionism-the-brook.jpg"
- },
- {
-  "title": "Drying the Linen, or Moonrise at the Priory",
-  "artist": "Maurice Denis",
-  "date": "1894",
-  "medium": "oil on canvas glued to cardboard",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2020.109/2020.109_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2020.109/2020.109_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2020.109",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/post-impressionism/05-post-impressionism-drying-the-linen-or-moonrise-at-the-priory.jpg"
- },
- {
-  "title": "Two Poplars in the Alpilles near Saint-Rémy",
-  "artist": "Vincent van Gogh",
-  "date": "1889",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1958.32/1958.32_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1958.32/1958.32_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1958.32",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/post-impressionism/06-post-impressionism-two-poplars-in-the-alpilles-near-saint-rémy.jpg"
+  "title": "The Forest in Winter at Sunset",
+  "artist": "Théodore Rousseau",
+  "date": "ca. 1846–67",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-31520-001.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP-31520-001.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/438816",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/post-impressionism/06-post-impressionism-the-forest-in-winter-at-sunset.jpg"
  }
 ]

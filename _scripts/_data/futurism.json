@@ -13,16 +13,42 @@
   "local_image": "99-附件/images/futurism/01-futurism-movement.jpg"
  },
  {
+  "title": "Sketches of Four Heads and a Child",
+  "artist": "Umberto Boccioni",
+  "date": "1907",
+  "medium": "Etching on ivory wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/0c3c4603-73f4-50e5-5af6-04cff1fde3ad/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/0c3c4603-73f4-50e5-5af6-04cff1fde3ad/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/11096",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/futurism/02-futurism-sketches-of-four-heads-and-a-child.jpg"
+ },
+ {
   "title": "Umberto Boccioni - Der Trinker",
   "artist": "Umberto Boccioni",
   "date": "1914",
   "medium": "Umberto Boccioni - Der Trinker",
-  "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Umberto_Boccioni_-_Der_Trinker.jpg/1280px-Umberto_Boccioni_-_Der_Trinker.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Umberto_Boccioni_-_Der_Trinker.jpg?width=1024",
   "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Umberto_Boccioni_-_Der_Trinker.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
   "page_url": "https://commons.wikimedia.org/wiki/File:Umberto_Boccioni_-_Der_Trinker.jpg",
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/futurism/02-futurism-umberto-boccioni---der-trinker.jpg"
+  "local_image": "99-附件/images/futurism/03-futurism-umberto-boccioni---der-trinker.jpg"
+ },
+ {
+  "title": "La Signora Sacchi",
+  "artist": "Umberto Boccioni",
+  "date": "1907",
+  "medium": "Drypoint on paper",
+  "image_url": "https://www.artic.edu/iiif/2/098b183a-d3c1-5ae6-a886-2879d3ca8c02/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/098b183a-d3c1-5ae6-a886-2879d3ca8c02/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/129370",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/futurism/04-futurism-la-signora-sacchi.jpg"
  }
 ]

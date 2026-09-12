@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/pre-raphaelite/01-pre-raphaelite-steps-in-a-garden.jpg"
  },
  {
+  "title": "Beata Beatrix",
+  "artist": "Dante Gabriel Rossetti",
+  "date": "1871–72",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/194674a2-f451-65f7-ba46-6aac4d894f0b/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/194674a2-f451-65f7-ba46-6aac4d894f0b/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/16551",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/pre-raphaelite/02-pre-raphaelite-beata-beatrix.jpg"
+ },
+ {
   "title": "The Coral Necklace",
   "artist": "Frederick Sandys",
   "date": "1871",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/pre-raphaelite/02-pre-raphaelite-the-coral-necklace.jpg"
+  "local_image": "99-附件/images/pre-raphaelite/03-pre-raphaelite-the-coral-necklace.jpg"
+ },
+ {
+  "title": "Elizabeth Siddal (Mrs. Dante Gabriel Rossetti)",
+  "artist": "Dante Gabriel Rossetti",
+  "date": "c. 1854",
+  "medium": "Graphite with stumping, on ivory wove paper, edge mounted to off-white wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/9d89ebca-cacc-c9a6-d457-4d366f2fa11f/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/9d89ebca-cacc-c9a6-d457-4d366f2fa11f/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/90806",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/pre-raphaelite/04-pre-raphaelite-elizabeth-siddal-mrs-dante-gabriel-rossetti.jpg"
  },
  {
   "title": "Study for \"The Hireling Shepherd\"",
@@ -36,32 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/pre-raphaelite/03-pre-raphaelite-study-for-the-hireling-shepherd.jpg"
+  "local_image": "99-附件/images/pre-raphaelite/05-pre-raphaelite-study-for-the-hireling-shepherd.jpg"
  },
  {
-  "title": "Susanna Anderson Rose",
-  "artist": "Frederick Sandys",
-  "date": "1862",
-  "medium": "oil on wood",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1979.81/1979.81_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1979.81/1979.81_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1979.81",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Mrs. William Morris Seated in Chair",
+  "artist": "Dante Gabriel Rossetti",
+  "date": "May 1870",
+  "medium": "Graphite, with stumping, on ivory wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/16a334a5-7bfb-2fff-7424-208f2f9919cf/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/16a334a5-7bfb-2fff-7424-208f2f9919cf/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/49421",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/pre-raphaelite/04-pre-raphaelite-susanna-anderson-rose.jpg"
- },
- {
-  "title": "Portrait of William Michael Rossetti",
-  "artist": "Christina Georgina Rossetti",
-  "date": "c. 1853",
-  "medium": "graphite",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2010.462/2010.462_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2010.462/2010.462_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2010.462",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/pre-raphaelite/05-pre-raphaelite-portrait-of-william-michael-rossetti.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/pre-raphaelite/06-pre-raphaelite-mrs-william-morris-seated-in-chair.jpg"
  }
 ]

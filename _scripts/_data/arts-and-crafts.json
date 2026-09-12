@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/arts-and-crafts/01-arts-and-crafts-strawberry-thief.jpg"
  },
  {
+  "title": "Peacock and Dragon",
+  "artist": "William Morris",
+  "date": "Design 1878",
+  "medium": "Wool, three-colored complementary weft, weft-float faced 3:1 twill weave; lined with linen, plain weave; two panels pieced",
+  "image_url": "https://www.artic.edu/iiif/2/2287bfa7-89a3-8c59-78ed-0d8f5f43b199/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/2287bfa7-89a3-8c59-78ed-0d8f5f43b199/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/103918",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/arts-and-crafts/02-arts-and-crafts-peacock-and-dragon.jpg"
+ },
+ {
+  "title": "Designed by William Morris, British - Printed Textile- Brer Rabbit - Google Art Project",
+  "artist": "Designed by William Morris, British",
+  "date": "Registered May 20, 1882",
+  "medium": "Printed Textile: Brer Rabbit title QS:P1476,en:\"Printed Text",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Designed_by_William_Morris,_British_-_Printed_Textile-_Brer_Rabbit_-_Google_Art_Project.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/9/93/Designed_by_William_Morris%2C_British_-_Printed_Textile-_Brer_Rabbit_-_Google_Art_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Designed_by_William_Morris%2C_British_-_Printed_Textile-_Brer_Rabbit_-_Google_Art_Project.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/arts-and-crafts/03-arts-and-crafts-designed-by-william-morris-british---printed.jpg"
+ },
+ {
   "title": "Tulip",
   "artist": "William Morris",
   "date": "1875",
@@ -23,58 +49,32 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/arts-and-crafts/02-arts-and-crafts-tulip.jpg"
+  "local_image": "99-附件/images/arts-and-crafts/04-arts-and-crafts-tulip.jpg"
  },
  {
-  "title": "Honeysuckle",
+  "title": "Cray",
   "artist": "William Morris",
-  "date": "Early 20th century",
-  "medium": "plain weave linen, printed",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1937.697/1937.697_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1937.697/1937.697_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1937.697",
-  "source": "克利夫兰艺术博物馆",
+  "date": "Design 1884, made 1884–1917",
+  "medium": "Cotton, plain weave, block printed",
+  "image_url": "https://www.artic.edu/iiif/2/8adeafb8-141d-6ad0-3356-5479dd0a6254/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/8adeafb8-141d-6ad0-3356-5479dd0a6254/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/47661",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/arts-and-crafts/03-arts-and-crafts-honeysuckle.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/arts-and-crafts/05-arts-and-crafts-cray.jpg"
  },
  {
-  "title": "Psyche Throwing Herself into the River",
-  "artist": "William Morris",
-  "date": "1865–68",
-  "medium": "wood engraving",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1981.90/1981.90_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1981.90/1981.90_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1981.90",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/arts-and-crafts/04-arts-and-crafts-psyche-throwing-herself-into-the-river.jpg"
- },
- {
-  "title": "Kennet",
-  "artist": "William Morris",
-  "date": "c 1920",
-  "medium": "plain weave cotton, printed",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1937.698/1937.698_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1937.698/1937.698_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1937.698",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/arts-and-crafts/05-arts-and-crafts-kennet.jpg"
- },
- {
-  "title": "Snakeshead",
-  "artist": "William Morris",
-  "date": "Early 20th century",
-  "medium": "plain weave cotton, printed",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1937.695/1937.695_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1937.695/1937.695_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1937.695",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/arts-and-crafts/06-arts-and-crafts-snakeshead.jpg"
+  "title": "Designed by William Morris - Panel Entitled \"Peacock and Dragon\" - Google Art Project",
+  "artist": "Designed by William Morris",
+  "date": "1878 (produced 1878/1940)",
+  "medium": "Panel Entitled \"Peacock and Dragon\" title QS:P1476,en:\"Panel",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Designed_by_William_Morris_-_Panel_Entitled_%22Peacock_and_Dragon%22_-_Google_Art_Project.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Designed_by_William_Morris_-_Panel_Entitled_%22Peacock_and_Dragon%22_-_Google_Art_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Designed_by_William_Morris_-_Panel_Entitled_%22Peacock_and_Dragon%22_-_Google_Art_Project.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/arts-and-crafts/06-arts-and-crafts-designed-by-william-morris---panel-entitled.jpg"
  }
 ]

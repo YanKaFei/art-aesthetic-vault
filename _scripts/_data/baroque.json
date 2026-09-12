@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/baroque/01-baroque-the-crucifixion-of-saint-andrew.jpg"
  },
  {
+  "title": "The Resurrection",
+  "artist": "Cecco del Caravaggio",
+  "date": "c. 1619-20",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/a49c5ada-f461-d7d1-0f1b-468ac577a872/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/a49c5ada-f461-d7d1-0f1b-468ac577a872/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/19336",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/baroque/02-baroque-the-resurrection.jpg"
+ },
+ {
+  "title": "Saint Philip Neri (1515–1595)",
+  "artist": "Carlo Dolci",
+  "date": "1645 or 1646",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-944-001.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP-944-001.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/712539",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/baroque/03-baroque-saint-philip-neri-15151595.jpg"
+ },
+ {
   "title": "Interior of a Synagogue",
   "artist": "Alessandro Magnasco",
   "date": "c. 1725–35",
@@ -23,58 +49,32 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/baroque/02-baroque-interior-of-a-synagogue.jpg"
+  "local_image": "99-附件/images/baroque/04-baroque-interior-of-a-synagogue.jpg"
  },
  {
-  "title": "The Holy Family on the Steps",
-  "artist": "Nicolas Poussin",
-  "date": "1648",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1981.18/1981.18_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1981.18/1981.18_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1981.18",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Kitchen Scene",
+  "artist": "Diego Velázquez",
+  "date": "1618–20",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/68452725-eba5-06e3-46d2-50c678a5d672/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/68452725-eba5-06e3-46d2-50c678a5d672/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/21934",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/baroque/03-baroque-the-holy-family-on-the-steps.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/baroque/05-baroque-kitchen-scene.jpg"
  },
  {
-  "title": "Diana and Her Nymphs Departing for the Hunt",
-  "artist": "Peter Paul Rubens",
-  "date": "c. 1615",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1959.190/1959.190_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1959.190/1959.190_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1959.190",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/baroque/04-baroque-diana-and-her-nymphs-departing-for-the-hunt.jpg"
- },
- {
-  "title": "Saint Peter Repentant",
-  "artist": "Georges de La Tour",
-  "date": "1645",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1951.454/1951.454_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1951.454/1951.454_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1951.454",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/baroque/05-baroque-saint-peter-repentant.jpg"
- },
- {
-  "title": "A Genoese Lady with Her Child",
-  "artist": "Anthony van Dyck",
-  "date": "c. 1623–25",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1954.392/1954.392_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1954.392/1954.392_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1954.392",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/baroque/06-baroque-a-genoese-lady-with-her-child.jpg"
+  "title": "Charity",
+  "artist": "Guido Reni",
+  "date": "ca. 1630",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DT10776.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DT10776.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/437422",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/baroque/06-baroque-charity.jpg"
  }
 ]

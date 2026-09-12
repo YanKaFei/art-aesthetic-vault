@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/orientalism/01-orientalism-lion-on-the-watch.jpg"
  },
  {
+  "title": "Chariot Race",
+  "artist": "Jean Léon Gérôme",
+  "date": "1876",
+  "medium": "Oil on cradled panel",
+  "image_url": "https://www.artic.edu/iiif/2/e728fa6d-c643-2b68-133d-74770ded12ef/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/e728fa6d-c643-2b68-133d-74770ded12ef/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/100350",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/orientalism/02-orientalism-chariot-race.jpg"
+ },
+ {
+  "title": "Jean-Léon Gérôme, pendant paintings of Napoleon in Egypt (1886) at Hearst Castle",
+  "artist": "Jean-Léon Gérôme",
+  "date": "1886",
+  "medium": "Jean-Léon Gérôme, pendant paintings of Napoleon in Egypt (18",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Jean-L%C3%A9on_G%C3%A9r%C3%B4me,_pendant_paintings_of_Napoleon_in_Egypt_(1886)_at_Hearst_Castle.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/2/24/Jean-L%C3%A9on_G%C3%A9r%C3%B4me%2C_pendant_paintings_of_Napoleon_in_Egypt_%281886%29_at_Hearst_Castle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Jean-L%C3%A9on_G%C3%A9r%C3%B4me%2C_pendant_paintings_of_Napoleon_in_Egypt_%281886%29_at_Hearst_Castle.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/orientalism/03-orientalism-jean-léon-gérôme-pendant-paintings-of-napole.jpg"
+ },
+ {
   "title": "Leaving the Oasis",
   "artist": "Jean-Léon Gérôme",
   "date": "1880s",
@@ -23,7 +49,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/orientalism/02-orientalism-leaving-the-oasis.jpg"
+  "local_image": "99-附件/images/orientalism/04-orientalism-leaving-the-oasis.jpg"
+ },
+ {
+  "title": "Portrait of a Woman",
+  "artist": "Jean Léon Gérôme",
+  "date": "1851",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/99c39143-a45c-5fa1-ddd3-0dae633fbb87/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/99c39143-a45c-5fa1-ddd3-0dae633fbb87/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/20686",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/orientalism/05-orientalism-portrait-of-a-woman.jpg"
  },
  {
   "title": "Alpine Landscape:  The Handegg, Switzerland",
@@ -36,45 +75,6 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/orientalism/03-orientalism-alpine-landscape-the-handegg-switzerland.jpg"
- },
- {
-  "title": "Head of an Italian Woman",
-  "artist": "Jean-Léon Gérôme",
-  "date": "c. 1847",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1980.264/1980.264_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1980.264/1980.264_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1980.264",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/orientalism/04-orientalism-head-of-an-italian-woman.jpg"
- },
- {
-  "title": "Egyptian Smoker",
-  "artist": "Jean-Léon Gérôme",
-  "date": "c. 1865",
-  "medium": "etching",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1920.139/1920.139_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1920.139/1920.139_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1920.139",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/orientalism/05-orientalism-egyptian-smoker.jpg"
- },
- {
-  "title": "Portrait Head of a Woman",
-  "artist": "Jean-Léon Gérôme",
-  "date": "1800s",
-  "medium": "graphite",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2010.163/2010.163_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2010.163/2010.163_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2010.163",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/orientalism/06-orientalism-portrait-head-of-a-woman.jpg"
+  "local_image": "99-附件/images/orientalism/06-orientalism-alpine-landscape-the-handegg-switzerland.jpg"
  }
 ]

@@ -13,43 +13,17 @@
   "local_image": "99-附件/images/luminism/01-luminism-view-of-the-town-of-gloucester-mass.jpg"
  },
  {
-  "title": "An October Day in the White Mountains",
+  "title": "Near Newport",
   "artist": "John Frederick Kensett",
-  "date": "1854",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1967.5/1967.5_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1967.5/1967.5_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1967.5",
-  "source": "克利夫兰艺术博物馆",
+  "date": "1869",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/50f98ea2-ea74-d991-b2fc-ddbc616283bd/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/50f98ea2-ea74-d991-b2fc-ddbc616283bd/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/109228",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/luminism/02-luminism-an-october-day-in-the-white-mountains.jpg"
- },
- {
-  "title": "View near Newport",
-  "artist": "John Frederick Kensett",
-  "date": "1860s",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1946.255/1946.255_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1946.255/1946.255_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1946.255",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/luminism/03-luminism-view-near-newport.jpg"
- },
- {
-  "title": "View of Niagara Falls",
-  "artist": "John Frederick Kensett",
-  "date": "c. 1851–1852",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1999.210/1999.210_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1999.210/1999.210_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1999.210",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/luminism/04-luminism-view-of-niagara-falls.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/luminism/02-luminism-near-newport.jpg"
  },
  {
   "title": "Stage Fort across Gloucester Harbor",
@@ -62,19 +36,45 @@
   "source": "大都会艺术博物馆",
   "license": "CC0 1.0（Open Access 公共领域）",
   "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
-  "local_image": "99-附件/images/luminism/05-luminism-stage-fort-across-gloucester-harbor.jpg"
+  "local_image": "99-附件/images/luminism/03-luminism-stage-fort-across-gloucester-harbor.jpg"
  },
  {
-  "title": "The Golden State Entering New York Harbor",
-  "artist": "Fitz Henry Lane (formerly Fitz Hugh Lane)",
+  "title": "John Frederick Kensett, \"View of Mount Washington\" 2006 23v1",
+  "artist": "John Frederick Kensett",
+  "date": "1852 date QS:P571,+1852-00-00T00:00:00Z/",
+  "medium": "View of Mount Washington",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/John_Frederick_Kensett,_%22View_of_Mount_Washington%22_2006_23v1.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/0/00/John_Frederick_Kensett%2C_%22View_of_Mount_Washington%22_2006_23v1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:John_Frederick_Kensett%2C_%22View_of_Mount_Washington%22_2006_23v1.jpg",
+  "source": "维基共享资源",
+  "license": "CC0",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/luminism/04-luminism-john-frederick-kensett-view-of-mount-washing.jpg"
+ },
+ {
+  "title": "An October Day in the White Mountains",
+  "artist": "John Frederick Kensett",
   "date": "1854",
+  "medium": "oil on canvas",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1967.5/1967.5_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1967.5/1967.5_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1967.5",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/luminism/05-luminism-an-october-day-in-the-white-mountains.jpg"
+ },
+ {
+  "title": "Rocky Coast",
+  "artist": "John Frederick Kensett",
+  "date": "c. 1860",
   "medium": "Oil on canvas",
-  "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/DT1548.jpg",
-  "image_url_hi": "https://images.metmuseum.org/CRDImages/ad/original/DT1548.jpg",
-  "page_url": "https://www.metmuseum.org/art/collection/search/11395",
-  "source": "大都会艺术博物馆",
-  "license": "CC0 1.0（Open Access 公共领域）",
-  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
-  "local_image": "99-附件/images/luminism/06-luminism-the-golden-state-entering-new-york-harbor.jpg"
+  "image_url": "https://www.artic.edu/iiif/2/7f6504bc-5eee-3200-6c94-181e2995837c/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/7f6504bc-5eee-3200-6c94-181e2995837c/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/145805",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/luminism/06-luminism-rocky-coast.jpg"
  }
 ]

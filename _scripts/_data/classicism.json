@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/classicism/01-classicism-the-holy-family-on-the-steps.jpg"
  },
  {
+  "title": "Landscape with Saint John on Patmos",
+  "artist": "Nicolas Poussin",
+  "date": "1640",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/aa870b0d-5a1b-660a-6dc6-56c12109cf6e/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/aa870b0d-5a1b-660a-6dc6-56c12109cf6e/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/5848",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/classicism/02-classicism-landscape-with-saint-john-on-patmos.jpg"
+ },
+ {
   "title": "Nymphs and a Satyr (Amor Vincit Omnia)",
   "artist": "Nicolas Poussin",
   "date": "c. 1625–27",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/classicism/02-classicism-nymphs-and-a-satyr-amor-vincit-omnia.jpg"
+  "local_image": "99-附件/images/classicism/03-classicism-nymphs-and-a-satyr-amor-vincit-omnia.jpg"
+ },
+ {
+  "title": "Birth of Alexander",
+  "artist": "Nicolas Poussin",
+  "date": "1640s",
+  "medium": "Pen and brown ink, with brush and brown wash, on ivory laid paper, laid down on tan wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/396d2808-93ec-c045-003c-c9c148e0daa3/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/396d2808-93ec-c045-003c-c9c148e0daa3/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/81892",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/classicism/04-classicism-birth-of-alexander.jpg"
  },
  {
   "title": "The Return of the Holy Family to Nazareth",
@@ -36,45 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/classicism/03-classicism-the-return-of-the-holy-family-to-nazareth.jpg"
+  "local_image": "99-附件/images/classicism/05-classicism-the-return-of-the-holy-family-to-nazareth.jpg"
  },
  {
-  "title": "Man Clutching a Horse in Water, after Poussin's \"Deluge\" (recto)",
-  "artist": "Théodore Géricault",
-  "date": "c. 1816",
-  "medium": "pen and brown ink and brush and brown wash over graphite",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2008.378.a/2008.378.a_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2008.378.a/2008.378.a_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2008.378.a",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/classicism/04-classicism-man-clutching-a-horse-in-water-after-poussin.jpg"
- },
- {
-  "title": "Compositional Study? (possibly for \"Poussin’s Deluge\") (verso)",
-  "artist": "Théodore Géricault",
-  "date": "c. 1816",
-  "medium": "brown wash and black crayon",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2008.378.b/2008.378.b_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2008.378.b/2008.378.b_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2008.378.b",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/classicism/05-classicism-compositional-study-possibly-for-poussins-de.jpg"
- },
- {
-  "title": "Three Heads and Other Sketches (verso)",
+  "title": "River Estuary",
   "artist": "Nicolas Poussin",
-  "date": "1643–44",
-  "medium": "pen and brown ink",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1983.197.b/1983.197.b_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1983.197.b/1983.197.b_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1983.197.b",
-  "source": "克利夫兰艺术博物馆",
+  "date": "1675/99",
+  "medium": "Sepia and wash on paper",
+  "image_url": "https://www.artic.edu/iiif/2/3c585e06-3713-6b9a-21a6-5aa8a53114e1/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/3c585e06-3713-6b9a-21a6-5aa8a53114e1/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/81403",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/classicism/06-classicism-three-heads-and-other-sketches-verso.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/classicism/06-classicism-river-estuary.jpg"
  }
 ]

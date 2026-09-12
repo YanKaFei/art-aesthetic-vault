@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/nabis/01-nabis-family-scene.jpg"
  },
  {
+  "title": "France-Champagne",
+  "artist": "Pierre Bonnard",
+  "date": "1889–91",
+  "medium": "Lithograph in yellow, orange, and black on cream wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/eb917bba-47c1-c876-2b5e-0ca1d2d1e7e4/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/eb917bba-47c1-c876-2b5e-0ca1d2d1e7e4/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/116238",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/nabis/02-nabis-france-champagne.jpg"
+ },
+ {
+  "title": "Bemberg Fondation Toulouse - Voiliers au sec - Pierre Bonnard - Canne, 1914 52x58 - Inv 2010",
+  "artist": "Didier Descouens",
+  "date": "Taken on 16 June 2018",
+  "medium": "Bemberg Fondation Toulouse - Voiliers au sec - Pierre Bonnar",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bemberg_Fondation_Toulouse_-_Voiliers_au_sec_-_Pierre_Bonnard_-_Canne,_1914_52x58_-_Inv_2010.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Bemberg_Fondation_Toulouse_-_Voiliers_au_sec_-_Pierre_Bonnard_-_Canne%2C_1914_52x58_-_Inv_2010.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Bemberg_Fondation_Toulouse_-_Voiliers_au_sec_-_Pierre_Bonnard_-_Canne%2C_1914_52x58_-_Inv_2010.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/nabis/03-nabis-bemberg-fondation-toulouse---voiliers-au-sec.jpg"
+ },
+ {
   "title": "Nursemaids’ Promenade, Frieze of Carriages",
   "artist": "Pierre Bonnard",
   "date": "1895",
@@ -23,7 +49,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/nabis/02-nabis-nursemaids-promenade-frieze-of-carriages.jpg"
+  "local_image": "99-附件/images/nabis/04-nabis-nursemaids-promenade-frieze-of-carriages.jpg"
+ },
+ {
+  "title": "The Bridge, from Some Aspects of Paris Life",
+  "artist": "Pierre Bonnard",
+  "date": "1896–97",
+  "medium": "Lithograph on off-white China paper",
+  "image_url": "https://www.artic.edu/iiif/2/e7356b0e-6a6a-b673-92c3-0e629a30c1ad/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/e7356b0e-6a6a-b673-92c3-0e629a30c1ad/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/117730",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/nabis/05-nabis-the-bridge-from-some-aspects-of-paris-life.jpg"
  },
  {
   "title": "Donkey Ride",
@@ -36,45 +75,6 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/nabis/03-nabis-donkey-ride.jpg"
- },
- {
-  "title": "The Costermonger",
-  "artist": "Pierre Bonnard",
-  "date": "1899",
-  "medium": "lithograph",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1948.156.8/1948.156.8_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1948.156.8/1948.156.8_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1948.156.8",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/nabis/04-nabis-the-costermonger.jpg"
- },
- {
-  "title": "Boulevard",
-  "artist": "Pierre Bonnard",
-  "date": "1899",
-  "medium": "lithograph",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1948.156.6/1948.156.6_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1948.156.6/1948.156.6_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1948.156.6",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/nabis/05-nabis-boulevard.jpg"
- },
- {
-  "title": "Houses in the Courtyard",
-  "artist": "Pierre Bonnard",
-  "date": "1899",
-  "medium": "color lithograph",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1948.156.4/1948.156.4_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1948.156.4/1948.156.4_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1948.156.4",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/nabis/06-nabis-houses-in-the-courtyard.jpg"
+  "local_image": "99-附件/images/nabis/06-nabis-donkey-ride.jpg"
  }
 ]

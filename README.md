@@ -419,6 +419,7 @@ python3 make_links.py                 # 重新生成外部检索深链
 | `artvault_vision.py` | **可选**：macOS Vision 语义检索（以图搜图 / 近重复 / 相近流派） |
 | `ingest_inbox.py` | 处理 `pinterest/` 投递箱，扫描时带上上面这些维度 |
 | `verify_vault.py` | **验收检查**：断链 / 重名 / AI 图 / frontmatter / 近重复 / 授权 / 孤儿图 |
+| `movement_fingerprint.py` | 用客观维度建流派指纹做图像→流派匹配（可解释，但实测不如 Vision） |
 | `pinterest_grab.py` / `pinterest_export.py` | Pinterest 抓取与导出（本地自用，图**不入库**） |
 
 ### 两条容易被忽略的约定

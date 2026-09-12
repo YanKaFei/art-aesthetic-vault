@@ -13,6 +13,45 @@
   "local_image": "99-附件/images/hudson-river-school/01-hudson-river-school-a-view-from-bald-mountain-orange-county-ny.jpg"
  },
  {
+  "title": "Study of Rocks in Pearson's Ravine",
+  "artist": "Asher Brown Durand",
+  "date": "Mid–1850s",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/9223818e-8eb8-740c-28ba-7c4c75acc3d5/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/9223818e-8eb8-740c-28ba-7c4c75acc3d5/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/220730",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/hudson-river-school/02-hudson-river-school-study-of-rocks-in-pearsons-ravine.jpg"
+ },
+ {
+  "title": "Heart of the Andes",
+  "artist": "Frederic Edwin Church",
+  "date": "1859",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/DT78.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ad/original/DT78.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/10481",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/hudson-river-school/03-hudson-river-school-heart-of-the-andes.jpg"
+ },
+ {
+  "title": "Cole Thomas The Course of Empire Destruction 1836",
+  "artist": "Thomas Cole",
+  "date": "1836 date QS:P571,+1836-00-00T00:00:00Z/",
+  "medium": "Destruction from The Course of Empire (paintings) .",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cole_Thomas_The_Course_of_Empire_Destruction_1836.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/6/64/Cole_Thomas_The_Course_of_Empire_Destruction_1836.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Cole_Thomas_The_Course_of_Empire_Destruction_1836.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/hudson-river-school/04-hudson-river-school-cole-thomas-the-course-of-empire-destruction.jpg"
+ },
+ {
   "title": "Albano, Italy",
   "artist": "George Inness",
   "date": "c. 1872",
@@ -23,58 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/hudson-river-school/02-hudson-river-school-albano-italy.jpg"
+  "local_image": "99-附件/images/hudson-river-school/05-hudson-river-school-albano-italy.jpg"
  },
  {
-  "title": "Niagara Falls by Moonlight",
+  "title": "View of Cotopaxi",
   "artist": "Frederic Edwin Church",
-  "date": "probably 1856",
-  "medium": "graphite and white gouache",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1976.30/1976.30_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1976.30/1976.30_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1976.30",
-  "source": "克利夫兰艺术博物馆",
+  "date": "1857",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/33fc29fc-097b-576b-c9e6-c3352d9d3f15/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/33fc29fc-097b-576b-c9e6-c3352d9d3f15/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/76571",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/hudson-river-school/03-hudson-river-school-niagara-falls-by-moonlight.jpg"
- },
- {
-  "title": "Twilight in the Wilderness",
-  "artist": "Frederic Edwin Church",
-  "date": "1860",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1965.233/1965.233_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1965.233/1965.233_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1965.233",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/hudson-river-school/04-hudson-river-school-twilight-in-the-wilderness.jpg"
- },
- {
-  "title": "Storm in the Mountains",
-  "artist": "Frederic Edwin Church",
-  "date": "1847",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1969.52/1969.52_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1969.52/1969.52_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1969.52",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/hudson-river-school/05-hudson-river-school-storm-in-the-mountains.jpg"
- },
- {
-  "title": "The Monastery of San Pedro (Our Lady of the Snows)",
-  "artist": "Frederic Edwin Church",
-  "date": "1879",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1915.684/1915.684_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1915.684/1915.684_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1915.684",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/hudson-river-school/06-hudson-river-school-the-monastery-of-san-pedro-our-lady-of-the-s.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/hudson-river-school/06-hudson-river-school-view-of-cotopaxi.jpg"
  }
 ]

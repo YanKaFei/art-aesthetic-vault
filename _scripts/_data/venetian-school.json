@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/venetian-school/01-venetian-school-adoration-of-the-magi.jpg"
  },
  {
+  "title": "Allegory of Venus and Cupid",
+  "artist": "Imitator of Titian",
+  "date": "c. 1600",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/19d1878d-943a-d47f-c32e-2ce56f917bc2/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/19d1878d-943a-d47f-c32e-2ce56f917bc2/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/46314",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/venetian-school/02-venetian-school-allegory-of-venus-and-cupid.jpg"
+ },
+ {
   "title": "The Submersion of Pharaoh's Army in the Red Sea",
   "artist": "Titian",
   "date": "1514–15, printed 1549",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/venetian-school/02-venetian-school-the-submersion-of-pharaohs-army-in-the-red-s.jpg"
+  "local_image": "99-附件/images/venetian-school/03-venetian-school-the-submersion-of-pharaohs-army-in-the-red-s.jpg"
+ },
+ {
+  "title": "Tobias and the Angel",
+  "artist": "Titian",
+  "date": "n.d.",
+  "medium": "Pen and black ink, with brush and gray wash, on ivory laid paper",
+  "image_url": "https://www.artic.edu/iiif/2/ae6af039-310b-7581-b4c8-628982ebe97c/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/ae6af039-310b-7581-b4c8-628982ebe97c/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/85140",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/venetian-school/04-venetian-school-tobias-and-the-angel.jpg"
  },
  {
   "title": "Various Sketches of the Madonna and Child (recto)",
@@ -36,45 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/venetian-school/03-venetian-school-various-sketches-of-the-madonna-and-child-re.jpg"
+  "local_image": "99-附件/images/venetian-school/05-venetian-school-various-sketches-of-the-madonna-and-child-re.jpg"
  },
  {
-  "title": "Portrait of Agostino Barbarigo",
-  "artist": "Paolo Veronese",
-  "date": "after c. 1571",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1928.16/1928.16_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1928.16/1928.16_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1928.16",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Self-Portrait",
+  "artist": "Titian",
+  "date": "n.d.",
+  "medium": "Black chalk, with stumping, on gray wove paper, tipped on to ivory laid paper",
+  "image_url": "https://www.artic.edu/iiif/2/5ea967f4-eb96-afbe-63cb-924e8d305a24/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/5ea967f4-eb96-afbe-63cb-924e8d305a24/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/55006",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/venetian-school/04-venetian-school-portrait-of-agostino-barbarigo.jpg"
- },
- {
-  "title": "The Annunciation",
-  "artist": "Paolo Veronese",
-  "date": "c. 1580",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1950.251/1950.251_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1950.251/1950.251_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1950.251",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/venetian-school/05-venetian-school-the-annunciation.jpg"
- },
- {
-  "title": "Baptism of Christ",
-  "artist": "Jacopo Tintoretto",
-  "date": "1580s",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1950.400/1950.400_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1950.400/1950.400_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1950.400",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/venetian-school/06-venetian-school-baptism-of-christ.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/venetian-school/06-venetian-school-self-portrait.jpg"
  }
 ]

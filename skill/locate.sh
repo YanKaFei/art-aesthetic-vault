@@ -28,8 +28,8 @@ done
 
 # 4) 常见位置
 for cand in \
-  "$HOME/Desktop/艺术审美风格0912" \
   "$HOME/Desktop/art-aesthetic-vault" \
+  "$HOME/Desktop/艺术审美风格0912" \
   "$HOME/art-aesthetic-vault" \
   "$HOME/Documents/art-aesthetic-vault" \
   "$HOME/repos/art-aesthetic-vault" ; do

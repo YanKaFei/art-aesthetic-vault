@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/yamato-e/01-yamato-e-scenes-from-the-tale-of-genji.jpg"
  },
  {
+  "title": "Illustration of the Tale of Genji, chapter 5 Waka-Murasaki",
+  "artist": "Tosa School",
+  "date": "17th century",
+  "medium": "Shikishi, ink, colors, and gold leaf on paper",
+  "image_url": "https://www.artic.edu/iiif/2/c0b9bd41-e5b0-6da6-6e95-d51ac68bffe6/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/c0b9bd41-e5b0-6da6-6e95-d51ac68bffe6/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/87087",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/yamato-e/02-yamato-e-illustration-of-the-tale-of-genji-chapter-5.jpg"
+ },
+ {
   "title": "Phoenixes and Paulownia",
   "artist": "Tosa Mitsuyoshi",
   "date": "late 1500s",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/yamato-e/02-yamato-e-phoenixes-and-paulownia.jpg"
+  "local_image": "99-附件/images/yamato-e/03-yamato-e-phoenixes-and-paulownia.jpg"
+ },
+ {
+  "title": "Illustration of the Tale of Genji, ch. 8 Hana no en",
+  "artist": "Tosa School",
+  "date": "17th century",
+  "medium": "Shikishi, ink, colors, and gold leaf on paper",
+  "image_url": "https://www.artic.edu/iiif/2/a910a43a-933d-fd0b-41d9-b2ba83eb7afd/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/a910a43a-933d-fd0b-41d9-b2ba83eb7afd/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/87093",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/yamato-e/04-yamato-e-illustration-of-the-tale-of-genji-ch-8-hana.jpg"
  },
  {
   "title": "Peacocks and Bamboo",
@@ -36,6 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/yamato-e/03-yamato-e-peacocks-and-bamboo.jpg"
+  "local_image": "99-附件/images/yamato-e/05-yamato-e-peacocks-and-bamboo.jpg"
+ },
+ {
+  "title": "Autumn Maples with Poem Slips",
+  "artist": "Tosa Mitsuoki",
+  "date": "c. 1675",
+  "medium": "Six-panel screen (one of pair); Ink, colors, gold leaf, and gold powder on silk",
+  "image_url": "https://www.artic.edu/iiif/2/86e919b9-d366-b3ca-d26f-4c16880474a3/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/86e919b9-d366-b3ca-d26f-4c16880474a3/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/127644",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/yamato-e/06-yamato-e-autumn-maples-with-poem-slips.jpg"
  }
 ]

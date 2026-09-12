@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/vienna-secession/01-vienna-secession-hermine-gallia.jpg"
  },
  {
+  "title": "Male Nude with Left Foot on a Pedestal",
+  "artist": "Gustav Klimt",
+  "date": "1879",
+  "medium": "Graphite and white heightening on brown wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/35a41ca7-f92c-b686-c89f-978321214c5c/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/35a41ca7-f92c-b686-c89f-978321214c5c/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/154795",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/vienna-secession/02-vienna-secession-male-nude-with-left-foot-on-a-pedestal.jpg"
+ },
+ {
   "title": "Portrait of a Child (Anton Peschka Jr.)",
   "artist": "Egon Schiele",
   "date": "1916",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/vienna-secession/02-vienna-secession-portrait-of-a-child-anton-peschka-jr.jpg"
+  "local_image": "99-附件/images/vienna-secession/03-vienna-secession-portrait-of-a-child-anton-peschka-jr.jpg"
+ },
+ {
+  "title": "Male Nude",
+  "artist": "Gustav Klimt",
+  "date": "January 29, 1880",
+  "medium": "Various graphite pencils, with erasing and stumping, on cream laid paper",
+  "image_url": "https://www.artic.edu/iiif/2/ee8a9167-1535-b432-3dc7-6e80eeed91fc/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/ee8a9167-1535-b432-3dc7-6e80eeed91fc/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/186098",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/vienna-secession/04-vienna-secession-male-nude.jpg"
  },
  {
   "title": "Nude Man with Raised Arms (recto) Seated Man (verso)",
@@ -36,32 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/vienna-secession/03-vienna-secession-nude-man-with-raised-arms-recto-seated-man-v.jpg"
+  "local_image": "99-附件/images/vienna-secession/05-vienna-secession-nude-man-with-raised-arms-recto-seated-man-v.jpg"
  },
  {
-  "title": "Nude Man with Raised Arms (recto)",
-  "artist": "Egon Schiele",
-  "date": "1911",
-  "medium": "graphite",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1959.304.a/1959.304.a_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1959.304.a/1959.304.a_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1959.304.a",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Seated Woman from the Front with Hat, Face Hooded",
+  "artist": "Gustav Klimt",
+  "date": "1910",
+  "medium": "Graphite, with colored pencil, on ivory wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/7936867b-74ab-7347-51f0-9ab14d050e9d/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/7936867b-74ab-7347-51f0-9ab14d050e9d/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/180671",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/vienna-secession/04-vienna-secession-nude-man-with-raised-arms-recto.jpg"
- },
- {
-  "title": "Seated Man (verso)",
-  "artist": "Egon Schiele",
-  "date": "1911",
-  "medium": "graphite",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1959.304.b/1959.304.b_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1959.304.b/1959.304.b_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1959.304.b",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/vienna-secession/05-vienna-secession-seated-man-verso.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/vienna-secession/06-vienna-secession-seated-woman-from-the-front-with-hat-face-ho.jpg"
  }
 ]

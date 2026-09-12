@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/islamic-geometric/01-islamic-geometric-tile-spandrel-with-floral-sprays.jpg"
  },
  {
+  "title": "Tile with a Double-Arched Prayer Niche (Mihrab)",
+  "artist": "Islamic",
+  "date": "Ilkhanid dynasty (1256–1353), 13th century",
+  "medium": "Lusterware, molded fritware with cobalt-blue and turquoise inglaze painting and luster-painted overglaze decoration on an opaque white glaze",
+  "image_url": "https://www.artic.edu/iiif/2/33b89e49-c311-fc07-f539-a981f4e15059/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/33b89e49-c311-fc07-f539-a981f4e15059/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/72855",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/islamic-geometric/02-islamic-geometric-tile-with-a-double-arched-prayer-niche-mihra.jpg"
+ },
+ {
+  "title": "Fragments of a Tile Panel MET 1975.350.3",
+  "artist": "佚名",
+  "date": "late 13th–first half 14th century",
+  "medium": "Fragments of a Tile Panel",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Fragments_of_a_Tile_Panel_MET_1975.350.3.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Fragments_of_a_Tile_Panel_MET_1975.350.3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Fragments_of_a_Tile_Panel_MET_1975.350.3.jpg",
+  "source": "维基共享资源",
+  "license": "CC0",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/islamic-geometric/03-islamic-geometric-fragments-of-a-tile-panel-met-19753503.jpg"
+ },
+ {
   "title": "Luster Wall Tile with a Couple",
   "artist": "佚名",
   "date": "1266",
@@ -23,58 +49,32 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/islamic-geometric/02-islamic-geometric-luster-wall-tile-with-a-couple.jpg"
+  "local_image": "99-附件/images/islamic-geometric/04-islamic-geometric-luster-wall-tile-with-a-couple.jpg"
  },
  {
-  "title": "Wall Tile with Lotus Blossom",
+  "title": "Eight Point Star Tile with Qur'anic Inscriptions",
+  "artist": "Islamic",
+  "date": "Ilkhanid dynasty (1256–1353), Mid-13th century",
+  "medium": "Lusterware, fritware painted in lustre over an opaque white glaze",
+  "image_url": "https://www.artic.edu/iiif/2/49462042-626d-f56a-b355-400be27c3e05/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/49462042-626d-f56a-b355-400be27c3e05/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/71231",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/islamic-geometric/05-islamic-geometric-eight-point-star-tile-with-quranic-inscripti.jpg"
+ },
+ {
+  "title": "Star- and Hexagonal-Tile Panel MET wb-37.40.26",
   "artist": "佚名",
-  "date": "c. 1300–50",
-  "medium": "fritware with molded and underglaze-painted design",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1915.645/1915.645_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1915.645/1915.645_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1915.645",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/islamic-geometric/03-islamic-geometric-wall-tile-with-lotus-blossom.jpg"
- },
- {
-  "title": "Wall Tiles",
-  "artist": "佚名",
-  "date": "1600s",
-  "medium": "fritware with underglaze-painted design",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1915.651/1915.651_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1915.651/1915.651_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1915.651",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/islamic-geometric/04-islamic-geometric-wall-tiles.jpg"
- },
- {
-  "title": "Wall Tile",
-  "artist": "佚名",
-  "date": "1300s",
-  "medium": "fritware with luster-painted design",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1915.638/1915.638_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1915.638/1915.638_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1915.638",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/islamic-geometric/05-islamic-geometric-wall-tile.jpg"
- },
- {
-  "title": "Tile- Islamic Pattern",
-  "artist": "Moravian Pottery and Tile Works",
-  "date": "before 1921",
-  "medium": "glazed ceramic",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1921.1039/1921.1039_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1921.1039/1921.1039_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1921.1039",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/islamic-geometric/06-islamic-geometric-tile--islamic-pattern.jpg"
+  "date": "late 13th–14th century",
+  "medium": "Star- and Hexagonal-Tile Panel",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Star-_and_Hexagonal-Tile_Panel_MET_wb-37.40.26.jpeg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/6/60/Star-_and_Hexagonal-Tile_Panel_MET_wb-37.40.26.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Star-_and_Hexagonal-Tile_Panel_MET_wb-37.40.26.jpeg",
+  "source": "维基共享资源",
+  "license": "CC0",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/islamic-geometric/06-islamic-geometric-star--and-hexagonal-tile-panel-met-wb-374026.jpg"
  }
 ]

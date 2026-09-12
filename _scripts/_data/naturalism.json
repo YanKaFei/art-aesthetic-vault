@@ -13,6 +13,45 @@
   "local_image": "99-附件/images/naturalism/01-naturalism-president-william-howard-taft.jpg"
  },
  {
+  "title": "Mrs. Potter Palmer",
+  "artist": "Anders Zorn",
+  "date": "1893",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/6f3dc71a-683d-7ad6-e24a-a97c4877f30d/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/6f3dc71a-683d-7ad6-e24a-a97c4877f30d/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/81576",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/naturalism/02-naturalism-mrs-potter-palmer.jpg"
+ },
+ {
+  "title": "Joan of Arc",
+  "artist": "Jules Bastien-Lepage",
+  "date": "1879",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14201-049.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP-14201-049.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/435621",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/naturalism/03-naturalism-joan-of-arc.jpg"
+ },
+ {
+  "title": "Anders Zorn - Morning Toilet - P25e13 - Isabella Stewart Gardner Museum",
+  "artist": "Anders Zorn",
+  "date": "1888",
+  "medium": "Morning Toilet title QS:P1476,en:\"Morning Toilet \" label QS:",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Anders_Zorn_-_Morning_Toilet_-_P25e13_-_Isabella_Stewart_Gardner_Museum.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Anders_Zorn_-_Morning_Toilet_-_P25e13_-_Isabella_Stewart_Gardner_Museum.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Anders_Zorn_-_Morning_Toilet_-_P25e13_-_Isabella_Stewart_Gardner_Museum.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/naturalism/04-naturalism-anders-zorn---morning-toilet---p25e13---isab.jpg"
+ },
+ {
   "title": "The Swan",
   "artist": "Anders Zorn",
   "date": "1915",
@@ -23,58 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/naturalism/02-naturalism-the-swan.jpg"
+  "local_image": "99-附件/images/naturalism/05-naturalism-the-swan.jpg"
  },
  {
-  "title": "Portrait of the Artist and His Model",
+  "title": "Nude Girl in Doorway",
   "artist": "Anders Zorn",
-  "date": "1899",
-  "medium": "etching",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1918.127/1918.127_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1918.127/1918.127_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1918.127",
-  "source": "克利夫兰艺术博物馆",
+  "date": "c. 1900",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/0f9304d9-e93d-7169-e1ab-48d3cc664dde/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/0f9304d9-e93d-7169-e1ab-48d3cc664dde/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/53213",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/naturalism/03-naturalism-portrait-of-the-artist-and-his-model.jpg"
- },
- {
-  "title": "Mona",
-  "artist": "Anders Zorn",
-  "date": "1911",
-  "medium": "etching",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1942.770/1942.770_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1942.770/1942.770_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1942.770",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/naturalism/04-naturalism-mona.jpg"
- },
- {
-  "title": "The Two",
-  "artist": "Anders Zorn",
-  "date": "1916",
-  "medium": "etching and drypoint",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1937.651/1937.651_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1937.651/1937.651_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1937.651",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/naturalism/05-naturalism-the-two.jpg"
- },
- {
-  "title": "Gopsmor Cottage",
-  "artist": "Anders Zorn",
-  "date": "1917",
-  "medium": "etching and drypoint",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1940.898/1940.898_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1940.898/1940.898_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1940.898",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/naturalism/06-naturalism-gopsmor-cottage.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/naturalism/06-naturalism-nude-girl-in-doorway.jpg"
  }
 ]

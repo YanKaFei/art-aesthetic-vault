@@ -1,18 +1,5 @@
 [
  {
-  "title": "Senator Thomas Hart Benton",
-  "artist": "Matthew Harris Jouett",
-  "date": "1820s",
-  "medium": "oil on wood",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1941.597/1941.597_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1941.597/1941.597_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1941.597",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/regionalism/01-regionalism-senator-thomas-hart-benton.jpg"
- },
- {
   "title": "Delphiniums in a White Vase by Grant Wood, 1929, oil on canvas, Saint Louis Art Museum",
   "artist": "Grant Wood, 1929, oil on canvas, Saint Louis Art Museum",
   "date": "1929",
@@ -23,7 +10,7 @@
   "source": "维基共享资源",
   "license": "CC0",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/regionalism/02-regionalism-delphiniums-in-a-white-vase-by-grant-wood-19.jpg"
+  "local_image": "99-附件/images/regionalism/01-regionalism-delphiniums-in-a-white-vase-by-grant-wood-19.jpg"
  },
  {
   "title": "The Sowers. Painted by Distinquished Artist, Thomas Benton - NARA - 513571",
@@ -36,7 +23,7 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/regionalism/03-regionalism-the-sowers-painted-by-distinquished-artist-t.jpg"
+  "local_image": "99-附件/images/regionalism/02-regionalism-the-sowers-painted-by-distinquished-artist-t.jpg"
  },
  {
   "title": "At the Circus by John Steuart Curry, 1936, oil on canvas",
@@ -49,7 +36,7 @@
   "source": "维基共享资源",
   "license": "CC0",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/regionalism/04-regionalism-at-the-circus-by-john-steuart-curry-1936-oil.jpg"
+  "local_image": "99-附件/images/regionalism/03-regionalism-at-the-circus-by-john-steuart-curry-1936-oil.jpg"
  },
  {
   "title": "John Brown by John Steuart Curry (study for the Kansas Mural)",
@@ -62,7 +49,7 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/regionalism/05-regionalism-john-brown-by-john-steuart-curry-study-for-t.jpg"
+  "local_image": "99-附件/images/regionalism/04-regionalism-john-brown-by-john-steuart-curry-study-for-t.jpg"
  },
  {
   "title": "Our Good Earth John Steuart Curry painting version Chazen Museum",
@@ -75,6 +62,6 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/regionalism/06-regionalism-our-good-earth-john-steuart-curry-painting-v.jpg"
+  "local_image": "99-附件/images/regionalism/05-regionalism-our-good-earth-john-steuart-curry-painting-v.jpg"
  }
 ]

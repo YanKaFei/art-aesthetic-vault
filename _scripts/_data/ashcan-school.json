@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/ashcan-school/01-ashcan-school-old-billiard-player.jpg"
  },
  {
+  "title": "Herself",
+  "artist": "Robert Henri",
+  "date": "1913",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/641c5259-1a92-4a3a-714b-62e09efa3b23/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/641c5259-1a92-4a3a-714b-62e09efa3b23/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/13742",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/ashcan-school/02-ashcan-school-herself.jpg"
+ },
+ {
+  "title": "1916 Gloucester Harbor painting by John Sloan Syracuse University",
+  "artist": "John Sloan Syracuse University",
+  "date": "1916 date QS:P571,+1916-00-00T00:00:00Z/",
+  "medium": "1916 Gloucester Harbor painting by John Sloan Syracuse Unive",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/1916_Gloucester_Harbor_painting_by_John_Sloan_Syracuse_University.png?width=640",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/9/9e/1916_Gloucester_Harbor_painting_by_John_Sloan_Syracuse_University.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:1916_Gloucester_Harbor_painting_by_John_Sloan_Syracuse_University.png",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/ashcan-school/03-ashcan-school-1916-gloucester-harbor-painting-by-john-sloa.png"
+ },
+ {
   "title": "Artists Judging Works of Art",
   "artist": "George Bellows",
   "date": "1916",
@@ -23,58 +49,32 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/ashcan-school/02-ashcan-school-artists-judging-works-of-art.jpg"
+  "local_image": "99-附件/images/ashcan-school/04-ashcan-school-artists-judging-works-of-art.jpg"
  },
  {
-  "title": "Stag at Sharkey's",
-  "artist": "George Bellows",
-  "date": "1909",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1922.1133/1922.1133_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1922.1133/1922.1133_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1922.1133",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Himself",
+  "artist": "Robert Henri",
+  "date": "1913",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/6ea9b674-8204-02b0-66a4-55da1a037b81/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/6ea9b674-8204-02b0-66a4-55da1a037b81/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/13745",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/ashcan-school/03-ashcan-school-stag-at-sharkeys.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/ashcan-school/05-ashcan-school-himself.jpg"
  },
  {
-  "title": "Boy in a Blue Coat",
-  "artist": "George Bellows",
-  "date": "1915",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1938.45/1938.45_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1938.45/1938.45_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1938.45",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/ashcan-school/04-ashcan-school-boy-in-a-blue-coat.jpg"
- },
- {
-  "title": "Business Men's Class",
-  "artist": "George Bellows",
-  "date": "1916",
-  "medium": "lithograph",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1936.630/1936.630_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1936.630/1936.630_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1936.630",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/ashcan-school/05-ashcan-school-business-mens-class.jpg"
- },
- {
-  "title": "Self-Portrait",
-  "artist": "George Bellows",
-  "date": "1921",
-  "medium": "lithograph",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1935.279/1935.279_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1935.279/1935.279_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1935.279",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/ashcan-school/06-ashcan-school-self-portrait.jpg"
+  "title": "1917 Gloucester Trolley painting by John Sloan Canajoharie Library",
+  "artist": "John Sloan Canajoharie Library",
+  "date": "1917 date QS:P571,+1917-00-00T00:00:00Z/",
+  "medium": "1917 Gloucester Trolley painting by John Sloan Canajoharie L",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/1917_Gloucester_Trolley_painting_by_John_Sloan_Canajoharie_Library.png?width=640",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/1/1e/1917_Gloucester_Trolley_painting_by_John_Sloan_Canajoharie_Library.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:1917_Gloucester_Trolley_painting_by_John_Sloan_Canajoharie_Library.png",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/ashcan-school/06-ashcan-school-1917-gloucester-trolley-painting-by-john-slo.png"
  }
 ]

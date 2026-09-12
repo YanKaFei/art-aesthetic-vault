@@ -13,19 +13,6 @@
   "local_image": "99-附件/images/safavid-painting/01-safavid-painting-shah-tahmasp-i-15141576-seated-in-a-landscap.jpg"
  },
  {
-  "title": "Illuminated Folio from a Gulistan (Rose Garden) of Sa'di (c. 1213–1291)",
-  "artist": "Sultan Muhammad",
-  "date": "c. 1475–1500; border: c. 1550",
-  "medium": "Gum tempera, ink, gold, and silver on paper",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2006.148/2006.148_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2006.148/2006.148_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2006.148",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/safavid-painting/02-safavid-painting-illuminated-folio-from-a-gulistan-rose-garde.jpg"
- },
- {
   "title": "The Opening Illuminated Double Page from the Shah Isma'il II Manuscript of Firdausi's Shahnameh, Persia, Qazvin, Safavid, circa 1577",
   "artist": "Sotheby's",
   "date": "circa 1577 date QS:P,+1577-00-00T00:00:0",
@@ -36,6 +23,19 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/safavid-painting/03-safavid-painting-the-opening-illuminated-double-page-from-the.jpg"
+  "local_image": "99-附件/images/safavid-painting/02-safavid-painting-the-opening-illuminated-double-page-from-the.jpg"
+ },
+ {
+  "title": "Illuminated Folio from a Gulistan (Rose Garden) of Sa'di (c. 1213–1291)",
+  "artist": "Sultan Muhammad",
+  "date": "c. 1475–1500; border: c. 1550",
+  "medium": "Gum tempera, ink, gold, and silver on paper",
+  "image_url": "https://openaccess-cdn.clevelandart.org/2006.148/2006.148_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2006.148/2006.148_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/2006.148",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/safavid-painting/03-safavid-painting-illuminated-folio-from-a-gulistan-rose-garde.jpg"
  }
 ]

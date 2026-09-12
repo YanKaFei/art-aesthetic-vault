@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/realism/01-realism-the-biglin-brothers-turning-the-stake.jpg"
  },
  {
+  "title": "Study for \"William Rush Carving His Allegorical Figure of the Schuylkill River\"",
+  "artist": "Thomas Eakins",
+  "date": "1876–77",
+  "medium": "Oil on canvas mounted on board",
+  "image_url": "https://www.artic.edu/iiif/2/bb08408a-0650-380f-4f0f-c3f012d1113e/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/bb08408a-0650-380f-4f0f-c3f012d1113e/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/28860",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/realism/02-realism-study-for-william-rush-carving-his-allegoric.jpg"
+ },
+ {
+  "title": "A Peasant Family",
+  "artist": "Antoine Le Nain",
+  "date": "ca. 1640–48",
+  "medium": "Oil on copper",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP131218.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP131218.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/438779",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/realism/03-realism-a-peasant-family.jpg"
+ },
+ {
   "title": "Early Morning After a Storm at Sea",
   "artist": "Winslow Homer",
   "date": "1900–1903",
@@ -23,58 +49,32 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/realism/02-realism-early-morning-after-a-storm-at-sea.jpg"
+  "local_image": "99-附件/images/realism/04-realism-early-morning-after-a-storm-at-sea.jpg"
  },
  {
-  "title": "Mme L . . . (Laure Borreau)",
-  "artist": "Gustave Courbet",
-  "date": "1863",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1962.2/1962.2_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1962.2/1962.2_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1962.2",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Coast of Maine",
+  "artist": "Winslow Homer",
+  "date": "1893",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/de060306-b5a3-5139-cad9-57e9c274d7c3/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/de060306-b5a3-5139-cad9-57e9c274d7c3/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/8971",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/realism/03-realism-mme-l-laure-borreau.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/realism/05-realism-coast-of-maine.jpg"
  },
  {
-  "title": "Panoramic View of the Alps, Les Dents du Midi",
-  "artist": "Gustave Courbet",
-  "date": "1877",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1964.420/1964.420_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1964.420/1964.420_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1964.420",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/realism/04-realism-panoramic-view-of-the-alps-les-dents-du-midi.jpg"
- },
- {
-  "title": "Landscape with Large Trees",
-  "artist": "Gustave Courbet",
-  "date": "c. 1870",
-  "medium": "black chalk with stumping on brown wove paper",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1976.18/1976.18_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1976.18/1976.18_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1976.18",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/realism/05-realism-landscape-with-large-trees.jpg"
- },
- {
-  "title": "The Cliff at Étretat",
-  "artist": "Gustave Courbet",
-  "date": "after 1872",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1929.465/1929.465_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1929.465/1929.465_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1929.465",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/realism/06-realism-the-cliff-at-étretat.jpg"
+  "title": "The Horse Fair",
+  "artist": "Rosa Bonheur",
+  "date": "1852–55",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-23550-001.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP-23550-001.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/435702",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/realism/06-realism-the-horse-fair.jpg"
  }
 ]

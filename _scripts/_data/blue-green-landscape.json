@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/blue-green-landscape/01-blue-green-landscape-zhao-mengfu-writing-the-heart-hridaya-sutra.jpg"
  },
  {
+  "title": "The Peach Blossom Spring 桃花源圖",
+  "artist": "Qiu Ying",
+  "date": "Late Ming (1368–1644) or early Qing (1644–1912) dynasty",
+  "medium": "Handscroll; ink and color on silk",
+  "image_url": "https://www.artic.edu/iiif/2/7d5dcd32-b556-6d64-c90e-d195717f633f/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/7d5dcd32-b556-6d64-c90e-d195717f633f/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/75361",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/blue-green-landscape/02-blue-green-landscape-the-peach-blossom-spring-桃花源圖.jpg"
+ },
+ {
   "title": "Garden for Solitary Enjoyment",
   "artist": "Qiu Ying",
   "date": "1515–52",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/blue-green-landscape/02-blue-green-landscape-garden-for-solitary-enjoyment.jpg"
+  "local_image": "99-附件/images/blue-green-landscape/03-blue-green-landscape-garden-for-solitary-enjoyment.jpg"
+ },
+ {
+  "title": "Memorial Stele for the Buddhist Master Daoyin (Ink Rubbings)",
+  "artist": "Qiu Ying",
+  "date": "Qing dynasty (1644–1911); Jiaqing–Daoguang reigns, c. 1796–1850",
+  "medium": "Album of rubbings, ink on paper",
+  "image_url": "https://www.artic.edu/iiif/2/a3a0071a-536c-48f4-1335-8c1c4844eaf8/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/a3a0071a-536c-48f4-1335-8c1c4844eaf8/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/140598",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/blue-green-landscape/04-blue-green-landscape-memorial-stele-for-the-buddhist-master-daoyi.jpg"
  },
  {
   "title": "Palace Ladies",
@@ -36,6 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/blue-green-landscape/03-blue-green-landscape-palace-ladies.jpg"
+  "local_image": "99-附件/images/blue-green-landscape/05-blue-green-landscape-palace-ladies.jpg"
+ },
+ {
+  "title": "Landscape",
+  "artist": "Qiu Ying",
+  "date": "Ming dynasty (1369–1644) or Qing dynasty (1644-1911)",
+  "medium": "Folding fan mounted as an album leaf; ink and color on gold paper",
+  "image_url": "https://www.artic.edu/iiif/2/a8254c8b-3475-9ab3-5b43-2ed225d9d32b/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/a8254c8b-3475-9ab3-5b43-2ed225d9d32b/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/43151",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/blue-green-landscape/06-blue-green-landscape-landscape.jpg"
  }
 ]

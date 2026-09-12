@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/neo-impressionism/01-neo-impressionism-at-the-concert-parisien.jpg"
  },
  {
+  "title": "A Sunday on La Grande Jatte — 1884",
+  "artist": "Georges Seurat",
+  "date": "1884–86, border added 1888–89",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/2d484387-2509-5e8e-2c43-22f9981972eb/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/2d484387-2509-5e8e-2c43-22f9981972eb/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/27992",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/neo-impressionism/02-neo-impressionism-a-sunday-on-la-grande-jatte-1884.jpg"
+ },
+ {
+  "title": "Georges Seurat - Man painting a boat PC 72",
+  "artist": "Georges Seurat",
+  "date": "circa 1883 date QS:P571,+1883-00-00T00:0",
+  "medium": "Man painting a boat",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Georges_Seurat_-_Man_painting_a_boat_PC_72.jpg?width=640",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/5/57/Georges_Seurat_-_Man_painting_a_boat_PC_72.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Georges_Seurat_-_Man_painting_a_boat_PC_72.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/neo-impressionism/03-neo-impressionism-georges-seurat---man-painting-a-boat-pc-72.jpg"
+ },
+ {
   "title": "Study for \"Bathers at Asnières\"",
   "artist": "Georges Seurat",
   "date": "c. 1883–84",
@@ -23,58 +49,32 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neo-impressionism/02-neo-impressionism-study-for-bathers-at-asnières.jpg"
+  "local_image": "99-附件/images/neo-impressionism/04-neo-impressionism-study-for-bathers-at-asnières.jpg"
  },
  {
-  "title": "End of the Harvest",
-  "artist": "Charles Angrand",
-  "date": "c. 1892–1905",
-  "medium": "charcoal on cream laid paper",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1999.49/1999.49_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1999.49/1999.49_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1999.49",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Oil Sketch for \"A Sunday on La Grande Jatte — 1884\"",
+  "artist": "Georges Seurat",
+  "date": "1884",
+  "medium": "Oil on panel",
+  "image_url": "https://www.artic.edu/iiif/2/081be15c-8812-c174-eeb2-cf318a2e67cf/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/081be15c-8812-c174-eeb2-cf318a2e67cf/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/61616",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neo-impressionism/03-neo-impressionism-end-of-the-harvest.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/neo-impressionism/05-neo-impressionism-oil-sketch-for-a-sunday-on-la-grande-jatte-1.jpg"
  },
  {
-  "title": "Self-Portrait at Easel",
-  "artist": "Hippolyte Petitjean",
-  "date": "1897",
-  "medium": "conté crayon with charcoal on laid paper",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2021.6/2021.6_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2021.6/2021.6_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2021.6",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neo-impressionism/04-neo-impressionism-self-portrait-at-easel.jpg"
- },
- {
-  "title": "Saint-Tropez:  The Port",
-  "artist": "Paul Signac",
-  "date": "1897–98",
-  "medium": "color lithograph",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1953.346/1953.346_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1953.346/1953.346_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1953.346",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neo-impressionism/05-neo-impressionism-saint-tropez-the-port.jpg"
- },
- {
-  "title": "The Promenade (Landscape with Cypresses)",
-  "artist": "Henri-Edmond Cross",
-  "date": "1897",
-  "medium": "color lithograph on chine collé",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1952.209/1952.209_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1952.209/1952.209_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1952.209",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neo-impressionism/06-neo-impressionism-the-promenade-landscape-with-cypresses.jpg"
+  "title": "Georges Seurat - Preparatory Sketch for the Painting La Grève du Bas-Butin, Honfleur PC 169",
+  "artist": "Georges Seurat",
+  "date": "1886 date QS:P571,+1886-00-00T00:00:00Z/",
+  "medium": "Preparatory Sketch for the Painting \"La Grève du Bas-Butin, ",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Georges_Seurat_-_Preparatory_Sketch_for_the_Painting_La_Gr%C3%A8ve_du_Bas-Butin,_Honfleur_PC_169.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Georges_Seurat_-_Preparatory_Sketch_for_the_Painting_La_Gr%C3%A8ve_du_Bas-Butin%2C_Honfleur_PC_169.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Georges_Seurat_-_Preparatory_Sketch_for_the_Painting_La_Gr%C3%A8ve_du_Bas-Butin%2C_Honfleur_PC_169.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/neo-impressionism/06-neo-impressionism-georges-seurat---preparatory-sketch-for-the.jpg"
  }
 ]

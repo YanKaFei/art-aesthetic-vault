@@ -13,6 +13,45 @@
   "local_image": "99-附件/images/academic-art/01-academic-art-rest.jpg"
  },
  {
+  "title": "The Bathers",
+  "artist": "William Adolphe Bouguereau",
+  "date": "1884",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/31f0a9a3-8a0d-44ed-6de8-66142b75c4c0/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/31f0a9a3-8a0d-44ed-6de8-66142b75c4c0/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/39560",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/academic-art/02-academic-art-the-bathers.jpg"
+ },
+ {
+  "title": "Marie Antoinette in a Park",
+  "artist": "Elisabeth Louise Vigée Le Brun",
+  "date": "ca. 1780–81",
+  "medium": "Black chalk, stumped, and white chalk; framing lines in black chalk",
+  "image_url": "https://images.metmuseum.org/CRDImages/dp/web-large/DP-18368-001.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/dp/original/DP-18368-001.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/824771",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/academic-art/03-academic-art-marie-antoinette-in-a-park.jpg"
+ },
+ {
+  "title": "Rest, oil painting by William Adolphe Bouguereau, 1879, Cleveland Museum of Art",
+  "artist": "William Adolphe Bouguereau, 1879, Cleveland Museum of Art",
+  "date": "1879",
+  "medium": "Rest, oil painting by William Adolphe Bouguereau, 1879, Clev",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Rest,_oil_painting_by_William_Adolphe_Bouguereau,_1879,_Cleveland_Museum_of_Art.JPG?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/9/93/Rest%2C_oil_painting_by_William_Adolphe_Bouguereau%2C_1879%2C_Cleveland_Museum_of_Art.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Rest%2C_oil_painting_by_William_Adolphe_Bouguereau%2C_1879%2C_Cleveland_Museum_of_Art.JPG",
+  "source": "维基共享资源",
+  "license": "CC0",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/academic-art/04-academic-art-rest-oil-painting-by-william-adolphe-bouguer.jpg"
+ },
+ {
   "title": "Arion on a Sea Horse and Bacchante on a Panther (pair)",
   "artist": "William Adolphe Bouguereau",
   "date": "1855",
@@ -23,58 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/academic-art/02-academic-art-arion-on-a-sea-horse-and-bacchante-on-a-pant.jpg"
+  "local_image": "99-附件/images/academic-art/05-academic-art-arion-on-a-sea-horse-and-bacchante-on-a-pant.jpg"
  },
  {
-  "title": "Arion on a Sea Horse",
-  "artist": "William Adolphe Bouguereau",
-  "date": "1855",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1980.238.1/1980.238.1_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1980.238.1/1980.238.1_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1980.238.1",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Academic Nude",
+  "artist": "Alexandre Cabanel",
+  "date": "n.d.",
+  "medium": "Red and brown Conté crayon on tan wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/b53a05d3-7b60-d30f-16de-de47403e6e3d/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/b53a05d3-7b60-d30f-16de-de47403e6e3d/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/81472",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/academic-art/03-academic-art-arion-on-a-sea-horse.jpg"
- },
- {
-  "title": "Bacchante on a Panther",
-  "artist": "William Adolphe Bouguereau",
-  "date": "1855",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1980.238.2/1980.238.2_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1980.238.2/1980.238.2_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1980.238.2",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/academic-art/04-academic-art-bacchante-on-a-panther.jpg"
- },
- {
-  "title": "A Calling",
-  "artist": "William Adolphe Bouguereau",
-  "date": "1896",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1996.272/1996.272_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1996.272/1996.272_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1996.272",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/academic-art/05-academic-art-a-calling.jpg"
- },
- {
-  "title": "The Virgin and Child",
-  "artist": "William Adolphe Bouguereau",
-  "date": "second half 19th century",
-  "medium": "graphite heightened with white chalk; small sketch upper right in graphite",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1939.647/1939.647_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1939.647/1939.647_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1939.647",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/academic-art/06-academic-art-the-virgin-and-child.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": ""
  }
 ]

@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/american-realism/01-american-realism-early-morning-after-a-storm-at-sea.jpg"
  },
  {
+  "title": "The Herring Net",
+  "artist": "Winslow Homer",
+  "date": "1885",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/5dca7347-c6dc-24dd-d073-d705b9cdc575/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/5dca7347-c6dc-24dd-d073-d705b9cdc575/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/25865",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/american-realism/02-american-realism-the-herring-net.jpg"
+ },
+ {
   "title": "The Brierwood Pipe",
   "artist": "Winslow Homer",
   "date": "1864",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/american-realism/02-american-realism-the-brierwood-pipe.jpg"
+  "local_image": "99-附件/images/american-realism/03-american-realism-the-brierwood-pipe.jpg"
+ },
+ {
+  "title": "After the Hurricane, Bahamas",
+  "artist": "Winslow Homer",
+  "date": "1899",
+  "medium": "Transparent watercolor, with touches of opaque watercolor, rewetting, blotting and scraping, over graphite, on moderately thick, moderately textured (twill texture on verso), ivory wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/b34de958-1cbe-065f-4941-c34f64d2b366/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/b34de958-1cbe-065f-4941-c34f64d2b366/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/16776",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/american-realism/04-american-realism-after-the-hurricane-bahamas.jpg"
  },
  {
   "title": "Leaping Trout",
@@ -36,45 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/american-realism/03-american-realism-leaping-trout.jpg"
+  "local_image": "99-附件/images/american-realism/05-american-realism-leaping-trout.jpg"
  },
  {
-  "title": "Boy with Anchor",
+  "title": "Croquet Scene",
   "artist": "Winslow Homer",
-  "date": "1873",
-  "medium": "Watercolor and graphite on paper",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1954.128/1954.128_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1954.128/1954.128_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1954.128",
-  "source": "克利夫兰艺术博物馆",
+  "date": "1866",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/f7b2db45-f393-653c-07ef-84319b0cdb92/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/f7b2db45-f393-653c-07ef-84319b0cdb92/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/44018",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/american-realism/04-american-realism-boy-with-anchor.jpg"
- },
- {
-  "title": "A Clam-Bake",
-  "artist": "Winslow Homer",
-  "date": "1873",
-  "medium": "watercolor, gouache, and graphite",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1945.229/1945.229_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1945.229/1945.229_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1945.229",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/american-realism/05-american-realism-a-clam-bake.jpg"
- },
- {
-  "title": "A Fisherman's Daughter",
-  "artist": "Winslow Homer",
-  "date": "1873",
-  "medium": "watercolor and gouache over graphite",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1943.660/1943.660_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1943.660/1943.660_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1943.660",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/american-realism/06-american-realism-a-fishermans-daughter.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/american-realism/06-american-realism-croquet-scene.jpg"
  }
 ]

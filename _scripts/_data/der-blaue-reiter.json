@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/der-blaue-reiter/01-der-blaue-reiter-genesis-ii.jpg"
  },
  {
+  "title": "Improvisation No. 30 (Cannons)",
+  "artist": "Vasily Kandinsky",
+  "date": "1913",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/b5bc6b66-9e6e-fe57-dcec-fc49e820e904/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/b5bc6b66-9e6e-fe57-dcec-fc49e820e904/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/8991",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/der-blaue-reiter/02-der-blaue-reiter-improvisation-no-30-cannons.jpg"
+ },
+ {
   "title": "Tiger",
   "artist": "Franz Marc",
   "date": "1912",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/der-blaue-reiter/02-der-blaue-reiter-tiger.jpg"
+  "local_image": "99-附件/images/der-blaue-reiter/03-der-blaue-reiter-tiger.jpg"
+ },
+ {
+  "title": "Landscape with Two Poplars",
+  "artist": "Vasily Kandinsky",
+  "date": "1912",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/9694ca0c-c4c4-e48d-566f-4d248990cff4/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/9694ca0c-c4c4-e48d-566f-4d248990cff4/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/8980",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/der-blaue-reiter/04-der-blaue-reiter-landscape-with-two-poplars.jpg"
  },
  {
   "title": "Horse",
@@ -36,6 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/der-blaue-reiter/03-der-blaue-reiter-horse.jpg"
+  "local_image": "99-附件/images/der-blaue-reiter/05-der-blaue-reiter-horse.jpg"
+ },
+ {
+  "title": "Painting with Green Center",
+  "artist": "Vasily Kandinsky",
+  "date": "1913",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/c68f33ec-feb1-5277-334b-b71ac15ae394/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/c68f33ec-feb1-5277-334b-b71ac15ae394/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/8987",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/der-blaue-reiter/06-der-blaue-reiter-painting-with-green-center.jpg"
  }
 ]

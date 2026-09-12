@@ -13,17 +13,17 @@
   "local_image": "99-附件/images/mannerism/01-mannerism-portrait-of-a-woman.jpg"
  },
  {
-  "title": "Man's Head from the Back",
-  "artist": "Agnolo Bronzino",
-  "date": "16th century?",
-  "medium": "red chalk with red and white gouache",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1939.659/1939.659_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1939.659/1939.659_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1939.659",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Alessandro de' Medici",
+  "artist": "Pontormo, (Jacopo Carrucci)",
+  "date": "1534–35",
+  "medium": "Oil on panel",
+  "image_url": "https://www.artic.edu/iiif/2/2b751a0e-a492-7fa9-749c-6667cdd1c928/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/2b751a0e-a492-7fa9-749c-6667cdd1c928/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/110759",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/mannerism/02-mannerism-mans-head-from-the-back.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/mannerism/02-mannerism-alessandro-de-medici.jpg"
  },
  {
   "title": "Christ Healing the Blind",
@@ -37,5 +37,44 @@
   "license": "CC0 1.0（Open Access 公共领域）",
   "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
   "local_image": "99-附件/images/mannerism/03-mannerism-christ-healing-the-blind.jpg"
+ },
+ {
+  "title": "Painting - Portrait of Bartolomeo Panciatichi by Bronzino",
+  "artist": "Bronzino",
+  "date": "2019-12-05 18:26:56",
+  "medium": "Painting - Portrait of Bartolomeo Panciatichi by Bronzino",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Painting_-_Portrait_of_Bartolomeo_Panciatichi_by_Bronzino.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Painting_-_Portrait_of_Bartolomeo_Panciatichi_by_Bronzino.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Painting_-_Portrait_of_Bartolomeo_Panciatichi_by_Bronzino.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/mannerism/04-mannerism-painting---portrait-of-bartolomeo-panciatich.jpg"
+ },
+ {
+  "title": "Man's Head from the Back",
+  "artist": "Agnolo Bronzino",
+  "date": "16th century?",
+  "medium": "red chalk with red and white gouache",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1939.659/1939.659_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1939.659/1939.659_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1939.659",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/mannerism/05-mannerism-mans-head-from-the-back.jpg"
+ },
+ {
+  "title": "Christ before Pilate",
+  "artist": "Pontormo, (Jacopo Carrucci)",
+  "date": "1522/23",
+  "medium": "Black chalk, with stumping, and traces of red chalk, heightened with traces of white chalk, over stylus incising, on cream laid paper",
+  "image_url": "https://www.artic.edu/iiif/2/55869b15-1e2f-e5dd-e6f9-fe241ccdb8d5/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/55869b15-1e2f-e5dd-e6f9-fe241ccdb8d5/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/109500",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/mannerism/06-mannerism-christ-before-pilate.jpg"
  }
 ]

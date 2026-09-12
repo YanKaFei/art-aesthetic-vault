@@ -1,5 +1,18 @@
 [
  {
+  "title": "The Bedroom",
+  "artist": "Vincent van Gogh",
+  "date": "1889",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/6644829f-f292-c5c4-a73c-0356a6fdbf0d/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/6644829f-f292-c5c4-a73c-0356a6fdbf0d/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/28560",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/japonism/01-japonism-the-bedroom.jpg"
+ },
+ {
   "title": "Self-Portrait with Japanese Print (1887) - Vincent Van Gogh (Kunstmuseum Basel)",
   "artist": "Paradise Chronicle",
   "date": "2023-11-17 14:20:06",
@@ -10,7 +23,20 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/japonism/01-japonism-self-portrait-with-japanese-print-1887---vin.jpg"
+  "local_image": "99-附件/images/japonism/02-japonism-self-portrait-with-japanese-print-1887---vin.jpg"
+ },
+ {
+  "title": "Japanese white-eye on flowering branch",
+  "artist": "Utagawa Hiroshige",
+  "date": "1830s–1840s",
+  "medium": "Color woodblock print; yotsugiriban",
+  "image_url": "https://www.artic.edu/iiif/2/19c28462-767d-b09b-f560-b4572406696a/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/19c28462-767d-b09b-f560-b4572406696a/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/19018",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/japonism/03-japonism-japanese-white-eye-on-flowering-branch.jpg"
  },
  {
   "title": "Van Gogh - Selbstbildnis mit japanischen Druck",
@@ -23,7 +49,20 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/japonism/02-japonism-van-gogh---selbstbildnis-mit-japanischen-dru.jpg"
+  "local_image": "99-附件/images/japonism/04-japonism-van-gogh---selbstbildnis-mit-japanischen-dru.jpg"
+ },
+ {
+  "title": "Hamamatsu, from the series \"Fifty-three Stations of the Tokaido (Tokaido gojusan tsugi),\" also known as the Tokaido with Poem (Kyoka iri Tokaido)",
+  "artist": "Utagawa Hiroshige",
+  "date": "c. 1837/42",
+  "medium": "Color woodblock print; chuban",
+  "image_url": "https://www.artic.edu/iiif/2/cef4e5df-a749-090b-b897-7d5f40654685/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/cef4e5df-a749-090b-b897-7d5f40654685/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/4371",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/japonism/05-japonism-hamamatsu-from-the-series-fifty-three-statio.jpg"
  },
  {
   "title": "Brooklyn Museum - Print from the Series Fifty-three Stages of the Tokaido (Tokaido Gojusan) - Utagawa Hiroshige (Ando)",
@@ -36,45 +75,6 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/japonism/03-japonism-brooklyn-museum---print-from-the-series-fift.jpg"
- },
- {
-  "title": "Imaginary painting of the America by Utagawa Hiroshige II",
-  "artist": "Utagawa Hiroshige II",
-  "date": "1861",
-  "medium": "Imaginary painting of the America by Utagawa Hiroshige II",
-  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Imaginary_painting_of_the_America_by_Utagawa_Hiroshige_II.jpg?width=1024",
-  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Imaginary_painting_of_the_America_by_Utagawa_Hiroshige_II.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-  "page_url": "https://commons.wikimedia.org/wiki/File:Imaginary_painting_of_the_America_by_Utagawa_Hiroshige_II.jpg",
-  "source": "维基共享资源",
-  "license": "Public domain",
-  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/japonism/04-japonism-imaginary-painting-of-the-america-by-utagawa.jpg"
- },
- {
-  "title": "Painting of Yoshida Kenko by Utagawa Hiroshige",
-  "artist": "Utagawa Hiroshige",
-  "date": "Edo period, mid 1840s",
-  "medium": "Painting of Yoshida Kenko by Utagawa Hiroshige",
-  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Painting_of_Yoshida_Kenko_by_Utagawa_Hiroshige.jpg?width=1024",
-  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Painting_of_Yoshida_Kenko_by_Utagawa_Hiroshige.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-  "page_url": "https://commons.wikimedia.org/wiki/File:Painting_of_Yoshida_Kenko_by_Utagawa_Hiroshige.jpg",
-  "source": "维基共享资源",
-  "license": "Public domain",
-  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/japonism/05-japonism-painting-of-yoshida-kenko-by-utagawa-hiroshi.jpg"
- },
- {
-  "title": "Utagawa Hiroshige - Woodcut - Google Art Project (570053)",
-  "artist": "Utagawa Hiroshige",
-  "date": "(1820 - 1858)",
-  "medium": "Woodcut title QS:P1476,en:\"Woodcut\" label QS:Len,\"Woodcut\"",
-  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Utagawa_Hiroshige_-_Woodcut_-_Google_Art_Project_(570053).jpg?width=1024",
-  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Utagawa_Hiroshige_-_Woodcut_-_Google_Art_Project_%28570053%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-  "page_url": "https://commons.wikimedia.org/wiki/File:Utagawa_Hiroshige_-_Woodcut_-_Google_Art_Project_%28570053%29.jpg",
-  "source": "维基共享资源",
-  "license": "Public domain",
-  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/japonism/06-japonism-utagawa-hiroshige---woodcut---google-art-pro.jpg"
+  "local_image": "99-附件/images/japonism/06-japonism-brooklyn-museum---print-from-the-series-fift.jpg"
  }
 ]

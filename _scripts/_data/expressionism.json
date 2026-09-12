@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/expressionism/01-expressionism-wrestlers-in-a-circus.jpg"
  },
  {
+  "title": "The Girl by the Window",
+  "artist": "Edvard Munch",
+  "date": "1893",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/d7df2633-3b40-f570-c906-211503a37cde/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/d7df2633-3b40-f570-c906-211503a37cde/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/154235",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/expressionism/02-expressionism-the-girl-by-the-window.jpg"
+ },
+ {
   "title": "Perseus's Last Duty",
   "artist": "Max Beckmann",
   "date": "1949",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/expressionism/02-expressionism-perseuss-last-duty.jpg"
+  "local_image": "99-附件/images/expressionism/03-expressionism-perseuss-last-duty.jpg"
+ },
+ {
+  "title": "The Scream",
+  "artist": "Edvard Munch",
+  "date": "1895",
+  "medium": "Lithograph in black ink on cream card",
+  "image_url": "https://www.artic.edu/iiif/2/3b374643-5328-3e00-c02b-5ab56e5ae8f8/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/3b374643-5328-3e00-c02b-5ab56e5ae8f8/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/17229",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/expressionism/04-expressionism-the-scream.jpg"
  },
  {
   "title": "Woman with Red Hair and Green Eyes (The Sin)",
@@ -36,45 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/expressionism/03-expressionism-woman-with-red-hair-and-green-eyes-the-sin.jpg"
+  "local_image": "99-附件/images/expressionism/05-expressionism-woman-with-red-hair-and-green-eyes-the-sin.jpg"
  },
  {
-  "title": "Evening, Melancholy I",
+  "title": "Two Women on the Shore",
   "artist": "Edvard Munch",
-  "date": "1896",
-  "medium": "Hand-colored woodcut",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1959.82/1959.82_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1959.82/1959.82_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1959.82",
-  "source": "克利夫兰艺术博物馆",
+  "date": "1898",
+  "medium": "Woodcut printed from one block (sawn into three sections) in dark blue, green, black and red-brown ink with additions in green crayon on cream Japanese paper",
+  "image_url": "https://www.artic.edu/iiif/2/faf61d4e-118f-4dff-5b72-dde12b07efa2/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/faf61d4e-118f-4dff-5b72-dde12b07efa2/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/17257",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/expressionism/04-expressionism-evening-melancholy-i.jpg"
- },
- {
-  "title": "Summer Night  (The Voice)",
-  "artist": "Edvard Munch",
-  "date": "1895",
-  "medium": "etching and plate roughened with sandpaper",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1986.17/1986.17_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1986.17/1986.17_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1986.17",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/expressionism/05-expressionism-summer-night-the-voice.jpg"
- },
- {
-  "title": "From Max Linde's House: Theodor Linde",
-  "artist": "Edvard Munch",
-  "date": "1902",
-  "medium": "drypoint",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1962.397/1962.397_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1962.397/1962.397_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1962.397",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/expressionism/06-expressionism-from-max-lindes-house-theodor-linde.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/expressionism/06-expressionism-two-women-on-the-shore.jpg"
  }
 ]

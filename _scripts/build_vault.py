@@ -1935,6 +1935,7 @@ need only Python 3 + Pillow.
 | `artvault_vision.py` | **Optional**: macOS Vision semantic search (search by image / near-duplicates / similar movements) |
 | `ingest_inbox.py` | Processes the `pinterest/` inbox, including the dimensions above in its scan |
 | `verify_vault.py` | **Acceptance checks**: broken links / duplicate names / AI images / frontmatter / near-duplicates / licences / orphans |
+| `movement_fingerprint.py` | Movement fingerprints from objective dimensions for image-to-movement matching (explainable, but measurably worse than Vision) |
 | `pinterest_grab.py` / `pinterest_export.py` | Pinterest scraping and export (local use only, images are **not** committed) |
 
 ### Two conventions that are easy to miss
@@ -2574,6 +2575,7 @@ python3 make_links.py                 # 重新生成外部检索深链
 | `artvault_vision.py` | **可选**：macOS Vision 语义检索（以图搜图 / 近重复 / 相近流派） |
 | `ingest_inbox.py` | 处理 `pinterest/` 投递箱，扫描时带上上面这些维度 |
 | `verify_vault.py` | **验收检查**：断链 / 重名 / AI 图 / frontmatter / 近重复 / 授权 / 孤儿图 |
+| `movement_fingerprint.py` | 用客观维度建流派指纹做图像→流派匹配（可解释，但实测不如 Vision） |
 | `pinterest_grab.py` / `pinterest_export.py` | Pinterest 抓取与导出（本地自用，图**不入库**） |
 
 ### 两条容易被忽略的约定
@@ -2685,6 +2687,15 @@ _scripts/vendor/
 
 # 抓取过程的临时清单（每次扫描都会重写）
 _scripts/_data/inbox_manifest.json
+
+# 生成物：换台机器重建即可，不必入库
+#   python3 artvault_vision.py build          （图像语义索引，几 MB）
+#   python3 movement_fingerprint.py build     （客观维度特征缓存，约 1 分钟）
+_scripts/_data/vision_index.json
+_scripts/_data/feature_cache.json
+
+# Vision 特征提取器的编译产物（架构相关，首次使用时自动编译）
+_scripts/vision/vision_feat
 
 # Pinterest 抓来的图版权归原作者、无统一授权，**不要提交也不要公开**
 # （10-流派/ 里的 CC0 图不受影响，那是可以随便分发的）

@@ -13,30 +13,17 @@
   "local_image": "99-附件/images/early-netherlandish/01-early-netherlandish-saint-john-the-baptist-in-a-landscape.jpg"
  },
  {
-  "title": "Virgin and Child",
-  "artist": "Hans Memling",
-  "date": "c. 1470–80",
-  "medium": "oil on wood",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1934.29/1934.29_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1934.29/1934.29_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1934.29",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Portrait of Jean Gros (recto); Coat of Arms of Jean Gros (verso)",
+  "artist": "Rogier van der Weyden",
+  "date": "1460–64",
+  "medium": "Oil on panel",
+  "image_url": "https://www.artic.edu/iiif/2/108f44fc-d93b-abf0-c33c-2920d57844c3/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/108f44fc-d93b-abf0-c33c-2920d57844c3/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/16298",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/early-netherlandish/02-early-netherlandish-virgin-and-child.jpg"
- },
- {
-  "title": "Virgin and Child in a Landscape",
-  "artist": "Jan Gossaert",
-  "date": "1531",
-  "medium": "oil on wood",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1972.47/1972.47_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1972.47/1972.47_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1972.47",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/early-netherlandish/03-early-netherlandish-virgin-and-child-in-a-landscape.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/early-netherlandish/02-early-netherlandish-portrait-of-jean-gros-recto-coat-of-arms-of.jpg"
  },
  {
   "title": "Young Woman with a Pink",
@@ -49,32 +36,45 @@
   "source": "大都会艺术博物馆",
   "license": "CC0 1.0（Open Access 公共领域）",
   "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
-  "local_image": "99-附件/images/early-netherlandish/04-early-netherlandish-young-woman-with-a-pink.jpg"
+  "local_image": "99-附件/images/early-netherlandish/03-early-netherlandish-young-woman-with-a-pink.jpg"
  },
  {
-  "title": "Head of Christ (Ecce Homo)",
-  "artist": "Petrus Christus",
-  "date": "ca. 1445",
-  "medium": "Oil on parchment, laid down on wood",
-  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DT229079.jpg",
-  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DT229079.jpg",
-  "page_url": "https://www.metmuseum.org/art/collection/search/435897",
-  "source": "大都会艺术博物馆",
-  "license": "CC0 1.0（Open Access 公共领域）",
-  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
-  "local_image": "99-附件/images/early-netherlandish/05-early-netherlandish-head-of-christ-ecce-homo.jpg"
+  "title": "Eyck, Jan van - Portret van Margareta van Eyck",
+  "artist": "Jan van Eyck",
+  "date": "1439 / after 1439 date QS:P,+1439-00-00T",
+  "medium": "Portrait of Margaretha, wife of the painter Jan van Eyck tit",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Eyck,_Jan_van_-_Portret_van_Margareta_van_Eyck.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Eyck%2C_Jan_van_-_Portret_van_Margareta_van_Eyck.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Eyck%2C_Jan_van_-_Portret_van_Margareta_van_Eyck.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/early-netherlandish/04-early-netherlandish-eyck-jan-van---portret-van-margareta-van-eyc.jpg"
  },
  {
-  "title": "Salvator Mundi",
+  "title": "Virgin and Child",
   "artist": "Hans Memling",
-  "date": "1480–85",
-  "medium": "Oil on wood",
-  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-19586-001.jpg",
-  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP-19586-001.jpg",
-  "page_url": "https://www.metmuseum.org/art/collection/search/437061",
-  "source": "大都会艺术博物馆",
-  "license": "CC0 1.0（Open Access 公共领域）",
-  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
-  "local_image": "99-附件/images/early-netherlandish/06-early-netherlandish-salvator-mundi.jpg"
+  "date": "c. 1470–80",
+  "medium": "oil on wood",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1934.29/1934.29_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1934.29/1934.29_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1934.29",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/early-netherlandish/05-early-netherlandish-virgin-and-child.jpg"
+ },
+ {
+  "title": "Portrait of a Donor (recto); Saint Anthony of Padua (verso)",
+  "artist": "Hans Memling",
+  "date": "c. 1485",
+  "medium": "Oil on panel",
+  "image_url": "https://www.artic.edu/iiif/2/0ce87c39-eb29-c888-95a8-e3394ed13c70/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/0ce87c39-eb29-c888-95a8-e3394ed13c70/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/79777",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/early-netherlandish/06-early-netherlandish-portrait-of-a-donor-recto-saint-anthony-of-p.jpg"
  }
 ]

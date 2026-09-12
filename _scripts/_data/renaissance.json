@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/renaissance/01-renaissance-the-holy-family-with-saint-john-the-baptist.jpg"
  },
  {
+  "title": "Virgin and Child with an Angel",
+  "artist": "Sandro Botticelli",
+  "date": "1475–85",
+  "medium": "Tempera on panel",
+  "image_url": "https://www.artic.edu/iiif/2/b59cc3e9-a7c0-5aa1-1a22-bb472bb2e6d4/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/b59cc3e9-a7c0-5aa1-1a22-bb472bb2e6d4/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/80530",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/renaissance/02-renaissance-virgin-and-child-with-an-angel.jpg"
+ },
+ {
+  "title": "Portrait of a Woman with a Man at a Casement",
+  "artist": "Fra Filippo Lippi",
+  "date": "ca. 1440",
+  "medium": "Tempera on wood",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP159891.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP159891.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/436896",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/renaissance/03-renaissance-portrait-of-a-woman-with-a-man-at-a-casement.jpg"
+ },
+ {
   "title": "Virgin and Child with the Young Saint John the Baptist",
   "artist": "Sandro Botticelli",
   "date": "c. 1490",
@@ -23,7 +49,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/renaissance/02-renaissance-virgin-and-child-with-the-young-saint-john-t.jpg"
+  "local_image": "99-附件/images/renaissance/04-renaissance-virgin-and-child-with-the-young-saint-john-t.jpg"
+ },
+ {
+  "title": "Alessandro de' Medici",
+  "artist": "Pontormo, (Jacopo Carrucci)",
+  "date": "1534–35",
+  "medium": "Oil on panel",
+  "image_url": "https://www.artic.edu/iiif/2/2b751a0e-a492-7fa9-749c-6667cdd1c928/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/2b751a0e-a492-7fa9-749c-6667cdd1c928/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/110759",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/renaissance/05-renaissance-alessandro-de-medici.jpg"
  },
  {
   "title": "Pair of Panels from a Triptych: The Archangel Michael and St. Anthony Abbot",
@@ -36,45 +75,6 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/renaissance/03-renaissance-pair-of-panels-from-a-triptych-the-archangel.jpg"
- },
- {
-  "title": "Portrait of Infante Don Luis de Borbon",
-  "artist": "Anton Raphael Mengs",
-  "date": "c. 1776",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1966.14/1966.14_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1966.14/1966.14_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1966.14",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/renaissance/04-renaissance-portrait-of-infante-don-luis-de-borbon.jpg"
- },
- {
-  "title": "Copy of Raphael's Massacre of the Innocents",
-  "artist": "Raphael",
-  "date": "after 1510",
-  "medium": "pen and brown ink (iron gall) and brush and brown wash, heightened with traces of lead white(?) (oxidized); framing lines in brown ink",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1988.28/1988.28_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1988.28/1988.28_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1988.28",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/renaissance/05-renaissance-copy-of-raphaels-massacre-of-the-innocents.jpg"
- },
- {
-  "title": "The Miraculous Draught of Fishes",
-  "artist": "Raphael",
-  "date": "c. 1509",
-  "medium": "chiaroscuro woodcut",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1923.1056/1923.1056_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1923.1056/1923.1056_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1923.1056",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/renaissance/06-renaissance-the-miraculous-draught-of-fishes.jpg"
+  "local_image": "99-附件/images/renaissance/06-renaissance-pair-of-panels-from-a-triptych-the-archangel.jpg"
  }
 ]

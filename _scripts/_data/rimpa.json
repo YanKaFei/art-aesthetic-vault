@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/rimpa/01-rimpa-pheasant-and-grasses.jpg"
  },
  {
+  "title": "Korin Shinsen Hyakuzu (New Selection of Hundred Works by Korin)",
+  "artist": "佚名",
+  "date": "1864",
+  "medium": "Woodblock- printed book",
+  "image_url": "https://www.artic.edu/iiif/2/01fe02c3-59cd-1965-f331-bee0bfdfa9d1/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/01fe02c3-59cd-1965-f331-bee0bfdfa9d1/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/272616",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/rimpa/02-rimpa-korin-shinsen-hyakuzu-new-selection-of-hundr.jpg"
+ },
+ {
+  "title": "Casket decorated with fan paintings Ogata Korin",
+  "artist": "Museum Yamato Bunkakan",
+  "date": "2016-10-27 08:47:47",
+  "medium": "Casket decorated with fan paintings Ogata Korin",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Casket_decorated_with_fan_paintings_Ogata_Korin.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Casket_decorated_with_fan_paintings_Ogata_Korin.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Casket_decorated_with_fan_paintings_Ogata_Korin.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/rimpa/03-rimpa-casket-decorated-with-fan-paintings-ogata-ko.jpg"
+ },
+ {
   "title": "Gourd Basket with Chrysanthemum Design",
   "artist": "Ogata Kōrin",
   "date": "1700s",
@@ -23,58 +49,32 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/rimpa/02-rimpa-gourd-basket-with-chrysanthemum-design.jpg"
+  "local_image": "99-附件/images/rimpa/04-rimpa-gourd-basket-with-chrysanthemum-design.jpg"
  },
  {
-  "title": "Plum Tree",
-  "artist": "Ogata Kōrin",
-  "date": "c. 1700",
-  "medium": "hanging scroll; ink on silk",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1983.10/1983.10_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1983.10/1983.10_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1983.10",
-  "source": "克利夫兰艺术博物馆",
+  "title": "Peonies, Magnolia, and Dandelions",
+  "artist": "Tawaraya Sôtatsu",
+  "date": "Unknown",
+  "medium": "Hanging scroll; ink and colors on paper",
+  "image_url": "https://www.artic.edu/iiif/2/13c3192f-2844-7eb9-4db5-3cd7ce4eb66a/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/13c3192f-2844-7eb9-4db5-3cd7ce4eb66a/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/35620",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/rimpa/03-rimpa-plum-tree.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/rimpa/05-rimpa-peonies-magnolia-and-dandelions.jpg"
  },
  {
-  "title": "Chrysanthemums by a Stream",
-  "artist": "Ogata Kōrin",
-  "date": "c. 1715–30 or after",
-  "medium": "One of a pair of six-panel folding screens; ink and color on gilded paper",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1958.206.2/1958.206.2_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1958.206.2/1958.206.2_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1958.206.2",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/rimpa/04-rimpa-chrysanthemums-by-a-stream.jpg"
- },
- {
-  "title": "Pheasant",
-  "artist": "Ogata Kōrin",
-  "date": "1658–1716",
-  "medium": "hanging scroll; ink and color on silk",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1997.110/1997.110_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1997.110/1997.110_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1997.110",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/rimpa/05-rimpa-pheasant.jpg"
- },
- {
-  "title": "Casket decorated with fan paintings Ogata Korin",
-  "artist": "Museum Yamato Bunkakan",
-  "date": "2016-10-27 08:47:47",
-  "medium": "Casket decorated with fan paintings Ogata Korin",
-  "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Casket_decorated_with_fan_paintings_Ogata_Korin.jpg/1280px-Casket_decorated_with_fan_paintings_Ogata_Korin.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Casket_decorated_with_fan_paintings_Ogata_Korin.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-  "page_url": "https://commons.wikimedia.org/wiki/File:Casket_decorated_with_fan_paintings_Ogata_Korin.jpg",
+  "title": "Egret by Ogata Korin, ink and gofun on gold leaf, c. 1701-1716",
+  "artist": "Ogata Korin, ink and gofun on gold leaf, c. 1701-1716",
+  "date": "between circa 1701 and circa 1716 date Q",
+  "medium": "Egret by Ogata Korin, ink and gofun on gold leaf, c. 1701-17",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Egret_by_Ogata_Korin,_ink_and_gofun_on_gold_leaf,_c._1701-1716.JPG?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/4/46/Egret_by_Ogata_Korin%2C_ink_and_gofun_on_gold_leaf%2C_c._1701-1716.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Egret_by_Ogata_Korin%2C_ink_and_gofun_on_gold_leaf%2C_c._1701-1716.JPG",
   "source": "维基共享资源",
-  "license": "Public domain",
+  "license": "CC0",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/rimpa/06-rimpa-casket-decorated-with-fan-paintings-ogata-ko.jpg"
+  "local_image": "99-附件/images/rimpa/06-rimpa-egret-by-ogata-korin-ink-and-gofun-on-gold-l.jpg"
  }
 ]

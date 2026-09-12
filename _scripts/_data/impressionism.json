@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/impressionism/01-impressionism-banks-of-the-oise-at-dawn.jpg"
  },
  {
+  "title": "On a Balcony",
+  "artist": "Mary Cassatt",
+  "date": "1878–79",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/f0150d21-33ab-f6ea-0d4d-32d459f091fe/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/f0150d21-33ab-f6ea-0d4d-32d459f091fe/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/26650",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/impressionism/02-impressionism-on-a-balcony.jpg"
+ },
+ {
   "title": "Frieze of Dancers",
   "artist": "Edgar Degas",
   "date": "c. 1895",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/impressionism/02-impressionism-frieze-of-dancers.jpg"
+  "local_image": "99-附件/images/impressionism/03-impressionism-frieze-of-dancers.jpg"
+ },
+ {
+  "title": "Woman Bathing",
+  "artist": "Mary Cassatt",
+  "date": "1890–91",
+  "medium": "Color aquatint and drypoint on off-white laid paper",
+  "image_url": "https://www.artic.edu/iiif/2/9e90fbeb-bd55-7921-26e4-dde3470c5bd9/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/9e90fbeb-bd55-7921-26e4-dde3470c5bd9/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/13506",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/impressionism/04-impressionism-woman-bathing.jpg"
  },
  {
   "title": "Water Lilies (Agapanthus)",
@@ -36,45 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/impressionism/03-impressionism-water-lilies-agapanthus.jpg"
+  "local_image": "99-附件/images/impressionism/05-impressionism-water-lilies-agapanthus.jpg"
  },
  {
-  "title": "Portrait of Renoir",
-  "artist": "Frédéric Bazille",
-  "date": "1867",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2021.134/2021.134_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2021.134/2021.134_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2021.134",
-  "source": "克利夫兰艺术博物馆",
+  "title": "After the Bullfight",
+  "artist": "Mary Cassatt",
+  "date": "1873",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/7a314af6-336f-b6a4-809c-15659313a757/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/7a314af6-336f-b6a4-809c-15659313a757/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/31816",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/impressionism/04-impressionism-portrait-of-renoir.jpg"
- },
- {
-  "title": "The Red Kerchief",
-  "artist": "Claude Monet",
-  "date": "c. 1868–73",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1958.39/1958.39_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1958.39/1958.39_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1958.39",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/impressionism/05-impressionism-the-red-kerchief.jpg"
- },
- {
-  "title": "Romaine Lacaux",
-  "artist": "Pierre-Auguste Renoir",
-  "date": "1864",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1942.1065/1942.1065_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1942.1065/1942.1065_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1942.1065",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/impressionism/06-impressionism-romaine-lacaux.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/impressionism/06-impressionism-after-the-bullfight.jpg"
  }
 ]

@@ -13,43 +13,17 @@
   "local_image": "99-附件/images/symbolism/01-symbolism-the-race-track-death-on-a-pale-horse.jpg"
  },
  {
-  "title": "Symbolic Head",
-  "artist": "Odilon Redon",
-  "date": "c. 1890",
-  "medium": "oil on paper mounted on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1988.91/1988.91_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1988.91/1988.91_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1988.91",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/symbolism/02-symbolism-symbolic-head.jpg"
- },
- {
-  "title": "The Good Samaritan",
+  "title": "Hercules and the Lernaean Hydra",
   "artist": "Gustave Moreau",
-  "date": "c. 1865–70",
-  "medium": "watercolor, gouache, and graphite on paper",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2024.32/2024.32_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2024.32/2024.32_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2024.32",
-  "source": "克利夫兰艺术博物馆",
+  "date": "1875–76",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/2ae64c8a-266d-470a-a25a-c83127564636/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/2ae64c8a-266d-470a-a25a-c83127564636/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/20579",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/symbolism/03-symbolism-the-good-samaritan.jpg"
- },
- {
-  "title": "Hermine Gallia",
-  "artist": "Gustav Klimt",
-  "date": "c. 1904",
-  "medium": "black chalk with graphite on light brown laid paper",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1972.312/1972.312_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1972.312/1972.312_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1972.312",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/symbolism/04-symbolism-hermine-gallia.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/symbolism/02-symbolism-hercules-and-the-lernaean-hydra.jpg"
  },
  {
   "title": "The Storm",
@@ -62,6 +36,45 @@
   "source": "大都会艺术博物馆",
   "license": "CC0 1.0（Open Access 公共领域）",
   "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
-  "local_image": "99-附件/images/symbolism/05-symbolism-the-storm.jpg"
+  "local_image": "99-附件/images/symbolism/03-symbolism-the-storm.jpg"
+ },
+ {
+  "title": "Symbolic Head",
+  "artist": "Odilon Redon",
+  "date": "c. 1890",
+  "medium": "oil on paper mounted on canvas",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1988.91/1988.91_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1988.91/1988.91_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1988.91",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/symbolism/04-symbolism-symbolic-head.jpg"
+ },
+ {
+  "title": "Hercules and the Hydra of Lerna",
+  "artist": "Gustave Moreau",
+  "date": "c. 1876",
+  "medium": "Pen and brown and black ink and graphite, with touches of brush and brown wash, heightened with lead white, discolored, on cream laid paper prepared with a pale brown wash, tipped on blue laid paper, laid down on cream board",
+  "image_url": "https://www.artic.edu/iiif/2/19bc2169-c12a-4d47-0b4d-cf5bea54bf3b/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/19bc2169-c12a-4d47-0b4d-cf5bea54bf3b/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/100264",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": ""
+ },
+ {
+  "title": "The Good Samaritan",
+  "artist": "Gustave Moreau",
+  "date": "c. 1865–70",
+  "medium": "watercolor, gouache, and graphite on paper",
+  "image_url": "https://openaccess-cdn.clevelandart.org/2024.32/2024.32_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2024.32/2024.32_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/2024.32",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/symbolism/06-symbolism-the-good-samaritan.jpg"
  }
 ]

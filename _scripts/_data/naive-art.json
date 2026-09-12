@@ -13,30 +13,17 @@
   "local_image": "99-附件/images/naive-art/01-naive-art-fight-between-a-tiger-and-a-buffalo.jpg"
  },
  {
-  "title": "Outskirts of Paris",
+  "title": "Sawmill, Outskirts of Paris",
   "artist": "Henri Rousseau",
-  "date": "c. 1897–1905",
-  "medium": "oil on fabric",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1929.951/1929.951_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1929.951/1929.951_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1929.951",
-  "source": "克利夫兰艺术博物馆",
+  "date": "c. 1893/95",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/3826e366-e82a-e853-12e4-b303a1618103/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/3826e366-e82a-e853-12e4-b303a1618103/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/68433",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/naive-art/02-naive-art-outskirts-of-paris.jpg"
- },
- {
-  "title": "The War",
-  "artist": "Henri Rousseau",
-  "date": "1894–1895",
-  "medium": "lithograph",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2011.10/2011.10_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2011.10/2011.10_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2011.10",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/naive-art/03-naive-art-the-war.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/naive-art/02-naive-art-sawmill-outskirts-of-paris.jpg"
  },
  {
   "title": "Henri Rousseau - The Pink Candle - Google Art Project",
@@ -49,6 +36,45 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/naive-art/04-naive-art-henri-rousseau---the-pink-candle---google-ar.jpg"
+  "local_image": "99-附件/images/naive-art/03-naive-art-henri-rousseau---the-pink-candle---google-ar.jpg"
+ },
+ {
+  "title": "Outskirts of Paris",
+  "artist": "Henri Rousseau",
+  "date": "c. 1897–1905",
+  "medium": "oil on fabric",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1929.951/1929.951_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1929.951/1929.951_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1929.951",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/naive-art/04-naive-art-outskirts-of-paris.jpg"
+ },
+ {
+  "title": "River and Park Landscape",
+  "artist": "Henri Rousseau",
+  "date": "1885/90",
+  "medium": "Pen and black inks and lead white gouache, with graphite on tan wove paper, perimeter mounted on cream card",
+  "image_url": "https://www.artic.edu/iiif/2/2410fd8c-957b-dde7-6375-f976318839f8/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/2410fd8c-957b-dde7-6375-f976318839f8/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/38445",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/naive-art/05-naive-art-river-and-park-landscape.jpg"
+ },
+ {
+  "title": "The War",
+  "artist": "Henri Rousseau",
+  "date": "1894–1895",
+  "medium": "lithograph",
+  "image_url": "https://openaccess-cdn.clevelandart.org/2011.10/2011.10_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2011.10/2011.10_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/2011.10",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/naive-art/06-naive-art-the-war.jpg"
  }
 ]

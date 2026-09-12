@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/orphism/01-orphism-allo-paris-the-bridges-of-paris-and-notre-da.jpg"
  },
  {
+  "title": "The Suckling of Hercules, plate two from La Galerie du Palais Royal, volume II",
+  "artist": "Robert Delaunay",
+  "date": "1808",
+  "medium": "Engraving on ivory laid paper",
+  "image_url": "https://www.artic.edu/iiif/2/4771b8a0-caae-293b-0979-5579a16b4ee9/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/4771b8a0-caae-293b-0979-5579a16b4ee9/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/51075",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/orphism/02-orphism-the-suckling-of-hercules-plate-two-from-la-g.jpg"
+ },
+ {
   "title": "La Tour",
   "artist": "Robert Delaunay",
   "date": "1926",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/orphism/02-orphism-la-tour.jpg"
+  "local_image": "99-附件/images/orphism/03-orphism-la-tour.jpg"
+ },
+ {
+  "title": "Dante's Purgatory",
+  "artist": "Jules-Élie Delaunay",
+  "date": "c. 1857",
+  "medium": "Pen and brown ink on tan wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/89000056-2745-1cd3-4751-4eb25b120e6b/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/89000056-2745-1cd3-4751-4eb25b120e6b/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/117224",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": ""
  },
  {
   "title": "Allo Paris:  Frontispiece to book",
@@ -36,6 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/orphism/03-orphism-allo-paris-frontispiece-to-book.jpg"
+  "local_image": "99-附件/images/orphism/05-orphism-allo-paris-frontispiece-to-book.jpg"
+ },
+ {
+  "title": "Portrait of Mrs. Charles L. Hutchinson",
+  "artist": "Jules-Élie Delaunay",
+  "date": "1890",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/c8566357-e7cc-3040-4d1d-2c67669f3456/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/c8566357-e7cc-3040-4d1d-2c67669f3456/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/111626",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/orphism/06-orphism-portrait-of-mrs-charles-l-hutchinson.jpg"
  }
 ]

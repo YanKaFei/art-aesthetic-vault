@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/neoclassicism/01-neoclassicism-cupid-and-psyche.jpg"
  },
  {
+  "title": "The Double Bass Player",
+  "artist": "Alphonse Legros",
+  "date": "c. 1873",
+  "medium": "Etching on ivory Japanese tissue",
+  "image_url": "https://www.artic.edu/iiif/2/467b538e-158b-7422-7f5a-0b87d325648b/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/467b538e-158b-7422-7f5a-0b87d325648b/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/70",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/neoclassicism/02-neoclassicism-the-double-bass-player.jpg"
+ },
+ {
+  "title": "The Death of Socrates",
+  "artist": "Jacques Louis David",
+  "date": "1787",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-13139-001.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP-13139-001.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/436105",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/neoclassicism/03-neoclassicism-the-death-of-socrates.jpg"
+ },
+ {
   "title": "Antiochus and Stratonice",
   "artist": "Jean-Auguste-Dominique Ingres",
   "date": "c. 1838",
@@ -23,7 +49,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neoclassicism/02-neoclassicism-antiochus-and-stratonice.jpg"
+  "local_image": "99-附件/images/neoclassicism/04-neoclassicism-antiochus-and-stratonice.jpg"
+ },
+ {
+  "title": "Madame de Pastoret and Her Son",
+  "artist": "Jacques Louis David",
+  "date": "1791–92",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/72227c9e-413c-8930-477d-5a90e0a2123c/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/72227c9e-413c-8930-477d-5a90e0a2123c/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/27307",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/neoclassicism/05-neoclassicism-madame-de-pastoret-and-her-son.jpg"
  },
  {
   "title": "The Prisoner",
@@ -36,45 +75,6 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neoclassicism/03-neoclassicism-the-prisoner.jpg"
- },
- {
-  "title": "Young Woman with a Turban",
-  "artist": "Jacques-Louis David",
-  "date": "c. 1780",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1952.542/1952.542_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1952.542/1952.542_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1952.542",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neoclassicism/04-neoclassicism-young-woman-with-a-turban.jpg"
- },
- {
-  "title": "Phryne before Her Judges",
-  "artist": "Jacques-Louis David",
-  "date": "c. 1816–20",
-  "medium": "black chalk on wove paper discolored to beige",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2013.249/2013.249_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2013.249/2013.249_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2013.249",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neoclassicism/05-neoclassicism-phryne-before-her-judges.jpg"
- },
- {
-  "title": "Study of the Sabine Statue from the Villa Medici",
-  "artist": "Jacques-Louis David",
-  "date": "c. 1775–1780",
-  "medium": "pen and brown ink and brush and gray wash",
-  "image_url": "https://openaccess-cdn.clevelandart.org/2008.343/2008.343_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2008.343/2008.343_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/2008.343",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neoclassicism/06-neoclassicism-study-of-the-sabine-statue-from-the-villa-me.jpg"
+  "local_image": "99-附件/images/neoclassicism/06-neoclassicism-the-prisoner.jpg"
  }
 ]
