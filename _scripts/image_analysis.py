@@ -351,6 +351,7 @@ def analyze(path):
         if e:
             r["extended"] = e
         r["extended_missing"] = _ext.missing_hint()
+        r["extended_disabled"] = bool(getattr(_ext, "_DISABLED", False))
     except Exception as e:
         r["extended_error"] = str(e)[:80]
     try:
@@ -443,7 +444,9 @@ def main():
         miss = results[0].get("extended_missing") if results else ""
         if miss:
             print("提示：%s" % miss)
-            print("      装：pip3 install --target ./vendor/libs numpy opencv-python-headless")
+            if not results[0].get("extended_disabled"):
+                print("      装：pip3 install --target ./vendor/libs "
+                      "numpy opencv-python-headless")
     return 0
 
 

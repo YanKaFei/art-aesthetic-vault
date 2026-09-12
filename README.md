@@ -340,11 +340,20 @@ cd _scripts && python3 artvault.py categories
 
 **核心脚本只用 Python 标准库，不需要 pip 安装任何东西。**
 
-可选依赖（只有 Pinterest 抓取和图片投递箱需要）：
+可选依赖 —— 不装也能跑，装了多一层能力：
 
 ```bash
+# Pinterest 抓取与投递箱
 pip3 install --user requests Pillow
+
+# 图片分析的增强维度（人脸景别 / 霍夫直线 / 显著性）与语义检索
+pip3 install --target ./vendor/libs numpy opencv-python-headless
 ```
+
+> 装到 `vendor/libs` 是为了不污染系统 Python，且该目录已 gitignore。
+> 不想装：`ARTVAULT_NO_EXT=1` 可显式关掉增强维度。
+> 另：`artvault_vision.py` 只在 macOS 上可用（依赖系统自带 Vision 框架），
+> 其他系统会自动降级并说明原因，不影响任何核心功能。
 
 ---
 

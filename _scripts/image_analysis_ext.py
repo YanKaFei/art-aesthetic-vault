@@ -343,6 +343,8 @@ def render_extended(ext, indent="  "):
 
 def missing_hint():
     """增强维度不可用时给一句提示。全部可用则返回空串。"""
+    if _DISABLED:
+        return "增强维度已被 ARTVAULT_NO_EXT 主动关闭（不是缺依赖）"
     miss = []
     if np is None:
         miss.append("numpy")

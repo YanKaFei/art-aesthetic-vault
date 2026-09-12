@@ -347,11 +347,22 @@ cd _scripts && python3 artvault.py categories
 
 **The core scripts use only the Python standard library - nothing to pip install.**
 
-Optional dependencies (only for Pinterest grabbing and the image inbox):
+Optional dependencies - everything works without them, they just add capability:
 
 ```bash
+# Pinterest grabbing and the image inbox
 pip3 install --user requests Pillow
+
+# Enhanced image-analysis dimensions (face framing / Hough lines / saliency)
+# and semantic search
+pip3 install --target ./vendor/libs numpy opencv-python-headless
 ```
+
+> Installing into `vendor/libs` keeps your system Python clean, and the
+> directory is gitignored. To skip them explicitly: `ARTVAULT_NO_EXT=1`.
+> Note `artvault_vision.py` is macOS-only (it uses the system Vision
+> framework); elsewhere it degrades gracefully and says why, without
+> affecting any core feature.
 
 ---
 
