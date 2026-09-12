@@ -9,6 +9,7 @@ build_vault.py —— 用 movements.py 的数据 + _data/*.json 的抓取结果�
 你自己写的笔记请放在 20-我的提示词/ 下，那个目录不会被碰。
 """
 
+import glob
 import json
 import os
 import sys
@@ -1613,7 +1614,7 @@ README_EN = """<div align="center">
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
-163 notes · 372 public-domain images · 21 ready-to-run scripts
+{n_notes} notes · {n_img} public-domain images · {n_scripts} ready-to-run scripts
 
 **English** ｜ [中文](README.md)
 
@@ -1682,7 +1683,7 @@ this and piling up style keywords.
 | | |
 |---|---|
 | **Movement cards** | **141**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
-| **Public-domain images** | **372** (134 MB), covering 79 movements |
+| **Public-domain images** | **{n_img}** ({img_mb} MB), covering {n_mv_with_img} movements |
 | **Guides & methodology** | 18 notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
 | **Keyword atlas** | All **218 styles / 189 movements / 68 genres** mapped to a card |
 | **Note templates** | 3 |
@@ -2259,7 +2260,7 @@ README = """<div align="center">
 
 从拜占庭到 Y2K ｜ 东亚 · 南亚 · 伊斯兰 ｜ 摄影谱系 ｜ 数字亚文化
 
-163 篇笔记 · 372 张公共领域实图 · 21 个即用脚本
+{n_notes} 篇笔记 · {n_img} 张公共领域实图 · {n_scripts} 个即用脚本
 
 [English](README.en.md) ｜ **中文**
 
@@ -2321,7 +2322,7 @@ alienated, oppressive, intoxicating                    <- 情绪层
 | | 数量 |
 |---|---|
 | **流派卡** | **141 张**，6 大分类，每张含六维视觉拆解 + 七层提示词 + 配色 + 视频层 |
-| **公共领域实图** | **372 张**（134 MB），79 个流派配了图 |
+| **公共领域实图** | **{n_img} 张**（{img_mb} MB），{n_mv_with_img} 个流派配了图 |
 | **导航与方法论** | 18 篇（流派总览、关键词图谱、七层方法、视频结构、配色速查、反推工具链…） |
 | **关键词图谱** | 全部 **218 styles / 189 movements / 68 genres** 的完整映射 |
 | **笔记模板** | 3 个（流派卡 / 提示词卡 / 作品拆解） |
@@ -2666,12 +2667,38 @@ def main():
         w("90-模板/%s" % name, tpl)
 
     w("20-我的提示词/我的提示词卡.md", MY_PROMPTS)
-    _rm = (README.replace("{n_mv}", str(len(MOVEMENTS)))
+    # 统计量在构建时算，不写死 —— 否则每抓一次图 README 就失准一次。
+    # （原来这里写死 "372 张"，实际已经涨到 600 多张。）
+    _img_files = []
+    for _r, _d, _fs in os.walk(os.path.join(VAULT, "99-附件", "images")):
+        for _f in _fs:
+            if _f.lower().endswith((".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff")):
+                _img_files.append(os.path.join(_r, _f))
+    STATS = {
+        "n_img": len(_img_files),
+        "img_mb": int(round(sum(os.path.getsize(p) for p in _img_files) / 1048576.0)),
+        # 只算**真的流派**目录：取 images/ 之后的第一段路径，再和流派 slug 求交集。
+        # 直接用 basename(dirname()) 会把 pinterest/ 和嵌套子目录也算进来
+        # （实测那样会得到 92，而真实是 81）。
+        "n_mv_with_img": len({p.split(os.sep + "images" + os.sep, 1)[1].split(os.sep)[0]
+                              for p in _img_files if os.sep + "images" + os.sep in p}
+                             & {m["slug"] for m in MOVEMENTS}),
+        "n_scripts": len([f for f in os.listdir(HERE) if f.endswith(".py")]),
+        "n_notes": sum(len(glob.glob(os.path.join(VAULT, d, "**", "*.md"), recursive=True))
+                       for d in ("00-导航", "10-流派", "20-我的提示词", "90-模板")),
+    }
+
+    def _fill(t):
+        for k, v in STATS.items():
+            t = t.replace("{%s}" % k, str(v))
+        return t
+
+    _rm = _fill(README.replace("{n_mv}", str(len(MOVEMENTS)))
                  .replace("{REPO_URL}", REPO_URL)
                  .replace("{skill_tree}", skill_tree()))
     w("README.md", _rm)
     w("LICENSE", LICENSE_TEXT)
-    _en = (README_EN.replace("{n_mv}", str(len(MOVEMENTS)))
+    _en = _fill(README_EN.replace("{n_mv}", str(len(MOVEMENTS)))
                     .replace("{REPO_URL}", REPO_URL)
                     .replace("{skill_tree_en}", skill_tree_en())
                     .replace("{cat_table_en}", category_table_en()))
