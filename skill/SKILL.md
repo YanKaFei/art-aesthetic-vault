@@ -90,13 +90,47 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \
    「巴洛克的光照层 + 赛博朋克的构图层 + 浮世绘的媒介层」。
 3. **先取层，再接主体。** 先 `layers` 拿到风格层，再把主体描述放最前面。
 
+## 分析一张参考图
+
+用户给一张图（或问「这是什么风格」）时，先测量再判断：
+
+```bash
+cd "$VAULT/_scripts"
+python3 image_analysis.py <图片>            # 七维度：明度/对比/色彩/和谐/构图/质感/线条
+python3 clip_match.py match <图片>          # 最像的流派（CLIP，含零样本）
+```
+
+`image_analysis` 只用 Pillow，永远可用。`clip_match` 需要先下模型
+（约 150MB，一次性）：`python3 clip_embed.py download && python3 clip_embed.py build`。
+
+**⚠ 两者都只是信号，不是结论。**
+- 客观测量的每一项都能翻译成提示词（「低明调」→ `low-key lighting`），
+  但**风格判断不能只看数字**。实测纯按配色距离匹配，一张油画会被算成
+  最接近「现实主义」，而那只是土色系重合。
+- CLIP 的 Top-1 实测 39%（随机基准 1.4%），十次错六次。
+
+正确用法：**先看图凭感觉判断 → 再看数字检查有没有看走眼 → 冲突时回去看图**
+（通常是感觉错了）。几个真正有用的信号：
+- `暗部溢出` 高 = 有意为之的深压暗调（巴洛克/明暗对照），不是曝光失误
+- `RMS 低但 Michelson 高` = 大面积暗调 + 小面积高光 → 明暗对照法的签名
+- `和谐` 判「互补 / 两组色相对峙」能抓出「纸底 vs 颜料」这类色彩骨架
+
+最后用 `artvault.py layers <流派>` 拿到人写的具体术语来落定风格。
+
 ## Pinterest 投递箱
 
 `$VAULT/pinterest/` 是投递箱。用户说「处理 pinterest 投递箱」时：
 
 ```bash
-cd "$VAULT/_scripts" && python3 ingest_inbox.py --scan   # 尺寸/主色/感知哈希/配色最近的流派
+cd "$VAULT/_scripts" && python3 ingest_inbox.py --scan
 ```
+
+`--scan` 一次给全：七维度客观测量、人脸景别/霍夫直线/显著性
+（装了 numpy+opencv 时）、**CLIP 建议流派 Top-3**、配色最近的流派。
+`--no-analysis` 可跳过分析只要清单。
+
+其中 **CLIP 建议流派最有用** —— 实测一张神奈川冲浪里被「配色最近」判成
+「宝丽来与胶片」，CLIP 正确判成 ukiyo-e。但它仍是**建议**（Top-1 39%）。
 
 然后**逐张 `read_image` 看图**，做七层拆解 + 匹配 1–3 个流派，
 写入 `20-我的提示词/投递箱-<日期>.md`，最后 `--archive` 归档。
@@ -117,4 +151,9 @@ cd "$VAULT/_scripts" && python3 ingest_inbox.py --scan   # 尺寸/主色/感知�
 ```
 
 工具（9 个）：`search_movements` `get_movement` `get_layers` `compose_prompt`
-`get_palette` `find_related` `list_categories`。纯标准库。
+`get_palette` `find_related` `list_categories` `analyze_image` `match_movement`。
+纯标准库实现。
+
+后两个是图片相关：`analyze_image(path)` 做客观测量，
+`match_movement(path, topn)` 找最像的流派。它们需要 Pillow / CLIP 模型，
+没装会返回明确原因和修复命令，不影响前七个。

@@ -73,6 +73,23 @@ for base in "${TARGETS[@]}"; do
         echo "  安装 $name → $dest"
         [ "$DRY" = 1 ] && continue
         mkdir -p "$base"
+
+        # 先清掉**本仓库自己的**历史备份。
+        # 老版本 install.sh 替换实体目录时会留下 <dest>.bak.<时间戳>，
+        # 而新版本只处理 $dest、不管旁边的陈旧备份，于是会一直累积。
+        # 它们的 SKILL.md 声明的 name 与当前 skill 相同，属于潜在的
+        # 重复加载冲突（两个同名 skill），不能留着。
+        # 只删认得出是本仓库的，不碰用户自己的东西。
+        for old_bak in "$dest".bak.*; do
+          [ -e "$old_bak" ] || continue
+          if [ -f "$old_bak/SKILL.md" ] && grep -q "艺术审美风格库\|art-aesthetic-vault" "$old_bak/SKILL.md" 2>/dev/null; then
+            echo "    （清理本仓库的旧备份 $(basename "$old_bak")）"
+            rm -rf "$old_bak"
+          else
+            echo "    （保留内容不认识的备份 $(basename "$old_bak")，未删除）"
+          fi
+        done
+
         if [ -L "$dest" ]; then
           rm -f "$dest"
         elif [ -e "$dest" ]; then
