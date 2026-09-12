@@ -2763,6 +2763,11 @@ def main():
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/cache
+# 主题是**个人界面选择**，不是参考内容：1.7MB 的 CSS 跟着公开仓库走
+# 会让每个 clone 都多背一份，也把个人审美强加给别人。
+# 另外社区主题的授权不一（实测 Royal Velvet 是 MIT，Wasp 没声明许可），
+# 不声明许可的那些不宜随公开仓库再分发。
+.obsidian/themes/
 # graph.json 只有缩放比例等视图状态 —— 实测一个提交里唯一的变化就是 scale。
 # 这一行曾在 849101d 加过，随后被无关的 ff52937 从模板里删掉了；
 # 因为 .gitignore 是模板生成的，删一次就等于永久回退。别再删。
