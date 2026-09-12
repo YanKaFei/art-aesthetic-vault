@@ -134,7 +134,7 @@ ARTVAULT_NO_EXT=1 python3 image_analysis.py <图片>   # 关掉增强维度
 python3 image_analysis_ext.py <图片>          # 三个可选增强（要 numpy + opencv）
 python3 artvault_vision.py build              # 语义索引（仅 macOS，可选）
 python3 artvault_vision.py dups --thresh 0.08 # 近重复检测（验收第 5 项）
-python3 ingest_inbox.py --scan                # 投递箱扫描（已带上以上维度）
+python3 ingest_inbox.py --scan                # 投递箱扫描（已带上以上维度 + CLIP 建议流派）
 ```
 
 **七维度**：明度 / 对比 / 色彩 / 和谐 / 构图 / 质感 / 线条 —— 每一项都能翻译成
@@ -146,6 +146,11 @@ python3 ingest_inbox.py --scan                # 投递箱扫描（已带上以�
 **关键提醒**：这些数字是**信号不是结论**。实测纯按配色距离匹配，一张油画会被
 算成最接近「现实主义」，但那只是土色系重合、风格毫不相干。正确用法是先看图
 凭感觉判断，再看数字检查有没有看走眼，冲突时回去看图。
+
+`--scan` 会给出 **CLIP 建议流派**（Top-3）。实测准确率 Top-1 39.1%
+（随机基准 1.4%），比同输出里的「配色最近」可靠得多 ——
+实测一张神奈川冲浪里被配色匹配判成「宝丽来与胶片」，CLIP 正确判成 ukiyo-e。
+但要当**建议**用，最终判断靠看图。
 
 投递箱工作流：用户把参考图丢进 `pinterest/` → AI 逐张 `read_image` 看图 →
 七层拆解 + 匹配流派 → 写 `20-我的提示词/投递箱-<日期>.md` → `--archive` 归档。
@@ -167,13 +172,16 @@ cd <仓库>/skill && ./install.sh
 ```bash
 cd _scripts
 python3 verify_vault.py            # 全部检查
-python3 verify_vault.py --quick    # 只跑不需要 Vision 索引的前四项
+python3 verify_vault.py --quick    # 跳过第 5 项（近重复），其余七项照跑
 ```
 
-七项检查：**断链 · 重名 · AI 生成图 · frontmatter · 近重复 · 授权字段 · 孤儿图**。
+八项检查：**断链 · 重名 · AI 生成图 · frontmatter · 近重复 · 授权字段 · 孤儿图 · JSON↔磁盘**。
 退出码 0 = 全过，1 = 有问题（可以直接写进 CI 或 pre-commit）。
 
-**必须全过的是前四项**（不需要任何可选依赖）：
+**必须全过的是 1/2/3/4/6/7/8 七项**（零可选依赖）。
+只有第 5 项是**信息项** —— 它列出跨流派完全相同的图，但不判失败，
+因为大部分跨流派重复是合理的（见下）：
+
 
 ```
 1 断链        每个 ![[...]] 都能在 99-附件/images/ 下找到文件

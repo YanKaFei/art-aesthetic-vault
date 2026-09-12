@@ -8,7 +8,7 @@ verify_vault.py —— 抓完/改完之后的验收检查。
 
 用法：
     python3 verify_vault.py            # 跑全部检查
-    python3 verify_vault.py --quick    # 只跑不需要索引的前四项
+    python3 verify_vault.py --quick    # 跳过第 5 项（近重复），其余七项照跑
 
 检查项
     1 断链       每个 ![[...]] 都能在 99-附件/images/ 下找到文件
@@ -256,7 +256,7 @@ def check_data_disk_sync():
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
-                    help="只跑不需要 Vision 索引的前四项")
+                    help="跳过第 5 项（近重复，需要 CLIP/Vision 索引），其余七项照跑")
     ap.add_argument("--max-list", type=int, default=8, help="每项最多列几条明细")
     a = ap.parse_args()
 

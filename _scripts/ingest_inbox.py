@@ -126,6 +126,26 @@ def load_analyzer():
         return None
 
 
+_CLIP_MATCH = None
+
+
+def load_clip_match():
+    """把 CLIP 的「最像哪个流派」接进来。
+
+    模型没下（clip_embed.available() 返回原因字符串）就返回 None，
+    扫描照常进行 —— 这一项是增强，不是必需。
+    """
+    global _CLIP_MATCH
+    if _CLIP_MATCH is None:
+        try:
+            import clip_embed
+            import clip_match
+            _CLIP_MATCH = clip_match if clip_embed.available() is None else False
+        except Exception:
+            _CLIP_MATCH = False
+    return _CLIP_MATCH or None
+
+
 _ANALYZER = None
 
 
@@ -173,6 +193,21 @@ def scan_new(analyze=True):
         else:
             rec["error"] = "未安装 Pillow，只能列出文件"
         out.append(rec)
+
+    # CLIP 建议流派：一次算好文本矩阵与质心，再批量编码所有新图。
+    # 这是投递箱工作流里最有用的信号 —— 但它只有约四成准确率
+    # （实测 Top-1 39.1%，随机基准 1.4%），所以输出里标成「建议」。
+    cm = load_clip_match() if analyze else None
+    if cm:
+        try:
+            sug = cm.suggest([r["path"] for r in out if not r.get("error")])
+            for r in out:
+                if r["path"] in sug:
+                    r["suggested"] = [{"slug": s_, "name": n, "score": round(sc, 3)}
+                                      for s_, n, sc in sug[r["path"]]]
+        except Exception as e:
+            for r in out:
+                r["suggest_error"] = str(e)[:70]
     return out
 
 
@@ -239,6 +274,12 @@ def render(recs, dups, matches):
                 L.append("   " + ln)
         elif r.get("analysis_error"):
             L.append("   ⚠ 维度分析失败: %s" % r["analysis_error"])
+        if r.get("suggested"):
+            L.append("   CLIP 建议流派：")
+            for m in r["suggested"]:
+                L.append("      %-16s %-18s 融合分 %.2f" % (m["slug"], m["name"], m["score"]))
+        elif r.get("suggest_error"):
+            L.append("   ⚠ CLIP 建议失败: %s" % r["suggest_error"])
         if r["file"] in matches:
             L.append("   配色最近的流派：")
             for m in matches[r["file"]]:

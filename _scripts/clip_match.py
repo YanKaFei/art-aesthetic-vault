@@ -281,6 +281,86 @@ def evaluate(min_samples=3, verbose=True):
 
 
 # ------------------------------------------------------------ 匹配
+def _centroids(slugs):
+    """算每个流派实图的平均向量（只保留 >=3 张的，样本太少的质心噪声大）。
+
+    单独抽出来是因为 `suggest()` 要给多张图打分 —— 每张图重算一遍质心
+    是纯浪费（600 张图的矩�阵乘加要跑几十次）。
+    """
+    import numpy as np
+    cache = load_cache()
+    keys, X = _np_matrix(cache, set(slugs))
+    cents = {}
+    if keys is None or len(keys) == 0:
+        return cents, set()
+    for s in slugs:
+        sel = [i for i, k in enumerate(keys) if slug_of(k) == s]
+        if len(sel) < 3:
+            continue
+        c = X[sel].mean(axis=0)
+        n = float(np.linalg.norm(c))
+        if n > 0:
+            cents[s] = c / n
+    return cents, set(keys)
+
+
+def suggest(paths, topn=3):
+    """给**多张**图一次性给出最像的流派。返回 {路径: [(slug, 名称, 融合分), ...]}。
+
+    供投递箱扫描调用：一次算好文本矩阵与质心，再批量编码所有图。
+    CLIP 不可用时返回空 dict（调用方据此决定要不要提示）。
+    """
+    import numpy as np
+    import clip_embed as C
+    if C.available():
+        return {}
+    tm = text_matrix()
+    if tm is None:
+        return {}
+    slugs, M = tm
+    cents, _keys = _centroids(slugs)
+    have = [s for s in slugs if s in cents]
+
+    emb = C.embed_batch(list(paths))
+    if not emb:
+        return {}
+    Q = np.asarray(list(emb.values()), dtype="f4")
+    Q = Q / np.maximum(np.linalg.norm(Q, axis=1, keepdims=True), 1e-8)
+
+    ZS = Q @ M.T                                  # [n, 141]
+    zs_idx = {s: i for i, s in enumerate(slugs)}
+    if have:
+        Cm = np.asarray([cents[s] for s in have], dtype="f4")
+        CT = Q @ Cm.T                             # [n, len(have)]
+        # 在同一批图上做 z 归一化再融合（与 evaluate 保持一致）
+        z1 = (ZS[:, [zs_idx[s] for s in have]] - ZS[:, [zs_idx[s] for s in have]].mean(axis=1, keepdims=True)) \
+             / (ZS[:, [zs_idx[s] for s in have]].std(axis=1, keepdims=True) + 1e-8)
+        z2 = (CT - CT.mean(axis=1, keepdims=True)) / (CT.std(axis=1, keepdims=True) + 1e-8)
+        FU = W_ZERO * z1 + (1.0 - W_ZERO) * z2
+    else:
+        FU = None
+
+    mp = movement_prompts()
+    out = {}
+    for j, path in enumerate(emb.keys()):
+        rows = []
+        if FU is not None:
+            for k in np.argsort(-FU[j])[:topn]:
+                s = have[int(k)]
+                rows.append((s, mp[s]["name"], float(FU[j, int(k)])))
+        if len(rows) < topn:
+            # 库里没有足够实图的流派只能靠零样本（CLIP 独有）
+            for k in np.argsort(-ZS[j])[:topn]:
+                s = slugs[int(k)]
+                if any(r[0] == s for r in rows):
+                    continue
+                rows.append((s, mp[s]["name"], float(ZS[j, int(k)])))
+                if len(rows) >= topn:
+                    break
+        out[path] = rows[:topn]
+    return out
+
+
 def match(path, topn=5):
     """给一张图找最像的流派。
 
