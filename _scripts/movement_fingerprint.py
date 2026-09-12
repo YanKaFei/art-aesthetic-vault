@@ -10,8 +10,8 @@ T3 的 Vision 特征能做语义匹配，于是想试试「用可解释的客观
 
 **结论：不会，实测比 Vision 差。** 同一个留一法框架下：
 
-    Vision（768 维）        最近邻同流派 27.6%   78 选 1 Top-1 29.7%
-    T1 客观维度（31 维）    最近邻同流派 13.4%   78 选 1 Top-1 13.0%
+    Vision（768 维）        最近邻同流派 27.6%   72 选 1 Top-1 30.6%
+    T1 客观维度（31 维）    最近邻同流派 13.4%   72 选 1 Top-1 13.2%
 
 （随机基准约 1%，所以两者都远超随机 —— ×25 和 ×12。）
 
@@ -282,10 +282,11 @@ def evaluate(cache, exclude=NOT_MOVEMENTS, min_samples=3, verbose=True):
         if verbose:
             print("可用样本不足（需要 ≥2 张图的流派）")
         return None
+    cands = [s for s, i in groups.items() if len(i) >= min_samples]
     return {"n": tot, "top1": ok / float(tot), "top3": top3 / float(tot),
-            "chance": 1.0 / max(1, len([s for s, i in groups.items() if len(i) >= 2])),
+            "chance": 1.0 / max(1, len(cands)),
             "confusion": sorted(confusion.items(), key=lambda kv: -kv[1])[:10],
-            "movements": len([s for s, i in groups.items() if len(i) >= 2])}
+            "movements": len(cands), "min_samples": min_samples}
 
 
 def describe_match(cache, target_vec, topn=5, min_samples=3):
@@ -401,8 +402,8 @@ def _report(name, cache):
     if not loo or not nn:
         print("  （样本不足）")
         return None
-    print("  样本 %d 张 / %d 个流派有 ≥2 张图（已排除 pinterest 投递箱）"
-          % (loo["n"], loo["movements"]))
+    print("  样本 %d 张 / %d 个流派有 ≥%d 张图（已排除 pinterest 投递箱）"
+          % (loo["n"], loo["movements"], loo.get("min_samples", 2)))
     print("  ［口径 A］质心分类（%d 选 1）  随机 %5.1f%%   Top-1 %5.1f%% (×%.0f)   Top-3 %5.1f%%"
           % (loo["movements"], loo["chance"] * 100, loo["top1"] * 100,
              loo["top1"] / loo["chance"] if loo["chance"] else 0, loo["top3"] * 100))
@@ -501,8 +502,8 @@ def main():
         print("「主要差异维度」是这张图和该流派指纹差得最多的三项 —— 它同时告诉你")
         print("为什么像、以及哪里不像，不是一个黑箱分数。")
         print()
-        print("⚠ 准确率要给准：留一法实测 Top-1 只有 13.0%（随机基准 1.3%，即 ×10），")
-        print("  **比 macOS Vision 特征的 29.7% 差**。这是弱参考 ——")
+        print("⚠ 准确率要给准：留一法实测 Top-1 只有 13.2%（随机基准 1.4%，即 ×9），")
+        print("  **比 macOS Vision 特征的 30.6% 差**。这是弱参考 ——")
         print("  它的价值在可解释，不在准。判风格请以流派卡为准。")
         return 0
 
