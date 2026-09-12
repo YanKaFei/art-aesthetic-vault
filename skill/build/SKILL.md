@@ -123,7 +123,7 @@ python3 artvault.py compose "雨夜霓虹的赏金猎人，要巴洛克的光照
 
 `compose` 把创意想法按意图分层、从不同流派各取一层组合，并**检出层级冲突**。
 
-MCP 服务（纯标准库，7 个工具）：`python3 mcp_server.py`
+MCP 服务（纯标准库，9 个工具，含 analyze_image / match_movement）：`python3 mcp_server.py`
 
 ### 阶段 4：图片分析与投递箱
 

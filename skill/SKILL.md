@@ -116,5 +116,5 @@ cd "$VAULT/_scripts" && python3 ingest_inbox.py --scan   # 尺寸/主色/感知�
   "args": ["<VAULT>/_scripts/mcp_server.py"]}}}
 ```
 
-工具：`search_movements` `get_movement` `get_layers` `compose_prompt`
+工具（9 个）：`search_movements` `get_movement` `get_layers` `compose_prompt`
 `get_palette` `find_related` `list_categories`。纯标准库。

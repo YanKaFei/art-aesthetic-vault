@@ -279,9 +279,11 @@ Start a **new AI session** for it to take effect.
 }
 ```
 
-7 tools: `search_movements` `get_movement` `get_layers` `compose_prompt`
-`get_palette` `find_related` `list_categories`. Pure standard library -
-**no `pip install mcp` needed**.
+9 tools: `search_movements` `get_movement` `get_layers` `compose_prompt`
+`get_palette` `find_related` `list_categories` `analyze_image` `match_movement`.
+Pure standard library - **no `pip install mcp` needed** (the last two also need
+Pillow / the CLIP model; without them they return a clear reason and the other
+seven keep working).
 
 ---
 

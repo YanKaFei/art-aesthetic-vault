@@ -276,8 +276,10 @@ bash locate.sh             # 手动定位仓库（排查用）
 }
 ```
 
-暴露 7 个工具：`search_movements` `get_movement` `get_layers` `compose_prompt`
-`get_palette` `find_related` `list_categories`。纯标准库实现，**不需要 pip 安装任何东西**。
+暴露 9 个工具：`search_movements` `get_movement` `get_layers` `compose_prompt`
+`get_palette` `find_related` `list_categories` `analyze_image` `match_movement`。
+纯标准库实现，**不需要 pip 安装任何东西**（后两个工具另需 Pillow / CLIP 模型，
+没装会返回明确原因，不影响前七个）。
 
 ---
 

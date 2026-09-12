@@ -25,6 +25,7 @@ mcp_server.py —— 把艺术审美风格库暴露成一个 MCP 服务。
 """
 
 import json
+import os
 import sys
 import traceback
 
@@ -99,6 +100,28 @@ TOOLS = [
         "description": "找某个流派的关联流派，用于风格迁移和混搭探索。",
         "inputSchema": {"type": "object", "properties": {"slug": {"type": "string"}}, "required": ["slug"]},
     },
+    {
+        "name": "analyze_image",
+        "description": ("对一张本地图片做客观测量，返回明度/对比/色彩/和谐/构图/质感/线条"
+                        "七个维度，以及人脸景别、霍夫直线、显著性（装了 numpy+opencv 时）。"
+                        "用途：拆解参考图时先拿到可量化的信号，再结合看图做判断。"
+                        "注意：这些数字是**信号不是结论**，风格判断仍需以流派卡为准。"),
+        "inputSchema": {"type": "object",
+                        "properties": {"path": {"type": "string",
+                                                "description": "图片的本地路径（绝对或相对仓库根）"}},
+                        "required": ["path"]},
+    },
+    {
+        "name": "match_movement",
+        "description": ("给一张本地图片，返回画面内容最像的几个艺术流派（CLIP 语义匹配，"
+                        "含零样本：库里没有实图的流派也能匹配到）。"
+                        "实测 Top-1 准确率约 39%（随机基准 1.4%），是**建议**不是结论。"
+                        "需要先跑 clip_embed.py download 下模型，未下模型时返回明确原因。"),
+        "inputSchema": {"type": "object",
+                        "properties": {"path": {"type": "string", "description": "图片的本地路径"},
+                                       "topn": {"type": "integer", "default": 5}},
+                        "required": ["path"]},
+    },
 ]
 
 
@@ -146,7 +169,83 @@ def call_tool(name, args):
             if x:
                 out.append(_card_brief(x))
         return out
+    if name == "analyze_image":
+        return _analyze_image(args.get("path", ""))
+    if name == "match_movement":
+        return _match_movement(args.get("path", ""), int(args.get("topn", 5)))
     raise ValueError("未知工具：" + name)
+
+
+def _analyze_image(path):
+    """T1 客观测量。返回拍平后的字段（原始的嵌套结构对模型不友好）。"""
+    if not path:
+        return {"error": "缺少 path"}
+    try:
+        import image_analysis as IA
+    except Exception as e:
+        return {"error": "图片分析不可用（需要 Pillow）：%s" % str(e)[:80]}
+    r = IA.analyze(path)
+    if r.get("error"):
+        return {"error": r["error"]}
+    lu, co, cl = r["luminance"], r["contrast"], r["color"]
+    hm, cp, tx, ln = r["harmony"], r["composition"], r["texture"], r["lines"]
+    out = {
+        "file": r["file"], "size": r["size"], "orientation": r["orientation"],
+        "明度": {"均值": lu["mean"], "标准差": lu["std"], "基调": lu["key"],
+                 "暗部溢出%": lu["shadow_clip_pct"], "高光溢出%": lu["highlight_clip_pct"]},
+        "对比": {"RMS": co["rms"], "Michelson": co["michelson"], "分级": co["level"]},
+        "色彩": {"色温": cl["temperature"], "暖度分": cl["warm_score"],
+                 "饱和度": cl["saturation"],
+                 "主色": ["%s %.0f%%" % (d["hex"], d["pct"]) for d in cl["dominant"]]},
+        "和谐": {"关系": hm["scheme"], "集中度": hm["concentration"],
+                 "有效色相数": hm["effective_hues"], "主色相": hm["mean_hue_name"]},
+        "构图": {"三分法": cp["subject_on_thirds"], "对称": cp["symmetry_hint"],
+                 "中心权重": cp["center_weight"]},
+        "质感": {"边缘密度": tx["edge_density"], "熵": tx["entropy"], "繁杂度": tx["busyness"]},
+        "线条": {"方向": ln["orientation"], "主导角": ln["dominant_angle"]},
+    }
+    # 两个对比度打架是个有意义的信号：大面积暗调 + 小面积高光 = 明暗对照法
+    if co["rms"] < 45 and co["michelson"] > 0.85:
+        out["提示"] = "RMS 低但 Michelson 高 —— 明暗对照法（chiaroscuro）的签名"
+    if r.get("extended"):
+        e = r["extended"]
+        if isinstance(e.get("faces"), dict) and "error" not in e["faces"]:
+            out["人脸"] = e["faces"]
+        if isinstance(e.get("hough"), dict) and "error" not in e["hough"]:
+            h = e["hough"]
+            out["直线"] = {"条数": h["count"], "水平": h["horizontal"],
+                           "垂直": h["vertical"], "斜向": h["diagonal"], "说明": h["hint"]}
+        if isinstance(e.get("saliency"), dict) and "error" not in e["saliency"]:
+            sz = e["saliency"]
+            out["显著性"] = {"重心": [sz["center_x"], sz["center_y"]],
+                             "最大显著区": sz["main_region"], "判定": sz["focus"]}
+    out["免责"] = "这些是客观测量信号，不是风格结论。风格判断以 artvault 的流派卡为准。"
+    return out
+
+
+def _match_movement(path, topn):
+    """T3 图像→流派匹配（CLIP）。"""
+    if not path:
+        return {"error": "缺少 path"}
+    try:
+        import clip_embed
+        import clip_match
+    except Exception as e:
+        return {"error": "CLIP 模块不可用：%s" % str(e)[:80]}
+    why = clip_embed.available()
+    if why:
+        return {"error": why,
+                "how_to_fix": "cd _scripts && python3 clip_embed.py download && python3 clip_embed.py build"}
+    r = clip_match.suggest([path], topn=topn)
+    rows = r.get(path) or []
+    if not rows:
+        return {"error": "匹配失败（文件不存在或不是有效图片）：%s" % path}
+    return {
+        "query": os.path.basename(path),
+        "suggestions": [{"slug": s, "name": n, "score": round(sc, 3)} for s, n, sc in rows],
+        "accuracy": "实测 Top-1 39.1% / Top-3 61.4%（随机基准 1.4%）—— 当建议用",
+        "next": "用 get_movement 取建议流派的完整卡片来确认是否真的对得上",
+    }
 
 
 def handle(msg):

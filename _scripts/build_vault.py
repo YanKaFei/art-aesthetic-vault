@@ -1367,8 +1367,12 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \\
 | `get_palette(slug)` | 配色 |
 | `find_related(slug)` | 关联流派 |
 | `list_categories()` | 分类概览 |
+| `analyze_image(path)` | **图片客观测量**：七维度 + 人脸景别/霍夫直线/显著性（新） |
+| `match_movement(path, topn)` | **给一张图找最像的流派**（CLIP 语义匹配，含零样本）（新） |
 
 纯标准库实现，**不需要 `pip install mcp`**。
+后两个工具依赖 Pillow（图片分析）与 CLIP 模型（语义匹配），未装时会返回
+明确原因和修复命令，不影响前七个工具。
 
 ## 四、给 AI 的提示词怎么写
 
@@ -1786,9 +1790,11 @@ Start a **new AI session** for it to take effect.
 }
 ```
 
-7 tools: `search_movements` `get_movement` `get_layers` `compose_prompt`
-`get_palette` `find_related` `list_categories`. Pure standard library -
-**no `pip install mcp` needed**.
+9 tools: `search_movements` `get_movement` `get_layers` `compose_prompt`
+`get_palette` `find_related` `list_categories` `analyze_image` `match_movement`.
+Pure standard library - **no `pip install mcp` needed** (the last two also need
+Pillow / the CLIP model; without them they return a clear reason and the other
+seven keep working).
 
 ---
 
@@ -2436,8 +2442,10 @@ bash locate.sh             # 手动定位仓库（排查用）
 }
 ```
 
-暴露 7 个工具：`search_movements` `get_movement` `get_layers` `compose_prompt`
-`get_palette` `find_related` `list_categories`。纯标准库实现，**不需要 pip 安装任何东西**。
+暴露 9 个工具：`search_movements` `get_movement` `get_layers` `compose_prompt`
+`get_palette` `find_related` `list_categories` `analyze_image` `match_movement`。
+纯标准库实现，**不需要 pip 安装任何东西**（后两个工具另需 Pillow / CLIP 模型，
+没装会返回明确原因，不影响前七个）。
 
 ---
 

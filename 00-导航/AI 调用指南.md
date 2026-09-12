@@ -95,8 +95,12 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \
 | `get_palette(slug)` | 配色 |
 | `find_related(slug)` | 关联流派 |
 | `list_categories()` | 分类概览 |
+| `analyze_image(path)` | **图片客观测量**：七维度 + 人脸景别/霍夫直线/显著性（新） |
+| `match_movement(path, topn)` | **给一张图找最像的流派**（CLIP 语义匹配，含零样本）（新） |
 
 纯标准库实现，**不需要 `pip install mcp`**。
+后两个工具依赖 Pillow（图片分析）与 CLIP 模型（语义匹配），未装时会返回
+明确原因和修复命令，不影响前七个工具。
 
 ## 四、给 AI 的提示词怎么写
 
