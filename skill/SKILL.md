@@ -117,6 +117,22 @@ python3 clip_match.py match <图片>          # 最像的流派（CLIP，含零�
 
 最后用 `artvault.py layers <流派>` 拿到人写的具体术语来落定风格。
 
+## 做视频提示词
+
+每张卡的「五、AI 视频层」给了**两块可直接粘贴的中文提示词**，格式不同别混用：
+
+```bash
+cd "$VAULT/_scripts"
+python3 artvault.py video 巴洛克        # A 块 Seedance 2.5 + B 块 MiniMax H3
+```
+
+- **A 块 → Seedance 2.5**（五段式：主体/风格/时间线/BGM/限制）
+- **B 块 → MiniMax H3 海螺官网/API**（纯中文自然语言）
+
+⚠ H3 前面有 Context-IR 做理解与改写，**手工塞分镜和时间戳会和它打架**
+（镜头数翻倍、时间戳错位），所以 B 块刻意不结构化。细节见
+`00-导航/视频提示词结构.md`。
+
 ## Pinterest 投递箱
 
 `$VAULT/pinterest/` 是投递箱。用户说「处理 pinterest 投递箱」时：
@@ -151,9 +167,11 @@ cd "$VAULT/_scripts" && python3 ingest_inbox.py --scan
 ```
 
 工具（10 个）：`search_movements` `get_movement` `get_layers` `compose_prompt`
-`get_palette` `find_related` `list_categories` `analyze_image` `match_movement`。
-纯标准库实现。
+`get_palette` `find_related` `list_categories` `analyze_image` `match_movement`
+`get_video_prompt`。纯标准库实现。
 
-后两个是图片相关：`analyze_image(path)` 做客观测量，
-`match_movement(path, topn)` 找最像的流派。它们需要 Pillow / CLIP 模型，
-没装会返回明确原因和修复命令，不影响前七个。
+- `analyze_image(path)` 图片客观测量、`match_movement(path, topn)` 找最像的流派 ——
+  需要 Pillow / CLIP 模型，没装会返回明确原因和修复命令，不影响其余工具
+- `get_video_prompt(slug)` 取该流派**两块可粘贴的中文视频提示词**
+  （Seedance 2.5 五段式 / MiniMax H3 自然语言），命令行等价于
+  `python3 artvault.py video <流派>`
