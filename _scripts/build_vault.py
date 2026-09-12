@@ -2523,11 +2523,15 @@ def main():
                     .replace("{cat_table_en}", category_table_en()))
     w("README.en.md", _en)
     w(".gitignore", """# Obsidian 运行时文件
+# （app.json / appearance.json / core-plugins.json 是稳定设置，保留在仓库里；
+#  下面是每次用 Obsidian 都会变的会话状态，跟着提交只会产生噪音）
 .DS_Store
 .trash/
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
+.obsidian/workspace
 .obsidian/cache
+.obsidian/graph.json
 
 # 脚本缓存与本地依赖
 _scripts/__pycache__/
