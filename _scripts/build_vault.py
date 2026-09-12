@@ -1715,7 +1715,37 @@ fight each other - ukiyo-e forbids `cast shadows` while Baroque lighting *requir
 **The model won't error**, it just produces subtly worse images that are very hard to debug.
 This check saves hours.
 
-### 3. As an MCP server (Claude Desktop / Cursor)
+### 3. Install as an AI skill (recommended)
+
+The repo ships a skill. Once installed, **any skill-aware AI assistant** will consult
+this library automatically for visual/aesthetic tasks instead of inventing movement
+terminology from memory.
+
+```bash
+cd skill && ./install.sh
+```
+
+It **symlinks** the skill into every skill directory present on your machine:
+
+| Directory | Read by |
+|---|---|
+| `~/.agents/skills/` | DSH / Codex / general convention |
+| `~/.claude/skills/` | Claude Code |
+| `~/.codex/skills/` | Codex |
+
+**Why symlink:** the skill resolves its own real path via `pwd -P`, derives the repo
+root from it, and therefore **finds the vault wherever it lives - no configuration,
+survives moving the repo**. No path is hardcoded anywhere in the skill.
+
+```bash
+./install.sh --copy        # copy instead of symlink (breaks if you move the repo)
+./install.sh --uninstall   # remove
+bash locate.sh             # manual vault lookup (for troubleshooting)
+```
+
+Start a **new AI session** for it to take effect.
+
+### 4. As an MCP server (Claude Desktop / Cursor)
 
 ```json
 {
@@ -2261,7 +2291,38 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \\
 精确主义禁止 `people`，而你的主体是个人物。
 **模型不会报错**，只会表现为「出图质量莫名地差」，极难排查。这个检查能省你几个小时。
 
-### 方式三：接入 MCP（Claude Desktop / Cursor）
+### 方式三：装成 AI skill（推荐）
+
+仓库自带一个 skill，装上之后**任何支持 skill 的 AI 助手**在遇到视觉/审美类任务时
+会自动查这个库，而不是凭记忆编造流派术语。
+
+```bash
+cd skill && ./install.sh
+```
+
+它会用**软链接**把 skill 装到本机所有可用的 skill 目录：
+
+| 目录 | 谁读它 |
+|---|---|
+| `~/.agents/skills/` | DSH / Codex / 通用约定 |
+| `~/.claude/skills/` | Claude Code |
+| `~/.codex/skills/` | Codex |
+
+**为什么用软链**：skill 可以用 `pwd -P` 解析出自己的真实位置，
+从而推断出仓库根目录 —— **仓库放在哪、移不移动都能自动找到**，不需要任何配置。
+skill 里**没有写死任何路径**。
+
+其他用法：
+
+```bash
+./install.sh --copy        # 复制安装（不用软链，但仓库移动后要重装）
+./install.sh --uninstall   # 卸载
+bash locate.sh             # 手动定位仓库（排查用）
+```
+
+装完**新开一个 AI 会话**才会生效。
+
+### 方式四：接入 MCP（Claude Desktop / Cursor）
 
 ```json
 {

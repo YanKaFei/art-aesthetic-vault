@@ -227,7 +227,37 @@ fight each other - ukiyo-e forbids `cast shadows` while Baroque lighting *requir
 **The model won't error**, it just produces subtly worse images that are very hard to debug.
 This check saves hours.
 
-### 3. As an MCP server (Claude Desktop / Cursor)
+### 3. Install as an AI skill (recommended)
+
+The repo ships a skill. Once installed, **any skill-aware AI assistant** will consult
+this library automatically for visual/aesthetic tasks instead of inventing movement
+terminology from memory.
+
+```bash
+cd skill && ./install.sh
+```
+
+It **symlinks** the skill into every skill directory present on your machine:
+
+| Directory | Read by |
+|---|---|
+| `~/.agents/skills/` | DSH / Codex / general convention |
+| `~/.claude/skills/` | Claude Code |
+| `~/.codex/skills/` | Codex |
+
+**Why symlink:** the skill resolves its own real path via `pwd -P`, derives the repo
+root from it, and therefore **finds the vault wherever it lives - no configuration,
+survives moving the repo**. No path is hardcoded anywhere in the skill.
+
+```bash
+./install.sh --copy        # copy instead of symlink (breaks if you move the repo)
+./install.sh --uninstall   # remove
+bash locate.sh             # manual vault lookup (for troubleshooting)
+```
+
+Start a **new AI session** for it to take effect.
+
+### 4. As an MCP server (Claude Desktop / Cursor)
 
 ```json
 {
