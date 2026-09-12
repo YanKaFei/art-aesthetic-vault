@@ -1,9 +1,15 @@
 # Obsidian 运行时文件
 .DS_Store
 .trash/
+# 下面是每次用 Obsidian 都会变的**会话状态**，跟着提交只产生噪音。
+# （app.json / appearance.json / core-plugins.json 是稳定设置，保留在仓库里）
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/cache
+# graph.json 只有缩放比例等视图状态 —— 实测一个提交里唯一的变化就是 scale。
+# 这一行曾在 849101d 加过，随后被无关的 ff52937 从模板里删掉了；
+# 因为 .gitignore 是模板生成的，删一次就等于永久回退。别再删。
+.obsidian/graph.json
 
 # 脚本缓存与本地依赖
 _scripts/__pycache__/
