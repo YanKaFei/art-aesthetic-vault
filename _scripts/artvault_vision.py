@@ -144,17 +144,25 @@ def _dist_np(a, b):
     return float(np.linalg.norm(np.asarray(a, dtype="f4") - np.asarray(b, dtype="f4")))
 
 
+_NUMPY = None
+
+
 def _have_numpy():
-    for c in (os.path.join(HERE, "vendor", "libs"),
-              os.environ.get("ARTVAULT_DEPS", ""),
-              os.path.expanduser("~/.artvault/deps")):
-        if c and os.path.isdir(c) and c not in sys.path:
-            sys.path.insert(0, c)
-    try:
-        import numpy  # noqa: F401
-        return True
-    except Exception:
-        return False
+    """numpy 可用性。缓存结果 —— 这个函数会改 sys.path 并尝试 import，
+    放在双层循环里每对比一次跑一遍是纯浪费（cmd_similar 要跑几万次）。"""
+    global _NUMPY
+    if _NUMPY is None:
+        for c in (os.path.join(HERE, "vendor", "libs"),
+                  os.environ.get("ARTVAULT_DEPS", ""),
+                  os.path.expanduser("~/.artvault/deps")):
+            if c and os.path.isdir(c) and c not in sys.path:
+                sys.path.insert(0, c)
+        try:
+            import numpy  # noqa: F401
+            _NUMPY = True
+        except Exception:
+            _NUMPY = False
+    return _NUMPY
 
 
 # ------------------------------------------------------------ 索引
@@ -266,9 +274,6 @@ def rank(query_vec, vectors, topn=10, exclude=None):
     return scored[:topn]
 
 
-_INTERP = None
-
-
 def interpret(d):
     """距离 → 可读判读。阈值由本库 603 张图的实测分布标定。
 
@@ -341,13 +346,14 @@ def cmd_similar(slug, topn):
         return 1
 
     # 对每个其他流派，取「与我方任一图最接近」的那张作为该流派的代表分
+    use_np = _have_numpy()          # 循环外取一次，别在几万次对比里反复探测
     best = {}
     for rel_q, vq in mine.items():
         for rel_o, vo in vectors.items():
             s = slug_of(rel_o)
             if s == slug or len(vo) != len(vq):
                 continue
-            d = _dist_np(vq, vo) if _have_numpy() else _dist(vq, vo)
+            d = _dist_np(vq, vo) if use_np else _dist(vq, vo)
             if s not in best or d < best[s][0]:
                 best[s] = (d, rel_o)
 
