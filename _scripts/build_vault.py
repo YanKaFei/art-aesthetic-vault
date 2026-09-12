@@ -1751,8 +1751,7 @@ onto an unrelated subject.
 
 ### 3. Every movement has *targeted* negative prompts
 
-Not the 2022-era generic `worst quality, bad anatomy` string - but the **specific failure
-modes of that movement**:
+**The specific failure modes of that movement**:
 
 - Impressionism → `black shadows, smooth blending, photorealistic`
 - Renaissance → `visible brushstrokes, impasto` (AI defaults to thick oil paint; Renaissance surfaces are smooth)
@@ -1770,11 +1769,10 @@ for 141 movements, so an AI calling it won't make things up.
 ### 5. Completeness is verifiable
 
 The keyword atlas maps **all 218 WikiArt styles / 189 movements / 68 genres** onto cards.
-You can be confident a whole category isn't missing.
 
 ### 6. Public domain only - no second thoughts
 
-All 372 images come from CC0 / public-domain open sources. Free to use, modify,
+All images come from CC0 / public-domain open sources. Free to use, modify,
 redistribute, and train on.
 
 ### 7. Extensible
@@ -1855,16 +1853,8 @@ python3 make_links.py                 # regenerate external search deep links
 
 ## Image sources
 
-All 372 images come from public-domain / CC0 open sources, verified entry by entry.
-Free to use and redistribute:
-
-| Source | License | Works |
-|---|---|---|
-| [Cleveland Museum of Art](https://openaccess-api.clevelandart.org) | CC0 1.0 Public Domain Dedication | 265 |
-| [Wikimedia Commons](https://commons.wikimedia.org) | Public domain | 89 |
-| [The Metropolitan Museum of Art](https://collectionapi.metmuseum.org) | CC0 1.0 (Open Access) | 21 |
-
-Every work is annotated with its source and license link.
+All images come from public-domain / CC0 open sources, verified entry by entry.
+Free to use and redistribute. Every work is annotated with its source and license link.
 
 **Code** MIT ｜ **Notes** CC BY 4.0
 
@@ -2304,7 +2294,7 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \\
 
 ### 3. 每个流派都有「针对性负向词」
 
-不是 2022 年那串通用的 `worst quality, bad anatomy`，而是**针对这个流派的典型翻车点**：
+**针对这个流派的典型翻车点**：
 
 - 印象派 → `black shadows, smooth blending, photorealistic`
 - 文艺复兴 → `visible brushstrokes, impasto`（AI 默认会给油画加厚涂）
@@ -2320,12 +2310,11 @@ AI 调用时不会瞎编。
 
 ### 5. 完整性有保证
 
-关键词图谱把 WikiArt 的 **218 styles / 189 movements / 68 genres**
-全部映射到了库内。你可以确信没有漏掉一整块分类。
+关键词图谱**218 styles / 189 movements / 68 genres**
 
 ### 6. 只收公共领域，用起来不用想
 
-全部 372 张图来自 CC0 / 公共领域开放数据源，可以自由使用、修改、再分发，
+全部图片来自 CC0 / 公共领域开放数据源，可以自由使用、修改、再分发，
 也可以放进你自己的数据集。
 
 ### 7. 能扩展
@@ -2403,15 +2392,7 @@ python3 make_links.py                 # 重新生成外部检索深链
 
 ## 图片来源
 
-全部 372 张图来自公共领域 / CC0 开放数据源，已逐条核对，可自由使用与再分发：
-
-| 来源 | 授权 | 件数 |
-|---|---|---|
-| [克利夫兰艺术博物馆](https://openaccess-api.clevelandart.org) | CC0 1.0 公共领域奉献 | 265 |
-| [维基共享资源](https://commons.wikimedia.org) | Public domain | 89 |
-| [大都会艺术博物馆](https://collectionapi.metmuseum.org) | CC0 1.0 (Open Access) | 21 |
-
-每张作品下方都标注了来源与授权链接。
+全部图片来自公共领域 / CC0 开放数据源，已逐条核对，可自由使用与再分发，每张作品下方都标注了来源与授权链接。
 
 **代码** MIT ｜ **笔记内容** CC BY 4.0
 
@@ -2501,6 +2482,9 @@ _scripts/_data/inbox_manifest.json
 # 投递箱里的图（用户自己丢进来的，同样版权归原作者）
 pinterest/*
 !pinterest/README.md
+
+# 本地推送助手（含个人仓库名，不必发布）
+push-to-github.sh
 """)
 
     n_img = sum(len(v) for v in works_map.values())

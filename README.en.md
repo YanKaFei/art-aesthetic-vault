@@ -263,8 +263,7 @@ onto an unrelated subject.
 
 ### 3. Every movement has *targeted* negative prompts
 
-Not the 2022-era generic `worst quality, bad anatomy` string - but the **specific failure
-modes of that movement**:
+**The specific failure modes of that movement**:
 
 - Impressionism → `black shadows, smooth blending, photorealistic`
 - Renaissance → `visible brushstrokes, impasto` (AI defaults to thick oil paint; Renaissance surfaces are smooth)
@@ -282,11 +281,10 @@ for 141 movements, so an AI calling it won't make things up.
 ### 5. Completeness is verifiable
 
 The keyword atlas maps **all 218 WikiArt styles / 189 movements / 68 genres** onto cards.
-You can be confident a whole category isn't missing.
 
 ### 6. Public domain only - no second thoughts
 
-All 372 images come from CC0 / public-domain open sources. Free to use, modify,
+All images come from CC0 / public-domain open sources. Free to use, modify,
 redistribute, and train on.
 
 ### 7. Extensible
@@ -367,16 +365,8 @@ python3 make_links.py                 # regenerate external search deep links
 
 ## Image sources
 
-All 372 images come from public-domain / CC0 open sources, verified entry by entry.
-Free to use and redistribute:
-
-| Source | License | Works |
-|---|---|---|
-| [Cleveland Museum of Art](https://openaccess-api.clevelandart.org) | CC0 1.0 Public Domain Dedication | 265 |
-| [Wikimedia Commons](https://commons.wikimedia.org) | Public domain | 89 |
-| [The Metropolitan Museum of Art](https://collectionapi.metmuseum.org) | CC0 1.0 (Open Access) | 21 |
-
-Every work is annotated with its source and license link.
+All images come from public-domain / CC0 open sources, verified entry by entry.
+Free to use and redistribute. Every work is annotated with its source and license link.
 
 **Code** MIT ｜ **Notes** CC BY 4.0
 
