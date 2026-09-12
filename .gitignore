@@ -19,6 +19,3 @@ _scripts/_data/inbox_manifest.json
 # 投递箱里的图（用户自己丢进来的，同样版权归原作者）
 pinterest/*
 !pinterest/README.md
-
-# 本地推送助手（含个人仓库名，不必发布）
-push-to-github.sh

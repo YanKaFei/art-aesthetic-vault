@@ -258,6 +258,85 @@ CAT_ICON = {"西方古典与近代": "🏛", "现代主义与战后": "🎨",
             "东亚·南亚·伊斯兰": "🀄", "摄影与图像": "📷"}
 
 
+CAT_EN = {
+ "西方古典与近代": "Western Classical & Modern",
+ "现代主义与战后": "Modernism & Post-war",
+ "先锋·当代·后现代": "Avant-Garde · Contemporary · Postmodern",
+ "数字·亚文化·摄影美学": "Digital · Subculture · Photography",
+ "东亚·南亚·伊斯兰": "East Asia · South Asia · Islam",
+ "摄影与图像": "Photography & Image",
+}
+
+SUBGROUPS_EN = {
+ "中世纪与拜占庭": "Medieval & Byzantine", "文艺复兴": "Renaissance",
+ "巴洛克与古典": "Baroque & Classical", "19 世纪": "19th Century",
+ "印象派前后": "Impressionism & After", "世纪之交": "Fin de Siecle",
+ "美国与近代诸派": "American & Modern Schools",
+ "表现与野兽": "Expressionism & Fauvism", "立体与未来": "Cubism & Futurism",
+ "几何抽象": "Geometric Abstraction", "达达与超现实": "Dada & Surrealism",
+ "战后抽象": "Post-war Abstraction", "波普与极简": "Pop & Minimal",
+ "三个总纲": "The Three Umbrellas", "抽象诸支": "Abstract Branches",
+ "反艺术与媚俗": "Anti-Art & Kitsch", "边缘与身体": "Margins & Body",
+ "公共与空间": "Public & Space", "新媒介与后观念": "New Media & Post-Conceptual",
+ "朋克五支": "Five Punks", "网络怀旧": "Internet Nostalgia",
+ "动画与插画": "Animation & Illustration", "银盐与印相": "Silver & Print",
+ "氛围与生活": "Atmosphere & Living", "平面设计": "Graphic Design",
+ "电影感": "Cinematic", "中国": "China", "日本": "Japan",
+ "朝鲜半岛": "Korea", "波斯与伊斯兰": "Persia & Islam",
+ "喜马拉雅与原住民": "Himalaya & Indigenous",
+ "两大传统": "Two Traditions", "社会与街头": "Social & Street",
+ "观念与时尚": "Conceptual & Fashion", "其他": "Others",
+}
+
+
+CAT_COVER_EN = {
+ "西方古典与近代": "Byzantine to Ashcan School - the backbone of European painting",
+ "现代主义与战后": "Fauvism to Neo-Expressionism - 20th century experiment",
+ "数字·亚文化·摄影美学": "Cyberpunk, vaporwave, analogue photo processes, internet subcultures",
+ "先锋·当代·后现代": "Avant-garde, contemporary, postmodern, installation / performance / digital",
+ "东亚·南亚·伊斯兰": "Dunhuang murals, Tibetan thangka, ukiyo-e, Persian miniature, Islamic geometry",
+ "摄影与图像": "Pictorialism, straight photography, documentary, street, surrealist photography",
+}
+
+
+def category_table_en():
+    cats = by_category()
+    L = ["| Category | Movements | Covers |", "|---|---|---|"]
+    for c in CATEGORIES:
+        L.append("| %s | %d | %s |" % (CAT_EN.get(c, c), len(cats[c]), CAT_COVER_EN.get(c, "")))
+    L.append("| **Total** | **%d** | 6 categories |" % len(MOVEMENTS))
+    return "\n".join(L)
+
+
+def skill_tree_en():
+    """英文版技能树，结构与中文版一一对应"""
+    by = {m["slug"]: m for m in MOVEMENTS}
+    cats = by_category()
+    L = ["Art Aesthetic Style Library", "│"]
+    for ci, cat in enumerate(CATEGORIES):
+        ms = cats[cat]
+        own = {m["slug"] for m in ms}
+        last_cat = (ci == len(CATEGORIES) - 1)
+        L.append("%s %s · %d" % ("└─" if last_cat else "├─", CAT_EN.get(cat, cat), len(ms)))
+        prefix = "   " if last_cat else "│  "
+        groups = [(g, [x for x in ss if x in own]) for g, ss in (SUBGROUPS.get(cat) or [])]
+        claimed = {x for _, ss in groups for x in ss}
+        rest = [m["slug"] for m in ms if m["slug"] not in claimed]
+        if rest:
+            groups.append(("其他", rest))
+        groups = [(g, ss) for g, ss in groups if ss]
+        for gi, (gname, slugs) in enumerate(groups):
+            last_g = (gi == len(groups) - 1)
+            L.append("%s%s %s" % (prefix, "└─" if last_g else "├─",
+                                  SUBGROUPS_EN.get(gname, gname)))
+            sub = prefix + ("    " if last_g else "│  ")
+            names = [by[x]["name_en"] for x in slugs]
+            for i in range(0, len(names), 3):
+                L.append("%s%s %s" % (sub, "└" if i + 3 >= len(names) else "├",
+                                      " . ".join(names[i:i + 3])))
+    return "\n".join(L)
+
+
 def skill_tree():
     """生成 Markdown 代码块里的技能树。只从本分类取成员，避免跨分类重复。"""
     by = {m["slug"]: m for m in MOVEMENTS}
@@ -1508,6 +1587,296 @@ python3 artvault.py compose --style ... --lighting ... --subject "..."
 """
 
 
+README_EN = """<div align="center">
+
+# Art Aesthetic Style Library
+
+**141 art movements, decomposed into swappable AI prompt layers**
+
+Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
+
+163 notes · 372 public-domain images · 21 ready-to-run scripts
+
+**English** ｜ [中文](README.md)
+
+</div>
+
+---
+
+## What is this
+
+Most "art style reference" collections are just image folders. You save a few hundred
+pictures, and then when it's time to actually use them you don't know what to look at
+or how to describe it. The images are dead weight.
+
+This library does something different: **it breaks each movement's visual language into
+seven layers that can be swapped independently.**
+
+```
+Subject  +  Style  +  Lighting  +  Color
+         +  Composition  +  Medium  +  Mood  +  Camera
+```
+
+Once it's layered, you can take the **lighting** from one painting and put it on the
+**subject** of a completely different one. That's what a reference library is actually for.
+
+> ### A note on language
+> **The prompt layers are already in English** - they're what you paste into a model.
+> Only the explanations (visual breakdowns, pitfalls, why-it-works notes) are in Chinese.
+> If you only want the prompts, you can use this library as-is.
+
+### See it work
+
+Say you want a bounty hunter in a neon-lit alley, but with classical painting light:
+
+```
+python3 artvault.py compose "雨夜霓虹街头的赏金猎人，要巴洛克的光照，赛博朋克的构图" --subject "a female bounty hunter in a wet neon alley"
+```
+
+It recognises that "巴洛克" (Baroque) is followed by "光照" (lighting) and takes
+Baroque's lighting layer; Cyberpunk supplies style and composition. Output:
+
+```
+a female bounty hunter in a wet neon alley,             <- your subject
+cyberpunk, neo-noir concept art, dense neon signage,    <- Style layer (Cyberpunk)
+single hard light source from off-frame,                <- Lighting layer (Baroque)
+deep crushed shadows, candlelight rim light,
+cyan and magenta clash, amber accent, deep black,       <- Color layer (Cyberpunk)
+low angle looking up at megastructures,                 <- Composition layer (Cyberpunk)
+alienated, oppressive, intoxicating                     <- Mood layer
+```
+
+**Same subject, every layer independently replaceable.** That's the difference between
+this and piling up style keywords.
+
+---
+
+## Skill tree
+
+```
+{skill_tree_en}
+```
+
+---
+
+## What's inside
+
+| | |
+|---|---|
+| **Movement cards** | **141**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
+| **Public-domain images** | **372** (134 MB), covering 79 movements |
+| **Guides & methodology** | 18 notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
+| **Keyword atlas** | Every one of WikiArt's **218 styles / 189 movements / 68 genres** mapped to a card |
+| **Note templates** | 3 |
+| **Scripts** | 21 - fetch, generate, search, compose, MCP server |
+
+> **62 movements are "prompt-only cards."** Abstract Expressionism, Pop Art, Minimalism,
+> Conceptual Art, Cyberpunk, Vaporwave and others are still in copyright, so no open data
+> source will supply images. Their visual language and 7-layer structure are documented
+> exactly the same way - just without pictures. This is deliberate, not a gap.
+
+---
+
+## How to use
+
+### 1. As an Obsidian vault
+
+Open the folder in Obsidian. Recommended entry points:
+
+- `00-导航/提示词拆解方法.md` - **start here**, it explains the 7 layers
+- `00-导航/流派总览.md` - overview of all 141 movements
+- `10-流派/` - pick a movement, read its full breakdown
+- `00-导航/关键词图谱.md` - look up any unfamiliar style term
+
+### 2. From the command line (or let an AI drive it)
+
+```bash
+cd _scripts
+
+python3 artvault.py categories              # 6 categories, 141 movements
+python3 artvault.py search "neon rain"      # fuzzy search, Chinese or English
+python3 artvault.py layers baroque          # just the 7 prompt layers
+python3 artvault.py show ukiyo-e            # full card
+python3 artvault.py palette cyberpunk       # 6-color palette
+python3 artvault.py related cubism          # find related movements
+python3 artvault.py --json layers baroque   # machine-readable
+```
+
+**The core feature is composition:**
+
+```bash
+# Explicit cross-era mixing
+python3 artvault.py compose --style ukiyo-e --lighting baroque --color vaporwave --composition precisionism --subject "a lone samurai"
+```
+
+It **detects and prints layer conflicts.** When you mix movements, their negative prompts
+fight each other - ukiyo-e forbids `cast shadows` while Baroque lighting *requires*
+`deep crushed shadows`; Precisionism forbids `people` while your subject is a person.
+**The model won't error**, it just produces subtly worse images that are very hard to debug.
+This check saves hours.
+
+### 3. As an MCP server (Claude Desktop / Cursor)
+
+```json
+{
+  "mcpServers": {
+    "artvault": {
+      "command": "python3",
+      "args": ["<absolute path to this repo>/_scripts/mcp_server.py"]
+    }
+  }
+}
+```
+
+7 tools: `search_movements` `get_movement` `get_layers` `compose_prompt`
+`get_palette` `find_related` `list_categories`. Pure standard library -
+**no `pip install mcp` needed**.
+
+---
+
+## Why it's different
+
+### 1. Not an image pack - a composable structure
+
+An image pack gives you "what this feels like." This gives you "how to make it."
+Every layer can be lifted out on its own. Swap the subject but keep the style layer,
+and you have a style-transfer template.
+
+### 2. Lighting is pulled out as its own layer
+
+Most people write prompts as one undifferentiated blob and then debug by trial and error.
+This library makes an explicit claim: **lighting affects the final texture more than the
+style keywords do.** Every movement's lighting layer is a separate snippet you can drop
+onto an unrelated subject.
+
+### 3. Every movement has *targeted* negative prompts
+
+Not the 2022-era generic `worst quality, bad anatomy` string - but the **specific failure
+modes of that movement**:
+
+- Impressionism → `black shadows, smooth blending, photorealistic`
+- Renaissance → `visible brushstrokes, impasto` (AI defaults to thick oil paint; Renaissance surfaces are smooth)
+- Ukiyo-e → `3d shading, cast shadows, gradient` (AI adds volume automatically; ukiyo-e is flat)
+
+**Note that different movements' negative prompts are often opposites** - which is exactly
+why mixing them breaks, and exactly what this library manages for you.
+
+### 4. Usable by AI, not just by you
+
+LLMs have fuzzy memories about art movements and routinely confuse Art Nouveau with
+Art Deco, or Barbizon with Impressionism. This library pins down concrete terminology
+for 141 movements, so an AI calling it won't make things up.
+
+### 5. Completeness is verifiable
+
+The keyword atlas maps **all 218 WikiArt styles / 189 movements / 68 genres** onto cards.
+You can be confident a whole category isn't missing.
+
+### 6. Public domain only - no second thoughts
+
+All 372 images come from CC0 / public-domain open sources. Free to use, modify,
+redistribute, and train on.
+
+### 7. Extensible
+
+Adding a movement means adding one entry to one Python file. Image fetching, note
+generation, keyword mapping and the AI interfaces all follow automatically.
+
+---
+
+## Quick start
+
+```bash
+git clone --depth 1 https://github.com/YanKaFei/art-aesthetic-vault.git
+cd art-aesthetic-vault
+
+# immediate self-check
+cd _scripts && python3 artvault.py categories
+```
+
+**Requirements:** Python 3.8+ and Obsidian (recommended).
+
+**The core scripts use only the Python standard library - nothing to pip install.**
+
+Optional dependencies (only for Pinterest grabbing and the image inbox):
+
+```bash
+pip3 install --user requests Pillow
+```
+
+---
+
+## Regenerate / extend
+
+```bash
+cd _scripts
+
+python3 fetch_art.py                  # fetch images for movements that lack them
+python3 fetch_art.py impressionism    # one movement only
+python3 fetch_art.py --per 12         # 12 images per movement
+python3 build_vault.py                # regenerate every note from the mv_*.py data
+python3 make_links.py                 # regenerate external search deep links
+```
+
+### Adding a movement
+
+1. Add an entry to the right `_scripts/mv_*.py` file
+2. Add filter keywords to **`ARTIST_KEYS` in the same file** ← **required, or you'll pull in unrelated works**
+3. `python3 fetch_art.py <slug>` then `python3 build_vault.py`
+
+| Data file | Category |
+|---|---|
+| `mv_core.py` | the original 18 core movements |
+| `mv_west.py` | Western Classical & Modern |
+| `mv_asia.py` / `mv_asia2.py` | East Asia · South Asia · Islam |
+| `mv_modern.py` / `mv_gaps.py` | Modernism & Post-war |
+| `mv_contemporary.py` | Avant-Garde · Contemporary · Postmodern |
+| `mv_visual.py` | Digital · Subculture · Photography |
+| `mv_photo.py` | Photography & Image |
+
+---
+
+## Three principles
+
+1. **Better fewer than wrong.**
+   Filtering deliberately does *not* have a "top up with whatever's available" fallback -
+   if a movement yields one image, it gets one image.
+   > The worst thing for a reference library isn't too few images, it's wrong ones.
+   > Wrong references corrupt your instincts, and you won't notice.
+
+2. **Lighting matters more than style keywords.**
+   If you can only tune one layer, tune lighting.
+
+3. **Don't invent movement terminology from memory.**
+   LLM recall on art movements is unreliable and blurs related schools together.
+   Use the concrete terms in the library.
+
+---
+
+## Image sources
+
+All 372 images come from public-domain / CC0 open sources, verified entry by entry.
+Free to use and redistribute:
+
+| Source | License | Works |
+|---|---|---|
+| [Cleveland Museum of Art](https://openaccess-api.clevelandart.org) | CC0 1.0 Public Domain Dedication | 265 |
+| [Wikimedia Commons](https://commons.wikimedia.org) | Public domain | 89 |
+| [The Metropolitan Museum of Art](https://collectionapi.metmuseum.org) | CC0 1.0 (Open Access) | 21 |
+
+Every work is annotated with its source and license link.
+
+**Code** MIT ｜ **Notes** CC BY 4.0
+
+---
+
+<div align="center">
+
+If this is useful, a star is appreciated - PRs adding more movements are welcome
+
+</div>
+"""
+
 # ------------------------------------------------------------------ 许可
 LICENSE_TEXT = """MIT License
 
@@ -1786,6 +2155,8 @@ README = """<div align="center">
 从拜占庭到 Y2K ｜ 东亚 · 南亚 · 伊斯兰 ｜ 摄影谱系 ｜ 数字亚文化
 
 163 篇笔记 · 372 张公共领域实图 · 21 个即用脚本
+
+[English](README.en.md) ｜ **中文**
 
 </div>
 
@@ -2071,8 +2442,10 @@ def main():
     w("00-导航/版权与来源.md", LICENSE.replace("{mark}", GEN_MARK))
     w("00-导航/数据源与访问限制.md", ACCESS.replace("{mark}", GEN_MARK))
     w("00-导航/外部站点接入方案.md", EXTERNAL.replace("{mark}", GEN_MARK))
+    # 注意：这里刻意用占位符而不是本机绝对路径。
+    # 仓库是要发布的，写死 /Users/xxx 对任何人（包括作者换个位置 clone）都是错的。
     _guide = AI_GUIDE.replace("{mark}", GEN_MARK).replace(
-        "{MCP_PATH}", os.path.join(HERE, "mcp_server.py"))
+        "{MCP_PATH}", "<仓库绝对路径>/_scripts/mcp_server.py")
     w("00-导航/AI 调用指南.md", _guide)
     w("00-导航/Pinterest 抓取实战.md", PINT.replace("{mark}", GEN_MARK))
     try:
@@ -2103,6 +2476,10 @@ def main():
                  .replace("{skill_tree}", skill_tree()))
     w("README.md", _rm)
     w("LICENSE", LICENSE_TEXT)
+    _en = (README_EN.replace("{n_mv}", str(len(MOVEMENTS)))
+                    .replace("{skill_tree_en}", skill_tree_en())
+                    .replace("{cat_table_en}", category_table_en()))
+    w("README.en.md", _en)
     w(".gitignore", """# Obsidian 运行时文件
 .DS_Store
 .trash/
