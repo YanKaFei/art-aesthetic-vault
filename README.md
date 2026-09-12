@@ -250,7 +250,7 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \
 
 ### 3. 每个流派都有「针对性负向词」
 
-不是 2022 年那串通用的 `worst quality, bad anatomy`，而是**针对这个流派的典型翻车点**：
+**针对这个流派的典型翻车点**：
 
 - 印象派 → `black shadows, smooth blending, photorealistic`
 - 文艺复兴 → `visible brushstrokes, impasto`（AI 默认会给油画加厚涂）
@@ -266,12 +266,11 @@ AI 调用时不会瞎编。
 
 ### 5. 完整性有保证
 
-关键词图谱把 WikiArt 的 **218 styles / 189 movements / 68 genres**
-全部映射到了库内。你可以确信没有漏掉一整块分类。
+关键词图谱**218 styles / 189 movements / 68 genres**
 
 ### 6. 只收公共领域，用起来不用想
 
-全部 372 张图来自 CC0 / 公共领域开放数据源，可以自由使用、修改、再分发，
+全部图片来自 CC0 / 公共领域开放数据源，可以自由使用、修改、再分发，
 也可以放进你自己的数据集。
 
 ### 7. 能扩展
@@ -349,15 +348,7 @@ python3 make_links.py                 # 重新生成外部检索深链
 
 ## 图片来源
 
-全部 372 张图来自公共领域 / CC0 开放数据源，已逐条核对，可自由使用与再分发：
-
-| 来源 | 授权 | 件数 |
-|---|---|---|
-| [克利夫兰艺术博物馆](https://openaccess-api.clevelandart.org) | CC0 1.0 公共领域奉献 | 265 |
-| [维基共享资源](https://commons.wikimedia.org) | Public domain | 89 |
-| [大都会艺术博物馆](https://collectionapi.metmuseum.org) | CC0 1.0 (Open Access) | 21 |
-
-每张作品下方都标注了来源与授权链接。
+全部图片来自公共领域 / CC0 开放数据源，已逐条核对，可自由使用与再分发，每张作品下方都标注了来源与授权链接。
 
 **代码** MIT ｜ **笔记内容** CC BY 4.0
 
