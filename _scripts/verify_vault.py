@@ -21,6 +21,7 @@ verify_vault.py —— 抓完/改完之后的验收检查。
     7 孤儿图     磁盘上存在但没有被任何笔记引用的图
     8 JSON↔磁盘  每个流派的抓取记录与磁盘上的图是否一一对应
     9 笔记双链   每个 [[...]] 都能解析到一篇笔记（含表格转义处理）
+   10 署名质量   卡片上没有「上传者当画家」「机器语法当日期」
 
 退出码：0 全部通过；1 有问题（便于写进 CI 或 pre-commit）。
 """
@@ -285,6 +286,36 @@ def check_note_links():
     return unresolved
 
 
+def check_attribution():
+    """10 署名质量：卡片上不能出现「上传者当画家」「机器语法当日期」。
+
+    实测过的脏值形态（都真实出现在卡片上过）：
+      **Daderot · 2016-12-01 15:50:04 · John the Baptist, Crete…**   上传者当画家
+      **Gary Todd from Xinzheng, China · 2012-07-06 05:32 · …**     同上
+      **song dynasty · 13th century**                               时期标签当画家
+      date QS:P571,+1650-00-00T00:00:00Z/7                          Wikidata 机器语法
+      title QS:P1476,en:"The Pink Candle"                           同上（出现在材质里）
+      Designed by William Morris, British                           编目口癖
+    一个标着「公共领域、可自由使用」的参考库出现这些，比图少更伤可信度。
+    """
+    import re as _re
+    sus = _re.compile(
+        r"(QS:|daderot|gary todd|cbl62|gryffindor|hiart|christies|sotheby|bonhams|"
+        r"rijksmuseum|library of congress|descouens|egorova|lupercio|martínez rosado|"
+        r"digital id|unknown author|from xinzheng|designed by|uploaded by|"
+        r"\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2})", _re.I)
+    hits = []
+    for md in _notes(skip_templates=False):
+        try:
+            t = open(md, encoding="utf-8").read()
+        except Exception:
+            continue
+        for m in _re.findall(r"\*\*([^*]+)\*\*", t):
+            if sus.search(m):
+                hits.append((os.path.relpath(md, VAULT), m.strip()[:60]))
+    return hits
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -336,6 +367,7 @@ def main():
     report("7 孤儿图", check_orphans())
     report("8 JSON↔磁盘", check_data_disk_sync())
     report("9 笔记双链", check_note_links())
+    report("10 署名质量", check_attribution())
 
     print("=" * 70)
     if failed:

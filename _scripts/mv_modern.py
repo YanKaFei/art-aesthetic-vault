@@ -122,7 +122,11 @@ MOVEMENTS = [
 {
  "slug": "orphism", "name_zh": "俄耳甫斯主义", "name_en": "Orphism",
  "period": "1912–1915", "region": "法国", "tier": "B",
- "exclude_keys": ["nicolas delaunay", "delaunay, nicolas"],
+ "exclude_keys": ["nicolas delaunay", "delaunay, nicolas",
+                         # 19 世纪学院派画家 Jules-Élie Delaunay —— 和 Robert Delaunay
+                         # 只是同姓。实测他的《但丁的炼狱》《Hutchinson 夫人像》混进了
+                         # orphism，零样本自识率因此为 0、平均排名掉到 104/141。
+                         "jules-élie delaunay", "jules-elie delaunay", "j.-e. delaunay"],
  "one_liner": "把立体主义变成音乐：纯粹的色彩圆盘与棱镜光谱。",
  "core": ["纯色彩构成画面，比立体主义更抽象、更明亮",
           "圆盘、同心圆、棱镜色散作为核心母题",

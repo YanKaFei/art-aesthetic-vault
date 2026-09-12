@@ -12,6 +12,7 @@ build_vault.py —— 用 movements.py 的数据 + _data/*.json 的抓取结果�
 import glob
 import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -63,6 +64,27 @@ def swatch(hexcode):
 
 
 # ------------------------------------------------------------------ 流派卡
+# 署名清洗的实现在 providers.clean_attribution —— 抓取时和渲染时共用同一份，
+# 避免两处逻辑各自漂移。这里只是薄封装（渲染时再过一遍，兜住历史 JSON 里的脏值）。
+from providers import clean_attribution as _clean_attribution  # noqa: E402
+
+
+def _clean_meta(wk, mv=None):
+    """返回 (artist, date, medium) 三元组，脏值已被换成得体内容。
+
+    artist 一栏走 display_artist 的**正向校验**：只有当作者能对上该流派
+    自己的艺术家关键词、或能从标题里可靠恢复时才显示，否则写「佚名」。
+    黑名单永远列不全（实测 Daderot / Gary Todd / Cbl62 / Joaquín Martínez
+    Rosado… 一个接一个冒出来），正向校验才收得住。
+    """
+    w = _clean_attribution(dict(wk))
+    if mv is not None:
+        from providers import display_artist as _da
+        w["artist"] = _da(w, mv.get("artist_keys") or [],
+                          mv.get("exclude_keys"), mv.get("title_keys"))
+    return w["artist"], w["date"], w["medium"]
+
+
 def movement_note(mv, works):
     slug = mv["slug"]
     lines = []
@@ -102,7 +124,7 @@ def movement_note(mv, works):
         A("- %s" % c)
     A("")
     # 二、视觉语言拆解
-    A("## 二、视觉语言拆解")
+    A("## 二、视觉语言拆解（六维）")
     A("")
     A("> [!tip] 这一节是「看什么」。先看懂，再谈提示词。")
     A("")
@@ -123,9 +145,14 @@ def movement_note(mv, works):
     # 四、提示词结构
     A("## 四、提示词结构")
     A("")
-    A("> [!note] 六层拼装法")
+    A("> [!note] 七层提示词 · 风格层自动拼装 6 层")
     A("> `主体 + 风格 + 光照 + 色彩 + 构图 + 媒介 + 情绪 + 镜头`")
     A("> 下面每一层都可以单独拆出来复用——换主体不换风格层，就是你的风格迁移模板。")
+    A(">")
+    A("> **镜头层为什么不进下面的整段？** 镜头是「你要什么景别」，不是「这个流派长什么样」——")
+    A("> 同一张巴洛克，你要特写还是要全景，镜头层完全不同。所以它单独列在表里，")
+    A("> 由你按画面意图决定要不要接上去。`artvault.py compose` 也遵守这条：")
+    A("> 除非你显式给 `--camera`，否则它不会替你选镜头。")
     A("")
     A("| 层 | 可复用片段 |")
     A("|---|---|")
@@ -174,7 +201,8 @@ def movement_note(mv, works):
             if wk.get("local_image"):
                 A("![[%s]]" % os.path.basename(wk["local_image"]))
                 A("")
-            meta = " · ".join(x for x in [wk.get("artist"), wk.get("date"), wk.get("medium")] if x)
+            _a, _d, _m = _clean_meta(wk, mv)
+            meta = " · ".join(x for x in [_a, _d, _m] if x)
             A("**%s**" % (meta or "—"))
             A("")
             A("来源：[%s](%s) · %s · [高清原图](%s)" % (

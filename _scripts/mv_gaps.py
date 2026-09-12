@@ -591,6 +591,9 @@ MOVEMENTS = [
               "AI 会加戏剧性 → negative 写 heroic drama, bright cheerful"],
  "sources": {"cleveland": ["paul nash", "neo-romanticism", "graham sutherland"],
              "met": ["paul nash", "neo-romanticism"], "commons": ["Paul Nash painting"]},
+ # 19 世纪版画家 Thomas Sutherland 与 Graham Sutherland 同姓不同人，
+ # 实测他的两幅版画混进了这个流派（标题里虽有 Paul Nash，作者却是他）。
+ "exclude_keys": ["thomas sutherland", "sutherland, thomas"],
  "see_also": ["romanticism", "tonalism", "symbolism"],
 },
 # ---------------------------------------------------------------- 美国现实主义
