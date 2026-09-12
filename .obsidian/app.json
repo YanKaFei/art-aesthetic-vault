@@ -1,5 +1,11 @@
 {
   "attachmentFolderPath": "99-附件/images",
   "newFileFolderPath": "20-我的提示词",
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "userIgnoreFilters": [
+    "_scripts",
+    "skill",
+    "pinterest",
+    "README"
+  ]
 }
