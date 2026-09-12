@@ -439,6 +439,11 @@ def main():
         for r in results:
             print(render(r))
             print()
+        # 增强维度缺失时明确说一声，别让用户以为「就这些」
+        miss = results[0].get("extended_missing") if results else ""
+        if miss:
+            print("提示：%s" % miss)
+            print("      装：pip3 install --target ./vendor/libs numpy opencv-python-headless")
     return 0
 
 
