@@ -22,6 +22,7 @@ verify_vault.py —— 抓完/改完之后的验收检查。
     8 JSON↔磁盘  每个流派的抓取记录与磁盘上的图是否一一对应
     9 笔记双链   每个 [[...]] 都能解析到一篇笔记（含表格转义处理）
    10 署名质量   卡片上没有「上传者当画家」「机器语法当日期」
+   11 视频层     每张卡都有 Seedance 五段式 + H3 自然语言两块中文提示词
 
 退出码：0 全部通过；1 有问题（便于写进 CI 或 pre-commit）。
 """
@@ -316,6 +317,40 @@ def check_attribution():
     return hits
 
 
+def check_video_layer():
+    """11 视频层：每张流派卡都要有可粘贴的中文视频提示词两块。
+
+    需要的两块（格式要求不同，缺一块就有半个模型用不了）：
+      A. Seedance 2.5 五段式 —— 必须含【主体】【风格】【时间线】【BGM】【限制】
+      B. MiniMax H3 自然语言 —— 不许出现 [Shot N] / 时间戳（会和 Context-IR 打架）
+    """
+    problems = []
+    for md in glob.glob(os.path.join(VAULT, "10-流派", "*.md")):
+        try:
+            t = open(md, encoding="utf-8").read()
+        except Exception:
+            continue
+        name = os.path.basename(md)
+        if "## 五、AI 视频层" not in t:
+            problems.append((name, "缺『五、AI 视频层』"))
+            continue
+        seg = t.split("## 五、AI 视频层", 1)[1].split("## 六、", 1)[0]
+        for tag in ("【主体】", "【风格】", "【时间线】", "【BGM】", "【限制】"):
+            if tag not in seg:
+                problems.append((name, "Seedance 五段式缺 " + tag))
+        if "### B. MiniMax H3" not in seg and "### B. MiniMax H3" not in t:
+            problems.append((name, "缺 H3 自然语言块"))
+        # H3 块里不该出现结构化字段名/时间戳
+        if "### B. MiniMax H3" in seg:
+            h3 = seg.split("### B. MiniMax H3", 1)[1]
+            h3 = h3.split("```")[1] if "```" in h3 else h3
+            for bad in ("[Shot ", "integrated_multimodal_description",
+                        "overall_soundscape", "non_diegetic_music"):
+                if bad in h3:
+                    problems.append((name, "H3 块混进了结构化字段 " + bad))
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -368,6 +403,7 @@ def main():
     report("8 JSON↔磁盘", check_data_disk_sync())
     report("9 笔记双链", check_note_links())
     report("10 署名质量", check_attribution())
+    report("11 视频层", check_video_layer())
 
     print("=" * 70)
     if failed:

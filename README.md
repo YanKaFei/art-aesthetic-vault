@@ -6,7 +6,7 @@
 
 从拜占庭到 Y2K ｜ 东亚 · 南亚 · 伊斯兰 ｜ 摄影谱系 ｜ 数字亚文化
 
-176 篇笔记 · 654 张公共领域实图 · 29 个即用脚本
+176 篇笔记 · 654 张公共领域实图 · 30 个即用脚本
 
 [English](README.en.md) ｜ **中文**
 
@@ -425,6 +425,7 @@ python3 make_links.py                 # 重新生成外部检索深链
 | `verify_vault.py` | **验收检查**：断链 / 重名 / AI 图 / frontmatter / 近重复 / 授权 / 孤儿图 |
 | `github_setup.py` | 推送 + 设为 Template + 设 topics/description 一条龙（token 不进命令行参数） |
 | `movement_fingerprint.py` | 用客观维度建流派指纹做图像→流派匹配（可解释，但实测不如 Vision） |
+| `video_prompt.py` | 从流派数据生成两块中文视频提示词（Seedance 2.5 五段式 + MiniMax H3 自然语言） |
 | `pinterest_grab.py` / `pinterest_export.py` | Pinterest 抓取与导出（本地自用，图**不入库**） |
 
 ### 两条容易被忽略的约定

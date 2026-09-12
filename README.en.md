@@ -6,7 +6,7 @@
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
-176 notes · 654 public-domain images · 29 ready-to-run scripts
+176 notes · 654 public-domain images · 30 ready-to-run scripts
 
 **English** ｜ [中文](README.md)
 
@@ -435,6 +435,7 @@ need only Python 3 + Pillow.
 | `verify_vault.py` | **Acceptance checks**: broken links / duplicate names / AI images / frontmatter / near-duplicates / licences / orphans |
 | `github_setup.py` | Push, set as Template, set topics/description in one go (token never appears in argv) |
 | `movement_fingerprint.py` | Movement fingerprints from objective dimensions for image-to-movement matching (explainable, but measurably worse than Vision) |
+| `video_prompt.py` | Generates two Chinese video-prompt blocks per movement (Seedance 2.5 five-part + MiniMax H3 natural language) |
 | `pinterest_grab.py` / `pinterest_export.py` | Pinterest scraping and export (local use only, images are **not** committed) |
 
 ### Two conventions that are easy to miss
