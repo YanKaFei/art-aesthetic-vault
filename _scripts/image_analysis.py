@@ -343,6 +343,16 @@ def analyze(path):
         "texture": _texture(gray),
         "lines": _lines(gray),
     }
+    # 可选增强（人脸/直线/显著性）—— 需要 numpy + opencv，缺了就静默跳过。
+    # 人脸必须在大图上跑，所以把原图 im 也传进去。
+    try:
+        import image_analysis_ext as _ext
+        e = _ext.analyze_extended(im, rgb, gray)
+        if e:
+            r["extended"] = e
+        r["extended_missing"] = _ext.missing_hint()
+    except Exception as e:
+        r["extended_error"] = str(e)[:80]
     try:
         im.close()
     except Exception:
@@ -363,6 +373,11 @@ def render(r, compact=False):
              % (lu["mean"], lu["std"], lu["median"], lu["dynamic_range"], lu["key"]))
     L.append("        高光溢出 %.2f%%  暗部溢出 %.2f%%" % (lu["highlight_clip_pct"], lu["shadow_clip_pct"]))
     L.append("  对比  RMS %.1f  Michelson %.3f  ｜ %s" % (co["rms"], co["michelson"], co["level"]))
+    # 两个对比度打架时是个有意义的信号，不是 bug：
+    # RMS 测整体明暗铺开程度，Michelson 测最亮/最暗的极差。
+    # RMS 低而 Michelson 高 = 大面积暗调里只有小面积高光 —— 明暗对照法的签名。
+    if co["rms"] < 45 and co["michelson"] > 0.85:
+        L.append("        ↑ RMS 低但 Michelson 高 ＝ 大面积暗调 + 小面积高光，典型明暗对照（chiaroscuro）")
     L.append("  色彩  RGB %s  ｜ 色温 %s (%.0f) ｜ 饱和度 %.3f"
              % (cl["mean_rgb"], cl["temperature"], cl["warm_score"], cl["saturation"]))
     if not compact:
@@ -385,6 +400,14 @@ def render(r, compact=False):
              % (ln["orientation"],
                 ("  主导角 %d°" % ln["dominant_angle"]) if ln["dominant_angle"] is not None else "",
                 ln.get("strong_edge_pct", 0)))
+    if r.get("extended"):
+        try:
+            import image_analysis_ext as _ext
+            L.extend(_ext.render_extended(r["extended"]))
+        except Exception:
+            pass
+    elif r.get("extended_error"):
+        L.append("  ⚠ 增强维度失败: %s" % r["extended_error"])
     return "\n".join(L)
 
 
