@@ -178,7 +178,7 @@ Art Aesthetic Style Library
 | **Movement cards** | **141**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
 | **Public-domain images** | **372** (134 MB), covering 79 movements |
 | **Guides & methodology** | 18 notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
-| **Keyword atlas** | Every one of WikiArt's **218 styles / 189 movements / 68 genres** mapped to a card |
+| **Keyword atlas** | All **218 styles / 189 movements / 68 genres** mapped to a card |
 | **Note templates** | 3 |
 | **Scripts** | 21 - fetch, generate, search, compose, MCP server |
 
@@ -280,7 +280,7 @@ for 141 movements, so an AI calling it won't make things up.
 
 ### 5. Completeness is verifiable
 
-The keyword atlas maps **all 218 WikiArt styles / 189 movements / 68 genres** onto cards.
+The keyword atlas maps **all 218 styles / 189 movements / 68 genres** onto cards.
 
 ### 6. Public domain only - no second thoughts
 

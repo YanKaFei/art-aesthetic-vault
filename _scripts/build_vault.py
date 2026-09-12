@@ -1666,7 +1666,7 @@ this and piling up style keywords.
 | **Movement cards** | **141**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
 | **Public-domain images** | **372** (134 MB), covering 79 movements |
 | **Guides & methodology** | 18 notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
-| **Keyword atlas** | Every one of WikiArt's **218 styles / 189 movements / 68 genres** mapped to a card |
+| **Keyword atlas** | All **218 styles / 189 movements / 68 genres** mapped to a card |
 | **Note templates** | 3 |
 | **Scripts** | 21 - fetch, generate, search, compose, MCP server |
 
@@ -1768,7 +1768,7 @@ for 141 movements, so an AI calling it won't make things up.
 
 ### 5. Completeness is verifiable
 
-The keyword atlas maps **all 218 WikiArt styles / 189 movements / 68 genres** onto cards.
+The keyword atlas maps **all 218 styles / 189 movements / 68 genres** onto cards.
 
 ### 6. Public domain only - no second thoughts
 
@@ -2208,7 +2208,7 @@ alienated, oppressive, intoxicating                    <- 情绪层
 | **流派卡** | **141 张**，6 大分类，每张含六维视觉拆解 + 七层提示词 + 配色 + 视频层 |
 | **公共领域实图** | **372 张**（134 MB），79 个流派配了图 |
 | **导航与方法论** | 18 篇（流派总览、关键词图谱、七层方法、视频结构、配色速查、反推工具链…） |
-| **关键词图谱** | WikiArt 全部 **218 styles / 189 movements / 68 genres** 的完整映射 |
+| **关键词图谱** | 全部 **218 styles / 189 movements / 68 genres** 的完整映射 |
 | **笔记模板** | 3 个（流派卡 / 提示词卡 / 作品拆解） |
 | **脚本** | 21 个，抓图、生成、检索、提示词合成、MCP 服务 |
 
