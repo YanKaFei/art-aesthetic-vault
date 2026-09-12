@@ -13,6 +13,19 @@
   "local_image": "99-附件/images/wet-plate/01-wet-plate-julia-jackson.jpg"
  },
  {
+  "title": "Anne Thackeray Ritchie",
+  "artist": "Julia Margaret Cameron",
+  "date": "May 1870",
+  "medium": "Albumen print",
+  "image_url": "https://www.artic.edu/iiif/2/e726dfa6-69f0-c73c-5881-905816b8f89a/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/e726dfa6-69f0-c73c-5881-905816b8f89a/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/18089",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/wet-plate/02-wet-plate-anne-thackeray-ritchie.jpg"
+ },
+ {
   "title": "Julia Jackson Duckworth (1846-1895)",
   "artist": "Julia Margaret Cameron",
   "date": "1874",
@@ -23,7 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/wet-plate/02-wet-plate-julia-jackson-duckworth-1846-1895.jpg"
+  "local_image": "99-附件/images/wet-plate/03-wet-plate-julia-jackson-duckworth-1846-1895.jpg"
+ },
+ {
+  "title": "A Study of the Beatrice Cenci",
+  "artist": "Julia Margaret Cameron",
+  "date": "September 1870",
+  "medium": "Albumen print",
+  "image_url": "https://www.artic.edu/iiif/2/77232fed-fa29-49f8-baca-5f527905824b/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/77232fed-fa29-49f8-baca-5f527905824b/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/20654",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/wet-plate/04-wet-plate-a-study-of-the-beatrice-cenci.jpg"
  },
  {
   "title": "Queen of the May",
@@ -36,45 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/wet-plate/03-wet-plate-queen-of-the-may.jpg"
+  "local_image": "99-附件/images/wet-plate/05-wet-plate-queen-of-the-may.jpg"
  },
  {
-  "title": "Sir John Herschel (1792-1871)",
+  "title": "Mrs. Herbert Duckworth",
   "artist": "Julia Margaret Cameron",
-  "date": "1867",
-  "medium": "albumen print from wet collodion negative",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1996.345/1996.345_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1996.345/1996.345_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1996.345",
-  "source": "克利夫兰艺术博物馆",
+  "date": "April 1867",
+  "medium": "Albumen print",
+  "image_url": "https://www.artic.edu/iiif/2/a50be06e-0072-24a5-9fa5-3e172c638fee/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/a50be06e-0072-24a5-9fa5-3e172c638fee/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/157056",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/wet-plate/04-wet-plate-sir-john-herschel-1792-1871.jpg"
- },
- {
-  "title": "The Lily and the Lamb",
-  "artist": "Julia Margaret Cameron",
-  "date": "c. 1865",
-  "medium": "albumen print from wet collodion negative",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1991.307/1991.307_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1991.307/1991.307_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1991.307",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/wet-plate/05-wet-plate-the-lily-and-the-lamb.jpg"
- },
- {
-  "title": "Lord Elcho (1818-1914)",
-  "artist": "Julia Margaret Cameron",
-  "date": "1865",
-  "medium": "albumen print from wet collodion negative",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1987.30/1987.30_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1987.30/1987.30_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1987.30",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/wet-plate/06-wet-plate-lord-elcho-1818-1914.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/wet-plate/06-wet-plate-mrs-herbert-duckworth.jpg"
  }
 ]

@@ -27,7 +27,7 @@
  },
  {
   "title": "Digital ID- 419707. Atkins, Anna - Photographer. 1843-53 (3110003250)",
-  "artist": "New York Public Library",
+  "artist": "Digital ID- 419707. Atkins, Anna",
   "date": "2008-12-14 22:04:11",
   "medium": "Digital ID- 419707. Atkins, Anna - Photographer. 1843-53 (31",
   "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Digital_ID-_419707._Atkins,_Anna_-_Photographer._1843-53_(3110003250).jpg?width=320",
@@ -37,6 +37,19 @@
   "license": "No restrictions",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
   "local_image": "99-附件/images/cyanotype/03-cyanotype-digital-id--419707-atkins-anna---photographe.jpg"
+ },
+ {
+  "title": "Met DP-17302-004",
+  "artist": "Anna Atkins",
+  "date": "circa 1853 date QS:P571,+1853-00-00T00:0",
+  "medium": "Photographs of British Algae: Cyanotype Impressions",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Met_DP-17302-004.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/1/11/Met_DP-17302-004.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Met_DP-17302-004.jpg",
+  "source": "维基共享资源",
+  "license": "CC0",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/cyanotype/04-cyanotype-met-dp-17302-004.jpg"
  },
  {
   "title": "Photographs of British Algae. Cyanotype Impressions, RP-F-2016-133",
@@ -49,6 +62,19 @@
   "source": "维基共享资源",
   "license": "CC0",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/cyanotype/04-cyanotype-photographs-of-british-algae-cyanotype-impre.jpg"
+  "local_image": "99-附件/images/cyanotype/05-cyanotype-photographs-of-british-algae-cyanotype-impre.jpg"
+ },
+ {
+  "title": "Photographs of British Algae",
+  "artist": "Anna Atkins",
+  "date": "1843",
+  "medium": "Photographs of British Algae",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Photographs_of_British_Algae.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Photographs_of_British_Algae.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Photographs_of_British_Algae.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/cyanotype/06-cyanotype-photographs-of-british-algae.jpg"
  }
 ]

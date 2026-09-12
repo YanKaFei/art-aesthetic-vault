@@ -1933,6 +1933,8 @@ need only Python 3 + Pillow.
 |---|---|
 | `image_analysis.py` | Seven objective dimensions: luminance / contrast / colour / harmony / composition / texture / line. Pure Pillow |
 | `image_analysis_ext.py` | **Optional**: face framing / Hough lines / spectral-residual saliency. Needs numpy + opencv, skipped automatically if absent |
+| `clip_embed.py` | **Optional**: CLIP image/text embeddings (ONNX, no PyTorch). Run `download` once for the model |
+| `clip_match.py` | **Optional**: image-to-movement matching with CLIP (zero-shot + fusion) — the most accurate of the three routes |
 | `artvault_vision.py` | **Optional**: macOS Vision semantic search (search by image / near-duplicates / similar movements) |
 | `ingest_inbox.py` | Processes the `pinterest/` inbox, including the dimensions above in its scan |
 | `verify_vault.py` | **Acceptance checks**: broken links / duplicate names / AI images / frontmatter / near-duplicates / licences / orphans |
@@ -2574,6 +2576,8 @@ python3 make_links.py                 # 重新生成外部检索深链
 |---|---|
 | `image_analysis.py` | 七维度客观测量：明度 / 对比 / 色彩 / 和谐 / 构图 / 质感 / 线条。纯 Pillow |
 | `image_analysis_ext.py` | **可选**：人脸景别 / 霍夫直线 / 谱残差显著性。要 numpy + opencv，没装自动跳过 |
+| `clip_embed.py` | **可选**：CLIP 图像/文本嵌入（ONNX，不需要 PyTorch）。首次跑 `download` 下模型 |
+| `clip_match.py` | **可选**：用 CLIP 做图像→流派匹配（零样本 + 融合），三条路里最准的一条 |
 | `artvault_vision.py` | **可选**：macOS Vision 语义检索（以图搜图 / 近重复 / 相近流派） |
 | `ingest_inbox.py` | 处理 `pinterest/` 投递箱，扫描时带上上面这些维度 |
 | `verify_vault.py` | **验收检查**：断链 / 重名 / AI 图 / frontmatter / 近重复 / 授权 / 孤儿图 |
@@ -2722,6 +2726,10 @@ _scripts/_data/inbox_manifest.json
 #   python3 movement_fingerprint.py build     （客观维度特征缓存，约 1 分钟）
 _scripts/_data/vision_index.json
 _scripts/_data/feature_cache.json
+_scripts/_data/clip_cache.json
+
+# CLIP 量化模型（约 150MB，跑 clip_embed.py download 自动获取）
+_scripts/vendor/clip/
 
 # Vision 特征提取器的编译产物（架构相关，首次使用时自动编译）
 _scripts/vision/vision_feat

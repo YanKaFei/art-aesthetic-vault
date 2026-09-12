@@ -17,6 +17,10 @@ _scripts/_data/inbox_manifest.json
 #   python3 movement_fingerprint.py build     （客观维度特征缓存，约 1 分钟）
 _scripts/_data/vision_index.json
 _scripts/_data/feature_cache.json
+_scripts/_data/clip_cache.json
+
+# CLIP 量化模型（约 150MB，跑 clip_embed.py download 自动获取）
+_scripts/vendor/clip/
 
 # Vision 特征提取器的编译产物（架构相关，首次使用时自动编译）
 _scripts/vision/vision_feat

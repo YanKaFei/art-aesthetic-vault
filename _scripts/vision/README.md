@@ -103,57 +103,42 @@ Top-1 约 30% 意味着**十次里错七次**。原因是样本太薄（78 个�
 
 `similar <流派>` 命令的输出里带了这些数字和提醒。
 
-### 顺便：还有一条路，但实测更差
+### 顺便：又试了两条路，都比 Vision 好或差
 
-同一个评估框架下也测了 T1 客观维度（31 维）建流派指纹的方案
-（`movement_fingerprint.py`），实测反而不如 Vision：
+同一个评估框架下还试了两条：
 
-| | 最近邻同流派 | Top-1 |
-|---|---|---|
-| Vision（768 维） | **27.6%** | **30.6%** |
-| T1 客观维度（31 维） | 13.4% | 13.2% |
+| 做法 | 最近邻同流派 | Top-1 | Top-3 |
+|---|---|---|---|
+| **CLIP + 融合（零样本权重 0.15）** | — | **39.1%** | **61.4%** |
+| CLIP 图像质心 | 33.1% | 37.6% | 59.8% |
+| CLIP 零样本（图 vs 流派文字） | — | 21.5% | 36.6% |
+| Vision featureprint（768 维） | 27.6% | 30.6% | 50.8% |
+| T1 客观维度（31 维） | 13.4% | 13.2% | 25.3% |
 
-两者都远超随机（×12 和 ×25），但 Vision 在两个口径上都更好。
-这和「客观维度更懂风格」的直觉相反，可能的原因是：T1 的 31 维里含大量
-与流派无关的信息（画面比例、对称性受题材和构图支配），而 Vision 的 768 维
-虽为物体识别训练，却隐含编码了笔触、材质、色调。
+- **CLIP 最好**（比 Vision 高 8.5 个百分点）→ 见 `_scripts/clip_match.py`，
+  它还能做**零样本**：用流派卡的英文描述直接匹配图像，连一张实图都没有的
+  流派（赛博朋克、蒸汽朋克）也能被匹配到
+- **T1 客观维度最弱**（31 维，用明度/饱和/笔触建流派指纹）
+  → 见 `_scripts/movement_fingerprint.py`
 
-结论：两个都能用，但都只能当建议。真要判风格，**以库里的流派卡为准** ——
-`artvault.py layers <流派>` 给的是人写的具体术语，比任何像素统计可靠。
+所以「要判流派」的推荐顺序是：**CLIP → Vision → T1 客观维度**。
+
+**基准一定要算对**：这里的「随机」是「随便挑另一张图恰好同流派」，本库约 1%。
+不是 50% —— 曾经用 50% 当基准，得出过「Vision 近乎随机」的相反结论。
 
 ---
 
 ## 顺带找出的库质量问题：17 对重复图
 
 `artvault_vision.py dups --thresh 0.08` 找出 17 对距离 0.000 的图，**全是跨流派**。
+这一项不受上面那个「建议级」限制 —— 距离 0.000 就是同一张，没有误判空间。
 
 大部分是**合理重叠**，不是 bug —— 一件作品本来就可以同时是多个流派的例证：
+`baroque` ↔ `caravaggisti`（卡拉瓦乔主义本就是巴洛克支流）、
+`renaissance` ↔ `early-renaissance`、`muralism` ↔ `social-realism`（Diego Rivera）、
+`post-impressionism` ↔ `neo-impressionism`（修拉《大碗岛》）、
+`gongbi` ↔ `song-academic`（《捣练图》）。
 
-| 重叠 | 为什么合理 |
-|---|---|
-| `baroque` ↔ `caravaggisti` | 卡拉瓦乔主义本就是巴洛克的支流 |
-| `renaissance` ↔ `early-renaissance` | 同一件文艺复兴作品 |
-| `muralism` ↔ `social-realism` | Diego Rivera 同属两个运动 |
-| `post-impressionism` ↔ `neo-impressionism` | 修拉《大碗岛》同属两者 |
-| `gongbi` ↔ `song-academic` | 《捣练图》同属两者 |
-
-**但有一处是真问题**：
-
-```
-abstract-art/01 = de-stijl/01   (蒙德里安 红黄蓝构图)
-abstract-art/02 = de-stijl/02   (蒙德里安 前景幼树的田野)
-```
-
-`abstract-art` 一共只有 2 张图，**两张都是蒙德里安，和 `de-stijl` 完全重复**。
-而它自己在 `mv_contemporary.py` 里列的关键词是
-`["abstract", "mondrian", "kandinsky", "malevich", "de kooning", "rothko"]` ——
-`mondrian` 排在前面，抓取时把名额全占了，于是这个流派真正的跨度
-（康定斯基、马列维奇、德库宁、罗斯科）一张都没有。
-
-修法：把 `mondrian` 从 `abstract-art` 的关键词里去掉（他已经是 `de-stijl` 的代表），
-让它去抓另外四位。改完重新抓这一个流派即可：
-
-```bash
-python3 fetch_art.py abstract-art --per 6 --refresh
-```
-
+**有一处是真问题**（已修）：`abstract-art` 仅有的 2 张图全是蒙德里安、
+与 `de-stijl` 完全重复，而它自己列的康定斯基/马列维奇/德库宁/罗斯科一张没有。
+详见 `skill/build/reference/pitfalls.md` 的 2.2.1~2.2.3。

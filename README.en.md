@@ -6,7 +6,7 @@
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
-176 notes · 622 public-domain images · 27 ready-to-run scripts
+176 notes · 626 public-domain images · 29 ready-to-run scripts
 
 **English** ｜ [中文](README.md)
 
@@ -176,7 +176,7 @@ Art Aesthetic Style Library
 | | |
 |---|---|
 | **Movement cards** | **141**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
-| **Public-domain images** | **622** (219 MB), covering 80 movements |
+| **Public-domain images** | **626** (219 MB), covering 81 movements |
 | **Guides & methodology** | 18 notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
 | **Keyword atlas** | All **218 styles / 189 movements / 68 genres** mapped to a card |
 | **Note templates** | 3 |
@@ -426,6 +426,8 @@ need only Python 3 + Pillow.
 |---|---|
 | `image_analysis.py` | Seven objective dimensions: luminance / contrast / colour / harmony / composition / texture / line. Pure Pillow |
 | `image_analysis_ext.py` | **Optional**: face framing / Hough lines / spectral-residual saliency. Needs numpy + opencv, skipped automatically if absent |
+| `clip_embed.py` | **Optional**: CLIP image/text embeddings (ONNX, no PyTorch). Run `download` once for the model |
+| `clip_match.py` | **Optional**: image-to-movement matching with CLIP (zero-shot + fusion) — the most accurate of the three routes |
 | `artvault_vision.py` | **Optional**: macOS Vision semantic search (search by image / near-duplicates / similar movements) |
 | `ingest_inbox.py` | Processes the `pinterest/` inbox, including the dimensions above in its scan |
 | `verify_vault.py` | **Acceptance checks**: broken links / duplicate names / AI images / frontmatter / near-duplicates / licences / orphans |
