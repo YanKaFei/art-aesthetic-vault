@@ -1,0 +1,21 @@
+# Obsidian 运行时文件
+.DS_Store
+.trash/
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+
+# 脚本缓存与本地依赖
+_scripts/__pycache__/
+_scripts/vendor/
+
+# 抓取过程的临时清单（每次扫描都会重写）
+_scripts/_data/inbox_manifest.json
+
+# Pinterest 抓来的图版权归原作者、无统一授权，**不要提交也不要公开**
+# （10-流派/ 里的 CC0 图不受影响，那是可以随便分发的）
+99-附件/images/pinterest/
+
+# 投递箱里的图（用户自己丢进来的，同样版权归原作者）
+pinterest/*
+!pinterest/README.md

@@ -1,0 +1,80 @@
+[
+ {
+  "title": "Adeline Ravoux",
+  "artist": "Vincent van Gogh",
+  "date": "1890",
+  "medium": "oil on fabric",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1958.31/1958.31_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1958.31/1958.31_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1958.31",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/post-impressionism/01-post-impressionism-adeline-ravoux.jpg"
+ },
+ {
+  "title": "The Pigeon Tower at Bellevue",
+  "artist": "Paul Cezanne",
+  "date": "1890",
+  "medium": "oil on fabric",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1936.19/1936.19_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1936.19/1936.19_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1936.19",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/post-impressionism/02-post-impressionism-the-pigeon-tower-at-bellevue.jpg"
+ },
+ {
+  "title": "The Call",
+  "artist": "Paul Gauguin",
+  "date": "1902",
+  "medium": "oil on canvas",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1943.392/1943.392_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1943.392/1943.392_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1943.392",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/post-impressionism/03-post-impressionism-the-call.jpg"
+ },
+ {
+  "title": "The Brook",
+  "artist": "Paul Cezanne",
+  "date": "c. 1895–1900",
+  "medium": "oil on fabric",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1958.20/1958.20_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1958.20/1958.20_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1958.20",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/post-impressionism/04-post-impressionism-the-brook.jpg"
+ },
+ {
+  "title": "Drying the Linen, or Moonrise at the Priory",
+  "artist": "Maurice Denis",
+  "date": "1894",
+  "medium": "oil on canvas glued to cardboard",
+  "image_url": "https://openaccess-cdn.clevelandart.org/2020.109/2020.109_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/2020.109/2020.109_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/2020.109",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/post-impressionism/05-post-impressionism-drying-the-linen-or-moonrise-at-the-priory.jpg"
+ },
+ {
+  "title": "Two Poplars in the Alpilles near Saint-Rémy",
+  "artist": "Vincent van Gogh",
+  "date": "1889",
+  "medium": "oil on fabric",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1958.32/1958.32_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1958.32/1958.32_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1958.32",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/post-impressionism/06-post-impressionism-two-poplars-in-the-alpilles-near-saint-rémy.jpg"
+ }
+]

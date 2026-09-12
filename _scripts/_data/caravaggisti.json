@@ -1,0 +1,80 @@
+[
+ {
+  "title": "The Crucifixion of Saint Andrew",
+  "artist": "Caravaggio",
+  "date": "1606–7",
+  "medium": "oil on canvas",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1976.2/1976.2_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1976.2/1976.2_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1976.2",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/caravaggisti/01-caravaggisti-the-crucifixion-of-saint-andrew.jpg"
+ },
+ {
+  "title": "Saint Peter Repentant",
+  "artist": "Georges de La Tour",
+  "date": "1645",
+  "medium": "oil on canvas",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1951.454/1951.454_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1951.454/1951.454_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1951.454",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/caravaggisti/02-caravaggisti-saint-peter-repentant.jpg"
+ },
+ {
+  "title": "Danaë",
+  "artist": "Orazio Gentileschi",
+  "date": "c. 1623",
+  "medium": "oil on canvas",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1971.101/1971.101_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1971.101/1971.101_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1971.101",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/caravaggisti/03-caravaggisti-danaë.jpg"
+ },
+ {
+  "title": "The Musicians",
+  "artist": "Caravaggio (Michelangelo Merisi)",
+  "date": "1597",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-687-001.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP-687-001.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/435844",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/caravaggisti/04-caravaggisti-the-musicians.jpg"
+ },
+ {
+  "title": "The Fortune-Teller",
+  "artist": "Georges de La Tour",
+  "date": "probably 1630s",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14286-015.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP-14286-015.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/436838",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/caravaggisti/05-caravaggisti-the-fortune-teller.jpg"
+ },
+ {
+  "title": "The Penitent Magdalen",
+  "artist": "Georges de La Tour",
+  "date": "ca. 1640",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-27910-001.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP-27910-001.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/436839",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/caravaggisti/06-caravaggisti-the-penitent-magdalen.jpg"
+ }
+]

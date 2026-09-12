@@ -1,0 +1,41 @@
+[
+ {
+  "title": "Portrait of a Woman",
+  "artist": "Agnolo Bronzino",
+  "date": "c. 1550",
+  "medium": "oil on wood",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1972.121/1972.121_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1972.121/1972.121_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1972.121",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/mannerism/01-mannerism-portrait-of-a-woman.jpg"
+ },
+ {
+  "title": "Man's Head from the Back",
+  "artist": "Agnolo Bronzino",
+  "date": "16th century?",
+  "medium": "red chalk with red and white gouache",
+  "image_url": "https://openaccess-cdn.clevelandart.org/1939.659/1939.659_web.jpg",
+  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1939.659/1939.659_print.jpg",
+  "page_url": "https://www.clevelandart.org/art/1939.659",
+  "source": "克利夫兰艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "local_image": "99-附件/images/mannerism/02-mannerism-mans-head-from-the-back.jpg"
+ },
+ {
+  "title": "Christ Healing the Blind",
+  "artist": "El Greco (Domenikos Theotokopoulos)",
+  "date": "ca. 1570",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-26505-001.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ep/original/DP-26505-001.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/436572",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/mannerism/03-mannerism-christ-healing-the-blind.jpg"
+ }
+]

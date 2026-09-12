@@ -1,0 +1,397 @@
+{
+ "hellenistic-period": {
+  "en": "Hellenistic",
+  "count": 135,
+  "zh": ""
+ },
+ "middle-byzantine-c-850-1204": {
+  "en": "Middle Byzantine (c. 850–1204)",
+  "count": 159,
+  "zh": ""
+ },
+ "late-byzantine-c-1261-1453": {
+  "en": "Late Byzantine/Palaeologan Renaissance (c. 1261–1453)",
+  "count": 137,
+  "zh": ""
+ },
+ "international-gothic": {
+  "en": "International Gothic",
+  "count": 329,
+  "zh": ""
+ },
+ "proto-renaissance": {
+  "en": "Proto Renaissance",
+  "count": 444,
+  "zh": ""
+ },
+ "early-renaissance": {
+  "en": "Early Renaissance",
+  "count": 1877,
+  "zh": ""
+ },
+ "tenebrism": {
+  "en": "Tenebrism",
+  "count": 553,
+  "zh": ""
+ },
+ "classicism": {
+  "en": "Classicism",
+  "count": 276,
+  "zh": ""
+ },
+ "orientalism": {
+  "en": "Orientalism",
+  "count": 1520,
+  "zh": ""
+ },
+ "costumbrismo": {
+  "en": "Costumbrismo",
+  "count": 121,
+  "zh": ""
+ },
+ "biedermeier": {
+  "en": "Biedermeier",
+  "count": 478,
+  "zh": ""
+ },
+ "luminism": {
+  "en": "Luminism",
+  "count": 402,
+  "zh": ""
+ },
+ "american-realism": {
+  "en": "American Realism",
+  "count": 375,
+  "zh": ""
+ },
+ "naturalism": {
+  "en": "Naturalism",
+  "count": 883,
+  "zh": ""
+ },
+ "na-ve-art-primitivism": {
+  "en": "Naïve Art (Primitivism)",
+  "count": 3766,
+  "zh": ""
+ },
+ "social-realism": {
+  "en": "Social Realism",
+  "count": 919,
+  "zh": ""
+ },
+ "metaphysical-art": {
+  "en": "Metaphysical art",
+  "count": 259,
+  "zh": ""
+ },
+ "magic-realism": {
+  "en": "Magic Realism",
+  "count": 1799,
+  "zh": ""
+ },
+ "fantastic-realism": {
+  "en": "Fantastic Realism",
+  "count": 412,
+  "zh": ""
+ },
+ "pointillism": {
+  "en": "Pointillism",
+  "count": 591,
+  "zh": ""
+ },
+ "divisionism": {
+  "en": "Divisionism",
+  "count": 437,
+  "zh": ""
+ },
+ "abstract-art": {
+  "en": "Abstract Art",
+  "count": 2037,
+  "zh": ""
+ },
+ "neo-baroque": {
+  "en": "Neo-baroque",
+  "count": 256,
+  "zh": ""
+ },
+ "japonism": {
+  "en": "Japonism",
+  "count": 213,
+  "zh": ""
+ },
+ "purism": {
+  "en": "Purism",
+  "count": 174,
+  "zh": ""
+ },
+ "precisionism": {
+  "en": "Precisionism",
+  "count": 362,
+  "zh": ""
+ },
+ "cloisonnism": {
+  "en": "Cloisonnism",
+  "count": 183,
+  "zh": ""
+ },
+ "regionalism": {
+  "en": "Regionalism",
+  "count": 580,
+  "zh": ""
+ },
+ "socialist-realism": {
+  "en": "Socialist Realism",
+  "count": 755,
+  "zh": ""
+ },
+ "muralism": {
+  "en": "Muralism",
+  "count": 226,
+  "zh": ""
+ },
+ "pictorialism": {
+  "en": "Pictorialism",
+  "count": 526,
+  "zh": ""
+ },
+ "kitsch": {
+  "en": "Kitsch",
+  "count": 860,
+  "zh": ""
+ },
+ "neo-romanticism": {
+  "en": "Neo-Romanticism",
+  "count": 828,
+  "zh": ""
+ },
+ "hard-edge-painting": {
+  "en": "Hard Edge Painting",
+  "count": 639,
+  "zh": ""
+ },
+ "synthetic-cubism": {
+  "en": "Synthetic Cubism",
+  "count": 245,
+  "zh": "Synthetic Cubism"
+ },
+ "lyrical-abstraction": {
+  "en": "Lyrical Abstraction",
+  "count": 1208,
+  "zh": "Lyrical Abstraction"
+ },
+ "figurative-expressionism": {
+  "en": "Figurative Expressionism",
+  "count": 369,
+  "zh": "Figurative Expressionism"
+ },
+ "art-informel": {
+  "en": "Art Informel",
+  "count": 1888,
+  "zh": ""
+ },
+ "cubo-futurism": {
+  "en": "Cubo-Futurism",
+  "count": 182,
+  "zh": ""
+ },
+ "tachisme": {
+  "en": "Tachisme",
+  "count": 576,
+  "zh": ""
+ },
+ "post-painterly-abstraction": {
+  "en": "Post-Painterly Abstraction",
+  "count": 382,
+  "zh": ""
+ },
+ "feminist-art": {
+  "en": "Feminist Art",
+  "count": 545,
+  "zh": ""
+ },
+ "modernismo": {
+  "en": "Modernismo",
+  "count": 159,
+  "zh": ""
+ },
+ "outsider-art": {
+  "en": "Outsider art",
+  "count": 492,
+  "zh": ""
+ },
+ "art-brut": {
+  "en": "Art Brut",
+  "count": 503,
+  "zh": ""
+ },
+ "neoplasticism": {
+  "en": "Neoplasticism",
+  "count": 183,
+  "zh": ""
+ },
+ "concretism": {
+  "en": "Concretism",
+  "count": 800,
+  "zh": "Concretism"
+ },
+ "neo-dada": {
+  "en": "Neo-Dada",
+  "count": 636,
+  "zh": ""
+ },
+ "neo-figurative-art": {
+  "en": "Neo-Figurative Art",
+  "count": 348,
+  "zh": ""
+ },
+ "new-realism": {
+  "en": "New Realism",
+  "count": 457,
+  "zh": "New Realism"
+ },
+ "kinetic-art": {
+  "en": "Kinetic Art",
+  "count": 301,
+  "zh": ""
+ },
+ "spatialism": {
+  "en": "Spatialism",
+  "count": 169,
+  "zh": ""
+ },
+ "nouveau-r-alisme": {
+  "en": "Nouveau Réalisme",
+  "count": 253,
+  "zh": ""
+ },
+ "post-minimalism": {
+  "en": "Post-Minimalism",
+  "count": 750,
+  "zh": ""
+ },
+ "light-and-space": {
+  "en": "Light and Space",
+  "count": 441,
+  "zh": ""
+ },
+ "environmental-land-art": {
+  "en": "Environmental (Land) Art",
+  "count": 184,
+  "zh": ""
+ },
+ "hyper-realism": {
+  "en": "Hyper-Realism",
+  "count": 316,
+  "zh": ""
+ },
+ "contemporary-realism": {
+  "en": "Contemporary Realism",
+  "count": 1767,
+  "zh": ""
+ },
+ "p-d-pattern-and-decoration": {
+  "en": "P&D (Pattern and Decoration)",
+  "count": 153,
+  "zh": ""
+ },
+ "transavantgarde": {
+  "en": "Transavantgarde",
+  "count": 601,
+  "zh": ""
+ },
+ "confessional-art": {
+  "en": "Confessional Art",
+  "count": 120,
+  "zh": "Confessional Art"
+ },
+ "new-european-painting": {
+  "en": "New European Painting",
+  "count": 413,
+  "zh": "New European Painting"
+ },
+ "neo-pop-art": {
+  "en": "Neo-Pop Art",
+  "count": 902,
+  "zh": ""
+ },
+ "neo-geo": {
+  "en": "Neo-Geo",
+  "count": 139,
+  "zh": ""
+ },
+ "street-art": {
+  "en": "Street art",
+  "count": 375,
+  "zh": ""
+ },
+ "digital-art": {
+  "en": "Digital Art",
+  "count": 246,
+  "zh": "Digital Art"
+ },
+ "neo-minimalism": {
+  "en": "Neo-Minimalism",
+  "count": 312,
+  "zh": "Neo-Minimalism"
+ },
+ "fantasy-art": {
+  "en": "Fantasy Art",
+  "count": 126,
+  "zh": "Fantasy Art"
+ },
+ "contemporary": {
+  "en": "Contemporary",
+  "count": 1221,
+  "zh": ""
+ },
+ "classical-realism": {
+  "en": "Classical Realism",
+  "count": 226,
+  "zh": "Classical Realism"
+ },
+ "postcolonial-art": {
+  "en": "Postcolonial art",
+  "count": 320,
+  "zh": "Postcolonial art"
+ },
+ "shin-hanga": {
+  "en": "Shin-hanga",
+  "count": 425,
+  "zh": ""
+ },
+ "s-saku-hanga": {
+  "en": "Sōsaku hanga",
+  "count": 480,
+  "zh": ""
+ },
+ "suiboku-ga-0": {
+  "en": "Sumi-e (Suiboku-ga)",
+  "count": 126,
+  "zh": ""
+ },
+ "zen": {
+  "en": "Zen",
+  "count": 166,
+  "zh": ""
+ },
+ "safavid-period": {
+  "en": "Safavid Period",
+  "count": 130,
+  "zh": ""
+ },
+ "native-art": {
+  "en": "Native Art",
+  "count": 569,
+  "zh": ""
+ },
+ "documentary-photography": {
+  "en": "Documentary photography",
+  "count": 158,
+  "zh": ""
+ },
+ "street-photography": {
+  "en": "Street Photography",
+  "count": 141,
+  "zh": "Street Photography"
+ }
+}

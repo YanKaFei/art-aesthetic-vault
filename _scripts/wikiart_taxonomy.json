@@ -1,0 +1,4736 @@
+{
+ "styles_en": {
+  "early-dynastic-period": {
+   "name": "Early Dynastic",
+   "count": 2
+  },
+  "old-kingdom": {
+   "name": "Old Kingdom",
+   "count": 1
+  },
+  "middle-kingdom": {
+   "name": "Middle Kingdom",
+   "count": 9
+  },
+  "new-kingdom": {
+   "name": "New Kingdom",
+   "count": 114
+  },
+  "amarna": {
+   "name": "Amarna",
+   "count": 12
+  },
+  "3rd-intermediate-period": {
+   "name": "3rd Intermediate Period",
+   "count": 16
+  },
+  "late-period": {
+   "name": "Late Period",
+   "count": 4
+  },
+  "ptolemaic": {
+   "name": "Ptolemaic",
+   "count": 4
+  },
+  "2nd-intermediate-period": {
+   "name": "2nd Intermediate Period",
+   "count": 1
+  },
+  "archaic-period": {
+   "name": "Archaic",
+   "count": 39
+  },
+  "classical-period": {
+   "name": "Classical",
+   "count": 89
+  },
+  "hellenistic-period": {
+   "name": "Hellenistic",
+   "count": 135
+  },
+  "geometric-period": {
+   "name": "Geometric",
+   "count": 12
+  },
+  "early-christian": {
+   "name": "Early Christian",
+   "count": 1
+  },
+  "early-byzantine-c-330-750": {
+   "name": "Early Byzantine (c. 330–750)",
+   "count": 109
+  },
+  "middle-byzantine-c-850-1204": {
+   "name": "Middle Byzantine (c. 850–1204)",
+   "count": 159
+  },
+  "mozarabic": {
+   "name": "Mozarabic",
+   "count": 85
+  },
+  "komnenian-style-1081-1185": {
+   "name": "Komnenian style (1081-1185)",
+   "count": 48
+  },
+  "latin-empire-of-constantinople-1204-1261": {
+   "name": "Latin Empire of Constantinople (1204-1261)",
+   "count": 29
+  },
+  "late-byzantine-c-1261-1453": {
+   "name": "Late Byzantine/Palaeologan Renaissance (c. 1261–1453)",
+   "count": 137
+  },
+  "byzantine": {
+   "name": "Byzantine",
+   "count": 256
+  },
+  "macedonian-renaissance-867-1056": {
+   "name": "Macedonian Renaissance (867–1056)",
+   "count": 95
+  },
+  "romanesque": {
+   "name": "Romanesque",
+   "count": 348
+  },
+  "mosan-art": {
+   "name": "Mosan art",
+   "count": 57
+  },
+  "gothic": {
+   "name": "Gothic",
+   "count": 34
+  },
+  "international-gothic": {
+   "name": "International Gothic",
+   "count": 329
+  },
+  "viking-art": {
+   "name": "Viking art",
+   "count": 67
+  },
+  "medieval-art": {
+   "name": "Medieval Art",
+   "count": 25
+  },
+  "crusader-workshop": {
+   "name": "Crusader workshop",
+   "count": 13
+  },
+  "moscow-school-of-icon-painting": {
+   "name": "Moscow school of icon painting",
+   "count": 74
+  },
+  "cretan-school-of-icon-painting": {
+   "name": "Cretan school of icon painting",
+   "count": 12
+  },
+  "macedonian-school-of-icon-painting": {
+   "name": "Macedonian school of icon painting",
+   "count": 2
+  },
+  "coptic-art": {
+   "name": "Coptic art",
+   "count": 78
+  },
+  "novgorod-school-of-icon-painting": {
+   "name": "Novgorod school of icon painting",
+   "count": 31
+  },
+  "kyiv-school-of-icon-painting": {
+   "name": "Kyiv school of icon painting",
+   "count": 17
+  },
+  "vladimir-school-of-icon-painting": {
+   "name": "Vladimir school of icon painting",
+   "count": 4
+  },
+  "galicia-volyn-school": {
+   "name": "Galicia-Volyn school",
+   "count": 21
+  },
+  "pskov-school-of-icon-painting": {
+   "name": "Pskov school of icon painting",
+   "count": 6
+  },
+  "yaroslavl-school-of-icon-painting": {
+   "name": "Yaroslavl school of icon painting",
+   "count": 14
+  },
+  "vologda-school-of-icon-painting": {
+   "name": "Vologda school of icon painting",
+   "count": 6
+  },
+  "chernihiv-school-of-icon-painting": {
+   "name": "Chernihiv school of icon painting",
+   "count": 4
+  },
+  "proto-renaissance": {
+   "name": "Proto Renaissance",
+   "count": 444
+  },
+  "early-renaissance": {
+   "name": "Early Renaissance",
+   "count": 1877
+  },
+  "high-renaissance": {
+   "name": "High Renaissance",
+   "count": 1769
+  },
+  "mannerism-late-renaissance": {
+   "name": "Mannerism (Late Renaissance)",
+   "count": 2543
+  },
+  "northern-renaissance": {
+   "name": "Northern Renaissance",
+   "count": 3275
+  },
+  "renaissance": {
+   "name": "Renaissance",
+   "count": 33
+  },
+  "baroque": {
+   "name": "Baroque",
+   "count": 8284
+  },
+  "tenebrism": {
+   "name": "Tenebrism",
+   "count": 553
+  },
+  "rococo": {
+   "name": "Rococo",
+   "count": 3701
+  },
+  "classicism": {
+   "name": "Classicism",
+   "count": 276
+  },
+  "neoclassicism": {
+   "name": "Neoclassicism",
+   "count": 4683
+  },
+  "academicism": {
+   "name": "Academicism",
+   "count": 3043
+  },
+  "romanticism": {
+   "name": "Romanticism",
+   "count": 15749
+  },
+  "orientalism": {
+   "name": "Orientalism",
+   "count": 1520
+  },
+  "costumbrismo": {
+   "name": "Costumbrismo",
+   "count": 121
+  },
+  "biedermeier": {
+   "name": "Biedermeier",
+   "count": 478
+  },
+  "neo-rococo": {
+   "name": "Neo-Rococo",
+   "count": 101
+  },
+  "luminism": {
+   "name": "Luminism",
+   "count": 402
+  },
+  "realism": {
+   "name": "Realism",
+   "count": 16883
+  },
+  "stroganov-school-of-icon-painting": {
+   "name": "Stroganov school of icon painting",
+   "count": 1
+  },
+  "american-realism": {
+   "name": "American Realism",
+   "count": 375
+  },
+  "naturalism": {
+   "name": "Naturalism",
+   "count": 883
+  },
+  "na-ve-art-primitivism": {
+   "name": "Naïve Art (Primitivism)",
+   "count": 3766
+  },
+  "social-realism": {
+   "name": "Social Realism",
+   "count": 919
+  },
+  "automatic-painting": {
+   "name": "Automatic Painting",
+   "count": 71
+  },
+  "action-painting": {
+   "name": "Action painting",
+   "count": 110
+  },
+  "surrealism": {
+   "name": "Surrealism",
+   "count": 7532
+  },
+  "post-impressionism": {
+   "name": "Post-Impressionism",
+   "count": 8334
+  },
+  "symbolism": {
+   "name": "Symbolism",
+   "count": 5481
+  },
+  "metaphysical-art": {
+   "name": "Metaphysical art",
+   "count": 259
+  },
+  "tonalism": {
+   "name": "Tonalism",
+   "count": 391
+  },
+  "impressionism": {
+   "name": "Impressionism",
+   "count": 16838
+  },
+  "magic-realism": {
+   "name": "Magic Realism",
+   "count": 1799
+  },
+  "fantastic-realism": {
+   "name": "Fantastic Realism",
+   "count": 412
+  },
+  "pointillism": {
+   "name": "Pointillism",
+   "count": 591
+  },
+  "divisionism": {
+   "name": "Divisionism",
+   "count": 437
+  },
+  "abstract-art": {
+   "name": "Abstract Art",
+   "count": 2037
+  },
+  "neo-baroque": {
+   "name": "Neo-baroque",
+   "count": 256
+  },
+  "japonism": {
+   "name": "Japonism",
+   "count": 213
+  },
+  "purism": {
+   "name": "Purism",
+   "count": 174
+  },
+  "verism": {
+   "name": "Verism",
+   "count": 110
+  },
+  "art-deco": {
+   "name": "Art Deco",
+   "count": 1033
+  },
+  "precisionism": {
+   "name": "Precisionism",
+   "count": 362
+  },
+  "cloisonnism": {
+   "name": "Cloisonnism",
+   "count": 183
+  },
+  "regionalism": {
+   "name": "Regionalism",
+   "count": 580
+  },
+  "socialist-realism": {
+   "name": "Socialist Realism",
+   "count": 755
+  },
+  "synthetism": {
+   "name": "Synthetism",
+   "count": 78
+  },
+  "intimism": {
+   "name": "Intimism",
+   "count": 112
+  },
+  "new-medievialism": {
+   "name": "New Medievialism",
+   "count": 11
+  },
+  "fauvism": {
+   "name": "Fauvism",
+   "count": 1230
+  },
+  "muralism": {
+   "name": "Muralism",
+   "count": 226
+  },
+  "art-nouveau-modern": {
+   "name": "Art Nouveau (Modern)",
+   "count": 7860
+  },
+  "cartographic-art": {
+   "name": "Cartographic Art",
+   "count": 51
+  },
+  "existential-art": {
+   "name": "Existential Art",
+   "count": 39
+  },
+  "pictorialism": {
+   "name": "Pictorialism",
+   "count": 526
+  },
+  "expressionism": {
+   "name": "Expressionism",
+   "count": 13461
+  },
+  "lettrism": {
+   "name": "Lettrism",
+   "count": 52
+  },
+  "kitsch": {
+   "name": "Kitsch",
+   "count": 860
+  },
+  "mechanistic-cubism": {
+   "name": "Mechanistic Cubism",
+   "count": 70
+  },
+  "miserablism": {
+   "name": "Miserablism",
+   "count": 19
+  },
+  "neo-romanticism": {
+   "name": "Neo-Romanticism",
+   "count": 828
+  },
+  "abstract-expressionism": {
+   "name": "Abstract Expressionism",
+   "count": 4985
+  },
+  "cubism": {
+   "name": "Cubism",
+   "count": 3461
+  },
+  "analytical-cubism": {
+   "name": "Analytical Cubism",
+   "count": 119
+  },
+  "color-field-painting": {
+   "name": "Color Field Painting",
+   "count": 1601
+  },
+  "hard-edge-painting": {
+   "name": "Hard Edge Painting",
+   "count": 639
+  },
+  "synthetic-cubism": {
+   "name": "Synthetic Cubism",
+   "count": 245
+  },
+  "lyrical-abstraction": {
+   "name": "Lyrical Abstraction",
+   "count": 1208
+  },
+  "orphism": {
+   "name": "Orphism",
+   "count": 291
+  },
+  "indian-space-painting": {
+   "name": "Indian Space painting",
+   "count": 80
+  },
+  "tubism": {
+   "name": "Tubism",
+   "count": 22
+  },
+  "cubo-expressionism": {
+   "name": "Cubo-Expressionism",
+   "count": 27
+  },
+  "figurative-expressionism": {
+   "name": "Figurative Expressionism",
+   "count": 369
+  },
+  "art-informel": {
+   "name": "Art Informel",
+   "count": 1888
+  },
+  "futurism": {
+   "name": "Futurism",
+   "count": 359
+  },
+  "cubo-futurism": {
+   "name": "Cubo-Futurism",
+   "count": 182
+  },
+  "tachisme": {
+   "name": "Tachisme",
+   "count": 576
+  },
+  "neo-concretism": {
+   "name": "Neo-Concretism",
+   "count": 92
+  },
+  "rayonism": {
+   "name": "Rayonism",
+   "count": 15
+  },
+  "synchromism": {
+   "name": "Synchromism",
+   "count": 16
+  },
+  "performance-art": {
+   "name": "Performance Art",
+   "count": 101
+  },
+  "dada": {
+   "name": "Dada",
+   "count": 488
+  },
+  "transautomatism": {
+   "name": "Transautomatism",
+   "count": 83
+  },
+  "suprematism": {
+   "name": "Suprematism",
+   "count": 135
+  },
+  "sots-art": {
+   "name": "Sots Art",
+   "count": 16
+  },
+  "neo-byzantine": {
+   "name": "Neo-Byzantine",
+   "count": 19
+  },
+  "post-painterly-abstraction": {
+   "name": "Post-Painterly Abstraction",
+   "count": 382
+  },
+  "constructivism": {
+   "name": "Constructivism",
+   "count": 599
+  },
+  "severe-style": {
+   "name": "Severe Style",
+   "count": 10
+  },
+  "feminist-art": {
+   "name": "Feminist Art",
+   "count": 545
+  },
+  "spectralism": {
+   "name": "Spectralism",
+   "count": 5
+  },
+  "fiber-art": {
+   "name": "Fiber art",
+   "count": 32
+  },
+  "modernismo": {
+   "name": "Modernismo",
+   "count": 159
+  },
+  "mail-art": {
+   "name": "Mail Art",
+   "count": 18
+  },
+  "neo-suprematism": {
+   "name": "Neo-Suprematism",
+   "count": 59
+  },
+  "analytical-realism": {
+   "name": "Analytical Realism",
+   "count": 90
+  },
+  "outsider-art": {
+   "name": "Outsider art",
+   "count": 492
+  },
+  "art-brut": {
+   "name": "Art Brut",
+   "count": 503
+  },
+  "neoplasticism": {
+   "name": "Neoplasticism",
+   "count": 183
+  },
+  "concretism": {
+   "name": "Concretism",
+   "count": 800
+  },
+  "neo-expressionism": {
+   "name": "Neo-Expressionism",
+   "count": 1774
+  },
+  "neo-dada": {
+   "name": "Neo-Dada",
+   "count": 636
+  },
+  "perceptism": {
+   "name": "Perceptism",
+   "count": 8
+  },
+  "neo-figurative-art": {
+   "name": "Neo-Figurative Art",
+   "count": 348
+  },
+  "new-realism": {
+   "name": "New Realism",
+   "count": 457
+  },
+  "kinetic-art": {
+   "name": "Kinetic Art",
+   "count": 301
+  },
+  "spatialism": {
+   "name": "Spatialism",
+   "count": 169
+  },
+  "op-art": {
+   "name": "Op Art",
+   "count": 1222
+  },
+  "pop-art": {
+   "name": "Pop Art",
+   "count": 2893
+  },
+  "nouveau-r-alisme": {
+   "name": "Nouveau Réalisme",
+   "count": 253
+  },
+  "neo-impressionism": {
+   "name": "Neo-Impressionism",
+   "count": 1174
+  },
+  "modernism-0": {
+   "name": "Modernism",
+   "count": 74
+  },
+  "conceptual-art": {
+   "name": "Conceptual Art",
+   "count": 2229
+  },
+  "minimalism": {
+   "name": "Minimalism",
+   "count": 2214
+  },
+  "post-minimalism": {
+   "name": "Post-Minimalism",
+   "count": 750
+  },
+  "light-and-space": {
+   "name": "Light and Space",
+   "count": 441
+  },
+  "environmental-land-art": {
+   "name": "Environmental (Land) Art",
+   "count": 184
+  },
+  "junk-art": {
+   "name": "Junk Art",
+   "count": 68
+  },
+  "cyber-art": {
+   "name": "Cyber Art",
+   "count": 38
+  },
+  "photorealism": {
+   "name": "Photorealism",
+   "count": 411
+  },
+  "hyper-realism": {
+   "name": "Hyper-Realism",
+   "count": 316
+  },
+  "poster-art-realism": {
+   "name": "Poster Art Realism",
+   "count": 54
+  },
+  "contemporary-realism": {
+   "name": "Contemporary Realism",
+   "count": 1767
+  },
+  "p-d-pattern-and-decoration": {
+   "name": "P&D (Pattern and Decoration)",
+   "count": 153
+  },
+  "transavantgarde": {
+   "name": "Transavantgarde",
+   "count": 601
+  },
+  "confessional-art": {
+   "name": "Confessional Art",
+   "count": 120
+  },
+  "new-european-painting": {
+   "name": "New European Painting",
+   "count": 413
+  },
+  "neo-pop-art": {
+   "name": "Neo-Pop Art",
+   "count": 902
+  },
+  "neo-geo": {
+   "name": "Neo-Geo",
+   "count": 139
+  },
+  "maximalism": {
+   "name": "Maximalism",
+   "count": 62
+  },
+  "neo-orthodoxism": {
+   "name": "Neo-Orthodoxism",
+   "count": 21
+  },
+  "graffiti-art": {
+   "name": "Graffiti Art",
+   "count": 1
+  },
+  "street-art": {
+   "name": "Street art",
+   "count": 375
+  },
+  "lowbrow-art": {
+   "name": "Lowbrow Art",
+   "count": 109
+  },
+  "stuckism": {
+   "name": "Stuckism",
+   "count": 79
+  },
+  "new-casualism": {
+   "name": "New Casualism",
+   "count": 49
+  },
+  "art-singulier": {
+   "name": "Art Singulier",
+   "count": 23
+  },
+  "superflat": {
+   "name": "Superflat",
+   "count": 30
+  },
+  "excessivism": {
+   "name": "Excessivism",
+   "count": 29
+  },
+  "digital-art": {
+   "name": "Digital Art",
+   "count": 246
+  },
+  "hyper-mannerism-anachronism": {
+   "name": "Hyper-Mannerism (Anachronism)",
+   "count": 17
+  },
+  "neo-minimalism": {
+   "name": "Neo-Minimalism",
+   "count": 312
+  },
+  "fantasy-art": {
+   "name": "Fantasy Art",
+   "count": 126
+  },
+  "sky-art": {
+   "name": "Sky Art",
+   "count": 3
+  },
+  "contemporary": {
+   "name": "Contemporary",
+   "count": 1221
+  },
+  "site-specific-art": {
+   "name": "Site-specific art",
+   "count": 11
+  },
+  "new-media-art": {
+   "name": "New media art",
+   "count": 6
+  },
+  "classical-realism": {
+   "name": "Classical Realism",
+   "count": 226
+  },
+  "postcolonial-art": {
+   "name": "Postcolonial art",
+   "count": 320
+  },
+  "queer-art": {
+   "name": "Queer art",
+   "count": 57
+  },
+  "gongbi": {
+   "name": "Gongbi",
+   "count": 35
+  },
+  "ink-and-wash-painting": {
+   "name": "Ink and wash painting",
+   "count": 821
+  },
+  "joseon-dynasty": {
+   "name": "Joseon Dynasty",
+   "count": 33
+  },
+  "shin-hanga": {
+   "name": "Shin-hanga",
+   "count": 425
+  },
+  "s-saku-hanga": {
+   "name": "Sōsaku hanga",
+   "count": 480
+  },
+  "suiboku-ga-0": {
+   "name": "Sumi-e (Suiboku-ga)",
+   "count": 126
+  },
+  "ukiyo-e": {
+   "name": "Ukiyo-e",
+   "count": 1859
+  },
+  "yamato-e": {
+   "name": "Yamato-e",
+   "count": 47
+  },
+  "kano-school": {
+   "name": "Kanō school style",
+   "count": 15
+  },
+  "nanga-bunjinga": {
+   "name": "Nanga (Bunjinga)",
+   "count": 58
+  },
+  "nihonga": {
+   "name": "Nihonga",
+   "count": 48
+  },
+  "zen": {
+   "name": "Zen",
+   "count": 166
+  },
+  "ero-guro-14": {
+   "name": "Ero guro",
+   "count": 17
+  },
+  "abbasid-period": {
+   "name": "Abbasid Period",
+   "count": 16
+  },
+  "ilkhanid": {
+   "name": "Ilkhanid",
+   "count": 14
+  },
+  "nas-taliq": {
+   "name": "Nas-Taliq",
+   "count": 14
+  },
+  "timurid-period": {
+   "name": "Timurid Period",
+   "count": 51
+  },
+  "mughal": {
+   "name": "Mughal",
+   "count": 16
+  },
+  "ottoman-period": {
+   "name": "Ottoman Period",
+   "count": 80
+  },
+  "safavid-period": {
+   "name": "Safavid Period",
+   "count": 130
+  },
+  "native-art": {
+   "name": "Native Art",
+   "count": 569
+  },
+  "yoruba": {
+   "name": "Yoruba",
+   "count": 28
+  },
+  "folk-art": {
+   "name": "Folk art",
+   "count": 24
+  },
+  "post-classic-c-900-1580": {
+   "name": "Post-classic (c.900-1580)",
+   "count": 99
+  },
+  "new-ink-painting": {
+   "name": "New Ink Painting",
+   "count": 64
+  },
+  "documentary-photography": {
+   "name": "Documentary photography",
+   "count": 158
+  },
+  "street-photography": {
+   "name": "Street Photography",
+   "count": 141
+  }
+ },
+ "styles_zh": {
+  "zao-wang-zhao": {
+   "name": "早王朝",
+   "count": 2
+  },
+  "old-kingdom": {
+   "name": "Old Kingdom",
+   "count": 1
+  },
+  "zhong-wang-guo": {
+   "name": "中王國",
+   "count": 9
+  },
+  "xin-wang-guo": {
+   "name": "新王國",
+   "count": 114
+  },
+  "a-ma-na": {
+   "name": "阿瑪納",
+   "count": 12
+  },
+  "di-san-zhong-jian-shi-qi": {
+   "name": "第三中間時期",
+   "count": 16
+  },
+  "wan-wang-zhao-shi-qi": {
+   "name": "晚王朝時期",
+   "count": 4
+  },
+  "tuo-le-mi-wang-zhao": {
+   "name": "托勒密王朝",
+   "count": 4
+  },
+  "di-er-zhong-jian-shi-qi": {
+   "name": "第二中間時期",
+   "count": 1
+  },
+  "gu-feng": {
+   "name": "古風",
+   "count": 39
+  },
+  "gu-dian": {
+   "name": "古典",
+   "count": 89
+  },
+  "xi-la-hua": {
+   "name": "希臘化",
+   "count": 135
+  },
+  "ji-he": {
+   "name": "幾何",
+   "count": 12
+  },
+  "zao-qi-ji-du-jiao-feng-ge": {
+   "name": "早期基督教風格",
+   "count": 1
+  },
+  "zao-qi-bai-zhan-ting-feng-ge-yue-330-750-nian": {
+   "name": "早期拜占庭風格（約 330 – 750 年）",
+   "count": 109
+  },
+  "zhong-qi-bai-zhan-ting-feng-ge-yue-850-1204-nian": {
+   "name": "中期拜占庭風格（約 850 – 1204 年）",
+   "count": 159
+  },
+  "mo-zha-la-bu-yi-shu": {
+   "name": "莫札拉布藝術",
+   "count": 85
+  },
+  "komnenian-style-1081-1185": {
+   "name": "Komnenian style (1081-1185)",
+   "count": 48
+  },
+  "latin-empire-of-constantinople-1204-1261": {
+   "name": "Latin Empire of Constantinople (1204-1261)",
+   "count": 29
+  },
+  "wan-qi-bai-zhan-ting-feng-ge-pa-li-ao-luo-jia-si": {
+   "name": "晚期拜占庭風格/\t帕里奧洛加斯王朝風格（約 1261 – 1453 年）",
+   "count": 137
+  },
+  "bai-zhan-ting": {
+   "name": "拜占庭",
+   "count": 256
+  },
+  "ma-qi-dun-wen-yi-fu-xing": {
+   "name": "馬其頓文藝復興",
+   "count": 95
+  },
+  "luo-ma-shi": {
+   "name": "羅馬式",
+   "count": 348
+  },
+  "ma-sai-ke": {
+   "name": "馬賽克",
+   "count": 57
+  },
+  "ge-de-shi": {
+   "name": "哥德式",
+   "count": 34
+  },
+  "guo-ji-ge-te-shi-yi-shu": {
+   "name": "國際哥德式",
+   "count": 329
+  },
+  "wei-jing-yi-shu": {
+   "name": "維京藝術",
+   "count": 67
+  },
+  "medieval-art": {
+   "name": "Medieval Art",
+   "count": 25
+  },
+  "crusader-workshop": {
+   "name": "Crusader workshop",
+   "count": 13
+  },
+  "moscow-school-of-icon-painting": {
+   "name": "Moscow school of icon painting",
+   "count": 74
+  },
+  "cretan-school-of-icon-painting": {
+   "name": "Cretan school of icon painting",
+   "count": 12
+  },
+  "macedonian-school-of-icon-painting": {
+   "name": "Macedonian school of icon painting",
+   "count": 2
+  },
+  "coptic-art": {
+   "name": "Coptic art",
+   "count": 78
+  },
+  "novgorod-school-of-icon-painting": {
+   "name": "Novgorod school of icon painting",
+   "count": 31
+  },
+  "kyiv-school-of-icon-painting": {
+   "name": "Kyiv school of icon painting",
+   "count": 17
+  },
+  "vladimir-school-of-icon-painting": {
+   "name": "Vladimir school of icon painting",
+   "count": 4
+  },
+  "galicia-volyn-school": {
+   "name": "Galicia-Volyn school",
+   "count": 21
+  },
+  "pskov-school-of-icon-painting": {
+   "name": "Pskov school of icon painting",
+   "count": 6
+  },
+  "yaroslavl-school-of-icon-painting": {
+   "name": "Yaroslavl school of icon painting",
+   "count": 14
+  },
+  "vologda-school-of-icon-painting": {
+   "name": "Vologda school of icon painting",
+   "count": 6
+  },
+  "chernihiv-school-of-icon-painting": {
+   "name": "Chernihiv school of icon painting",
+   "count": 4
+  },
+  "wen-yi-fu-xing-kai-duan": {
+   "name": "文藝復興開端",
+   "count": 444
+  },
+  "wen-yi-fu-xing-zao-qi": {
+   "name": "文藝復興早期",
+   "count": 1877
+  },
+  "wen-yi-fu-xing-quan-sheng-qi": {
+   "name": "文藝復興全盛期",
+   "count": 1769
+  },
+  "jiao-shi-zhu-yi-wen-yi-fu-xing-wan-qi": {
+   "name": "矯飾主義（文藝復興晚期）",
+   "count": 2543
+  },
+  "bei-fang-wen-yi-fu-xing": {
+   "name": "北方文藝復興",
+   "count": 3275
+  },
+  "wen-yi-fu-xing": {
+   "name": "文藝復興",
+   "count": 33
+  },
+  "ba-luo-ke-shi": {
+   "name": "巴洛克",
+   "count": 8284
+  },
+  "an-se-zhu-yi": {
+   "name": "暗色主義",
+   "count": 553
+  },
+  "luo-ke-ke": {
+   "name": "洛可可",
+   "count": 3701
+  },
+  "gu-dian-zhu-yi": {
+   "name": "古典主義",
+   "count": 276
+  },
+  "xin-gu-dian-zhu-yi": {
+   "name": "新古典主義",
+   "count": 4683
+  },
+  "xue-yuan-yi-shu": {
+   "name": "學院藝術",
+   "count": 3043
+  },
+  "lang-man-zhu-yi": {
+   "name": "浪漫主義",
+   "count": 15749
+  },
+  "dong-fang-zhu-yi": {
+   "name": "東方主義",
+   "count": 1520
+  },
+  "feng-su-zhu-yi": {
+   "name": "風俗主義",
+   "count": 121
+  },
+  "bi-de-mai-feng-ge": {
+   "name": "比德邁風格",
+   "count": 478
+  },
+  "luo-ke-ke-fu-xing-feng-ge": {
+   "name": "洛可可復興風格",
+   "count": 101
+  },
+  "guang-liang-zhu-yi": {
+   "name": "光亮主義",
+   "count": 402
+  },
+  "xian-shi-zhu-yi": {
+   "name": "現實主義",
+   "count": 16883
+  },
+  "stroganov-school-of-icon-painting": {
+   "name": "Stroganov school of icon painting",
+   "count": 1
+  },
+  "mei-guo-xie-shi-zhu-yi": {
+   "name": "美國寫實主義",
+   "count": 375
+  },
+  "zi-ran-zhu-yi": {
+   "name": "自然主義",
+   "count": 883
+  },
+  "su-ren-yi-shu-yuan-shi-zhu-yi": {
+   "name": "素人藝術（原始主義）",
+   "count": 3766
+  },
+  "she-hui-xie-shi-zhu-yi": {
+   "name": "社會寫實主義",
+   "count": 919
+  },
+  "zi-dong-xing-hui-hua": {
+   "name": "自動性繪畫",
+   "count": 71
+  },
+  "xing-dong-hui-hua": {
+   "name": "行動繪畫",
+   "count": 110
+  },
+  "chao-xian-shi-zhu-yi": {
+   "name": "超現實主義",
+   "count": 7532
+  },
+  "hou-yin-xiang-pai": {
+   "name": "後印象派",
+   "count": 8334
+  },
+  "xiang-zheng-zhu-yi": {
+   "name": "象徵主義",
+   "count": 5481
+  },
+  "xing-shang-yi-shu": {
+   "name": "形上藝術",
+   "count": 259
+  },
+  "feng-jing-hua-pai": {
+   "name": "風景畫派",
+   "count": 391
+  },
+  "yin-xiang-pai": {
+   "name": "印象派",
+   "count": 16838
+  },
+  "mo-huan-xie-shi-zhu-yi": {
+   "name": "魔幻寫實主義",
+   "count": 1799
+  },
+  "huan-xiang-xie-shi-zhu-yi": {
+   "name": "幻想寫實主義",
+   "count": 412
+  },
+  "dian-miao-hua-pai": {
+   "name": "點描畫派",
+   "count": 591
+  },
+  "xin-yin-xiang-zhu-yi-fen-guang-zhu-yi": {
+   "name": "新印象主義（分光主義）",
+   "count": 437
+  },
+  "chou-xiang-yi-shu": {
+   "name": "抽象藝術",
+   "count": 2037
+  },
+  "ba-luo-ke-fu-xing-feng-ge": {
+   "name": "巴洛克復興風格",
+   "count": 256
+  },
+  "ri-ben-zhu-yi": {
+   "name": "日本主義",
+   "count": 213
+  },
+  "chun-cui-zhu-yi": {
+   "name": "純粹主義",
+   "count": 174
+  },
+  "wei-zhen-xie-shi-zhu-yi": {
+   "name": "唯真寫實主義",
+   "count": 110
+  },
+  "zhuang-shi-feng-yi-zhu": {
+   "name": "裝飾藝術",
+   "count": 1033
+  },
+  "jing-que-zhu-yi": {
+   "name": "精確主義",
+   "count": 362
+  },
+  "qia-si-fa-lang-cai-zhu-yi": {
+   "name": "掐絲琺瑯彩主義",
+   "count": 183
+  },
+  "di-fang-zhu-yi": {
+   "name": "地方主義",
+   "count": 580
+  },
+  "she-hui-zhu-yi-de-xian-shi-zhu-yi": {
+   "name": "社會黨寫實主義",
+   "count": 755
+  },
+  "zong-he-zhu-yi": {
+   "name": "綜合主義",
+   "count": 78
+  },
+  "xian-qing-hua-pai": {
+   "name": "閒情畫派",
+   "count": 112
+  },
+  "new-medievialism": {
+   "name": "New Medievialism",
+   "count": 11
+  },
+  "ye-shou-pai": {
+   "name": "野獸派",
+   "count": 1230
+  },
+  "mo-xi-ge-bi-hua-yun-dong": {
+   "name": "墨西哥壁畫運動",
+   "count": 226
+  },
+  "xin-yi-zhu-yun-dong": {
+   "name": "新藝術運動",
+   "count": 7860
+  },
+  "cartographic-art": {
+   "name": "Cartographic Art",
+   "count": 51
+  },
+  "cun-zai-zhu-yi-yi-shu": {
+   "name": "存在主義藝術",
+   "count": 39
+  },
+  "hua-yi-she-ying-zhu-yi": {
+   "name": "畫意攝影主義",
+   "count": 526
+  },
+  "biao-xian-zhu-yi": {
+   "name": "表現主義",
+   "count": 13461
+  },
+  "zi-mu-pai": {
+   "name": "字母派",
+   "count": 52
+  },
+  "mei-su": {
+   "name": "媚俗",
+   "count": 860
+  },
+  "mechanistic-cubism": {
+   "name": "Mechanistic Cubism",
+   "count": 70
+  },
+  "miserablism": {
+   "name": "Miserablism",
+   "count": 19
+  },
+  "xin-lang-man-zhu-yi": {
+   "name": "新浪漫主義",
+   "count": 828
+  },
+  "chou-xiang-biao-xian-zhu-yi": {
+   "name": "抽象表現主義",
+   "count": 4985
+  },
+  "li-ti-zhu-yi": {
+   "name": "立體派",
+   "count": 3461
+  },
+  "analytical-cubism": {
+   "name": "Analytical Cubism",
+   "count": 119
+  },
+  "color-field-painting": {
+   "name": "Color Field Painting",
+   "count": 1601
+  },
+  "ying-bian-hui-hua": {
+   "name": "硬邊繪畫",
+   "count": 639
+  },
+  "synthetic-cubism": {
+   "name": "Synthetic Cubism",
+   "count": 245
+  },
+  "lyrical-abstraction": {
+   "name": "Lyrical Abstraction",
+   "count": 1208
+  },
+  "ao-fei-zhu-yi": {
+   "name": "奧費主義",
+   "count": 291
+  },
+  "indian-space-painting": {
+   "name": "Indian Space painting",
+   "count": 80
+  },
+  "tubism": {
+   "name": "Tubism",
+   "count": 22
+  },
+  "cubo-expressionism": {
+   "name": "Cubo-Expressionism",
+   "count": 27
+  },
+  "figurative-expressionism": {
+   "name": "Figurative Expressionism",
+   "count": 369
+  },
+  "wu-xing-shi-yi-shu": {
+   "name": "不定形藝術",
+   "count": 1888
+  },
+  "wei-lai-zhu-yi": {
+   "name": "未來主義",
+   "count": 359
+  },
+  "li-ti-wei-lai-zhu-yi": {
+   "name": "立體未來主義",
+   "count": 182
+  },
+  "ban-dian-pai": {
+   "name": "斑點派",
+   "count": 576
+  },
+  "xin-hun-ni-tu-yun-dong": {
+   "name": "新混泥土運動",
+   "count": 92
+  },
+  "she-guang-zhu-yi": {
+   "name": "射光主義",
+   "count": 15
+  },
+  "tong-bu-zhu-yi": {
+   "name": "同步主義",
+   "count": 16
+  },
+  "xing-wei-yi-zhu": {
+   "name": "表演藝術",
+   "count": 101
+  },
+  "da-da-zhu-yi": {
+   "name": "達達主義",
+   "count": 488
+  },
+  "transautomatism": {
+   "name": "Transautomatism",
+   "count": 83
+  },
+  "jue-dui-zhu-yi": {
+   "name": "絕對主義",
+   "count": 135
+  },
+  "su-lian-she-hui-dang-xie-shi-zhu-yi": {
+   "name": "蘇聯社會黨寫實主義",
+   "count": 16
+  },
+  "neo-byzantine": {
+   "name": "Neo-Byzantine",
+   "count": 19
+  },
+  "se-mian-hui-hua": {
+   "name": "色面繪畫",
+   "count": 382
+  },
+  "gou-cheng-zhu-yi": {
+   "name": "構成主義",
+   "count": 599
+  },
+  "ya-zheng-feng-ge": {
+   "name": "雅正風格",
+   "count": 10
+  },
+  "nu-xing-zhu-yi-yi-shu": {
+   "name": "女性主義藝術",
+   "count": 545
+  },
+  "spectralism": {
+   "name": "Spectralism",
+   "count": 5
+  },
+  "xian-wei-yi-shu": {
+   "name": "纖維藝術",
+   "count": 32
+  },
+  "xi-ban-ya-xian-dai-feng-ge": {
+   "name": "西班牙現代風格",
+   "count": 159
+  },
+  "you-jian-yi-shu": {
+   "name": "郵件藝術",
+   "count": 18
+  },
+  "neo-suprematism": {
+   "name": "Neo-Suprematism",
+   "count": 59
+  },
+  "fen-xi-xian-shi-zhu-yi": {
+   "name": "分析現實主義",
+   "count": 90
+  },
+  "fei-zhu-liu-yi-shu": {
+   "name": "非主流藝術",
+   "count": 492
+  },
+  "fei-zhu-liu-yi-shu-0": {
+   "name": "非主流藝術",
+   "count": 503
+  },
+  "xin-zao-xing-zhu-yi": {
+   "name": "新造形主義",
+   "count": 183
+  },
+  "concretism": {
+   "name": "Concretism",
+   "count": 800
+  },
+  "xin-biao-xian-zhu-yi": {
+   "name": "新表現主義",
+   "count": 1774
+  },
+  "xin-da-da-zhu-yi": {
+   "name": "新達達主義",
+   "count": 636
+  },
+  "perceptism": {
+   "name": "Perceptism",
+   "count": 8
+  },
+  "xin-ju-xiang-yi-shu": {
+   "name": "新具象藝術",
+   "count": 348
+  },
+  "new-realism": {
+   "name": "New Realism",
+   "count": 457
+  },
+  "ji-dong-yi-shu": {
+   "name": "機動藝術",
+   "count": 301
+  },
+  "kong-jian-zhu-yi": {
+   "name": "空間主義",
+   "count": 169
+  },
+  "ou-pu-yi-shu": {
+   "name": "歐普藝術",
+   "count": 1222
+  },
+  "liu-xing-yi-zhu": {
+   "name": "普普藝術",
+   "count": 2893
+  },
+  "xin-xie-shi-zhu-yi": {
+   "name": "新寫實主義",
+   "count": 253
+  },
+  "xin-yin-xiang-pai": {
+   "name": "新印象派",
+   "count": 1174
+  },
+  "xian-dai-zhu-yi": {
+   "name": "現代主義",
+   "count": 74
+  },
+  "guan-nian-yi-shu": {
+   "name": "觀念藝術",
+   "count": 2229
+  },
+  "ji-jian-zhu-yi": {
+   "name": "極簡主義",
+   "count": 2214
+  },
+  "hou-ji-jian-zhu-yi": {
+   "name": "後極簡主義",
+   "count": 750
+  },
+  "guang-yu-kong-jian": {
+   "name": "光與空間",
+   "count": 441
+  },
+  "da-di-yi-zhu": {
+   "name": "環境藝術",
+   "count": 184
+  },
+  "fei-wu-yi-shu": {
+   "name": "廢物藝術",
+   "count": 68
+  },
+  "cyber-art": {
+   "name": "Cyber Art",
+   "count": 38
+  },
+  "zhao-xiang-xie-shi-zhu-yi": {
+   "name": "照相寫實主義",
+   "count": 411
+  },
+  "chao-ji-xie-shi-zhu-yi": {
+   "name": "超級寫實主義",
+   "count": 316
+  },
+  "xie-shi-hai-bao-yi-shu": {
+   "name": "寫實海報藝術",
+   "count": 54
+  },
+  "dang-dai-xie-shi-zhu-yi": {
+   "name": "當代寫實主義",
+   "count": 1767
+  },
+  "tu-an-hui-hua": {
+   "name": "圖案繪畫",
+   "count": 153
+  },
+  "chao-qian-wei": {
+   "name": "超前衛",
+   "count": 601
+  },
+  "confessional-art": {
+   "name": "Confessional Art",
+   "count": 120
+  },
+  "new-european-painting": {
+   "name": "New European Painting",
+   "count": 413
+  },
+  "xin-pu-pu-yi-shu": {
+   "name": "新普普藝術",
+   "count": 902
+  },
+  "xin-ji-he": {
+   "name": "新幾何",
+   "count": 139
+  },
+  "ji-fan-zhu-yi": {
+   "name": "極繁主義",
+   "count": 62
+  },
+  "neo-orthodoxism": {
+   "name": "Neo-Orthodoxism",
+   "count": 21
+  },
+  "tu-ya": {
+   "name": "塗鴉",
+   "count": 1
+  },
+  "jie-tou-yi-shu": {
+   "name": "街頭藝術",
+   "count": 375
+  },
+  "di-mei-yi-shu": {
+   "name": "低眉藝術",
+   "count": 109
+  },
+  "fan-gai-nian-zhu-yi": {
+   "name": "反概念主義",
+   "count": 79
+  },
+  "new-casualism": {
+   "name": "New Casualism",
+   "count": 49
+  },
+  "dan-shu-yi-shu": {
+   "name": "單數藝術",
+   "count": 23
+  },
+  "superflat": {
+   "name": "Superflat",
+   "count": 30
+  },
+  "guo-du-zhu-yi": {
+   "name": "過度主義",
+   "count": 29
+  },
+  "digital-art": {
+   "name": "Digital Art",
+   "count": 246
+  },
+  "wen-ya-hui-hua": {
+   "name": "文雅繪畫",
+   "count": 17
+  },
+  "neo-minimalism": {
+   "name": "Neo-Minimalism",
+   "count": 312
+  },
+  "fantasy-art": {
+   "name": "Fantasy Art",
+   "count": 126
+  },
+  "tian-kong-yi-shu": {
+   "name": "天空藝術",
+   "count": 3
+  },
+  "dang-dai-yi-shu": {
+   "name": "當代藝術",
+   "count": 1221
+  },
+  "chang-yu-te-ding-yi-shu": {
+   "name": "場域特定藝術",
+   "count": 11
+  },
+  "new-media-art": {
+   "name": "New media art",
+   "count": 6
+  },
+  "classical-realism": {
+   "name": "Classical Realism",
+   "count": 226
+  },
+  "postcolonial-art": {
+   "name": "Postcolonial art",
+   "count": 320
+  },
+  "queer-art": {
+   "name": "Queer art",
+   "count": 57
+  },
+  "gong-bi-hua": {
+   "name": "工筆畫",
+   "count": 35
+  },
+  "shui-mo-hua": {
+   "name": "水墨畫",
+   "count": 821
+  },
+  "zhao-xian-wang-zhao": {
+   "name": "朝鮮王朝",
+   "count": 33
+  },
+  "xin-ban-hua": {
+   "name": "新版畫",
+   "count": 425
+  },
+  "chuang-zuo-ban-hua": {
+   "name": "創作版畫",
+   "count": 480
+  },
+  "mo-hui-shui-mo-hua": {
+   "name": "墨繪（水墨畫）",
+   "count": 126
+  },
+  "fu-shi-hui": {
+   "name": "浮世繪",
+   "count": 1859
+  },
+  "da-he-hui": {
+   "name": "大和繪",
+   "count": 47
+  },
+  "shou-ye-pai": {
+   "name": "狩野派",
+   "count": 15
+  },
+  "nan-hua-wen-ren-hua": {
+   "name": "南畫（文人畫）",
+   "count": 58
+  },
+  "ri-ben-hua": {
+   "name": "日本畫",
+   "count": 48
+  },
+  "chan-hua": {
+   "name": "禪畫",
+   "count": 166
+  },
+  "ero-guro-14": {
+   "name": "Ero guro",
+   "count": 17
+  },
+  "abbasid-period": {
+   "name": "Abbasid Period",
+   "count": 16
+  },
+  "yi-er-han-shi-qi": {
+   "name": "伊兒汗時期",
+   "count": 14
+  },
+  "bo-si-ti": {
+   "name": "波斯體",
+   "count": 14
+  },
+  "tie-mu-er-shi-qi": {
+   "name": "帖木兒時期",
+   "count": 51
+  },
+  "meng-wu-er": {
+   "name": "蒙兀兒時期",
+   "count": 16
+  },
+  "e-tu-man-shi-qi": {
+   "name": "鄂圖曼帝國時期",
+   "count": 80
+  },
+  "sa-fei-shi-qi": {
+   "name": "薩非時期",
+   "count": 130
+  },
+  "yuan-zhu-min-yi-shu": {
+   "name": "原住民藝術",
+   "count": 569
+  },
+  "yue-lu-ba-yi-shu": {
+   "name": "約魯巴藝術",
+   "count": 28
+  },
+  "min-jian-yi-shu": {
+   "name": "民間藝術",
+   "count": 24
+  },
+  "hou-gu-dian-qi-yue-990-1580-nian": {
+   "name": "後古典期（約 990 – 1580 年）",
+   "count": 99
+  },
+  "new-ink-painting": {
+   "name": "New Ink Painting",
+   "count": 64
+  },
+  "ji-shi-she-ying": {
+   "name": "紀實攝影",
+   "count": 158
+  },
+  "street-photography": {
+   "name": "Street Photography",
+   "count": 141
+  }
+ },
+ "movements_en": {
+  "early-dynastic-period-3150-2686-bc": {
+   "name": "Early Dynastic Period (3150 – 2686 BC)",
+   "count": 1
+  },
+  "old-kingdom-2686-2181-bc": {
+   "name": "Old Kingdom (2686–2181 BC)",
+   "count": 1
+  },
+  "1st-intermediate-period-2181-2055-bc": {
+   "name": "1st Intermediate Period (2181–2055 BC)",
+   "count": 1
+  },
+  "middle-kingdom-2055-1650-bc": {
+   "name": "Middle Kingdom (2055–1650 BC)",
+   "count": 1
+  },
+  "2nd-intermediate-period-1650-1550-bc": {
+   "name": "2nd Intermediate Period (1650–1550 BC)",
+   "count": 1
+  },
+  "new-kingdom-1550-1069-bc": {
+   "name": "New Kingdom (1550–1069 BC)",
+   "count": 1
+  },
+  "amarna-period-1351-1334-bc": {
+   "name": "Amarna Period (1351 - 1334 BC)",
+   "count": 1
+  },
+  "3rd-intermediate-period-1069-664-bc": {
+   "name": "3rd Intermediate Period (1069–664 BC)",
+   "count": 1
+  },
+  "late-period-664-332-bc": {
+   "name": "Late Period (664–332 BC)",
+   "count": 1
+  },
+  "ptolemaic-period-332-30-bc": {
+   "name": "Ptolemaic Period (332–30 BC)",
+   "count": 1
+  },
+  "roman-period-1c-bc-4-c-ad": {
+   "name": "Roman Period (30 BC - 640 AD)",
+   "count": 1
+  },
+  "geometric-period-c-900-c-700-bc": {
+   "name": "Geometric Period (c.900 - c.700 BC)",
+   "count": 1
+  },
+  "archaic-period-700-480-bc": {
+   "name": "Archaic Period (700-480 BC)",
+   "count": 2
+  },
+  "classical-period-480-323-bc": {
+   "name": "Classical Period (480 - 323 BC)",
+   "count": 3
+  },
+  "hellenistic-period-323-31-bc": {
+   "name": "Hellenistic Period (323-31 BC)",
+   "count": 3
+  },
+  "byzantine-art": {
+   "name": "Byzantine Art",
+   "count": 4
+  },
+  "pre-romanesque-art": {
+   "name": "Pre-Romanesque Art",
+   "count": 1
+  },
+  "romanesque-art": {
+   "name": "Romanesque Art",
+   "count": 7
+  },
+  "gothic-art": {
+   "name": "Gothic Art",
+   "count": 12
+  },
+  "medieval-art": {
+   "name": "Medieval Art",
+   "count": 2
+  },
+  "coptic-art": {
+   "name": "Coptic art",
+   "count": 2
+  },
+  "proto-renaissance": {
+   "name": "Proto Renaissance",
+   "count": 9
+  },
+  "early-renaissance": {
+   "name": "Early Renaissance",
+   "count": 33
+  },
+  "high-renaissance": {
+   "name": "High Renaissance",
+   "count": 36
+  },
+  "mannerism-late-renaissance": {
+   "name": "Mannerism (Late Renaissance)",
+   "count": 47
+  },
+  "northern-renaissance": {
+   "name": "Northern Renaissance",
+   "count": 47
+  },
+  "baroque": {
+   "name": "Baroque",
+   "count": 158
+  },
+  "dutch-golden-age": {
+   "name": "Dutch Golden Age",
+   "count": 53
+  },
+  "rococo": {
+   "name": "Rococo",
+   "count": 60
+  },
+  "neoclassicism": {
+   "name": "Neoclassicism",
+   "count": 74
+  },
+  "romanticism": {
+   "name": "Romanticism",
+   "count": 279
+  },
+  "orientalism": {
+   "name": "Orientalism",
+   "count": 32
+  },
+  "academic-art": {
+   "name": "Academic Art",
+   "count": 92
+  },
+  "realism": {
+   "name": "Realism",
+   "count": 217
+  },
+  "naturalism": {
+   "name": "Naturalism",
+   "count": 25
+  },
+  "symbolism": {
+   "name": "Symbolism",
+   "count": 92
+  },
+  "impressionism": {
+   "name": "Impressionism",
+   "count": 226
+  },
+  "na-ve-art-primitivism": {
+   "name": "Naïve Art (Primitivism)",
+   "count": 45
+  },
+  "arts-and-crafts": {
+   "name": "Arts and Crafts",
+   "count": 10
+  },
+  "tonalism": {
+   "name": "Tonalism",
+   "count": 12
+  },
+  "neo-impressionism": {
+   "name": "Neo-Impressionism",
+   "count": 22
+  },
+  "post-impressionism": {
+   "name": "Post-Impressionism",
+   "count": 135
+  },
+  "new-realism-american-realism": {
+   "name": "New Realism (American Realism)",
+   "count": 13
+  },
+  "expressionism": {
+   "name": "Expressionism",
+   "count": 221
+  },
+  "social-realism": {
+   "name": "Social Realism",
+   "count": 43
+  },
+  "art-nouveau": {
+   "name": "Art Nouveau",
+   "count": 119
+  },
+  "secession": {
+   "name": "Secession",
+   "count": 5
+  },
+  "aestheticism": {
+   "name": "Aestheticism",
+   "count": 7
+  },
+  "cubism": {
+   "name": "Cubism",
+   "count": 75
+  },
+  "abstract-art": {
+   "name": "Abstract Art",
+   "count": 153
+  },
+  "suprematism": {
+   "name": "Suprematism",
+   "count": 6
+  },
+  "avant-garde": {
+   "name": "Avant-garde",
+   "count": 31
+  },
+  "futurism": {
+   "name": "Futurism",
+   "count": 24
+  },
+  "dada": {
+   "name": "Dada",
+   "count": 23
+  },
+  "constructivism": {
+   "name": "Constructivism",
+   "count": 39
+  },
+  "de-stijl-neoplasticism": {
+   "name": "De Stijl (Neoplasticism)",
+   "count": 11
+  },
+  "metaphysical-art": {
+   "name": "Metaphysical art",
+   "count": 8
+  },
+  "modernism": {
+   "name": "Modernism",
+   "count": 50
+  },
+  "magic-realism": {
+   "name": "Magic Realism",
+   "count": 43
+  },
+  "rayonism": {
+   "name": "Rayonism",
+   "count": 2
+  },
+  "art-deco": {
+   "name": "Art Deco",
+   "count": 20
+  },
+  "synchromism": {
+   "name": "Synchromism",
+   "count": 2
+  },
+  "vorticism": {
+   "name": "Vorticism",
+   "count": 4
+  },
+  "surrealism": {
+   "name": "Surrealism",
+   "count": 181
+  },
+  "purism": {
+   "name": "Purism",
+   "count": 3
+  },
+  "precisionism": {
+   "name": "Precisionism",
+   "count": 11
+  },
+  "harlem-renaissance-new-negro-movement": {
+   "name": "Harlem Renaissance (New Negro Movement)",
+   "count": 17
+  },
+  "incoherents": {
+   "name": "Incoherents",
+   "count": 1
+  },
+  "indigenism": {
+   "name": "Indigenism",
+   "count": 6
+  },
+  "regionalism": {
+   "name": "Regionalism",
+   "count": 14
+  },
+  "socialist-realism": {
+   "name": "Socialist Realism",
+   "count": 49
+  },
+  "pictorialism": {
+   "name": "Pictorialism",
+   "count": 13
+  },
+  "new-medievialism": {
+   "name": "New Medievialism",
+   "count": 1
+  },
+  "muralism": {
+   "name": "Muralism",
+   "count": 14
+  },
+  "neo-romanticism": {
+   "name": "Neo-Romanticism",
+   "count": 10
+  },
+  "existential-art": {
+   "name": "Existential Art",
+   "count": 6
+  },
+  "lettrism": {
+   "name": "Lettrism",
+   "count": 5
+  },
+  "young-poland": {
+   "name": "Young Poland",
+   "count": 7
+  },
+  "abstract-expressionism": {
+   "name": "Abstract Expressionism",
+   "count": 162
+  },
+  "indian-space-painting": {
+   "name": "Indian Space Painting",
+   "count": 3
+  },
+  "orphism-simultanism": {
+   "name": "Orphism (Simultanism)",
+   "count": 5
+  },
+  "art-informel": {
+   "name": "Art Informel",
+   "count": 82
+  },
+  "tachisme": {
+   "name": "Tachisme",
+   "count": 31
+  },
+  "haute-p-te-matter-painting": {
+   "name": "Haute Pâte (Matter Painting)",
+   "count": 6
+  },
+  "cubo-futurism": {
+   "name": "Cubo-Futurism",
+   "count": 8
+  },
+  "neo-concretism": {
+   "name": "Neo-Concretism",
+   "count": 6
+  },
+  "viennese-actionism": {
+   "name": "Viennese Actionism",
+   "count": 2
+  },
+  "performance-art": {
+   "name": "Performance Art",
+   "count": 17
+  },
+  "neosurrealismo": {
+   "name": "Neo-Surrealism",
+   "count": 6
+  },
+  "transautomatism": {
+   "name": "Transautomatism",
+   "count": 1
+  },
+  "sots-art": {
+   "name": "Sots Art",
+   "count": 2
+  },
+  "post-painterly-abstraction": {
+   "name": "Post-Painterly Abstraction",
+   "count": 75
+  },
+  "abstract-illusionism": {
+   "name": "Abstract Illusionism",
+   "count": 5
+  },
+  "feminist-art": {
+   "name": "Feminist Art",
+   "count": 45
+  },
+  "modernismo": {
+   "name": "Modernismo",
+   "count": 25
+  },
+  "fiber-art": {
+   "name": "Fiber Art",
+   "count": 6
+  },
+  "analytical-realism": {
+   "name": "Analytical Realism",
+   "count": 1
+  },
+  "mail-art": {
+   "name": "Mail Art",
+   "count": 5
+  },
+  "new-objectivity-neue-sachlichkeit": {
+   "name": "New Objectivity (Neue Sachlichkeit)",
+   "count": 9
+  },
+  "outsider-art-art-brut": {
+   "name": "Outsider art (Art brut)",
+   "count": 34
+  },
+  "art-singulier": {
+   "name": "Art Singulier",
+   "count": 1
+  },
+  "concrete-art-concretism": {
+   "name": "Concrete Art (Concretism)",
+   "count": 51
+  },
+  "neo-expressionism": {
+   "name": "Neo-Expressionism",
+   "count": 57
+  },
+  "neo-dada": {
+   "name": "Neo-Dada",
+   "count": 31
+  },
+  "neo-figurative-art": {
+   "name": "Neo-Figurative Art",
+   "count": 15
+  },
+  "kinetic-art": {
+   "name": "Kinetic art",
+   "count": 24
+  },
+  "spatialism": {
+   "name": "Spatialism",
+   "count": 10
+  },
+  "arte-povera": {
+   "name": "Arte Povera",
+   "count": 16
+  },
+  "soviet-nonconformist-art": {
+   "name": "Soviet Nonconformist Art",
+   "count": 18
+  },
+  "op-art": {
+   "name": "Op Art",
+   "count": 57
+  },
+  "pop-art": {
+   "name": "Pop Art",
+   "count": 103
+  },
+  "nouveau-r-alisme": {
+   "name": "Nouveau Réalisme",
+   "count": 15
+  },
+  "new-generation-sculpture": {
+   "name": "New Generation Sculpture",
+   "count": 6
+  },
+  "classical-realism": {
+   "name": "Classical Realism",
+   "count": 10
+  },
+  "conceptual-art": {
+   "name": "Conceptual Art",
+   "count": 119
+  },
+  "excessivism": {
+   "name": "Excessivism",
+   "count": 4
+  },
+  "minimalism": {
+   "name": "Minimalism",
+   "count": 104
+  },
+  "post-minimalism": {
+   "name": "Post-Minimalism",
+   "count": 56
+  },
+  "light-and-space": {
+   "name": "Light and Space",
+   "count": 25
+  },
+  "environmental-art": {
+   "name": "Environmental Art (Land art)",
+   "count": 24
+  },
+  "junk-art": {
+   "name": "Junk Art",
+   "count": 7
+  },
+  "kitsch": {
+   "name": "Kitsch",
+   "count": 37
+  },
+  "cyberart": {
+   "name": "CyberArt",
+   "count": 8
+  },
+  "relational-art": {
+   "name": "Relational Art",
+   "count": 15
+  },
+  "funk-art": {
+   "name": "Funk Art",
+   "count": 1
+  },
+  "photorealism-super-realism-hyper-realism": {
+   "name": "Photorealism (Super-Realism, Hyper-Realism)",
+   "count": 30
+  },
+  "poster-art-realism": {
+   "name": "Poster Art Realism",
+   "count": 3
+  },
+  "neo-conceptualism": {
+   "name": "Neo-Conceptualism",
+   "count": 1
+  },
+  "contemporary-realism": {
+   "name": "Contemporary Realism",
+   "count": 49
+  },
+  "p-d-pattern-and-decoration": {
+   "name": "P&D (Pattern and Decoration)",
+   "count": 5
+  },
+  "new-image-painting": {
+   "name": "New Image Painting",
+   "count": 6
+  },
+  "transavantgarde": {
+   "name": "Transavantgarde",
+   "count": 11
+  },
+  "pittura-colta": {
+   "name": "Pittura Colta",
+   "count": 2
+  },
+  "confessional-art": {
+   "name": "Confessional Art",
+   "count": 1
+  },
+  "new-european-painting": {
+   "name": "New European Painting",
+   "count": 14
+  },
+  "neo-pop-art": {
+   "name": "Neo-Pop Art",
+   "count": 23
+  },
+  "neo-minimalism-neo-geo": {
+   "name": "Neo-Minimalism (Neo-Geo)",
+   "count": 42
+  },
+  "maximalism": {
+   "name": "Maximalism",
+   "count": 4
+  },
+  "neo-orthodoxism": {
+   "name": "Neo-Orthodoxism",
+   "count": 6
+  },
+  "street-art": {
+   "name": "Street art",
+   "count": 28
+  },
+  "lowbrow-art": {
+   "name": "Lowbrow Art",
+   "count": 5
+  },
+  "stuckism": {
+   "name": "Stuckism",
+   "count": 3
+  },
+  "provisional-painting-new-casualism": {
+   "name": "Provisional Painting (New Casualism)",
+   "count": 7
+  },
+  "fantasy-art": {
+   "name": "Fantasy Art",
+   "count": 7
+  },
+  "internet-art-net-art": {
+   "name": "Internet art (Net art)",
+   "count": 1
+  },
+  "futuretech-art": {
+   "name": "Futuretech Art",
+   "count": 1
+  },
+  "net-art-0": {
+   "name": "net.art",
+   "count": 1
+  },
+  "digital-art": {
+   "name": "Digital Art",
+   "count": 6
+  },
+  "new-media-art": {
+   "name": "New media art",
+   "count": 4
+  },
+  "postcolonial-art": {
+   "name": "Postcolonial art",
+   "count": 17
+  },
+  "institutional-critique": {
+   "name": "Institutional Critique",
+   "count": 6
+  },
+  "postinternet": {
+   "name": "Postinternet",
+   "count": 1
+  },
+  "contemporary": {
+   "name": "Contemporary",
+   "count": 157
+  },
+  "chicano-art-movement": {
+   "name": "Chicano art movement",
+   "count": 1
+  },
+  "black-arts-movement": {
+   "name": "Black Arts Movement",
+   "count": 2
+  },
+  "tang-dynasty": {
+   "name": "Tang Dynasty (618–907)",
+   "count": 5
+  },
+  "five-dynasties-and-ten-kingdoms": {
+   "name": "Five Dynasties and Ten Kingdoms (907–960)",
+   "count": 2
+  },
+  "northern-song-dynasty": {
+   "name": "Northern Song Dynasty (960–1126)",
+   "count": 4
+  },
+  "southern-song-dynasty": {
+   "name": "Southern Song Dynasty (1127–1279)",
+   "count": 1
+  },
+  "yuan-dynasty": {
+   "name": "Yuan Dynasty (1271–1368)",
+   "count": 3
+  },
+  "ming-dynasty": {
+   "name": "Ming Dynasty (1368–1644)",
+   "count": 7
+  },
+  "qing-dynasty": {
+   "name": "Qing Dynasty (1644–1912)",
+   "count": 4
+  },
+  "republic-of-china": {
+   "name": "Republic of China (1912–1949)",
+   "count": 8
+  },
+  "new-culture-movement": {
+   "name": "New Culture Movement (1915-1926)",
+   "count": 3
+  },
+  "peoples-republic-of-china-1949-present": {
+   "name": "People's Republic of China (1949-present)",
+   "count": 3
+  },
+  "new-ink-art": {
+   "name": "New Ink Art",
+   "count": 4
+  },
+  "joseon-dynasty": {
+   "name": "Joseon Dynasty",
+   "count": 2
+  },
+  "korean-informel": {
+   "name": "Korean Informel",
+   "count": 4
+  },
+  "dansaekhwa-korean-monochrome-painting": {
+   "name": "Dansaekhwa (Korean Monochrome Painting)",
+   "count": 4
+  },
+  "muromachi-period-1392-1573": {
+   "name": "Muromachi period (1392–1573)",
+   "count": 4
+  },
+  "azuchi-momoyama-period-1573-1603": {
+   "name": "Azuchi-Momoyama period (1573–1603)",
+   "count": 1
+  },
+  "edo-period-1603-1867": {
+   "name": "Edo period (1603–1867)",
+   "count": 23
+  },
+  "meiji-period-1868-1912": {
+   "name": "Meiji Period (1868–1912)",
+   "count": 11
+  },
+  "taish-period-1912-1926": {
+   "name": "Taishō period (1912–1926)",
+   "count": 18
+  },
+  "sh-wa-period-1926-1989": {
+   "name": "Shōwa period (1926–1989)",
+   "count": 28
+  },
+  "ero-guro": {
+   "name": "Ero guro",
+   "count": 2
+  },
+  "abbasid-period-750-1258": {
+   "name": "Abbasid Period (750–1258)",
+   "count": 1
+  },
+  "ilkhanid-period-1256-1353": {
+   "name": "Ilkhanid Period (1256–1353)",
+   "count": 1
+  },
+  "timurid-period-c-1370-1507": {
+   "name": "Timurid Period (c.1370–1507)",
+   "count": 2
+  },
+  "ottoman-period-before-1600": {
+   "name": "Ottoman Period (before 1600)",
+   "count": 2
+  },
+  "s-leyman-the-magnificent-period-1520-1566": {
+   "name": "Süleyman the Magnificent Period (1520–1566)",
+   "count": 1
+  },
+  "mughal-period-after-1600": {
+   "name": "Mughal Period (after 1600)",
+   "count": 1
+  },
+  "ottoman-period-after-1600": {
+   "name": "Ottoman Period (after 1600)",
+   "count": 3
+  },
+  "safavid-period-before-1600": {
+   "name": "Safavid Period (before 1600)",
+   "count": 4
+  },
+  "safavid-and-qajar-periods-after-1600": {
+   "name": "Safavid and Qajar Periods (after 1600)",
+   "count": 2
+  },
+  "native-art": {
+   "name": "Native Art",
+   "count": 17
+  },
+  "yoruba-art": {
+   "name": "Yoruba Art",
+   "count": 1
+  },
+  "folk-art": {
+   "name": "Folk art",
+   "count": 1
+  },
+  "post-classic-c-900-1580": {
+   "name": "Post-classic (c.900-1580)",
+   "count": 1
+  }
+ },
+ "movements_zh": {
+  "zao-wang-zhao-shi-qi-gong-yuan-qian-3150-2686": {
+   "name": "早王朝時期（公元前 3150 – 2686 年）",
+   "count": 1
+  },
+  "gu-wang-guo-shi-qi-xi-yuan-qian-2686-2181": {
+   "name": "古王國時期（公元前 2686 – 2181年）",
+   "count": 1
+  },
+  "di-zhong-jian-shi-qi-gong-yuan-qian-2181-2055": {
+   "name": "第一中間時期（公元前 2181 – 2055 年）",
+   "count": 1
+  },
+  "zhong-wang-guo-shi-qi-xi-yuan-qian-2055-1650": {
+   "name": "中王國時期（公元前 2055 – 1650 年）",
+   "count": 1
+  },
+  "di-er-zhong-jian-shi-qi-gong-yuan-qian-1650-1550": {
+   "name": "第二中間時期（公元前 1650 – 1550 年）",
+   "count": 1
+  },
+  "xin-wang-guo-shi-qi-gong-yuan-qian-1550-1069": {
+   "name": "新王國時期（公元前 1550 – 1069 年）",
+   "count": 1
+  },
+  "a-ma-na-shi-qi-gong-yuan-qian-1351-1334-nian": {
+   "name": "阿瑪納時期（公元前 1351 – 1334 年）",
+   "count": 1
+  },
+  "di-san-zhong-jian-shi-qi-gong-yuan-qian-1069-664": {
+   "name": "第三中間時期（公元前 1069 – 664 年）",
+   "count": 1
+  },
+  "wan-wang-zhao-shi-qi-gong-yuan-qian-664-332-nian": {
+   "name": "晚王朝時期（公元前 664 – 332 年）",
+   "count": 1
+  },
+  "tuo-le-mi-wang-zhao-gong-yuan-qian-332-30-nian": {
+   "name": "托勒密王朝（公元前 332 – 30 年）",
+   "count": 1
+  },
+  "luo-ma-xing-sheng-shi-qi-gong-yuan-qian-30-nian": {
+   "name": "羅馬行省時期（公元前 30 年 – 公元 64 年）",
+   "count": 1
+  },
+  "ji-he-yi-zhu": {
+   "name": "幾何時期（約公元前 900 – 700 年）",
+   "count": 1
+  },
+  "gu-feng-shi-qi-gong-yuan-qian-700-480-nian": {
+   "name": "古風時期（公元前 700 – 480 年）",
+   "count": 2
+  },
+  "gu-dian-shi-qi-gong-yuan-qian-480-323-nian": {
+   "name": "古典時期（公元前 480 – 323 年）",
+   "count": 3
+  },
+  "xi-la-hua-shi-qi-gong-yuan-qian-323-31-nian": {
+   "name": "希臘化時期（公元前 323 – 31 年）",
+   "count": 3
+  },
+  "bai-zhan-ting-yi-zhu": {
+   "name": "拜占庭藝術",
+   "count": 4
+  },
+  "qian-luo-man-shi-jian-zhu": {
+   "name": "早期羅馬式",
+   "count": 1
+  },
+  "luo-ma-shi-mei-zhu": {
+   "name": "羅馬式",
+   "count": 7
+  },
+  "ge-te-shi-yi-zhu": {
+   "name": "哥德式",
+   "count": 12
+  },
+  "ou-zhou-zhong-shi-ji-mei-zhu": {
+   "name": "中世紀藝術",
+   "count": 2
+  },
+  "coptic-art": {
+   "name": "Coptic art",
+   "count": 2
+  },
+  "wen-yi-fu-xing-kai-duan": {
+   "name": "文藝復興開端",
+   "count": 9
+  },
+  "early-renaissance": {
+   "name": "Early Renaissance",
+   "count": 33
+  },
+  "wen-yi-fu-xing-quan-sheng-qi": {
+   "name": "文藝復興全盛期",
+   "count": 36
+  },
+  "feng-ge-zhu-yi": {
+   "name": "矯飾主義（文藝復興晚期）",
+   "count": 47
+  },
+  "bei-fang-wen-yi-fu-xing": {
+   "name": "北方文藝復興",
+   "count": 47
+  },
+  "ba-luo-ke-yi-zhu": {
+   "name": "巴洛克",
+   "count": 158
+  },
+  "he-lan-huang-jin-shi-dai-hui-hua": {
+   "name": "荷蘭黃金時代",
+   "count": 53
+  },
+  "luo-ke-ke": {
+   "name": "洛可可",
+   "count": 60
+  },
+  "xin-gu-dian-zhu-yi": {
+   "name": "新古典主義",
+   "count": 74
+  },
+  "lang-man-zhu-yi": {
+   "name": "浪漫主義",
+   "count": 279
+  },
+  "dong-fang-zhu-yi": {
+   "name": "东方主义",
+   "count": 32
+  },
+  "xue-yuan-yi-shu": {
+   "name": "學院藝術",
+   "count": 92
+  },
+  "xian-shi-zhu-yi": {
+   "name": "寫實主義",
+   "count": 217
+  },
+  "zi-ran-zhu-yi-mei-xue": {
+   "name": "自然主義",
+   "count": 25
+  },
+  "xiang-zheng-zhu-yi": {
+   "name": "象徵主義",
+   "count": 92
+  },
+  "yin-xiang-pai": {
+   "name": "印象派",
+   "count": 226
+  },
+  "su-ren-yi-shu-yuan-shi-zhu-yi": {
+   "name": "素人藝術（原始主義）",
+   "count": 45
+  },
+  "yi-zhu-yu-gong-yi-mei-zhu-yun-dong": {
+   "name": "美術工藝運動",
+   "count": 10
+  },
+  "feng-jing-hua-pai": {
+   "name": "風景畫派",
+   "count": 12
+  },
+  "xin-yin-xiang-pai": {
+   "name": "新印象派",
+   "count": 22
+  },
+  "hou-yin-xiang-pai": {
+   "name": "後印象派",
+   "count": 135
+  },
+  "xin-xie-shi-zhu-yi-mei-guo-xie-shi-zhu-yi": {
+   "name": "新寫實主義（美國寫實主義）",
+   "count": 13
+  },
+  "biao-xian-zhu-yi": {
+   "name": "表現主義",
+   "count": 221
+  },
+  "she-hui-xian-shi-zhu-yi": {
+   "name": "社會寫實主義",
+   "count": 43
+  },
+  "xin-yi-zhu-yun-dong": {
+   "name": "新藝術運動",
+   "count": 119
+  },
+  "fen-li-pai": {
+   "name": "分離派",
+   "count": 5
+  },
+  "wei-mei-zhu-yi": {
+   "name": "唯美主義",
+   "count": 7
+  },
+  "li-ti-zhu-yi": {
+   "name": "立體主義",
+   "count": 75
+  },
+  "chou-xiang-yi-shu": {
+   "name": "抽象藝術",
+   "count": 153
+  },
+  "zhi-shang-zhu-yi": {
+   "name": "絕對主義",
+   "count": 6
+  },
+  "qian-wei": {
+   "name": "前衛藝術",
+   "count": 31
+  },
+  "wei-lai-zhu-yi": {
+   "name": "未來主義",
+   "count": 24
+  },
+  "da-da-zhu-yi": {
+   "name": "達達主義",
+   "count": 23
+  },
+  "gou-cheng-zhu-yi": {
+   "name": "構成主義",
+   "count": 39
+  },
+  "he-lan-feng-ge-pai-yun-dong": {
+   "name": "荷蘭風格派（新造型主義）",
+   "count": 11
+  },
+  "xing-shang-yi-shu": {
+   "name": "形上藝術",
+   "count": 8
+  },
+  "xian-dai-zhu-yi": {
+   "name": "現代主義",
+   "count": 50
+  },
+  "mo-huan-xie-shi-zhu-yi": {
+   "name": "魔幻寫實主義",
+   "count": 43
+  },
+  "she-guang-zhu-yi": {
+   "name": "射光主義",
+   "count": 2
+  },
+  "ao-ha": {
+   "name": "裝飾藝術",
+   "count": 20
+  },
+  "tong-bu-zhu-yi": {
+   "name": "同步主義",
+   "count": 2
+  },
+  "xuan-wo-zhu-yi": {
+   "name": "漩渦畫派",
+   "count": 4
+  },
+  "chao-xian-shi-zhu-yi": {
+   "name": "超現實主義",
+   "count": 181
+  },
+  "chun-cui-zhu-yi": {
+   "name": "純粹主義",
+   "count": 3
+  },
+  "jing-que-zhu-yi": {
+   "name": "精確主義",
+   "count": 11
+  },
+  "ha-lai-mu-wen-yi-fu-xing": {
+   "name": "哈林文藝復興（新黑人運動）",
+   "count": 17
+  },
+  "bu-xie-diao-yi-shu": {
+   "name": "不協調藝術",
+   "count": 1
+  },
+  "yuan-zhu-min-zhu-yi": {
+   "name": "原住民主義",
+   "count": 6
+  },
+  "di-fang-zhu-yi": {
+   "name": "地方主義",
+   "count": 14
+  },
+  "she-hui-zhu-yi-de-xian-shi-zhu-yi": {
+   "name": "社會黨寫實主義",
+   "count": 49
+  },
+  "hua-yi-she-ying-zhu-yi": {
+   "name": "畫意攝影主義",
+   "count": 13
+  },
+  "new-medievialism": {
+   "name": "New Medievialism",
+   "count": 1
+  },
+  "mo-xi-ge-bi-hua-yun-dong": {
+   "name": "墨西哥壁畫運動",
+   "count": 14
+  },
+  "xin-lang-man-zhu-yi": {
+   "name": "新浪漫主義",
+   "count": 10
+  },
+  "cun-zai-zhu-yi-yi-shu": {
+   "name": "存在主義藝術",
+   "count": 6
+  },
+  "dan-zi-zhu-yi": {
+   "name": "字母派",
+   "count": 5
+  },
+  "qing-nian-bo-lan-yun-dong": {
+   "name": "青年波蘭運動",
+   "count": 7
+  },
+  "chou-xiang-biao-xian-zhu-yi": {
+   "name": "抽象表現主義",
+   "count": 162
+  },
+  "indian-space-painting": {
+   "name": "Indian Space Painting",
+   "count": 3
+  },
+  "ao-fei-zhu-yi": {
+   "name": "奧費主義",
+   "count": 5
+  },
+  "ban-dian-pai-0": {
+   "name": "無形式藝術",
+   "count": 82
+  },
+  "ban-dian-pai": {
+   "name": "斑點派",
+   "count": 31
+  },
+  "jie-jing": {
+   "name": "Haute Pâte (Matter Painting)",
+   "count": 6
+  },
+  "li-ti-wei-lai-zhu-yi": {
+   "name": "立體未來主義",
+   "count": 8
+  },
+  "xin-hun-ni-tu-yun-dong": {
+   "name": "新混泥土運動",
+   "count": 6
+  },
+  "wei-ye-na-xing-dong-zhu-yi": {
+   "name": "維也納行動派",
+   "count": 2
+  },
+  "xing-wei-yi-zhu": {
+   "name": "表演藝術",
+   "count": 17
+  },
+  "xin-chao-xian-shi-zhu-yi": {
+   "name": "新超現實主義",
+   "count": 6
+  },
+  "chao-zi-dong-zhu-yi": {
+   "name": "超自動主義",
+   "count": 1
+  },
+  "su-lian-she-hui-dang-xie-shi-zhu-yi": {
+   "name": "蘇聯社會黨寫實主義",
+   "count": 2
+  },
+  "fei-hui-hua-xing-chou-xiang-hui-hua": {
+   "name": "色面繪畫",
+   "count": 75
+  },
+  "chou-xiang-huan-xiang-zhu-yi": {
+   "name": "抽象幻想主義",
+   "count": 5
+  },
+  "nu-xing-zhu-yi-yi-shu": {
+   "name": "女性主義藝術",
+   "count": 45
+  },
+  "xi-ban-ya-xian-dai-feng-ge": {
+   "name": "西班牙現代風格",
+   "count": 25
+  },
+  "xian-wei-yi-shu": {
+   "name": "纖維藝術",
+   "count": 6
+  },
+  "fen-xi-xian-shi-zhu-yi": {
+   "name": "分析現實主義",
+   "count": 1
+  },
+  "you-jian-yi-shu": {
+   "name": "郵件藝術",
+   "count": 5
+  },
+  "xin-ke-guan-zhu-yi": {
+   "name": "新客觀主義",
+   "count": 9
+  },
+  "fei-zhu-liu-yi-shu": {
+   "name": "非主流藝術",
+   "count": 34
+  },
+  "dan-shu-yi-shu": {
+   "name": "單數藝術",
+   "count": 1
+  },
+  "ju-ti-yi-shu": {
+   "name": "具體藝術",
+   "count": 51
+  },
+  "xin-biao-xian-zhu-yi": {
+   "name": "新表現主義",
+   "count": 57
+  },
+  "xin-da-da-zhu-yi": {
+   "name": "新達達主義",
+   "count": 31
+  },
+  "xin-ju-xiang-yi-shu": {
+   "name": "新具象藝術",
+   "count": 15
+  },
+  "dong-li-yi-shu": {
+   "name": "機動藝術",
+   "count": 24
+  },
+  "kong-jian-zhu-yi": {
+   "name": "空間主義",
+   "count": 10
+  },
+  "guan-nian-pai-yi-shu": {
+   "name": "觀念派藝術",
+   "count": 16
+  },
+  "su-lian-yi-yi-ren-shi-yi-shu": {
+   "name": "蘇聯異議人士藝術",
+   "count": 18
+  },
+  "ao-pu-yi-zhu": {
+   "name": "歐普藝術",
+   "count": 57
+  },
+  "bo-pu-yi-shu": {
+   "name": "普普藝術",
+   "count": 103
+  },
+  "xin-xian-shi-zhu-yi": {
+   "name": "新寫實主義",
+   "count": 15
+  },
+  "new-generation-sculpture": {
+   "name": "New Generation Sculpture",
+   "count": 6
+  },
+  "gu-dian-xian-shi-zhu-yi": {
+   "name": "古典現實主義",
+   "count": 10
+  },
+  "gai-nian-yi-shu": {
+   "name": "觀念藝術",
+   "count": 119
+  },
+  "guo-du-zhu-yi": {
+   "name": "過度主義",
+   "count": 4
+  },
+  "ji-jian-zhu-yi": {
+   "name": "極簡主義",
+   "count": 104
+  },
+  "hou-jian-yue-yin-le": {
+   "name": "後極簡主義",
+   "count": 56
+  },
+  "guang-yu-kong-jian": {
+   "name": "光與空間",
+   "count": 25
+  },
+  "huan-jing-yi-shu": {
+   "name": "環境藝術",
+   "count": 24
+  },
+  "fei-wu-yi-shu": {
+   "name": "廢物藝術",
+   "count": 7
+  },
+  "mei-su": {
+   "name": "媚俗",
+   "count": 37
+  },
+  "cyberart": {
+   "name": "CyberArt",
+   "count": 8
+  },
+  "guan-xi-mei-xue": {
+   "name": "關係美學",
+   "count": 15
+  },
+  "fen-ke-yun-dong": {
+   "name": "放克藝術",
+   "count": 1
+  },
+  "zhao-xiang-xie-shi-zhu-yi": {
+   "name": "照相寫實主義（超級寫實主義）",
+   "count": 30
+  },
+  "xie-shi-hai-bao-yi-shu": {
+   "name": "寫實海報藝術",
+   "count": 3
+  },
+  "neo-conceptualism": {
+   "name": "Neo-Conceptualism",
+   "count": 1
+  },
+  "dang-dai-xie-shi-zhu-yi": {
+   "name": "當代寫實主義",
+   "count": 49
+  },
+  "tu-an-hui-hua": {
+   "name": "圖案繪畫",
+   "count": 5
+  },
+  "xin-yi-xiang-hui-hua": {
+   "name": "新意象繪畫",
+   "count": 6
+  },
+  "chao-qian-wei": {
+   "name": "超前衛",
+   "count": 11
+  },
+  "wen-ya-hui-hua-pittura-colta": {
+   "name": "文雅繪畫（Pittura Colta）",
+   "count": 2
+  },
+  "confessional-art": {
+   "name": "Confessional Art",
+   "count": 1
+  },
+  "new-european-painting": {
+   "name": "New European Painting",
+   "count": 14
+  },
+  "xin-pu-pu-yi-shu": {
+   "name": "新普普藝術",
+   "count": 23
+  },
+  "xin-ji-he": {
+   "name": "新幾何",
+   "count": 42
+  },
+  "ji-fan-zhu-yi": {
+   "name": "極繁主義",
+   "count": 4
+  },
+  "neo-orthodoxism": {
+   "name": "Neo-Orthodoxism",
+   "count": 6
+  },
+  "jie-tou-yi-shu": {
+   "name": "街頭藝術",
+   "count": 28
+  },
+  "di-mei-yi-shu": {
+   "name": "低眉藝術",
+   "count": 5
+  },
+  "fan-gai-nian-zhu-yi": {
+   "name": "反概念主義",
+   "count": 3
+  },
+  "provisional-painting-new-casualism": {
+   "name": "Provisional Painting (New Casualism)",
+   "count": 7
+  },
+  "fantasy-art": {
+   "name": "Fantasy Art",
+   "count": 7
+  },
+  "internet-art-net-art": {
+   "name": "Internet art (Net art)",
+   "count": 1
+  },
+  "futuretech-art": {
+   "name": "Futuretech Art",
+   "count": 1
+  },
+  "net-art-0": {
+   "name": "net.art",
+   "count": 1
+  },
+  "shu-zi-yi-zhu": {
+   "name": "数字艺术",
+   "count": 6
+  },
+  "new-media-art": {
+   "name": "New media art",
+   "count": 4
+  },
+  "postcolonial-art": {
+   "name": "Postcolonial art",
+   "count": 17
+  },
+  "institutional-critique": {
+   "name": "Institutional Critique",
+   "count": 6
+  },
+  "postinternet": {
+   "name": "Postinternet",
+   "count": 1
+  },
+  "dang-dai-yi-shu": {
+   "name": "當代藝術",
+   "count": 157
+  },
+  "chicano-art-movement": {
+   "name": "Chicano art movement",
+   "count": 1
+  },
+  "black-arts-movement": {
+   "name": "Black Arts Movement",
+   "count": 2
+  },
+  "tang-zhao": {
+   "name": "唐朝（ 618 – 907 年）",
+   "count": 5
+  },
+  "wu-dai-shi-guo-gong-yuan-907-960-nian": {
+   "name": "五代十國（ 907 – 960 年）",
+   "count": 2
+  },
+  "bei-song-gong-yuan-960-1126-nian": {
+   "name": "北宋（ 960 – 1126 年）",
+   "count": 4
+  },
+  "nan-song-gong-yuan-1127-1279-nian": {
+   "name": "南宋 （ 1127 – 1279 年）",
+   "count": 1
+  },
+  "yuan-zhao": {
+   "name": "元朝（ 1271 – 1368 年）",
+   "count": 3
+  },
+  "ming-zhao-gong-yuan-1368-1644-nian": {
+   "name": "明朝（ 1368 – 1644 年）",
+   "count": 7
+  },
+  "qing-zhao-gong-yuan-1644-1912nian": {
+   "name": "清朝（ 1644 – 1912年）",
+   "count": 4
+  },
+  "zhong-hua-min-guo-1912-xian-zai": {
+   "name": "中華民國（1912 – 現在）",
+   "count": 8
+  },
+  "xin-wen-hua-yun-dong-1915-1926": {
+   "name": "新文化運動（1915–1926）",
+   "count": 3
+  },
+  "zhong-hua-ren-min-gong-he-guo-1949-xian-zai": {
+   "name": "中華人民共和國（1949–現在）",
+   "count": 3
+  },
+  "xin-shui-mo-yi-shu": {
+   "name": "新水墨藝術",
+   "count": 4
+  },
+  "zhao-xian-wang-zhao": {
+   "name": "朝鮮王朝",
+   "count": 2
+  },
+  "han-guo-wu-xing-shi-yi-shu": {
+   "name": "韓國無形式藝術",
+   "count": 4
+  },
+  "dan-se-hua-pai-dansaeghwa": {
+   "name": "單色畫派（단색화）",
+   "count": 4
+  },
+  "shi-ting-1392-1573": {
+   "name": "室町（ 1392 – 1573 年）",
+   "count": 4
+  },
+  "an-tu-tao-shan-1573-1603-nian": {
+   "name": "安土桃山（ 1573 – 1603 年）",
+   "count": 1
+  },
+  "jiang-hu-1603-1867-nian": {
+   "name": "江戶（ 1603 – 1867 年）",
+   "count": 23
+  },
+  "ming-zhi-1868-1912-nian": {
+   "name": "明治（ 1868 – 1912 年）",
+   "count": 11
+  },
+  "da-zheng": {
+   "name": "大正（ 1912 – 1926 年）",
+   "count": 18
+  },
+  "zhao-he": {
+   "name": "昭和（ 1926 – 1989 年）",
+   "count": 28
+  },
+  "lie-qi-eroguro": {
+   "name": "情色獵奇（エログロ）",
+   "count": 2
+  },
+  "abbasid-period-750-1258": {
+   "name": "Abbasid Period (750–1258)",
+   "count": 1
+  },
+  "yi-er-han-guo-1256-1353-nian": {
+   "name": "伊兒汗時期（ 1256 – 1353 年）",
+   "count": 1
+  },
+  "tie-mu-er-di-guo-yue-1370-1507-nian": {
+   "name": "帖木兒時期（約 1370 – 1507 年）",
+   "count": 2
+  },
+  "e-tu-man-di-guo-shi-qi-1600-nian-qian": {
+   "name": "鄂圖曼帝國時期（ 1600 年前）",
+   "count": 2
+  },
+  "su-lai-man-shi-shi-qi-1520-1566-nian": {
+   "name": "蘇萊曼一世時期（ 1520 – 1566 年）",
+   "count": 1
+  },
+  "meng-wu-er-shi-qi-1600-nian-hou": {
+   "name": "蒙兀兒時期（ 1600 年後）",
+   "count": 1
+  },
+  "e-tu-man-di-guo-shi-qi-1600-nian-hou": {
+   "name": "鄂圖曼帝國時期（ 1600 年後）",
+   "count": 3
+  },
+  "sa-fei-shi-qi-1600-nian-qian": {
+   "name": "薩非時期（ 1600 年前）",
+   "count": 4
+  },
+  "sa-fei-yu-qia-zha-er-shi-qi-1600-nian-hou": {
+   "name": "薩非與卡札爾時期（ 1600 年後）",
+   "count": 2
+  },
+  "yuan-zhu-min-yi-shu": {
+   "name": "原住民藝術",
+   "count": 17
+  },
+  "yue-lu-ba-yi-shu": {
+   "name": "約魯巴藝術",
+   "count": 1
+  },
+  "min-jian-yi-shu": {
+   "name": "民間藝術",
+   "count": 1
+  },
+  "hou-gu-dian-qi-yue-990-1580-nian": {
+   "name": "後古典期（約 990 – 1580 年）",
+   "count": 1
+  }
+ },
+ "genres_en": {
+  "abstract": {
+   "name": "abstract",
+   "count": 17912
+  },
+  "advertisement": {
+   "name": "advertisement",
+   "count": 240
+  },
+  "allegorical-painting": {
+   "name": "allegorical painting",
+   "count": 1589
+  },
+  "animal-painting": {
+   "name": "animal painting",
+   "count": 2911
+  },
+  "animation": {
+   "name": "animation",
+   "count": 12
+  },
+  "architecture": {
+   "name": "architecture",
+   "count": 397
+  },
+  "artists-book": {
+   "name": "artist's book",
+   "count": 14
+  },
+  "augmented-reality": {
+   "name": "augmented reality",
+   "count": 1
+  },
+  "battle-painting": {
+   "name": "battle painting",
+   "count": 732
+  },
+  "bijinga": {
+   "name": "bijinga",
+   "count": 121
+  },
+  "bird-and-flower-painting": {
+   "name": "bird-and-flower painting",
+   "count": 152
+  },
+  "calligraphy": {
+   "name": "calligraphy",
+   "count": 242
+  },
+  "capriccio": {
+   "name": "capriccio",
+   "count": 159
+  },
+  "caricature": {
+   "name": "caricature",
+   "count": 702
+  },
+  "cityscape": {
+   "name": "cityscape",
+   "count": 8941
+  },
+  "cloudscape": {
+   "name": "cloudscape",
+   "count": 824
+  },
+  "design": {
+   "name": "design",
+   "count": 3711
+  },
+  "digital": {
+   "name": "digital",
+   "count": 37
+  },
+  "figurative": {
+   "name": "figurative",
+   "count": 9034
+  },
+  "flower-painting": {
+   "name": "flower painting",
+   "count": 2508
+  },
+  "furniture": {
+   "name": "furniture",
+   "count": 41
+  },
+  "genre-painting": {
+   "name": "genre painting",
+   "count": 23950
+  },
+  "graffiti": {
+   "name": "graffiti",
+   "count": 291
+  },
+  "history-painting": {
+   "name": "history painting",
+   "count": 1715
+  },
+  "icon": {
+   "name": "icon",
+   "count": 496
+  },
+  "illustration": {
+   "name": "illustration",
+   "count": 6593
+  },
+  "installation": {
+   "name": "installation",
+   "count": 2556
+  },
+  "interior": {
+   "name": "interior",
+   "count": 1468
+  },
+  "jewelry": {
+   "name": "jewelry",
+   "count": 86
+  },
+  "landscape": {
+   "name": "landscape",
+   "count": 24247
+  },
+  "literary-painting": {
+   "name": "literary painting",
+   "count": 934
+  },
+  "manga": {
+   "name": "manga",
+   "count": 23
+  },
+  "marina": {
+   "name": "marina",
+   "count": 3460
+  },
+  "miniature": {
+   "name": "miniature",
+   "count": 401
+  },
+  "mobile": {
+   "name": "mobile",
+   "count": 59
+  },
+  "mosaic": {
+   "name": "mosaic",
+   "count": 50
+  },
+  "mural": {
+   "name": "mural",
+   "count": 72
+  },
+  "mythological-painting": {
+   "name": "mythological painting",
+   "count": 3315
+  },
+  "nude-painting-nu": {
+   "name": "nude painting (nu)",
+   "count": 4662
+  },
+  "object": {
+   "name": "object",
+   "count": 14
+  },
+  "ornament": {
+   "name": "ornament",
+   "count": 42
+  },
+  "panorama": {
+   "name": "panorama",
+   "count": 25
+  },
+  "pastorale": {
+   "name": "pastorale",
+   "count": 105
+  },
+  "performance": {
+   "name": "performance",
+   "count": 223
+  },
+  "photo": {
+   "name": "photo",
+   "count": 2939
+  },
+  "pin-up": {
+   "name": "pin-up",
+   "count": 20
+  },
+  "portrait": {
+   "name": "portrait",
+   "count": 28610
+  },
+  "poster": {
+   "name": "poster",
+   "count": 992
+  },
+  "quadratura": {
+   "name": "quadratura",
+   "count": 36
+  },
+  "religious-painting": {
+   "name": "religious painting",
+   "count": 12117
+  },
+  "sculpture": {
+   "name": "sculpture",
+   "count": 4344
+  },
+  "self-portrait": {
+   "name": "self-portrait",
+   "count": 2681
+  },
+  "shan-shui": {
+   "name": "shan shui",
+   "count": 47
+  },
+  "sketch-and-study": {
+   "name": "sketch and study",
+   "count": 7303
+  },
+  "stabile": {
+   "name": "stabile",
+   "count": 15
+  },
+  "still-life": {
+   "name": "still life",
+   "count": 4883
+  },
+  "symbolic-painting": {
+   "name": "symbolic painting",
+   "count": 4413
+  },
+  "tapestry": {
+   "name": "tapestry",
+   "count": 45
+  },
+  "tessellation": {
+   "name": "tessellation",
+   "count": 312
+  },
+  "trompe-loeil": {
+   "name": "trompe-l'œil",
+   "count": 51
+  },
+  "tronie": {
+   "name": "tronie",
+   "count": 215
+  },
+  "urushi-e": {
+   "name": "urushi-e",
+   "count": 1
+  },
+  "utensil": {
+   "name": "utensil",
+   "count": 294
+  },
+  "vanitas": {
+   "name": "vanitas",
+   "count": 58
+  },
+  "veduta": {
+   "name": "veduta",
+   "count": 350
+  },
+  "video-art": {
+   "name": "video",
+   "count": 23
+  },
+  "wildlife-painting": {
+   "name": "wildlife painting",
+   "count": 441
+  },
+  "yakusha-e": {
+   "name": "yakusha-e",
+   "count": 257
+  }
+ },
+ "genres_zh": {
+  "allegorical-painting": {
+   "name": "allegorical painting",
+   "count": 1589
+  },
+  "animal-painting": {
+   "name": "animal painting",
+   "count": 2911
+  },
+  "artists-book": {
+   "name": "artist's book",
+   "count": 14
+  },
+  "battle-painting": {
+   "name": "battle painting",
+   "count": 732
+  },
+  "cloudscape": {
+   "name": "cloudscape",
+   "count": 824
+  },
+  "digital": {
+   "name": "digital",
+   "count": 37
+  },
+  "furniture": {
+   "name": "furniture",
+   "count": 41
+  },
+  "icon": {
+   "name": "icon",
+   "count": 496
+  },
+  "literary-painting": {
+   "name": "literary painting",
+   "count": 934
+  },
+  "mobile": {
+   "name": "mobile",
+   "count": 59
+  },
+  "mythological-painting": {
+   "name": "mythological painting",
+   "count": 3315
+  },
+  "object": {
+   "name": "object",
+   "count": 14
+  },
+  "ornament": {
+   "name": "ornament",
+   "count": 42
+  },
+  "religious-painting": {
+   "name": "religious painting",
+   "count": 12117
+  },
+  "sketch-and-study": {
+   "name": "sketch and study",
+   "count": 7303
+  },
+  "stabile": {
+   "name": "stabile",
+   "count": 15
+  },
+  "symbolic-painting": {
+   "name": "symbolic painting",
+   "count": 4413
+  },
+  "tessellation": {
+   "name": "tessellation",
+   "count": 312
+  },
+  "tronie": {
+   "name": "tronie",
+   "count": 215
+  },
+  "veduta": {
+   "name": "veduta",
+   "count": 350
+  },
+  "wildlife-painting": {
+   "name": "wildlife painting",
+   "count": 441
+  },
+  "bi-hua": {
+   "name": "壁畫",
+   "count": 72
+  },
+  "biao-yan": {
+   "name": "表演",
+   "count": 223
+  },
+  "cha-hua": {
+   "name": "插畫",
+   "count": 6593
+  },
+  "chou-xiang-yi-shu": {
+   "name": "抽象藝術",
+   "count": 17912
+  },
+  "shi-jue-xian-jing": {
+   "name": "錯視畫",
+   "count": 51
+  },
+  "diao-su": {
+   "name": "雕塑",
+   "count": 4344
+  },
+  "dong-hua": {
+   "name": "動畫",
+   "count": 12
+  },
+  "shi-rong": {
+   "name": "都市風景畫",
+   "count": 8941
+  },
+  "feng-jing-hua": {
+   "name": "風景畫",
+   "count": 24247
+  },
+  "feng-su-hua": {
+   "name": "風俗畫",
+   "count": 23950
+  },
+  "feng-ci-hua": {
+   "name": "諷刺畫",
+   "count": 702
+  },
+  "guang-gao": {
+   "name": "廣告",
+   "count": 240
+  },
+  "hai-bao": {
+   "name": "海報",
+   "count": 992
+  },
+  "hai-bao-nu-lang": {
+   "name": "海報女郎",
+   "count": 20
+  },
+  "hai-jing-hua": {
+   "name": "海景畫",
+   "count": 3460
+  },
+  "hua-hui-hua": {
+   "name": "花卉畫",
+   "count": 2508
+  },
+  "hua-niao-hua": {
+   "name": "花鳥畫",
+   "count": 152
+  },
+  "huan-jing-hui-hua": {
+   "name": "幻景繪畫",
+   "count": 36
+  },
+  "huan-xiang-hua": {
+   "name": "幻想畫",
+   "count": 159
+  },
+  "jian-zhu": {
+   "name": "建築",
+   "count": 397
+  },
+  "jing-wu-hua": {
+   "name": "静物畫",
+   "count": 4883
+  },
+  "ju-xiang-yi-shu": {
+   "name": "具象藝術",
+   "count": 9034
+  },
+  "kuo-zeng-shi-jing": {
+   "name": "擴增實境",
+   "count": 1
+  },
+  "li-shi-hua": {
+   "name": "歷史畫",
+   "count": 1715
+  },
+  "luo-ti-hua": {
+   "name": "裸體畫",
+   "count": 4662
+  },
+  "ma-sai-ke": {
+   "name": "馬賽克",
+   "count": 50
+  },
+  "mei-ren-hua": {
+   "name": "美人畫",
+   "count": 121
+  },
+  "nei-shi-tu": {
+   "name": "內視圖",
+   "count": 1468
+  },
+  "qi-hui": {
+   "name": "漆繪",
+   "count": 1
+  },
+  "qi-wu": {
+   "name": "器物",
+   "count": 294
+  },
+  "quan-jing-hua": {
+   "name": "全景畫",
+   "count": 25
+  },
+  "xu-kong-pai": {
+   "name": "勸世靜物畫",
+   "count": 58
+  },
+  "ri-ben-man-hua-jia": {
+   "name": "日本漫畫家",
+   "count": 23
+  },
+  "shan-shui-hua": {
+   "name": "山水畫",
+   "count": 47
+  },
+  "she-ji": {
+   "name": "設計圖",
+   "count": 3711
+  },
+  "she-ying": {
+   "name": "攝影",
+   "count": 2939
+  },
+  "shu-fa": {
+   "name": "書法",
+   "count": 242
+  },
+  "tian-yuan-feng-guang-hua": {
+   "name": "田園風光畫",
+   "count": 105
+  },
+  "tu-ya": {
+   "name": "塗鴉",
+   "count": 291
+  },
+  "xi-mi-hua": {
+   "name": "細密畫",
+   "count": 401
+  },
+  "xiao-xiang-hua": {
+   "name": "肖像畫",
+   "count": 28610
+  },
+  "yi-zhe-hui": {
+   "name": "役者繪",
+   "count": 257
+  },
+  "ying-xiang": {
+   "name": "影視作品",
+   "count": 23
+  },
+  "zhi-pin-hua": {
+   "name": "織品畫",
+   "count": 45
+  },
+  "zhu-bao": {
+   "name": "珠寶",
+   "count": 86
+  },
+  "zhuang-zhi-yi-shu": {
+   "name": "裝置藝術",
+   "count": 2556
+  },
+  "zi-hua-xiang": {
+   "name": "自畫像",
+   "count": 2681
+  }
+ },
+ "media_en": {
+  "acrylic": {
+   "name": "acrylic",
+   "count": 1559
+  },
+  "albumen-silver-toned": {
+   "name": "albumen silver",
+   "count": 28
+  },
+  "aluminium": {
+   "name": "aluminium",
+   "count": 58
+  },
+  "appropriation": {
+   "name": "appropriation",
+   "count": 5
+  },
+  "aquatint": {
+   "name": "aquatint",
+   "count": 194
+  },
+  "assemblage": {
+   "name": "assemblage",
+   "count": 72
+  },
+  "augmented-reality-ar": {
+   "name": "augmented reality",
+   "count": 12
+  },
+  "basalt": {
+   "name": "basalt",
+   "count": 9
+  },
+  "bas-relief": {
+   "name": "bas-relief",
+   "count": 14
+  },
+  "binder": {
+   "name": "binder",
+   "count": 5
+  },
+  "blockchain": {
+   "name": "blockchain",
+   "count": 1
+  },
+  "board": {
+   "name": "board",
+   "count": 642
+  },
+  "brass": {
+   "name": "brass",
+   "count": 8
+  },
+  "bronze": {
+   "name": "bronze",
+   "count": 255
+  },
+  "brush": {
+   "name": "brush",
+   "count": 149
+  },
+  "burlap": {
+   "name": "burlap",
+   "count": 12
+  },
+  "cable": {
+   "name": "cable",
+   "count": 2
+  },
+  "cameo": {
+   "name": "cameo",
+   "count": 1
+  },
+  "canvas": {
+   "name": "canvas",
+   "count": 34821
+  },
+  "carbon-fiber": {
+   "name": "carbon fiber",
+   "count": 1
+  },
+  "card": {
+   "name": "card",
+   "count": 31
+  },
+  "cardboard": {
+   "name": "cardboard",
+   "count": 1295
+  },
+  "casein": {
+   "name": "casein",
+   "count": 5
+  },
+  "cement": {
+   "name": "cement",
+   "count": 3
+  },
+  "ceramics": {
+   "name": "ceramics",
+   "count": 40
+  },
+  "chalk": {
+   "name": "chalk",
+   "count": 1062
+  },
+  "charcoal": {
+   "name": "charcoal",
+   "count": 515
+  },
+  "chisel": {
+   "name": "chisel",
+   "count": 14
+  },
+  "clay": {
+   "name": "clay",
+   "count": 34
+  },
+  "cliche-verre": {
+   "name": "cliché-verre",
+   "count": 1
+  },
+  "cloth": {
+   "name": "cloth",
+   "count": 27
+  },
+  "coal": {
+   "name": "coal",
+   "count": 27
+  },
+  "collage": {
+   "name": "collage",
+   "count": 732
+  },
+  "collotype-in-black-on-cream-laid-paper": {
+   "name": "collotype",
+   "count": 1
+  },
+  "color-varnish": {
+   "name": "color varnish",
+   "count": 4
+  },
+  "colored-markers": {
+   "name": "colored markers",
+   "count": 6
+  },
+  "colored-pencils": {
+   "name": "colored pencils",
+   "count": 96
+  },
+  "concrete": {
+   "name": "concrete",
+   "count": 15
+  },
+  "copper": {
+   "name": "copper",
+   "count": 76
+  },
+  "cotton": {
+   "name": "cotton",
+   "count": 9
+  },
+  "crayon": {
+   "name": "crayon",
+   "count": 138
+  },
+  "digital": {
+   "name": "digital",
+   "count": 92
+  },
+  "drawing": {
+   "name": "drawing",
+   "count": 860
+  },
+  "drypoint": {
+   "name": "drypoint",
+   "count": 93
+  },
+  "dust": {
+   "name": "dust",
+   "count": 1
+  },
+  "elephant-dung": {
+   "name": "elephant dung",
+   "count": 1
+  },
+  "embroidery": {
+   "name": "embroidery",
+   "count": 12
+  },
+  "emulsion": {
+   "name": "emulsion",
+   "count": 12
+  },
+  "enamel": {
+   "name": "enamel",
+   "count": 74
+  },
+  "encaustic": {
+   "name": "encaustic",
+   "count": 43
+  },
+  "engraving": {
+   "name": "engraving",
+   "count": 483
+  },
+  "etching": {
+   "name": "etching",
+   "count": 1694
+  },
+  "fabric": {
+   "name": "fabric",
+   "count": 65
+  },
+  "fabric-straps": {
+   "name": "fabric straps",
+   "count": 3
+  },
+  "fat": {
+   "name": "fat",
+   "count": 5
+  },
+  "feather": {
+   "name": "feather",
+   "count": 65
+  },
+  "felt": {
+   "name": "felt",
+   "count": 13
+  },
+  "felt-tip-pen": {
+   "name": "felt-tip pen",
+   "count": 126
+  },
+  "fiberboard": {
+   "name": "fiberboard",
+   "count": 24
+  },
+  "fiberglass": {
+   "name": "fiberglass",
+   "count": 9
+  },
+  "flashlight": {
+   "name": "flashlight",
+   "count": 1
+  },
+  "fluorescent-paint": {
+   "name": "fluorescent paint",
+   "count": 40
+  },
+  "fresco": {
+   "name": "fresco",
+   "count": 1126
+  },
+  "frottage": {
+   "name": "frottage",
+   "count": 2
+  },
+  "gelatin-silver-print": {
+   "name": "gelatin silver print",
+   "count": 18
+  },
+  "gesso": {
+   "name": "gesso",
+   "count": 28
+  },
+  "gilt": {
+   "name": "gilt",
+   "count": 1
+  },
+  "glass": {
+   "name": "glass",
+   "count": 121
+  },
+  "glitter": {
+   "name": "glitter",
+   "count": 3
+  },
+  "gloss": {
+   "name": "gloss",
+   "count": 1
+  },
+  "gold": {
+   "name": "gold",
+   "count": 58
+  },
+  "gold-leaf": {
+   "name": "gold leaf",
+   "count": 21
+  },
+  "gouache": {
+   "name": "gouache",
+   "count": 1366
+  },
+  "graffiti": {
+   "name": "graffiti",
+   "count": 3
+  },
+  "granite": {
+   "name": "granite",
+   "count": 9
+  },
+  "graphite": {
+   "name": "graphite",
+   "count": 328
+  },
+  "graphite-pencil-0": {
+   "name": "graphite pencil",
+   "count": 5
+  },
+  "grattage": {
+   "name": "grattage",
+   "count": 6
+  },
+  "greenstone": {
+   "name": "greenstone",
+   "count": 2
+  },
+  "grisaille": {
+   "name": "grisaille",
+   "count": 11
+  },
+  "gum-arabic": {
+   "name": "gum arabic",
+   "count": 8
+  },
+  "hematite": {
+   "name": "hematite",
+   "count": 1
+  },
+  "hemp": {
+   "name": "hemp",
+   "count": 5
+  },
+  "hologram": {
+   "name": "hologram",
+   "count": 2
+  },
+  "horns": {
+   "name": "horns",
+   "count": 1
+  },
+  "indian-ink": {
+   "name": "indian ink",
+   "count": 721
+  },
+  "ink": {
+   "name": "ink",
+   "count": 2081
+  },
+  "intaglio": {
+   "name": "intaglio",
+   "count": 160
+  },
+  "ipad": {
+   "name": "ipad",
+   "count": 6
+  },
+  "iron": {
+   "name": "iron",
+   "count": 12
+  },
+  "iron-plate": {
+   "name": "iron plate",
+   "count": 2
+  },
+  "ivory": {
+   "name": "ivory",
+   "count": 28
+  },
+  "japanese-paper": {
+   "name": "japanese paper",
+   "count": 79
+  },
+  "jute": {
+   "name": "jute",
+   "count": 2
+  },
+  "lacquer": {
+   "name": "lacquer",
+   "count": 9
+  },
+  "laid-paper": {
+   "name": "laid paper",
+   "count": 19
+  },
+  "latex": {
+   "name": "latex",
+   "count": 2
+  },
+  "lavis": {
+   "name": "lavis",
+   "count": 26
+  },
+  "leadpoint": {
+   "name": "leadpoint",
+   "count": 19
+  },
+  "leather": {
+   "name": "leather",
+   "count": 7
+  },
+  "lemon": {
+   "name": "lemon",
+   "count": 1
+  },
+  "light-box": {
+   "name": "light box",
+   "count": 12
+  },
+  "light-bulb": {
+   "name": "light bulb",
+   "count": 5
+  },
+  "limestone": {
+   "name": "limestone",
+   "count": 8
+  },
+  "linen": {
+   "name": "linen",
+   "count": 167
+  },
+  "linocut": {
+   "name": "linocut",
+   "count": 108
+  },
+  "linocut-b-w": {
+   "name": "linocut b&w",
+   "count": 4
+  },
+  "linocut-color": {
+   "name": "linocut color",
+   "count": 29
+  },
+  "linoleum": {
+   "name": "linoleum",
+   "count": 2
+  },
+  "lithography": {
+   "name": "lithography",
+   "count": 1202
+  },
+  "magna": {
+   "name": "magna",
+   "count": 112
+  },
+  "magnets": {
+   "name": "magnets",
+   "count": 1
+  },
+  "mahogany-panel": {
+   "name": "mahogany panel",
+   "count": 9
+  },
+  "majolica": {
+   "name": "majolica",
+   "count": 10
+  },
+  "map-pins": {
+   "name": "map pins",
+   "count": 1
+  },
+  "marble": {
+   "name": "marble",
+   "count": 120
+  },
+  "masking-tape": {
+   "name": "masking tape",
+   "count": 3
+  },
+  "masonite": {
+   "name": "masonite",
+   "count": 115
+  },
+  "metal": {
+   "name": "metal",
+   "count": 83
+  },
+  "metalpoint": {
+   "name": "metalpoint",
+   "count": 21
+  },
+  "mezzotint": {
+   "name": "mezzotint",
+   "count": 7
+  },
+  "mixed-media": {
+   "name": "mixed media",
+   "count": 403
+  },
+  "mixed-technique": {
+   "name": "mixed technique",
+   "count": 404
+  },
+  "mosaic-stone-and-glass-on-panel": {
+   "name": "mosaic",
+   "count": 1
+  },
+  "mosa-que": {
+   "name": "mosaïque",
+   "count": 290
+  },
+  "mural": {
+   "name": "mural",
+   "count": 22
+  },
+  "music": {
+   "name": "music",
+   "count": 3
+  },
+  "music-paper": {
+   "name": "music paper",
+   "count": 1
+  },
+  "nails": {
+   "name": "nails",
+   "count": 8
+  },
+  "oak": {
+   "name": "oak",
+   "count": 92
+  },
+  "objet-trouve": {
+   "name": "objet trouve",
+   "count": 11
+  },
+  "obsidian": {
+   "name": "obsidian",
+   "count": 5
+  },
+  "oil": {
+   "name": "oil",
+   "count": 46256
+  },
+  "oilcloth": {
+   "name": "oilcloth",
+   "count": 127
+  },
+  "onyx": {
+   "name": "onyx",
+   "count": 2
+  },
+  "paint": {
+   "name": "paint",
+   "count": 42
+  },
+  "painted-metal": {
+   "name": "painted metal",
+   "count": 29
+  },
+  "panel": {
+   "name": "panel",
+   "count": 3344
+  },
+  "paper": {
+   "name": "paper",
+   "count": 9692
+  },
+  "papier-pelle": {
+   "name": "papier-pelle",
+   "count": 1
+  },
+  "papyrus": {
+   "name": "papyrus",
+   "count": 5
+  },
+  "parchment": {
+   "name": "parchment",
+   "count": 30
+  },
+  "pastel": {
+   "name": "pastel",
+   "count": 1628
+  },
+  "pebbles": {
+   "name": "pebbles",
+   "count": 2
+  },
+  "pen": {
+   "name": "pen",
+   "count": 929
+  },
+  "pencil": {
+   "name": "pencil",
+   "count": 1885
+  },
+  "pergament": {
+   "name": "pergament",
+   "count": 2
+  },
+  "photogram": {
+   "name": "photogram",
+   "count": 12
+  },
+  "photographic-paper": {
+   "name": "photographic paper",
+   "count": 15
+  },
+  "photography": {
+   "name": "photography",
+   "count": 1563
+  },
+  "photogravure": {
+   "name": "photogravure",
+   "count": 25
+  },
+  "photomontage": {
+   "name": "photomontage",
+   "count": 88
+  },
+  "photomosaic": {
+   "name": "photomosaic",
+   "count": 38
+  },
+  "piano": {
+   "name": "piano",
+   "count": 2
+  },
+  "pigment": {
+   "name": "pigment",
+   "count": 48
+  },
+  "plaster": {
+   "name": "plaster",
+   "count": 57
+  },
+  "plastic": {
+   "name": "plastic",
+   "count": 56
+  },
+  "plates": {
+   "name": "plates",
+   "count": 3
+  },
+  "plexiglas": {
+   "name": "plexiglas",
+   "count": 22
+  },
+  "plug-socket": {
+   "name": "plug socket",
+   "count": 1
+  },
+  "plywood": {
+   "name": "plywood",
+   "count": 33
+  },
+  "polyester": {
+   "name": "polyester",
+   "count": 6
+  },
+  "polymer": {
+   "name": "polymer",
+   "count": 16
+  },
+  "polymer-paint": {
+   "name": "polymer paint",
+   "count": 17
+  },
+  "polystyrene": {
+   "name": "polystyrene",
+   "count": 6
+  },
+  "poplar": {
+   "name": "poplar",
+   "count": 9
+  },
+  "porcelain": {
+   "name": "porcelain",
+   "count": 17
+  },
+  "postcard": {
+   "name": "postcard",
+   "count": 7
+  },
+  "print": {
+   "name": "print",
+   "count": 218
+  },
+  "printed-brochure": {
+   "name": "printed brochure",
+   "count": 2
+  },
+  "pyroxylin": {
+   "name": "pyroxylin",
+   "count": 34
+  },
+  "ready-made": {
+   "name": "ready-made",
+   "count": 79
+  },
+  "recorder-with-cassette": {
+   "name": "recorder with cassette",
+   "count": 1
+  },
+  "resin": {
+   "name": "resin",
+   "count": 15
+  },
+  "rubber": {
+   "name": "rubber",
+   "count": 4
+  },
+  "sand": {
+   "name": "sand",
+   "count": 23
+  },
+  "sandstone": {
+   "name": "sandstone",
+   "count": 1
+  },
+  "sanguine": {
+   "name": "sanguine",
+   "count": 34
+  },
+  "satin": {
+   "name": "satin",
+   "count": 1
+  },
+  "scrapings": {
+   "name": "scrapings",
+   "count": 1
+  },
+  "screenprint": {
+   "name": "screenprint",
+   "count": 119
+  },
+  "sepia": {
+   "name": "sepia",
+   "count": 70
+  },
+  "shell": {
+   "name": "shell",
+   "count": 2
+  },
+  "silk": {
+   "name": "silk",
+   "count": 30
+  },
+  "silkscreen": {
+   "name": "silkscreen",
+   "count": 173
+  },
+  "silver": {
+   "name": "silver",
+   "count": 13
+  },
+  "silverpoint": {
+   "name": "silverpoint",
+   "count": 7
+  },
+  "sound": {
+   "name": "sound",
+   "count": 1
+  },
+  "sponge": {
+   "name": "sponge",
+   "count": 4
+  },
+  "spray-paint": {
+   "name": "spray paint",
+   "count": 24
+  },
+  "stained-glass": {
+   "name": "stained glass",
+   "count": 113
+  },
+  "steel": {
+   "name": "steel",
+   "count": 120
+  },
+  "stencil": {
+   "name": "stencil",
+   "count": 18
+  },
+  "stone": {
+   "name": "stone",
+   "count": 71
+  },
+  "string": {
+   "name": "string",
+   "count": 8
+  },
+  "stucco": {
+   "name": "stucco",
+   "count": 6
+  },
+  "stump": {
+   "name": "stump",
+   "count": 10
+  },
+  "tapestry": {
+   "name": "tapestry",
+   "count": 9
+  },
+  "tar": {
+   "name": "tar",
+   "count": 4
+  },
+  "tempera": {
+   "name": "tempera",
+   "count": 2160
+  },
+  "terracotta": {
+   "name": "terracotta",
+   "count": 86
+  },
+  "textile": {
+   "name": "textile",
+   "count": 3
+  },
+  "tin": {
+   "name": "tin",
+   "count": 23
+  },
+  "travertine": {
+   "name": "travertine",
+   "count": 1
+  },
+  "turquoise": {
+   "name": "turquoise",
+   "count": 1
+  },
+  "tusche": {
+   "name": "tusche",
+   "count": 55
+  },
+  "twine": {
+   "name": "twine",
+   "count": 2
+  },
+  "varnish": {
+   "name": "varnish",
+   "count": 13
+  },
+  "vellum": {
+   "name": "vellum",
+   "count": 50
+  },
+  "video": {
+   "name": "video",
+   "count": 6
+  },
+  "vinyl": {
+   "name": "vinyl",
+   "count": 13
+  },
+  "vitrage": {
+   "name": "vitrage",
+   "count": 10
+  },
+  "wall": {
+   "name": "wall",
+   "count": 108
+  },
+  "wallpaper": {
+   "name": "wallpaper",
+   "count": 4
+  },
+  "wash": {
+   "name": "wash",
+   "count": 169
+  },
+  "watercolor": {
+   "name": "watercolor",
+   "count": 4214
+  },
+  "wax": {
+   "name": "wax",
+   "count": 46
+  },
+  "wax-pastel": {
+   "name": "wax pastel",
+   "count": 6
+  },
+  "white": {
+   "name": "white",
+   "count": 60
+  },
+  "whitewash": {
+   "name": "whitewash",
+   "count": 4
+  },
+  "wine": {
+   "name": "wine",
+   "count": 3
+  },
+  "wire": {
+   "name": "wire",
+   "count": 52
+  },
+  "wood": {
+   "name": "wood",
+   "count": 1900
+  },
+  "wood-engraving-1": {
+   "name": "wood engraving",
+   "count": 9
+  },
+  "color-woodblock-print": {
+   "name": "woodblock print",
+   "count": 319
+  },
+  "woodcut": {
+   "name": "woodcut",
+   "count": 583
+  },
+  "wooden-chair": {
+   "name": "wooden chair",
+   "count": 27
+  },
+  "wooden-sled": {
+   "name": "wooden sled",
+   "count": 1
+  },
+  "wool": {
+   "name": "wool",
+   "count": 4
+  },
+  "zinc": {
+   "name": "zinc",
+   "count": 10
+  }
+ }
+}
