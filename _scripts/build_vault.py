@@ -1935,6 +1935,7 @@ need only Python 3 + Pillow.
 | `artvault_vision.py` | **Optional**: macOS Vision semantic search (search by image / near-duplicates / similar movements) |
 | `ingest_inbox.py` | Processes the `pinterest/` inbox, including the dimensions above in its scan |
 | `verify_vault.py` | **Acceptance checks**: broken links / duplicate names / AI images / frontmatter / near-duplicates / licences / orphans |
+| `github_setup.py` | Push, set as Template, set topics/description in one go (token never appears in argv) |
 | `movement_fingerprint.py` | Movement fingerprints from objective dimensions for image-to-movement matching (explainable, but measurably worse than Vision) |
 | `pinterest_grab.py` / `pinterest_export.py` | Pinterest scraping and export (local use only, images are **not** committed) |
 
@@ -2575,6 +2576,7 @@ python3 make_links.py                 # 重新生成外部检索深链
 | `artvault_vision.py` | **可选**：macOS Vision 语义检索（以图搜图 / 近重复 / 相近流派） |
 | `ingest_inbox.py` | 处理 `pinterest/` 投递箱，扫描时带上上面这些维度 |
 | `verify_vault.py` | **验收检查**：断链 / 重名 / AI 图 / frontmatter / 近重复 / 授权 / 孤儿图 |
+| `github_setup.py` | 推送 + 设为 Template + 设 topics/description 一条龙（token 不进命令行参数） |
 | `movement_fingerprint.py` | 用客观维度建流派指纹做图像→流派匹配（可解释，但实测不如 Vision） |
 | `pinterest_grab.py` / `pinterest_export.py` | Pinterest 抓取与导出（本地自用，图**不入库**） |
 
