@@ -19,6 +19,7 @@ verify_vault.py —— 抓完/改完之后的验收检查。
     5 近重复     跨流派完全相同的图（需要先建 Vision 索引，仅 macOS）
     6 授权       每条作品记录都有 license 字段（来源合法是发布的前提）
     7 孤儿图     磁盘上存在但没有被任何笔记引用的图
+    8 JSON↔磁盘  每个流派的抓取记录与磁盘上的图是否一一对应
 
 退出码：0 全部通过；1 有问题（便于写进 CI 或 pre-commit）。
 """
@@ -207,6 +208,51 @@ def check_orphans():
     return sorted(orphans)
 
 
+def check_data_disk_sync():
+    """8 JSON ↔ 磁盘一致性。这是最直接的一项，能在重建笔记之前就发现问题。
+
+    每个流派的 `_data/<slug>.json` 是抓取结果，磁盘上的图是它的落地。
+    两者必须一一对应。实测真的会脱节：第一轮抓取处理 tonalism 时
+    **下载完图片但在写 JSON 之前中断了**，结果 JSON 还是前一天的 6 条旧记录，
+    磁盘上是 1 张旧图 + 2 张新图。
+
+    这种状态很隐蔽：笔记是按 JSON 生成的，所以笔记引用 5 个不存在的文件，
+    同时磁盘上有 2 张没人引用的孤儿图。要等下一次重建 + 验收才暴露。
+    这一项直接比对两者，不用等。
+    """
+    problems = []
+    for p in sorted(glob.glob(os.path.join(DATA, "*.json"))):
+        base = os.path.basename(p)
+        if base.startswith(("inbox", "vision", "feature", "clip")):
+            continue
+        slug = base[:-5]
+        try:
+            d = json.load(open(p, encoding="utf-8"))
+        except Exception:
+            continue
+        items = d if isinstance(d, list) else (d.get("items") or d.get("works") or [])
+        if isinstance(items, dict):
+            items = [v for v in items.values() if isinstance(v, dict)]
+
+        recorded = set()
+        for w in items:
+            if not isinstance(w, dict) or not w.get("local_image"):
+                continue
+            name = os.path.basename(w["local_image"])
+            recorded.add(name)
+            if not os.path.exists(os.path.join(VAULT, w["local_image"])):
+                problems.append(("JSON 有记录但磁盘缺文件", slug, name))
+
+        folder = os.path.join(IMAGES, slug)
+        if os.path.isdir(folder):
+            for f in os.listdir(folder):
+                if f.startswith("."):
+                    continue
+                if f not in recorded:
+                    problems.append(("磁盘有文件但 JSON 无记录", slug, f))
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -256,6 +302,7 @@ def main():
 
     report("6 授权字段", check_license())
     report("7 孤儿图", check_orphans())
+    report("8 JSON↔磁盘", check_data_disk_sync())
 
     print("=" * 70)
     if failed:

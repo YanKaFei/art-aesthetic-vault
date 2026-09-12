@@ -13,6 +13,32 @@
   "local_image": "99-附件/images/tonalism/01-tonalism-the-garden.jpg"
  },
  {
+  "title": "Nocturne: Blue and Gold—Southampton Water",
+  "artist": "James McNeill Whistler",
+  "date": "1872",
+  "medium": "Oil on canvas",
+  "image_url": "https://www.artic.edu/iiif/2/50034c7f-ce51-00f1-430e-a6f7efc233fc/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/50034c7f-ce51-00f1-430e-a6f7efc233fc/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/56905",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/tonalism/02-tonalism-nocturne-blue-and-goldsouthampton-water.jpg"
+ },
+ {
+  "title": "Arrangement in Flesh Colour and Black: Portrait of Theodore Duret",
+  "artist": "James McNeill Whistler",
+  "date": "1883",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/DT92.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ad/original/DT92.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/13211",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/tonalism/03-tonalism-arrangement-in-flesh-colour-and-black-portra.jpg"
+ },
+ {
   "title": "Japanese Woman Painting a Fan (recto); Standing Woman Holding Up Her Dress (verso)",
   "artist": "James McNeill Whistler",
   "date": "c. 1872",
@@ -23,58 +49,32 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/tonalism/02-tonalism-japanese-woman-painting-a-fan-recto-standing.jpg"
+  "local_image": "99-附件/images/tonalism/04-tonalism-japanese-woman-painting-a-fan-recto-standing.jpg"
  },
  {
-  "title": "The Storm",
+  "title": "Butterfly",
   "artist": "James McNeill Whistler",
-  "date": "1861",
-  "medium": "drypoint",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1924.47/1924.47_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1924.47/1924.47_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1924.47",
-  "source": "克利夫兰艺术博物馆",
+  "date": "c. 1890",
+  "medium": "Graphite on ivory wove paper",
+  "image_url": "https://www.artic.edu/iiif/2/d92660fb-b49a-ff1f-e761-0efacce3023f/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/d92660fb-b49a-ff1f-e761-0efacce3023f/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/14488",
+  "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/tonalism/03-tonalism-the-storm.jpg"
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/tonalism/05-tonalism-butterfly.jpg"
  },
  {
-  "title": "Nocturne",
+  "title": "Cremorne Gardens, No. 2",
   "artist": "James McNeill Whistler",
-  "date": "1878",
-  "medium": "lithograph on chine collé",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1941.89/1941.89_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1941.89/1941.89_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1941.89",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/tonalism/04-tonalism-nocturne.jpg"
- },
- {
-  "title": "Confidence in the Garden",
-  "artist": "James McNeill Whistler",
-  "date": "1894",
-  "medium": "lithograph",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1923.40/1923.40_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1923.40/1923.40_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1923.40",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/tonalism/05-tonalism-confidence-in-the-garden.jpg"
- },
- {
-  "title": "The Violin Player",
-  "artist": "James McNeill Whistler",
-  "date": "c. 1890–94",
-  "medium": "oil on canvas",
-  "image_url": "https://openaccess-cdn.clevelandart.org/1942.1133/1942.1133_web.jpg",
-  "image_url_hi": "https://openaccess-cdn.clevelandart.org/1942.1133/1942.1133_print.jpg",
-  "page_url": "https://www.clevelandart.org/art/1942.1133",
-  "source": "克利夫兰艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/tonalism/06-tonalism-the-violin-player.jpg"
+  "date": "ca. 1870–80",
+  "medium": "Oil on canvas",
+  "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/DT2780.jpg",
+  "image_url_hi": "https://images.metmuseum.org/CRDImages/ad/original/DT2780.jpg",
+  "page_url": "https://www.metmuseum.org/art/collection/search/13223",
+  "source": "大都会艺术博物馆",
+  "license": "CC0 1.0（Open Access 公共领域）",
+  "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+  "local_image": "99-附件/images/tonalism/06-tonalism-cremorne-gardens-no-2.jpg"
  }
 ]

@@ -148,8 +148,13 @@ MOVEMENTS = [
  "pitfalls": ["太笼统 → 必须指定子类型（geometric / lyrical / gestural）",
               "版权：20 世纪作品多数在版权期内，只存提示词",
               "收图只取公有领域的早期抽象（康定斯基/克利/李西茨基/莫霍利-纳吉），"
-              "马列维奇、德库宁、罗斯科的作品要么仍在版权期、要么源里只有"
-              "文献照片，宁可空着也不收错"],
+              "马列维奇、德库宁、罗斯科的作品要么仍在版权期、要么源里只有文献照片",
+              "**这个流派天生会和其他流派重叠，是艺术史事实，不是 bug**："
+              "「抽象艺术」是跨越运动的大类，没有自己的艺术家名册 —— "
+              "康定斯基属青骑士/包豪斯/表现主义，克利属青骑士/包豪斯，"
+              "李西茨基属至上主义/构成主义，莫霍利-纳吉属包豪斯，莱热属立体主义。"
+              "实测 6 张图里 3 张与 der-blaue-reiter / bauhaus 相同，"
+              "跑 verify_vault.py 的第 5 项可以看到。判断标准是「重叠说得通就保留」"],
  "sources": {"cleveland": ["kandinsky", "klee"],
              "met": ["kandinsky", "klee", "moholy-nagy"],
              "commons": ["Wassily Kandinsky painting", "Paul Klee painting",

@@ -1,5 +1,18 @@
 [
  {
+  "title": "Hortensia",
+  "artist": "Frank Eugene",
+  "date": "1898",
+  "medium": "Platinum print",
+  "image_url": "https://www.artic.edu/iiif/2/2f9a0bec-4208-93cd-a5bc-3f392b262cfd/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/2f9a0bec-4208-93cd-a5bc-3f392b262cfd/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/66702",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/pictorialism/01-pictorialism-hortensia.jpg"
+ },
+ {
   "title": "Nu drapé voile bleu cropped R. Demachy ca 1907-15",
   "artist": "Robert Demachy",
   "date": "between 1907 and 1915 date QS:P,+1950-00",
@@ -10,7 +23,20 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/pictorialism/01-pictorialism-nu-drapé-voile-bleu-cropped-r-demachy-ca-190.jpg"
+  "local_image": "99-附件/images/pictorialism/02-pictorialism-nu-drapé-voile-bleu-cropped-r-demachy-ca-190.jpg"
+ },
+ {
+  "title": "John Marin",
+  "artist": "Alfred Stieglitz",
+  "date": "1910",
+  "medium": "Platinum print",
+  "image_url": "https://www.artic.edu/iiif/2/83f0e795-8fe9-7447-fbf3-90e6e42a4600/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/83f0e795-8fe9-7447-fbf3-90e6e42a4600/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/66327",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/pictorialism/03-pictorialism-john-marin.jpg"
  },
  {
   "title": "Nu féminin allongé, drapé d'un voile rose, par Robert Demachy",
@@ -23,19 +49,32 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/pictorialism/02-pictorialism-nu-féminin-allongé-drapé-dun-voile-rose-par.jpg"
+  "local_image": "99-附件/images/pictorialism/04-pictorialism-nu-féminin-allongé-drapé-dun-voile-rose-par.jpg"
  },
  {
-  "title": "Joseph T. Keiley, photographed by Gertrude Käsebier, 1900",
-  "artist": "Gertrude Käsebier, 1900",
-  "date": "circa 1899 date QS:P,+1899-00-00T00:00:0",
-  "medium": "Joseph T. Keiley, photographed by Gertrude Käsebier, 1900",
-  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Joseph_T._Keiley,_photographed_by_Gertrude_K%C3%A4sebier,_1900.jpg?width=320",
-  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/5/59/Joseph_T._Keiley%2C_photographed_by_Gertrude_K%C3%A4sebier%2C_1900.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-  "page_url": "https://commons.wikimedia.org/wiki/File:Joseph_T._Keiley%2C_photographed_by_Gertrude_K%C3%A4sebier%2C_1900.jpg",
+  "title": "An Icy Night, New York",
+  "artist": "Alfred Stieglitz",
+  "date": "1898",
+  "medium": "Carbon print",
+  "image_url": "https://www.artic.edu/iiif/2/4affa44a-d7ba-2f99-ddb8-e1e9f61660b4/full/843,/0/default.jpg",
+  "image_url_hi": "https://www.artic.edu/iiif/2/4affa44a-d7ba-2f99-ddb8-e1e9f61660b4/full/1686,/0/default.jpg",
+  "page_url": "https://www.artic.edu/artworks/66258",
+  "source": "芝加哥艺术博物馆",
+  "license": "CC0 1.0 公共领域奉献",
+  "license_url": "https://www.artic.edu/open-access/open-access-images",
+  "local_image": "99-附件/images/pictorialism/05-pictorialism-an-icy-night-new-york.jpg"
+ },
+ {
+  "title": "Nu féminin assis - portrait de 3-4 à droite - btv1b6904392c",
+  "artist": "Demachy, Robert (1859-1936). Photographe",
+  "date": "between 1907 and 1915 date QS:P571,+1950",
+  "medium": "Nu féminin assis : portrait de 3/4 à droite : photographie /",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Nu_f%C3%A9minin_assis_-_portrait_de_3-4_%C3%A0_droite_-_btv1b6904392c.jpg?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/8/87/Nu_f%C3%A9minin_assis_-_portrait_de_3-4_%C3%A0_droite_-_btv1b6904392c.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Nu_f%C3%A9minin_assis_-_portrait_de_3-4_%C3%A0_droite_-_btv1b6904392c.jpg",
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/pictorialism/03-pictorialism-joseph-t-keiley-photographed-by-gertrude-käs.jpg"
+  "local_image": "99-附件/images/pictorialism/06-pictorialism-nu-féminin-assis---portrait-de-3-4-à-droite.jpg"
  }
 ]
