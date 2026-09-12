@@ -23,6 +23,7 @@ fetch_art.py —— 从开放授权美术馆 / 维基共享资源抓取公共领
 import json
 import os
 import re
+import shutil
 import sys
 import time
 
@@ -169,6 +170,11 @@ def run(only=None, per=6, refresh=False, allow_ccby=False, tier=None):
             done += 1
             continue
         d = os.path.join(IMG_DIR, slug)
+        # --refresh 时必须先清空这个流派的图片目录。
+        # 否则换了数据源之后，旧图还在、新图又进来，会留下一堆
+        # 没有任何笔记引用的孤儿文件（它们照样占体积、照样被 clone）。
+        if refresh:
+            shutil.rmtree(d, ignore_errors=True)
         os.makedirs(d, exist_ok=True)
         for i, w in enumerate(works, 1):
             # 文件名必须带 slug：不同流派可能收录同一件作品，
