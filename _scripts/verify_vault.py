@@ -20,6 +20,7 @@ verify_vault.py —— 抓完/改完之后的验收检查。
     6 授权       每条作品记录都有 license 字段（来源合法是发布的前提）
     7 孤儿图     磁盘上存在但没有被任何笔记引用的图
     8 JSON↔磁盘  每个流派的抓取记录与磁盘上的图是否一一对应
+    9 笔记双链   每个 [[...]] 都能解析到一篇笔记（含表格转义处理）
 
 退出码：0 全部通过；1 有问题（便于写进 CI 或 pre-commit）。
 """
@@ -253,6 +254,37 @@ def check_data_disk_sync():
     return problems
 
 
+def check_note_links():
+    """9 笔记双链：每个 [[...]] 都能解析到一篇笔记。
+
+    这一项一直缺 —— 原来的断链检查只覆盖 `![[图片]]` 嵌入，
+    不覆盖 `[[笔记]]` 双链。
+
+    **必须正确处理表格里的转义 `\|`。** Markdown 表格中不转义的 `|`
+    会破坏单元格，所以 Obsidian 规定表格内的别名写法就是
+    `[[笔记\|别名]]`（见官方文档 “Vertical bars in tables”）。
+    最初没处理这个转义，把 12 条**完全合法**的链接报成了断链 ——
+    检查器自己的 bug，不是库的 bug。
+    """
+    notes = set()
+    for d in NOTE_DIRS:
+        for p in glob.glob(os.path.join(VAULT, d, "**", "*.md"), recursive=True):
+            notes.add(os.path.splitext(os.path.basename(p))[0])
+    unresolved = []
+    for md in _notes():
+        try:
+            t = open(md, encoding="utf-8").read()
+        except Exception:
+            continue
+        t = re.sub(r"```.*?```", "", t, flags=re.S)      # 去掉代码块里的示例
+        t = t.replace("\\|", "|")                        # 还原表格转义
+        for m in re.findall(r"(?<!!)\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]", t):
+            name = m.strip()
+            if name and name not in notes:
+                unresolved.append((os.path.relpath(md, VAULT), name))
+    return unresolved
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -303,6 +335,7 @@ def main():
     report("6 授权字段", check_license())
     report("7 孤儿图", check_orphans())
     report("8 JSON↔磁盘", check_data_disk_sync())
+    report("9 笔记双链", check_note_links())
 
     print("=" * 70)
     if failed:
