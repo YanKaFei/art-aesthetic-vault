@@ -122,6 +122,17 @@ TOOLS = [
                                        "topn": {"type": "integer", "default": 5}},
                         "required": ["path"]},
     },
+    {
+        "name": "get_video_prompt",
+        "description": ("取某个流派**可直接粘贴的中文视频提示词**，两块格式不同、不能混用："
+                        "A 块是 Seedance 2.5 五段式（主体/风格/时间线/BGM/限制）；"
+                        "B 块是 MiniMax H3（海螺）官网/API 用的中文自然语言 —— "
+                        "H3 有 Context-IR 前置，手工结构化会和它打架，所以 B 块刻意不结构化。"),
+        "inputSchema": {"type": "object",
+                        "properties": {"slug": {"type": "string",
+                                                "description": "流派 slug 或中文名，例如 baroque / 巴洛克"}},
+                        "required": ["slug"]},
+    },
 ]
 
 
@@ -192,6 +203,15 @@ def call_tool(name, args):
         return _analyze_image(args.get("path", ""))
     if name == "match_movement":
         return _match_movement(args.get("path", ""), int(args.get("topn", 5)))
+    if name == "get_video_prompt":
+        c, hints = A.resolve(args.get("slug", ""))
+        if not c:
+            return _not_found(args.get("slug"), hints)
+        r = A.video_prompts(c)
+        return {"movement": c["name_zh"], "duration_seconds": r["duration"],
+                "seedance_2_5": r["seedance"], "minimax_h3": r["h3"],
+                "note": "两块格式不同不能混用：H3 官网/API 用 minimax_h3（自然语言），"
+                        "Seedance 用 seedance_2_5（五段式）。"}
     raise ValueError("未知工具：" + name)
 
 

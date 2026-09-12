@@ -150,7 +150,7 @@ cd "$VAULT/_scripts" && python3 ingest_inbox.py --scan
   "args": ["<VAULT>/_scripts/mcp_server.py"]}}}
 ```
 
-工具（9 个）：`search_movements` `get_movement` `get_layers` `compose_prompt`
+工具（10 个）：`search_movements` `get_movement` `get_layers` `compose_prompt`
 `get_palette` `find_related` `list_categories` `analyze_image` `match_movement`。
 纯标准库实现。
 

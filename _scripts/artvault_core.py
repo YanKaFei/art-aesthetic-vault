@@ -97,6 +97,16 @@ def cards():
     return _CACHE["cards"]
 
 
+def video_prompts(mv):
+    """取某个流派的两块可粘贴中文视频提示词（Seedance 2.5 / MiniMax H3）。
+
+    实现在 video_prompt.py，这里只做转发 —— 卡片和 CLI 共用同一份生成逻辑，
+    避免两边各写一套后漂移。
+    """
+    import video_prompt
+    return video_prompt.build(mv)
+
+
 def by_slug():
     if "byslug" not in _CACHE:
         _CACHE["byslug"] = {c["slug"]: c for c in cards()}

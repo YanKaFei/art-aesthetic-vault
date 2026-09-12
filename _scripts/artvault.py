@@ -47,6 +47,7 @@ def main():
     p = sub.add_parser("layers"); p.add_argument("slug")
     p = sub.add_parser("palette"); p.add_argument("slug")
     p = sub.add_parser("related"); p.add_argument("slug")
+    p = sub.add_parser("video"); p.add_argument("slug")   # 两块可粘贴的视频提示词
     p = sub.add_parser("compose")
     p.add_argument("brief", nargs="?", default="")
     p.add_argument("--subject")
@@ -82,6 +83,27 @@ def main():
             return 0
         for c in r:
             print("  %-12s %-10s %s" % (c["slug"], c["name_zh"], c["one_liner"]))
+
+    elif a.cmd == "video":
+        c, hints = A.resolve(a.slug)
+        if not c:
+            print("没找到：%s" % a.slug); return 1
+        r = A.video_prompts(c)
+        if out({"seedance": r["seedance"], "minimax_h3": r["h3"],
+                "duration": r["duration"]}, a.json):
+            return 0
+        print("== %s · AI 视频层 ==" % c["name_zh"])
+        print()
+        print("【A】Seedance 2.5 五段式（直接粘贴，单条最长 30s）")
+        print("─" * 58)
+        print(r["seedance"])
+        print()
+        print("【B】MiniMax H3 海螺（官网/API，中文自然语言，4–15 秒）")
+        print("─" * 58)
+        print(r["h3"])
+        print()
+        print("※ 两块不要混用：H3 有 Context-IR 前置，手工塞分镜和时间戳会和它打架。")
+        return 0
 
     elif a.cmd in ("show", "layers", "palette", "related"):
         # 标识符查找走 A.resolve()，不走 search() —— search 是全文模糊检索，

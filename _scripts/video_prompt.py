@@ -180,16 +180,22 @@ def build(mv, duration=10):
     # 刻意不出现 [Shot N]、时间戳、字段名 —— H3 有 Context-IR 前置，
     # 手工结构化会和它打架。只把「它不会替你决定的东西」讲清楚：
     # 时长、镜头意图、声音层次、素材分工。
-    h3 = (
-        "一段 %d 秒的%s风格视频。画面是<你的主体>，在<场景>中%s。%s"
-        "开头两秒就要给出最强的视觉信息，不要用缓慢推进开场。全片%s。"
-        % (dur, mv.get("name_zh") or "", ("，" + cl[0]) if cl else "", body_style, camzh)
-        if not static else
-        "一段 %d 秒的%s风格视频。画面是<你的主体>，在<场景>中%s。%s"
-        "开头两秒就要给出最强的视觉信息。这是几乎静止的画面，镜头全程固定不动，"
-        "靠光线和雾气自身的缓慢变化推进，不要加任何运镜。"
-        % (dur, mv.get("name_zh") or "", ("，" + cl[0]) if cl else "", body_style)
-    )
+    # 三元表达式里混 % 格式化很容易写错（实测踩过），改成显式 if/else
+    _pre_cam = "" if any(x in camzh for x in ("机位", "镜头")) else "镜头"
+    if static:
+        h3 = (
+            "一段 %d 秒的%s风格视频。画面是<你的主体>，在<场景>中%s。%s"
+            "开头两秒就要给出最强的视觉信息。这是几乎静止的画面，镜头全程固定不动，"
+            "靠画面内部自身的缓慢变化推进（%s），不要加任何运镜。"
+            % (dur, mv.get("name_zh") or "", ("，" + cl[0]) if cl else "", body_style, a)
+        )
+    else:
+        h3 = (
+            "一段 %d 秒的%s风格视频。画面是<你的主体>，在<场景>中%s。%s"
+            "开头两秒就要给出最强的视觉信息，不要用缓慢推进开场。全片%s。"
+            % (dur, mv.get("name_zh") or "", ("，" + cl[0]) if cl else "",
+               body_style, _pre_cam + camzh)
+        )
     h3 += (
         "声音分三层：环境音按场景给；动作音跟着画面里的动作走；配乐%s。"
         % (v.get("bgm") or _bgm(mood))

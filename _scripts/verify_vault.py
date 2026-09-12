@@ -23,6 +23,7 @@ verify_vault.py —— 抓完/改完之后的验收检查。
     9 笔记双链   每个 [[...]] 都能解析到一篇笔记（含表格转义处理）
    10 署名质量   卡片上没有「上传者当画家」「机器语法当日期」
    11 视频层     每张卡都有 Seedance 五段式 + H3 自然语言两块中文提示词
+   12 新鲜度     生成脚本没比笔记新（否则说明上次重建失败，笔记是旧的）
 
 退出码：0 全部通过；1 有问题（便于写进 CI 或 pre-commit）。
 """
@@ -351,6 +352,31 @@ def check_video_layer():
     return problems
 
 
+def check_generated_freshness():
+    """12 生成物新鲜度：生成脚本比笔记新 → 上次重建失败或没重建。
+
+    这是今天踩了两次的坑：`build_vault.py` 报错退出（exit 1）时，
+    **10-流派/ 下的笔记还是上一次成功构建的旧文件**，于是所有检查照常通过 ——
+    验收全绿，但内容是旧的。只查「笔记里的东西对不对」看不出这个问题，
+    必须比对**时间**。
+    """
+    srcs = [os.path.join(HERE, "build_vault.py"), os.path.join(HERE, "movements.py"),
+            os.path.join(HERE, "video_prompt.py"), os.path.join(HERE, "providers.py")]
+    srcs += glob.glob(os.path.join(HERE, "mv_*.py"))
+    srcs = [p for p in srcs if os.path.exists(p)]
+    if not srcs:
+        return None
+    newest = max(os.path.getmtime(p) for p in srcs)
+    newest_name = os.path.basename(max(srcs, key=os.path.getmtime))
+
+    stale = []
+    for d in ("10-流派", "00-导航"):
+        for p in glob.glob(os.path.join(VAULT, d, "*.md")):
+            if os.path.getmtime(p) < newest - 1:      # 容 1 秒误差
+                stale.append((os.path.relpath(p, VAULT), "比 " + newest_name + " 旧"))
+    return stale
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -404,6 +430,7 @@ def main():
     report("9 笔记双链", check_note_links())
     report("10 署名质量", check_attribution())
     report("11 视频层", check_video_layer())
+    report("12 生成物新鲜度", check_generated_freshness())
 
     print("=" * 70)
     if failed:
