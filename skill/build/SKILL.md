@@ -128,14 +128,30 @@ MCP 服务（纯标准库，7 个工具）：`python3 mcp_server.py`
 ### 阶段 4：图片分析与投递箱
 
 ```bash
-python3 image_analysis.py <图片>        # T1 零依赖维度
-python3 ingest_inbox.py --scan          # 投递箱扫描
+python3 image_analysis.py <图片>              # 七维度客观测量（纯 Pillow）
+python3 image_analysis.py <目录> --json       # 批量
+ARTVAULT_NO_EXT=1 python3 image_analysis.py <图片>   # 关掉增强维度
+python3 image_analysis_ext.py <图片>          # 三个可选增强（要 numpy + opencv）
+python3 artvault_vision.py build              # 语义索引（仅 macOS，可选）
+python3 artvault_vision.py dups --thresh 0.08 # 近重复检测（验收第 5 项）
+python3 ingest_inbox.py --scan                # 投递箱扫描（已带上以上维度）
 ```
 
-工作流：用户把参考图丢进 `pinterest/` → AI 逐张 `read_image` 看图 →
+**七维度**：明度 / 对比 / 色彩 / 和谐 / 构图 / 质感 / 线条 —— 每一项都能翻译成
+提示词（「低明调」→ `low-key lighting`，「繁杂」→ `intricate detail`）。
+
+**三个可选增强**：人脸景别 / 霍夫直线 / 谱残差显著性。装了 numpy+opencv 才有，
+没装自动跳过，主脚本照常跑（`ARTVAULT_NO_EXT=1` 可强制关掉）。
+
+**关键提醒**：这些数字是**信号不是结论**。实测纯按配色距离匹配，一张油画会被
+算成最接近「现实主义」，但那只是土色系重合、风格毫不相干。正确用法是先看图
+凭感觉判断，再看数字检查有没有看走眼，冲突时回去看图。
+
+投递箱工作流：用户把参考图丢进 `pinterest/` → AI 逐张 `read_image` 看图 →
 七层拆解 + 匹配流派 → 写 `20-我的提示词/投递箱-<日期>.md` → `--archive` 归档。
 
-详见 `reference/analysis.md`。
+详见 `reference/analysis.md`（含和谐维度换过三版、人脸不能缩到 256 检测、
+霍夫 threshold=45 会把噪声当直线等踩坑记录）。
 
 ### 阶段 5：安装查询 skill
 
@@ -168,6 +184,20 @@ EOF
 ```
 
 **四项必须全过：断链 0 · 重名 0 · AI 图 0 · frontmatter 合法。**
+
+第 5 项（可选，仅 macOS）：近重复检测。它一次就找出过 `abstract-art`
+仅有 2 张图、却和 `de-stijl` 一模一样的问题。
+
+```bash
+cd _scripts
+python3 artvault_vision.py build              # 600 张约 8 秒
+python3 artvault_vision.py dups --thresh 0.08
+```
+
+**注意大部分跨流派重复是合理的**，不是 bug —— 一件作品本来就可以同时是多个
+流派的例证（Caravaggisti 属巴洛克、Diego Rivera 同属壁画运动与社会现实主义）。
+人工过的时候判断的是：重叠说得通 → 保留；还是关键词选错了（该流派真正该有的
+作品一张都没有）→ 改关键词。详见 `reference/pitfalls.md` 的 4.5。
 
 ---
 
