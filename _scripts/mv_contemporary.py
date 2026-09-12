@@ -146,8 +146,19 @@ MOVEMENTS = [
            "camera": "static 平面构图；让画面内部运动",
            "note": "抽象是一个大类——提示词里要说明是几何抽象还是抒情抽象"},
  "pitfalls": ["太笼统 → 必须指定子类型（geometric / lyrical / gestural）",
-              "版权：20 世纪作品多数在版权期内，只存提示词"],
- "sources": {"cleveland": ["abstract art"], "met": ["abstract art"], "commons": []},
+              "版权：20 世纪作品多数在版权期内，只存提示词",
+              "收图只取公有领域的早期抽象（康定斯基/克利/李西茨基/莫霍利-纳吉），"
+              "马列维奇、德库宁、罗斯科的作品要么仍在版权期、要么源里只有"
+              "文献照片，宁可空着也不收错"],
+ "sources": {"cleveland": ["kandinsky", "klee"],
+             "met": ["kandinsky", "klee", "moholy-nagy"],
+             "commons": ["Wassily Kandinsky painting", "Paul Klee painting",
+                         "El Lissitzky", "László Moholy-Nagy"]},
+ # 姓氏匹配会撞上在世同姓者与文献照，实测过的坑见 vision/README.md：
+ #   "Catherine Delaunay 2025" 在世同姓者 / "August Macke, Zeichnung Paul Klee"
+ #   别人画的克利 / "Balla signature" 一个签名 / "Casimir Malevich photo" 人物照
+ "exclude_keys": ["macke", "signature", "photo", "unknown author",
+                  "portrait of", "ex libris"],
  "see_also": ["suprematism", "de-stijl", "abstract-expressionism", "art-informel"],
 },
 # ---------------------------------------------------------------- 无形式艺术
@@ -770,7 +781,12 @@ ARTIST_KEYS = {
  "avant-garde": ["avant-garde", "manifesto", "situationis", "debord", "dada", "constructivis"],
  "contemporary-art": ["contemporary art", "installation", "biennale", "beuys", "sherman", "koons"],
  "postmodernism": ["postmodern", "rauschenberg", "kruger", "sherman", "levine", "venturi"],
- "abstract-art": ["abstract", "kandinsky", "mondrian", "malevich", "de kooning", "rothko"],
+ # 原来的 ["abstract", "kandinsky", "mondrian", "malevich", "de kooning", "rothko"]
+ # 有三个问题，全部由实测发现（详见 vision/README.md）：
+ #   1. "mondrian" 让 2 张蒙德里安占满名额，与 de-stijl 完全重复
+ #   2. "abstract" 会拉进 "Abstract background image-03" 这类业余图库图
+ #   3. "malevich"/"de kooning"/"rothko" 在这些 CC0 源里只有文献照片，没有真迹
+ "abstract-art": ["kandinsky", "klee", "lissitzky", "moholy-nagy", "leger"],
  "art-informel": ["informel", "fautrier", "tapies", "tàpies", "burri", "wols", "matter painting"],
  "tachisme": ["tachis", "hartung", "mathieu", "soulages", "bryen", "degoix"],
  "lyrical-abstraction": ["frankenthaler", "olitski", "louis", "jenkins", "natkin", "lyrical"],

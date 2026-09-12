@@ -228,7 +228,20 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \
 cd skill && ./install.sh
 ```
 
-它会用**软链接**把 skill 装到本机所有可用的 skill 目录：
+仓库提供**两个** skill，一次装好：
+
+| skill | 干什么 | 什么时候触发 |
+|---|---|---|
+| `art-aesthetic-vault` | **用**库：检索流派、取七层提示词、跨流派拼提示词 | 你问「这个角色该用什么风格」 |
+| `build-art-aesthetic-vault` | **建**库：从零建一套新的 | 你说「我也想要一套这样的库」 |
+
+> [!note] 为什么两个 skill 都不自带数据
+> 它们都是**软链**指向本仓库 —— 数据只有仓库这一份。
+> `mv_*.py`（141 个流派定义）如果被打包进 skill，就会出现两份、
+> 必然会分叉。实测过：打包版本里有 4 个文件与仓库不同步，
+> 用它建出来的库分类是错的。
+
+它会把这些软链建到本机所有可用的 skill 目录：
 
 | 目录 | 谁读它 |
 |---|---|
@@ -362,6 +375,48 @@ python3 make_links.py                 # 重新生成外部检索深链
 | `mv_contemporary.py` | 先锋·当代·后现代 |
 | `mv_visual.py` | 数字·亚文化·摄影美学 |
 | `mv_photo.py` | 摄影与图像 |
+
+---
+
+## 工具清单
+
+`_scripts/` 下每个脚本的分工。除了标注**可选**的，都只要 Python 3 + Pillow。
+
+### 门面
+
+| 脚本 | 干什么 |
+|---|---|
+| `artvault.py` | 主查询接口：`categories` `search` `layers` `show` `palette` `related` `compose` |
+| `mcp_server.py` | 同一套能力包装成 MCP server，给 Claude Desktop / Cursor 直连 |
+
+### 数据源与生成
+
+| 脚本 | 干什么 |
+|---|---|
+| `movements.py` | 汇总 141 个流派定义，是**唯一数据源** |
+| `mv_*.py` | 流派卡片与过滤关键词（按分类分成 8 个文件） |
+| `providers.py` | 四个 CC0 数据源适配器 + 三层过滤（AI 图 / 平面作品 / 作者匹配） |
+| `fetch_art.py` | 抓图：按来源轮转、两层过滤、`--refresh` 清孤儿图 |
+| `build_vault.py` | **生成** Obsidian 笔记 / README / LICENSE / .gitignore |
+| `make_links.py` | 生成外部检索深链 |
+| `keyword_map.py` | 生成关键词图谱 |
+
+### 图片分析
+
+| 脚本 | 干什么 |
+|---|---|
+| `image_analysis.py` | 七维度客观测量：明度 / 对比 / 色彩 / 和谐 / 构图 / 质感 / 线条。纯 Pillow |
+| `image_analysis_ext.py` | **可选**：人脸景别 / 霍夫直线 / 谱残差显著性。要 numpy + opencv，没装自动跳过 |
+| `artvault_vision.py` | **可选**：macOS Vision 语义检索（以图搜图 / 近重复 / 相近流派） |
+| `ingest_inbox.py` | 处理 `pinterest/` 投递箱，扫描时带上上面这些维度 |
+| `pinterest_grab.py` / `pinterest_export.py` | Pinterest 抓取与导出（本地自用，图**不入库**） |
+
+### 两条容易被忽略的约定
+
+1. **改生成物，先改模板。**
+   `10-流派/*.md`、`00-导航/*.md`、`README.md` 全部由 `build_vault.py` 生成，
+   直接编辑会在下次重建时被覆盖（这份工具清单本身也在模板里）。
+2. **`20-我的提示词/` 是你自己的。** 脚本只读不覆盖，可以放心写。
 
 ---
 
