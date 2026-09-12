@@ -294,9 +294,13 @@ def match(path, topn=5):
         print("CLIP 不可用。先跑：python3 clip_embed.py download")
         return 1
     slugs, M = tm
+    why = C.available()
+    if why:
+        print("CLIP 不可用：%s" % why)
+        return 1
     emb = C.embed_batch([path])
     if not emb:
-        print("图像编码失败")
+        print("图像编码失败（文件不存在或不是有效图片）：%s" % path)
         return 1
     q = np.asarray(list(emb.values())[0], dtype="f4")
     q = q / max(float(np.linalg.norm(q)), 1e-8)
