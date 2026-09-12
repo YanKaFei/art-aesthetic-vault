@@ -117,10 +117,31 @@ def palette_distance(pal_a, pal_b):
     return (d1 + d2) / 2
 
 
+def load_analyzer():
+    """把 image_analysis 的七个客观维度接进来。找不到就跳过，不影响扫描。"""
+    try:
+        import image_analysis
+        return image_analysis
+    except Exception:
+        return None
+
+
+_ANALYZER = None
+
+
+def render_analysis(r):
+    """渲染单个分析结果（省掉调用方已经印过的头行和主色行）。"""
+    global _ANALYZER
+    if _ANALYZER is None:
+        _ANALYZER = load_analyzer()
+    return _ANALYZER.render(r, compact=True) if _ANALYZER else ""
+
+
 # ------------------------------------------------------------------ 扫描
-def scan_new():
+def scan_new(analyze=True):
     if not os.path.isdir(INBOX):
         return []
+    analyzer = load_analyzer() if analyze else None
     out = []
     for fn in sorted(os.listdir(INBOX)):
         p = os.path.join(INBOX, fn)
@@ -144,6 +165,11 @@ def scan_new():
                 im.close()
             except Exception as e:
                 rec["error"] = "读取失败: %s" % str(e)[:60]
+            if analyzer and not rec.get("error"):
+                try:
+                    rec["analysis"] = analyzer.analyze(p)
+                except Exception as e:
+                    rec["analysis_error"] = str(e)[:80]
         else:
             rec["error"] = "未安装 Pillow，只能列出文件"
         out.append(rec)
@@ -207,6 +233,12 @@ def render(recs, dups, matches):
         L.append("   尺寸 %dx%d  %s  比例 %.2f" % (r["width"], r["height"], r["orientation"], r["ratio"]))
         L.append("   主色 " + "  ".join("%s %.0f%%" % (c["hex"], c["pct"]) for c in r["colors"]))
         L.append("   感知哈希 %s" % r["dhash"])
+        if r.get("analysis"):
+            # 客观测量，供拆解时参考 —— 数字是信号不是结论，最终判断靠看图
+            for ln in render_analysis(r["analysis"]).split("\n"):
+                L.append("   " + ln)
+        elif r.get("analysis_error"):
+            L.append("   ⚠ 维度分析失败: %s" % r["analysis_error"])
         if r["file"] in matches:
             L.append("   配色最近的流派：")
             for m in matches[r["file"]]:
@@ -227,17 +259,19 @@ def main():
     ap.add_argument("--archive", action="store_true")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--palette-match", type=int, default=3, metavar="N")
+    ap.add_argument("--no-analysis", action="store_true",
+                    help="跳过七维度客观测量（只想快速列文件时用）")
     a = ap.parse_args()
 
     if a.archive:
-        recs = scan_new()
+        recs = scan_new(analyze=False)
         if not recs:
             print("投递箱是空的，没有要归档的。"); return 0
         n = archive(recs)
         print("已归档 %d 张 → pinterest/_已归档/" % n)
         return 0
 
-    recs = scan_new()
+    recs = scan_new(analyze=not a.no_analysis)
     if not recs:
         print("投递箱是空的。把图片放进 pinterest/ 再来。")
         return 0
