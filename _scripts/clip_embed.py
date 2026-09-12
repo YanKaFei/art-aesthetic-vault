@@ -201,11 +201,18 @@ def _preprocess(paths):
     std = np.array(cfg.get("image_std", [0.26862954, 0.26130258, 0.27577711]), dtype="f4")
 
     out = np.zeros((len(paths), 3, size, size), dtype="f4")
+    ok = []
     for i, p in enumerate(paths):
         try:
             im = Image.open(p).convert("RGB")
         except Exception:
+            # **不能 continue 了事**：那样这一格会留成全零，然后照样送进模型，
+            # 等于把「一张黑图」当输入，静默产出一个看起来正常的预测。
+            # 实测 match_movement 传一个不存在的路径时，它返回了一串建议、
+            # 还不报错 —— 这就是最该避免的「悄悄给错数据」。
+            # 改成记录失败下标，调用方只对成功的那些返回结果。
             continue
+        ok.append(i)
         w, h = im.size
         s = size / float(min(w, h))
         im = im.resize((max(size, int(round(w * s))), max(size, int(round(h * s)))),
@@ -216,7 +223,7 @@ def _preprocess(paths):
         a = np.asarray(im, dtype="f4") / 255.0
         a = (a - mean) / std
         out[i] = a.transpose(2, 0, 1)
-    return out
+    return out, ok
 
 
 def embed_batch(paths, verbose=False):
@@ -232,9 +239,14 @@ def embed_batch(paths, verbose=False):
     res = {}
     for i in range(0, len(paths), BATCH):
         chunk = paths[i:i + BATCH]
-        x = _preprocess(chunk)
+        x, ok = _preprocess(chunk)
+        if not ok:
+            if verbose:
+                print("  本批 %d 张全部读取失败，跳过" % len(chunk))
+            continue
         try:
-            y = sess.run([out_name], {name: x})[0]
+            # 只用读成功的那些跑推理，失败的图不进模型
+            y = sess.run([out_name], {name: x[ok]})[0]
         except Exception as e:
             if verbose:
                 print("  推理失败（批次 %d）：%s" % (i, str(e)[:60]))
@@ -244,8 +256,8 @@ def embed_batch(paths, verbose=False):
         n = np.linalg.norm(y, axis=1, keepdims=True)
         n[n == 0] = 1.0
         y = y / n
-        for j, p in enumerate(chunk):
-            res[p] = [float(v) for v in y[j]]
+        for k, j in enumerate(ok):
+            res[chunk[j]] = [float(v) for v in y[k]]
         if verbose and (i // BATCH) % 10 == 0:
             print("    %d/%d" % (min(i + BATCH, len(paths)), len(paths)))
     return res

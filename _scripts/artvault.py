@@ -84,10 +84,20 @@ def main():
             print("  %-12s %-10s %s" % (c["slug"], c["name_zh"], c["one_liner"]))
 
     elif a.cmd in ("show", "layers", "palette", "related"):
-        r = A.search(a.slug, 1)
-        if not r:
-            print("没找到：%s" % a.slug); return 1
-        c = r[0]
+        # 标识符查找走 A.resolve()，不走 search() —— search 是全文模糊检索，
+        # 会命中卡片正文（实测 show 一个不存在的名字会返回「原生艺术」，
+        # 因为那张卡的描述里有「不存在」这个词）。问一个流派得到另一个，
+        # 比明确报错糟得多。
+        c, hints = A.resolve(a.slug)
+        if not c:
+            print("没找到：%s" % a.slug)
+            if hints:
+                print("你是不是想找：")
+                for x in hints:
+                    print("  %-12s %-10s %s" % (x["slug"], x["name_zh"], x["one_liner"]))
+            else:
+                print("用 search 做模糊检索，或 categories 看全部流派。")
+            return 1
         if a.cmd == "show":
             if out(c, a.json): return 0
             print(A.format_card(c))
@@ -101,7 +111,8 @@ def main():
             for h, n in c["palette"]:
                 print("  %s  %s" % (h, n))
         else:
-            rel = [A.by_slug().get(s) or (A.search(s, 1) or [None])[0] for s in c["see_also"]]
+            # see_also 里存的是 slug，直接按 slug 取；取不到再退回解析
+            rel = [A.by_slug().get(s) or A.lookup(s) for s in c["see_also"]]
             rel = [x for x in rel if x]
             if out([{k: x[k] for k in ("slug", "name_zh", "name_en")} for x in rel], a.json):
                 return 0

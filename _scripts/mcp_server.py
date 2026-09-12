@@ -125,6 +125,22 @@ TOOLS = [
 ]
 
 
+def _not_found(ident, hints):
+    """统一的「没找到」响应 —— 带候选而不是静默挑一个。
+
+    原来这几个工具都用 A.search() 做标识符查找，而 search 是全文模糊检索：
+    实测 get_movement("不存在") 会返回「原生艺术 Art Brut」，因为那张卡片的
+    描述里恰好有「不存在」这个词。问一个流派得到另一个流派，
+    比明确报错糟得多。
+    """
+    out = {"error": "未找到流派：%s" % ident}
+    if hints:
+        out["did_you_mean"] = [{"slug": x["slug"], "name_zh": x["name_zh"]} for x in hints]
+    else:
+        out["hint"] = "用 search_movements 做模糊检索，或 list_categories 看全部流派"
+    return out
+
+
 def _card_brief(c):
     return {"slug": c["slug"], "name_zh": c["name_zh"], "name_en": c["name_en"],
             "category": c["category"], "period": c["period"], "has_images": c["has_images"],
@@ -136,13 +152,14 @@ def call_tool(name, args):
     if name == "search_movements":
         return [_card_brief(c) for c in A.search(args.get("query", ""), int(args.get("limit", 8)))]
     if name == "get_movement":
-        r = A.search(args.get("slug", ""), 1)
-        return r[0] if r else {"error": "未找到流派：" + str(args.get("slug"))}
+        c, hints = A.resolve(args.get("slug", ""))
+        if not c:
+            return _not_found(args.get("slug"), hints)
+        return c
     if name == "get_layers":
-        r = A.search(args.get("slug", ""), 1)
-        if not r:
-            return {"error": "未找到流派：" + str(args.get("slug"))}
-        c = r[0]
+        c, hints = A.resolve(args.get("slug", ""))
+        if not c:
+            return _not_found(args.get("slug"), hints)
         return {"slug": c["slug"], "name_zh": c["name_zh"],
                 "layers": {A.LAYER_ZH[k]: v for k, v in c["prompt"].items()},
                 "negative": c["negative"]}
@@ -155,17 +172,19 @@ def call_tool(name, args):
                 "video": r["video"], "conflicts": r["conflicts"], "notes": r["notes"],
                 "rendered": A.render(r)}
     if name == "get_palette":
-        r = A.search(args.get("slug", ""), 1)
-        return ["%s %s" % (h, n) for h, n in r[0]["palette"]] if r else {"error": "未找到"}
+        c, hints = A.resolve(args.get("slug", ""))
+        if not c:
+            return _not_found(args.get("slug"), hints)
+        return ["%s %s" % (h, n) for h, n in c["palette"]]
     if name == "list_categories":
         return [{"category": k, "count": len(v)} for k, v in A._CACHE["bycat"].items()]
     if name == "find_related":
-        r = A.search(args.get("slug", ""), 1)
-        if not r:
-            return {"error": "未找到"}
+        c, hints = A.resolve(args.get("slug", ""))
+        if not c:
+            return _not_found(args.get("slug"), hints)
         out = []
-        for s in r[0]["see_also"]:
-            x = A.by_slug().get(s) or (A.search(s, 1) or [None])[0]
+        for s in c["see_also"]:
+            x = A.by_slug().get(s) or A.lookup(s)
             if x:
                 out.append(_card_brief(x))
         return out
@@ -248,6 +267,12 @@ def _match_movement(path, topn):
     }
 
 
+def _tool_error(mid, text):
+    """统一构造一个「工具执行失败」的响应。"""
+    return {"jsonrpc": "2.0", "id": mid, "result": {
+        "content": [{"type": "text", "text": text}], "isError": True}}
+
+
 def handle(msg):
     method = msg.get("method")
     mid = msg.get("id")
@@ -266,13 +291,17 @@ def handle(msg):
         name = p.get("name")
         try:
             data = call_tool(name, p.get("arguments") or {})
-            text = data if isinstance(data, str) else json.dumps(data, ensure_ascii=False, indent=1)
-            return {"jsonrpc": "2.0", "id": mid, "result": {
-                "content": [{"type": "text", "text": text}], "isError": False}}
         except Exception as e:
-            return {"jsonrpc": "2.0", "id": mid, "result": {
-                "content": [{"type": "text", "text": "调用失败：%s\n%s" % (e, traceback.format_exc()[-400:])}],
-                "isError": True}}
+            return _tool_error(mid, "调用失败：%s\n%s" % (e, traceback.format_exc()[-400:]))
+        text = data if isinstance(data, str) else json.dumps(data, ensure_ascii=False, indent=1)
+        # 工具层的失败（找不到流派、图片读不了、CLIP 没装…）是以 {"error": ...}
+        # **正常返回**的，不是抛异常。按 MCP 约定这类也要标 isError: true，
+        # 否则客户端会把「没找到」当成成功结果。原来只有抛异常那条路径标了，
+        # 于是同一个协议里有两种错误表示 —— 实测 analyze_image 传不存在的
+        # 路径时返回 isError: false，这是错的。
+        is_err = isinstance(data, dict) and "error" in data
+        return {"jsonrpc": "2.0", "id": mid, "result": {
+            "content": [{"type": "text", "text": text}], "isError": bool(is_err)}}
     if method == "ping":
         return {"jsonrpc": "2.0", "id": mid, "result": {}}
     if mid is None:

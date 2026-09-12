@@ -103,6 +103,60 @@ def by_slug():
     return _CACHE["byslug"]
 
 
+def lookup(ident):
+    """按**标识符**精确查找一个流派：slug / 中文名 / 英文名 / 别名。
+
+    找不到返回 None。**不要用 search() 代替这个** —— search 是全文模糊检索，
+    卡片正文里的词也算命中，所以拿它做标识符查找会静默返回错误的流派。
+
+    踩过的坑：`artvault.py show 不存在` 会返回「原生艺术 Art Brut」，
+    因为那张卡片的描述里恰好有「不存在」这个词（原生艺术「不存在于
+    主流艺术史」）。同理 `get_movement("不存在")` 也返回它。
+    问一个流派却得到另一个流派，比明确报错糟得多。
+    """
+    q = (ident or "").strip().lower()
+    if not q:
+        return None
+    for c in cards():
+        if q in (c["slug"].lower(), c["name_zh"].lower(), c["name_en"].lower()):
+            return c
+    s = _aliases().get(q)
+    if s:
+        return by_slug().get(s)
+    return None
+
+
+def name_matches(ident, limit=5):
+    """只在**名字**里找近似项，用于「你是不是想找…」提示（绝不用于取值）。
+
+    和 search() 的区别：search 会命中正文，这里只看名字，所以不会有
+    「正文里碰巧有这个词」的假命中。
+    """
+    q = (ident or "").strip().lower()
+    if not q:
+        return []
+    out = []
+    for c in cards():
+        for field in (c["slug"].lower(), c["name_zh"].lower(), c["name_en"].lower()):
+            if q in field or field in q:
+                out.append(c)
+                break
+    return out[:limit]
+
+
+def resolve(ident):
+    """标识符解析：先精确，再在**名字**里找近似。
+
+    返回 (card, hint)。card 为 None 时 hint 是「你是不是想找」的候选列表；
+    这样调用方可以明确报错并给出建议，而不是随便挑一个用。
+    """
+    c = lookup(ident)
+    if c:
+        return c, []
+    cands = name_matches(ident)
+    return (cands[0], []) if len(cands) == 1 else (None, cands)
+
+
 # --------------------------------------------------------------------- 检索
 def _aliases():
     """关键词 → slug 的别名表（含 WikiArt 映射 + 四个核心词的同义簇）"""
