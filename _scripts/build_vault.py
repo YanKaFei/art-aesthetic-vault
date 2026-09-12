@@ -2727,6 +2727,7 @@ _scripts/_data/inbox_manifest.json
 _scripts/_data/vision_index.json
 _scripts/_data/feature_cache.json
 _scripts/_data/clip_cache.json
+_scripts/_data/clip_text_cache.json
 
 # CLIP 量化模型（约 150MB，跑 clip_embed.py download 自动获取）
 _scripts/vendor/clip/

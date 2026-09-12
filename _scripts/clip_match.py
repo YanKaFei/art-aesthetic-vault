@@ -44,6 +44,7 @@ CLIP 有一个前两条路都没有的能力 —— **文本和图像在同一�
 """
 
 import argparse
+import hashlib
 import json
 import os
 import sys
@@ -51,6 +52,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 VAULT = os.path.dirname(HERE)
 CACHE = os.path.join(HERE, "_data", "clip_cache.json")
+TEXT_CACHE = os.path.join(HERE, "_data", "clip_text_cache.json")
 
 sys.path.insert(0, HERE)
 for _c in (os.path.join(HERE, "vendor", "libs"), os.path.expanduser("~/.artvault/deps"),
@@ -128,19 +130,37 @@ _TEXT_CACHE = None
 
 
 def text_matrix():
-    """返回 (slugs, 矩阵[N,512])。每个流派的模板取平均后重新归一化。"""
+    """返回 (slugs, 矩阵[N,512])。每个流派的模板取平均后重新归一化。
+
+    带磁盘缓存 —— 文本塔很慢（564 条文本编码实测 5.8 秒），而结果只依赖
+    流派卡的文字，卡片没改就没必要重算。缓存键是文本内容的哈希，
+    所以改了 prompt 字段会自动失效。落盘后加载是毫秒级。
+    """
     global _TEXT_CACHE
     if _TEXT_CACHE is not None:
         return _TEXT_CACHE
     import numpy as np
-    import clip_embed as C
     mp = movement_prompts()
     slugs = sorted(mp)
+
+    # 先把所有文本摊平，算一个内容哈希当缓存键
     flat, owner = [], []
     for s in slugs:
         for t in mp[s]["texts"]:
             flat.append(t)
             owner.append(s)
+    h = hashlib.sha256("\n".join(flat).encode("utf-8")).hexdigest()[:16]
+
+    if os.path.exists(TEXT_CACHE):
+        try:
+            d = json.load(open(TEXT_CACHE, encoding="utf-8"))
+            if d.get("hash") == h and d.get("slugs") == slugs:
+                _TEXT_CACHE = (slugs, np.asarray(d["matrix"], dtype="f4"))
+                return _TEXT_CACHE
+        except Exception:
+            pass
+
+    import clip_embed as C
     E = C.text_embed(flat)
     if E is None:
         return None
@@ -151,6 +171,12 @@ def text_matrix():
     n = np.linalg.norm(M, axis=1, keepdims=True)
     n[n == 0] = 1.0
     M = M / n
+    try:
+        os.makedirs(os.path.dirname(TEXT_CACHE), exist_ok=True)
+        json.dump({"hash": h, "slugs": slugs, "matrix": M.tolist()},
+                  open(TEXT_CACHE, "w", encoding="utf-8"))
+    except Exception:
+        pass
     _TEXT_CACHE = (slugs, M)
     return _TEXT_CACHE
 

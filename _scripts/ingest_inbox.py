@@ -197,7 +197,8 @@ def scan_new(analyze=True):
     # CLIP 建议流派：一次算好文本矩阵与质心，再批量编码所有新图。
     # 这是投递箱工作流里最有用的信号 —— 但它只有约四成准确率
     # （实测 Top-1 39.1%，随机基准 1.4%），所以输出里标成「建议」。
-    cm = load_clip_match() if analyze else None
+    # 空投递箱不必加载 CLIP —— 文本矩阵要 5.8 秒，没图可匹配就是白等
+    cm = load_clip_match() if (analyze and out) else None
     if cm:
         try:
             sug = cm.suggest([r["path"] for r in out if not r.get("error")])
