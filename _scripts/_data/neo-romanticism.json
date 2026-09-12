@@ -13,30 +13,17 @@
   "local_image": "99-附件/images/neo-romanticism/01-neo-romanticism-dyke-by-the-road.jpg"
  },
  {
-  "title": "Shooting: Verse 2",
-  "artist": "Thomas Sutherland",
-  "date": "1819",
-  "medium": "Hand-colored aquatint and etching on ivory wove paper",
-  "image_url": "https://www.artic.edu/iiif/2/3d08784e-c128-5d4d-80eb-f612c5093684/full/843,/0/default.jpg",
-  "image_url_hi": "https://www.artic.edu/iiif/2/3d08784e-c128-5d4d-80eb-f612c5093684/full/1686,/0/default.jpg",
-  "page_url": "https://www.artic.edu/artworks/90757",
-  "source": "芝加哥艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://www.artic.edu/open-access/open-access-images",
-  "local_image": "99-附件/images/neo-romanticism/02-neo-romanticism-shooting-verse-2.jpg"
- },
- {
-  "title": "Landscape of Bleached Objects, by Paul Nash, 1934, oil on canvas - Auckland Art Gallery - Auckland, NZ - DSC08908-001",
-  "artist": "Daderot",
-  "date": "1934",
-  "medium": "Landscape of Bleached Objects, by Paul Nash, 1934, oil on ca",
-  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Landscape_of_Bleached_Objects,_by_Paul_Nash,_1934,_oil_on_canvas_-_Auckland_Art_Gallery_-_Auckland,_NZ_-_DSC08908-001.jpg?width=1024",
-  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Landscape_of_Bleached_Objects%2C_by_Paul_Nash%2C_1934%2C_oil_on_canvas_-_Auckland_Art_Gallery_-_Auckland%2C_NZ_-_DSC08908-001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-  "page_url": "https://commons.wikimedia.org/wiki/File:Landscape_of_Bleached_Objects%2C_by_Paul_Nash%2C_1934%2C_oil_on_canvas_-_Auckland_Art_Gallery_-_Auckland%2C_NZ_-_DSC08908-001.jpg",
+  "title": "ABDAG010665 - Paul Nash - Raider on the Moors",
+  "artist": "Paul Nash",
+  "date": "",
+  "medium": "",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/ABDAG010665_-_Paul_Nash_-_Raider_on_the_Moors.jpeg?width=800",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/3/31/ABDAG010665_-_Paul_Nash_-_Raider_on_the_Moors.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:ABDAG010665_-_Paul_Nash_-_Raider_on_the_Moors.jpeg",
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/neo-romanticism/03-neo-romanticism-landscape-of-bleached-objects-by-paul-nash-1.jpg"
+  "local_image": "99-附件/images/neo-romanticism/02-neo-romanticism-abdag010665---paul-nash---raider-on-the-moor.jpg"
  },
  {
   "title": "Totems, Old Shipyard, Rye",
@@ -49,20 +36,20 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neo-romanticism/04-neo-romanticism-totems-old-shipyard-rye.jpg"
+  "local_image": "99-附件/images/neo-romanticism/03-neo-romanticism-totems-old-shipyard-rye.jpg"
  },
  {
-  "title": "Richmond Park Entrance",
-  "artist": "Thomas Sutherland",
-  "date": "1819",
-  "medium": "Aquatint, heightened with watercolor, on paper",
-  "image_url": "https://www.artic.edu/iiif/2/4a07af6a-c9be-aa8f-7919-b27c84c61e7d/full/843,/0/default.jpg",
-  "image_url_hi": "https://www.artic.edu/iiif/2/4a07af6a-c9be-aa8f-7919-b27c84c61e7d/full/1686,/0/default.jpg",
-  "page_url": "https://www.artic.edu/artworks/105064",
-  "source": "芝加哥艺术博物馆",
-  "license": "CC0 1.0 公共领域奉献",
-  "license_url": "https://www.artic.edu/open-access/open-access-images",
-  "local_image": "99-附件/images/neo-romanticism/05-neo-romanticism-richmond-park-entrance.jpg"
+  "title": "Battle of Britain (Paul Nash)",
+  "artist": "Paul Nash",
+  "date": "",
+  "medium": "",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Battle_of_Britain_(Paul_Nash).png?width=1024",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Battle_of_Britain_%28Paul_Nash%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Battle_of_Britain_%28Paul_Nash%29.png",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/neo-romanticism/04-neo-romanticism-battle-of-britain-paul-nash.png"
  },
  {
   "title": "The Bull Ring, Ronda, Spain",
@@ -75,6 +62,19 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/neo-romanticism/06-neo-romanticism-the-bull-ring-ronda-spain.jpg"
+  "local_image": "99-附件/images/neo-romanticism/05-neo-romanticism-the-bull-ring-ronda-spain.jpg"
+ },
+ {
+  "title": "Beeches in the Wind by Paul Nash - Paul Nash - ABDAG002872",
+  "artist": "Beeches in the Wind by Paul Nash",
+  "date": "",
+  "medium": "",
+  "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Beeches_in_the_Wind_by_Paul_Nash_-_Paul_Nash_-_ABDAG002872.jpg?width=320",
+  "image_url_hi": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Beeches_in_the_Wind_by_Paul_Nash_-_Paul_Nash_-_ABDAG002872.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "page_url": "https://commons.wikimedia.org/wiki/File:Beeches_in_the_Wind_by_Paul_Nash_-_Paul_Nash_-_ABDAG002872.jpg",
+  "source": "维基共享资源",
+  "license": "Public domain",
+  "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+  "local_image": "99-附件/images/neo-romanticism/06-neo-romanticism-beeches-in-the-wind-by-paul-nash---paul-nash.jpg"
  }
 ]
