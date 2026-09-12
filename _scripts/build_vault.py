@@ -16,6 +16,13 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 VAULT = os.path.dirname(HERE)
 DATA_DIR = os.path.join(HERE, "_data")
+
+# 仓库地址只在**这一处**定义，README（中/英）与 skill 文档都引用它。
+# 之前中英两版各写了一遍，结果中文版写成了显示名（GitHub 显示名）而不是
+# 用户名（YanKaFei），克隆命令直接 404 —— 单一来源就不会再漂移。
+REPO_SLUG = "YanKaFei/art-aesthetic-vault"
+REPO_URL = "https://github.com/" + REPO_SLUG
+
 sys.path.insert(0, HERE)
 from movements import (MOVEMENTS, CATEGORIES, by_category,  # noqa: E402
                        build_positive)
@@ -1835,7 +1842,7 @@ generation, keyword mapping and the AI interfaces all follow automatically.
 ## Quick start
 
 ```bash
-git clone --depth 1 https://github.com/YanKaFei/art-aesthetic-vault.git
+git clone --depth 1 {REPO_URL}.git
 cd art-aesthetic-vault
 
 # immediate self-check
@@ -2465,7 +2472,7 @@ AI 调用时不会瞎编。
 ## 快速开始
 
 ```bash
-git clone https://github.com/YanKaFei/art-aesthetic-vault.git
+git clone {REPO_URL}.git
 cd art-aesthetic-vault
 
 # 立刻能用的自检
@@ -2634,10 +2641,12 @@ def main():
 
     w("20-我的提示词/我的提示词卡.md", MY_PROMPTS)
     _rm = (README.replace("{n_mv}", str(len(MOVEMENTS)))
+                 .replace("{REPO_URL}", REPO_URL)
                  .replace("{skill_tree}", skill_tree()))
     w("README.md", _rm)
     w("LICENSE", LICENSE_TEXT)
     _en = (README_EN.replace("{n_mv}", str(len(MOVEMENTS)))
+                    .replace("{REPO_URL}", REPO_URL)
                     .replace("{skill_tree_en}", skill_tree_en())
                     .replace("{cat_table_en}", category_table_en()))
     w("README.en.md", _en)
