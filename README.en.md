@@ -395,7 +395,7 @@ python3 make_links.py                 # regenerate external search deep links
 
 ## Image sources
 
-All images come from public-domain / CC0 open sources, verified entry by entry.
+All images come from public-domain / CC0 open sources (Cleveland, Art Institute of Chicago, The Met, Wikimedia Commons), verified entry by entry.
 Free to use and redistribute. Every work is annotated with its source and license link.
 
 **Code** MIT ｜ **Notes** CC BY 4.0

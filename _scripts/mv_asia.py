@@ -529,7 +529,7 @@ MOVEMENTS = [
 ARTIST_KEYS = {
  "rimpa": ["korin", "sotatsu", "kensan", "hoitsu", "kiitsu", "rimpa", "ogata"],
  "suiboku-ga": ["sesshu", "shubun", "josetsu", "tohaku", "sumi", "suiboku", "ink",
-                 "shubun", "gyokudo", "taiga", "buson"],
+               "shugetsu", "shūgetsu", "tōkan", "tokan", "gyokudo", "taiga", "buson"],
  "yamato-e": ["yamato-e", "yamatoe", "tosa", "genji", "sumiyoshi", "emakimono",
                "handscroll", "narrative scroll"],
  "blue-green-landscape": ["wang ximeng", "zhao boju", "qiu ying", "li sixun", "zhan ziqing",

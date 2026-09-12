@@ -590,7 +590,8 @@ MOVEMENTS = [
 ]
 
 ARTIST_KEYS = {
- "byzantine": ["byzantine", "theophanes", "rublev", "icon painter", "crete", "sinai"],
+ "byzantine": ["byzantine", "theophanes", "rublev", "icon painter", "crete",
+                "cretan", "sinai", "mosaic"],
  "romanesque": ["romanesque", "románico", "romanico", "winchester bible", "saint-savin",
                  "hildesheim", "catalan", "sant climent", "taüll", "taull", "moissac",
                  "vézelay", "vezelay", "bayeux", "cluny", "fresco romanesque", "capital romanesque"],

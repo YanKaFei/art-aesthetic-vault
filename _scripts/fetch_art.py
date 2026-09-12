@@ -59,53 +59,88 @@ def fetch_one(provider, query, want, allow_ccby):
 
 
 def collect(mv, per, allow_ccby=False):
-    """按 sources 里声明的顺序、逐个查询词抓取，并做两层过滤：
+    """收集某个流派的作品。
 
-       1) 艺术家必须命中该流派的关联艺术家关键词（保证语义相关）
-       2) 必须是平面作品（排除汤盆、沙发、花瓶之类的三维藏品）
+    两层过滤（这是整个库最关键的逻辑）：
+      1) 作者必须命中该流派的关联关键词 —— 否则泛化查询会混进大量无关作品
+      2) 必须是平面作品 —— 排除硬币、玻璃器、家具之类的三维藏品
+
+    抓取策略：**按来源轮流取**，而不是「第一个源凑够就停」。
+    后者会让排在前面的源垄断结果，后面的源永远轮不到。
+    不同馆的强项不同（AIC 印象派强、克利夫兰亚洲强、大都会最广），
+    轮转能让结果有来源与风格上的广度。
 
     刻意不做「放宽补充」：宁可某个流派只有 2 张图，也不要混进无关作品。
-    一个参考库最怕的不是图少，是图错——错的参考会污染你的提示词直觉。
+    一个参考库最怕的不是图少，是图错——错的参考会污染提示词直觉。
     """
-    seen, works = set(), []
     keys = mv.get("artist_keys") or []
     excl = mv.get("exclude_keys") or []
-    plan = []
-    for provider in ("cleveland", "met", "commons"):
-        for q in (mv.get("sources") or {}).get(provider, []) or []:
-            plan.append((provider, q))
-    if not plan or not keys:
+    tkeys = mv.get("title_keys") or []
+    if not keys and not tkeys:
         return []
 
-    for provider, query in plan:
-        print("    [%s] q=%s" % (provider, query))
-        try:
-            pool = fetch_one(provider, query, per * 3, allow_ccby)
-        except Exception as e:
-            print("    ! provider error: %s" % e)
-            pool = []
-        for w in pool:
-            # 大多数流派只要平面作品；但侘寂（茶碗）、伊斯兰几何（瓷砖）
-            # 这类流派的主角就是器物，用 allow_3d 关掉平面过滤
-            if is_ai_generated(w):
-                print("    ✗ 排除 AI 生成图: %s" % w["title"][:48])
-                continue
-            if not mv.get("allow_3d") and not is_flat_work(w):
-                continue
-            if not artist_matches(w, keys, excl):
-                continue
-            if w.get("raw_title"):
-                real = extract_artist_from_title(w["raw_title"], keys)
-                if real:
-                    w["artist"] = real
-            key = (w["title"].lower()[:40], (w.get("raw_title") or w["artist"]).lower()[:40])
-            if key in seen:
-                continue
-            seen.add(key)
-            works.append(w)
-        time.sleep(0.5)
-        if len(works) >= per:
+    src = mv.get("sources") or {}
+    # 芝加哥艺术博物馆是后加的源。为了不用改 141 份流派定义，
+    # 没显式声明 artic 查询词时复用 cleveland 的——两者都是同类检索词。
+    if "artic" not in src and src.get("cleveland"):
+        src = dict(src, artic=list(src["cleveland"]))
+
+    def keep(w):
+        if is_ai_generated(w):
+            print("    ✗ 排除 AI 生成图: %s" % w["title"][:48])
+            return False
+        if not mv.get("allow_3d") and not is_flat_work(w):
+            return False
+        if not artist_matches(w, keys, excl, tkeys):
+            return False
+        if w.get("raw_title"):
+            real = extract_artist_from_title(w["raw_title"], keys)
+            if real:
+                w["artist"] = real
+        return True
+
+    # ---- 逐个来源收集候选池 ----
+    pools = []          # [(来源名, [作品])]
+    seen = set()
+    for provider in ("cleveland", "artic", "met", "commons"):
+        queries = src.get(provider) or []
+        if not queries:
+            continue
+        mine = []
+        for query in queries:
+            if len(mine) >= per:      # 这个来源够了，不用再问它的后续查询词
+                break
+            print("    [%s] q=%s" % (provider, query))
+            try:
+                pool = fetch_one(provider, query, per * 3, allow_ccby)
+            except Exception as e:
+                print("    ! provider error: %s" % e)
+                pool = []
+            for w in pool:
+                if len(mine) >= per:
+                    break
+                dedup = (w["title"].lower()[:40], (w.get("raw_title") or w.get("artist") or "").lower()[:40])
+                if dedup in seen or not keep(w):
+                    continue
+                seen.add(dedup)
+                mine.append(w)
+            time.sleep(0.5)
+        if mine:
+            pools.append((provider, mine))
+
+    # ---- 轮流取，保证来源分散 ----
+    works, round_no = [], 0
+    while len(works) < per and round_no < per * 2:
+        progressed = False
+        for _prov, pool in pools:
+            if round_no < len(pool):
+                progressed = True
+                works.append(pool[round_no])
+                if len(works) >= per:
+                    break
+        if not progressed:
             break
+        round_no += 1
     return works[:per]
 
 

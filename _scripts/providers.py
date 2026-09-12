@@ -4,8 +4,13 @@
 
 已实测可用的免密钥源：
   · 克利夫兰艺术博物馆  CC0       openaccess-api.clevelandart.org
+  · 芝加哥艺术博物馆    CC0       api.artic.edu            ← 复测后加入
   · 大都会艺术博物馆    CC0       collectionapi.metmuseum.org
   · 维基共享资源        逐条标注   commons.wikimedia.org
+
+⚠️ 芝加哥这个源曾经被 curl 测出 403 而误判为「图片有 Cloudflare 保护」。
+   用 Python requests 复测是 200 —— 出口代理会拦 curl 的 TLS 指纹但放过 Python。
+   **判断可达性必须用最终要用的客户端。**
 
 统一返回字段：
   title / artist / date / medium / image_url / image_url_hi /
@@ -16,6 +21,7 @@ import json
 import re
 import ssl
 import time
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -29,6 +35,8 @@ CLE_API = "https://openaccess-api.clevelandart.org/api/artworks/"
 MET_SEARCH = "https://collectionapi.metmuseum.org/public/collection/v1/search"
 MET_OBJECT = "https://collectionapi.metmuseum.org/public/collection/v1/objects/"
 COMMONS_API = "https://commons.wikimedia.org/w/api.php"
+ARTIC_SEARCH = "https://api.artic.edu/api/v1/artworks/search"
+ARTIC_IIIF = "https://www.artic.edu/iiif/2"
 
 
 def get_json(url, tries=3, timeout=45):
@@ -194,6 +202,38 @@ def from_cleveland(query, want):
     return out
 
 
+# ------------------------------------------------------------------ 芝加哥
+# 公共领域作品的 IIIF 图片按 CC0 发布（官方声明见 license_url）。
+# 用 IIIF 分级取图：843px 约 225KB 做笔记嵌图，1686px 约 950KB 作高清链接。
+# 注意 "full" 尺寸会返回 403，必须用带数字的尺寸。
+def from_artic(query, want):
+    js = get_json(ARTIC_SEARCH + "?" + urllib.parse.urlencode({
+        "q": query, "limit": min(want * 4, 60),
+        "fields": "id,title,artist_title,date_display,medium_display,image_id,"
+                  "is_public_domain,department_title,classification_title,place_of_origin",
+    }))
+    out = []
+    for a in (js or {}).get("data", []):
+        # 只要公共领域 + 有图。AIC 的 bool 查询参数格式特殊，
+        # 客户端过滤比构造查询更稳。
+        if not a.get("is_public_domain") or not a.get("image_id"):
+            continue
+        iid = a["image_id"]
+        out.append({
+            "title": (a.get("title") or "无题").strip(),
+            "artist": (a.get("artist_title") or "佚名").strip(),
+            "date": (a.get("date_display") or "").strip(),
+            "medium": (a.get("medium_display") or "").strip(),
+            "image_url": "%s/%s/full/843,/0/default.jpg" % (ARTIC_IIIF, iid),
+            "image_url_hi": "%s/%s/full/1686,/0/default.jpg" % (ARTIC_IIIF, iid),
+            "page_url": "https://www.artic.edu/artworks/%s" % a.get("id"),
+            "source": "芝加哥艺术博物馆",
+            "license": "CC0 1.0 公共领域奉献",
+            "license_url": "https://www.artic.edu/open-access/open-access-images",
+        })
+    return out
+
+
 # ------------------------------------------------------------------ 大都会
 def from_met(query, want):
     js = get_json(MET_SEARCH + "?" + urllib.parse.urlencode({
@@ -291,6 +331,7 @@ def from_commons(query, want, allow_ccby=False, width=1024):
 
 
 PROVIDERS = {
+    "artic": from_artic,
     "cleveland": from_cleveland,
     "met": from_met,
     "commons": from_commons,
@@ -355,23 +396,56 @@ def is_flat_work(w):
     return any(k in m for k in MEDIUM_OK)
 
 
-def artist_matches(w, keys, exclude=None):
-    """判断一件作品是否属于某个流派。
+def _norm(s):
+    """归一化：小写 + 去掉变音符号。
 
-    关键区别：博物馆 API 的 artist 字段是**画家本人**；
-    维基共享资源的 Artist 字段常常是**拍这张照片的上传者**
-    （实测：罗马式壁画条目的 artist 是 "Joe Mabel"）。
-    所以来自共享资源的作品只按文件名判断——文件名里通常带画家名或作品名。
-
-    排除词同样重要：名字片段会误命中，比如 "henri" 会命中 Henri Fantin-Latour，
-    "delaunay" 会命中 17 世纪的 Nicolas Delaunay。流派用 exclude_keys 挡掉。
+    必须做这一步 —— 实测 "Sesshū Tōyō" 因为 ū 和关键词 "sesshu" 的 u
+    不是同一个字符而漏掉。同类问题还有 é / ñ / ō / ü 等一大类。
     """
-    if w.get("raw_title"):
-        hay = w["raw_title"].lower()
-    else:
-        hay = ((w.get("artist") or "") + " " + (w.get("title") or "")).lower()
-    if exclude and any(x.lower() in hay for x in exclude):
+    s = unicodedata.normalize("NFKD", (s or "").lower())
+    return "".join(c for c in s if not unicodedata.combining(c))
+
+
+# 作者字段是这些时，说明没有具体作者，才允许退回用标题兜底匹配
+ANON_ARTIST = ("佚名", "unknown", "anonymous", "unidentified", "unattributed",
+               "attributed to", "artist(s)", "workshop", "follower of",
+               "circle of", "school of", "manner of", "formerly", "workshop of")
+
+
+def artist_matches(w, keys, exclude=None, title_keys=None):
+    """判断一件作品是否属于某个流派。按可信度从高到低：
+
+    1. **维基共享资源**：Artist 字段常是上传者不是画家（实测罗马式壁画
+       条目的作者写着 "Joe Mabel"），只看文件名。
+    2. **博物馆 API 且作者是真人**：只看作者，**绝不看标题**。
+       标题里出现风格词会造成严重误判 —— 实测一幅 19 世纪东方主义油画
+       《Circassian Cavalry ... at the Door of a Byzantine Monument》
+       因为标题含 "Byzantine" 被收进了拜占庭。
+    3. **作者匿名/不确定**：退回用标题匹配。敦煌、唐卡、伊斯兰瓷砖
+       这类无名氏传统需要这条退路。
+    4. **title_keys**：有些流派的身份在「作品/主题」而不是「作者」
+       （禅艺术、壁画运动），这些流派显式声明 title_keys，总是匹配标题。
+
+    排除词同样重要：名字片段会误命中（"henri" 命中 Henri Fantin-Latour、
+    "delaunay" 命中 17 世纪的 Nicolas Delaunay、"lange" 命中 michelangelo）。
+    所有比较都先过 _norm()。
+    """
+    hay_title = _norm(w.get("raw_title") or w.get("title"))
+    hay_artist = _norm(w.get("artist"))
+    hay = (hay_artist + " " + hay_title) if w.get("raw_title") else hay_artist
+
+    if exclude and any(_norm(x) in hay or _norm(x) in hay_title for x in exclude):
         return False
+
+    # title_keys 单独判定，不受「真人作者只看作者」的限制
+    if title_keys and any(_norm(k) in hay_title for k in title_keys):
+        return True
     if not keys:
         return False
-    return any(k.lower() in hay for k in keys)
+
+    if not w.get("raw_title"):
+        if hay_artist and not any(x in hay_artist for x in ANON_ARTIST):
+            hay = hay_artist                    # 真人作者：只看作者
+        else:
+            hay = hay_artist + " " + hay_title  # 匿名：作者 + 标题
+    return any(_norm(k) in hay for k in keys)

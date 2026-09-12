@@ -689,9 +689,14 @@ style / artist / genre 标签，比你自己爬完再标注省事得多：
 | 源 | 授权 | 免密钥 | 本仓库是否使用 |
 |---|---|---|---|
 | [克利夫兰艺术博物馆](https://openaccess-api.clevelandart.org) | **CC0** | ✅ | ✅ 主力 |
+| [芝加哥艺术博物馆](https://api.artic.edu/docs/) | **CC0** | ✅ | ✅ 主力（IIIF 分级取图） |
 | [大都会艺术博物馆](https://collectionapi.metmuseum.org/public/collection/v1/search) | **CC0** | ✅ | ✅ 主力 |
 | [维基共享资源](https://commons.wikimedia.org/w/api.php) | 逐条 | ✅ | ✅ 只取 PD/CC0 |
-| [芝加哥艺术博物馆](https://api.artic.edu/docs/) | **CC0** | ✅ | ⚠️ 只取元数据（图片 CDN 有 Cloudflare） |
+| [丹麦国立美术馆 SMK](https://api.smk.dk/api/v1/art/search/) | 公共领域 | ✅ | 🔶 可接入，需解析 IIIF v3 |
+| [美国国家美术馆 NGA](https://github.com/NationalGalleryOfArt/opendata) | **CC0** | ✅ | 🔶 开放数据 82MB CSV |
+| [史密森尼 Open Access](https://www.si.edu/openaccess) | **CC0** | ❌ 需 key | 🔶 DEMO_KEY 可测通路 |
+| [Europeana](https://www.europeana.eu/en/apis) | 逐条 | ❌ 需 key | 🔶 demo key 可测通路 |
+| [维基数据 SPARQL](https://query.wikidata.org) | **CC0** | ✅ | 🔶 结构化查询，另一种范式 |
 | [史密森尼 Open Access](https://www.si.edu/openaccess) | **CC0** | ❌ 需 key | 可扩展 |
 | [Rijksmuseum](https://data.rijksmuseum.nl/) | 公共领域 | ❌ 需 key | 可扩展 |
 | [Harvard Art Museums](https://harvardartmuseums.org/collections/api) | 部分 CC0 | ❌ 需 key | 可扩展 |
@@ -734,9 +739,15 @@ type: 说明
 | 来源 | 授权 | 本仓库的使用方式 |
 |---|---|---|
 | 克利夫兰艺术博物馆 | **CC0 1.0** | 主力源，API 免密钥，一次返回完整元数据 |
+| **芝加哥艺术博物馆** | **CC0 1.0** | 主力源，IIIF 分级取图 |
 | 大都会艺术博物馆 | **CC0 1.0** (Open Access) | 主力源，`isPublicDomain=true` 过滤 |
-| 芝加哥艺术博物馆 | **CC0 1.0** | 只取其元数据（它的图片 CDN 有 Cloudflare 保护，脚本抓不到） |
 | 维基共享资源 | **逐条判定**，脚本只接受 Public domain / CC0 | 补全非西方流派与现代流派 |
+
+> [!warning] 关于芝加哥：我曾经把它误判为「图片抓不到」
+> 早期用 `curl` 测它的 IIIF 图片得到 403，就写进了「有 Cloudflare 保护」。
+> 后来用 Python `requests` 复测 —— **200，图片正常下载**。
+> 出口代理会拦 `curl` 的 TLS 指纹但放过 Python。
+> 这个错误让我白白漏掉了一个 13 万件规模的一流源，教训记在 `_scripts/providers.py` 里。
 
 CC0 意味着**没有版权限制**：你可以下载、修改、商用、再分发，
 包括把图放进你自己的数据集训练模型。每张作品下面都标了来源和授权链接。
@@ -1883,7 +1894,7 @@ python3 make_links.py                 # regenerate external search deep links
 
 ## Image sources
 
-All images come from public-domain / CC0 open sources, verified entry by entry.
+All images come from public-domain / CC0 open sources (Cleveland, Art Institute of Chicago, The Met, Wikimedia Commons), verified entry by entry.
 Free to use and redistribute. Every work is annotated with its source and license link.
 
 **Code** MIT ｜ **Notes** CC BY 4.0
@@ -2453,7 +2464,7 @@ python3 make_links.py                 # 重新生成外部检索深链
 
 ## 图片来源
 
-全部图片来自公共领域 / CC0 开放数据源，已逐条核对，可自由使用与再分发，每张作品下方都标注了来源与授权链接。
+全部图片来自公共领域 / CC0 开放数据源（克利夫兰、芝加哥、大都会、维基共享），已逐条核对，可自由使用与再分发，每张作品下方都标注了来源与授权链接。
 
 **代码** MIT ｜ **笔记内容** CC BY 4.0
 
@@ -2523,15 +2534,11 @@ def main():
                     .replace("{cat_table_en}", category_table_en()))
     w("README.en.md", _en)
     w(".gitignore", """# Obsidian 运行时文件
-# （app.json / appearance.json / core-plugins.json 是稳定设置，保留在仓库里；
-#  下面是每次用 Obsidian 都会变的会话状态，跟着提交只会产生噪音）
 .DS_Store
 .trash/
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
-.obsidian/workspace
 .obsidian/cache
-.obsidian/graph.json
 
 # 脚本缓存与本地依赖
 _scripts/__pycache__/

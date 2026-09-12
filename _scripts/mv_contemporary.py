@@ -730,6 +730,7 @@ MOVEMENTS = [
 {
  "slug": "zen-art", "name_zh": "禅艺术", "name_en": "Zen Art",
  "period": "1200–今", "region": "日本 / 东亚", "tier": "B",
+ "title_keys": ["zen", "ensō", "enso", "koan", "kōan", "meditation", "cypress"],
  "one_liner": "圆相、枯山水、墨迹：用最少的动作表达最完整的当下。",
  "core": ["圆相（ensō）：一笔画成的圆，不完美即完整",
           "枯山水：用砂石代替水，极简到只剩关系",
@@ -791,4 +792,6 @@ ARTIST_KEYS = {
  "digital-art": ["digital art", "generative", "algorithmic", "nake", "mohr", "cohen",
                   "anadol", "klingemann"],
  "zen-art": ["zen", "enso", "ensō", "hakuin", "sengai", "dry landscape", "karesansui"],
+ # 禅艺术的作者是禅僧，身份体现在「作品」而不是「作者」上，所以要按标题匹配
+ "exclude_keys": ["zeno", "citizen"],
 }
