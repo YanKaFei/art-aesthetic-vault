@@ -244,18 +244,82 @@ def match_palette(recs, topn=3):
     return res
 
 
-def archive(recs):
-    os.makedirs(ARCHIVE, exist_ok=True)
-    moved = 0
+def archive(recs, verbose=True):
+    """把处理完的图从投递箱移走，**并记进本地图库的待归档清单**。
+
+    原来的做法是移到 pinterest/_已归档/ —— 结果图仍留在投递箱区域，
+    而投递箱是刻意排除在图谱外的，于是「处理完了」等于「从图谱里消失了」。
+    现在改为移进 99-附件/images-local/<流派>/，并写进 local_library.json，
+    跑一次 build_vault.py 就会生成 15-我的图库/ 的笔记、链回流派卡 ——
+    这些图从此和权威库挂在同一张图谱上。
+
+    没指定流派的图进 99-附件/images-local/_未归类/，在总览页里能看到、等着归。
+    """
+    # 取 CLIP 建议：优先读 --scan 写下的清单（不必重跑一遍分析）
+    sug_by_file = {}
+    if os.path.exists(MANIFEST):
+        try:
+            for it in (json.load(open(MANIFEST, encoding="utf-8")).get("items") or []):
+                if it.get("suggested"):
+                    sug_by_file[it["file"]] = it["suggested"]
+        except Exception:
+            pass
+
+    man_path = os.path.join(HERE, "_data", "local_library.json")
+    man = {"items": {}}
+    if os.path.exists(man_path):
+        try:
+            man = json.load(open(man_path, encoding="utf-8"))
+            man.setdefault("items", {})
+        except Exception:
+            pass
+    moved, unmoved = 0, 0
     for r in recs:
-        src, dst = r["path"], os.path.join(ARCHIVE, r["file"])
-        if os.path.exists(src):
-            base, ext = os.path.splitext(r["file"])
-            k = 1
-            while os.path.exists(dst):
-                dst = os.path.join(ARCHIVE, "%s-%d%s" % (base, k, ext)); k += 1
+        src = r["path"]
+        if not os.path.exists(src):
+            continue
+        # 用 CLIP 的第一建议作为去处；没有建议就进 _未归类
+        sug = r.get("suggested") or sug_by_file.get(r["file"]) or []
+        slug = (sug[0].get("slug") if sug else None) or "_未归类"
+        dest_dir = os.path.join(VAULT, "99-附件", "images-local", slug)
+        os.makedirs(dest_dir, exist_ok=True)
+        dst = os.path.join(dest_dir, r["file"])
+        base, ext = os.path.splitext(r["file"])
+        k = 1
+        while os.path.exists(dst):
+            dst = os.path.join(dest_dir, "%s-%d%s" % (base, k, ext)); k += 1
+        try:
             shutil.move(src, dst)
-            moved += 1
+        except Exception:
+            continue
+        rel = os.path.relpath(dst, VAULT).replace(os.sep, "/")
+        man["items"][rel] = {
+            "movement": slug,
+            "title": base,
+            "source": "pinterest 投递箱",
+            "added_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "summary": (r.get("analysis") and {
+                "明度": (r["analysis"].get("luminance") or {}).get("key"),
+                "饱和度": (r["analysis"].get("color") or {}).get("saturation"),
+                "繁杂度": (r["analysis"].get("texture") or {}).get("busyness"),
+            }) or None,
+        }
+        moved += 1
+        if slug == "_未归类":
+            unmoved += 1
+
+    # 清掉已经空掉的投递箱目录
+    os.makedirs(ARCHIVE, exist_ok=True)
+    try:
+        json.dump(man, open(man_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    except Exception:
+        pass
+    if verbose:
+        print("已归档 %d 张 → 99-附件/images-local/（按 CLIP 建议分流派）" % moved)
+        if unmoved:
+            print("  其中 %d 张进了 _未归类/ —— 建议没把握，等着你归" % unmoved)
+        print("  下一步：python3 build_vault.py   （生成 15-我的图库/ 的笔记并链回流派卡）")
+        print("  要改归类：python3 scan_local.py --list  然后 --file <编号> --to <流派>")
     return moved
 
 
@@ -309,8 +373,7 @@ def main():
         recs = scan_new(analyze=False)
         if not recs:
             print("投递箱是空的，没有要归档的。"); return 0
-        n = archive(recs)
-        print("已归档 %d 张 → pinterest/_已归档/" % n)
+        archive(recs)          # archive() 自己会说明去了哪
         return 0
 
     recs = scan_new(analyze=not a.no_analysis)

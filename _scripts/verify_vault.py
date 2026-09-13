@@ -24,6 +24,7 @@ verify_vault.py —— 抓完/改完之后的验收检查。
    10 署名质量   卡片上没有「上传者当画家」「机器语法当日期」
    11 视频层     每张卡都有 Seedance 五段式 + H3 自然语言两块中文提示词
    12 新鲜度     生成脚本没比笔记新（否则说明上次重建失败，笔记是旧的）
+   13 本地图库   层 2 的清单 / 图片 / 笔记三者一致（没有本地图库时自动跳过）
 
 退出码：0 全部通过；1 有问题（便于写进 CI 或 pre-commit）。
 """
@@ -41,7 +42,10 @@ VAULT = os.path.dirname(HERE)
 IMAGES = os.path.join(VAULT, "99-附件", "images")
 DATA = os.path.join(HERE, "_data")
 
-NOTE_DIRS = ("00-导航", "10-流派", "20-我的提示词", "90-模板")
+NOTE_DIRS = ("00-导航", "10-流派", "15-我的图库", "20-我的提示词", "90-模板")
+# 图片有两个根：权威层的 99-附件/images/ 和用户自己的 99-附件/images-local/。
+# 断链与孤儿图两项都要同时认这两个根，否则本地图库的嵌入会被误报成断链。
+IMAGE_ROOTS = ("99-附件/images", "99-附件/images-local")
 # 模板目录里是给用户抄的骨架，本来就带占位符（如 `![[此处放图]]`），
 # 检查断链时要跳过，否则每次都会报一个假问题。
 TEMPLATE_DIR = "90-模板"
@@ -62,9 +66,10 @@ def _notes(skip_templates=False):
 def check_links():
     """1 断链。只看像文件名的嵌入（带图片扩展名），占位符不算。"""
     have = set()
-    for p in glob.glob(os.path.join(IMAGES, "**", "*"), recursive=True):
-        if os.path.isfile(p) and not os.path.basename(p).startswith("."):
-            have.add(os.path.basename(p))
+    for root in IMAGE_ROOTS:
+        for p in glob.glob(os.path.join(VAULT, root, "**", "*"), recursive=True):
+            if os.path.isfile(p) and not os.path.basename(p).startswith("."):
+                have.add(os.path.basename(p))
     missing = []
     for md in _notes(skip_templates=True):
         try:
@@ -83,9 +88,10 @@ def check_links():
 def check_duplicate_names():
     """2 重名。"""
     names = []
-    for p in glob.glob(os.path.join(IMAGES, "**", "*"), recursive=True):
-        if os.path.isfile(p) and not os.path.basename(p).startswith("."):
-            names.append(os.path.basename(p))
+    for root in IMAGE_ROOTS:
+        for p in glob.glob(os.path.join(VAULT, root, "**", "*"), recursive=True):
+            if os.path.isfile(p) and not os.path.basename(p).startswith("."):
+                names.append(os.path.basename(p))
     return [k for k, v in Counter(names).items() if v > 1]
 
 
@@ -99,7 +105,7 @@ def check_ai():
     hits = []
     for p in sorted(glob.glob(os.path.join(DATA, "*.json"))):
         base = os.path.basename(p)
-        if base.startswith("inbox") or base.startswith("vision"):
+        if base.startswith(("inbox", "vision", "local_")):
             continue
         try:
             d = json.load(open(p, encoding="utf-8"))
@@ -178,7 +184,7 @@ def check_license():
     missing = []
     for p in sorted(glob.glob(os.path.join(DATA, "*.json"))):
         base = os.path.basename(p)
-        if base.startswith("inbox") or base.startswith("vision"):
+        if base.startswith(("inbox", "vision", "local_")):
             continue
         try:
             d = json.load(open(p, encoding="utf-8"))
@@ -204,11 +210,12 @@ def check_orphans():
         except Exception:
             continue
     orphans = []
-    for p in glob.glob(os.path.join(IMAGES, "**", "*"), recursive=True):
-        if not os.path.isfile(p) or os.path.basename(p).startswith("."):
-            continue
-        if os.path.basename(p) not in referenced:
-            orphans.append(os.path.relpath(p, VAULT))
+    for root in IMAGE_ROOTS:
+        for p in glob.glob(os.path.join(VAULT, root, "**", "*"), recursive=True):
+            if not os.path.isfile(p) or os.path.basename(p).startswith("."):
+                continue
+            if os.path.basename(p) not in referenced:
+                orphans.append(os.path.relpath(p, VAULT))
     return sorted(orphans)
 
 
@@ -227,7 +234,7 @@ def check_data_disk_sync():
     problems = []
     for p in sorted(glob.glob(os.path.join(DATA, "*.json"))):
         base = os.path.basename(p)
-        if base.startswith(("inbox", "vision", "feature", "clip")):
+        if base.startswith(("inbox", "vision", "feature", "clip", "local_")):
             continue
         slug = base[:-5]
         try:
@@ -377,6 +384,50 @@ def check_generated_freshness():
     return stale
 
 
+def check_local_library():
+    """13 本地图库：层 2 的清单、图片、笔记三者要一致。
+
+    只在用户本机有本地图库时才有意义 —— 没有清单就直接通过（别人 clone 后就是这种）。
+    三件事要同时成立：
+      · 清单里每条记录对应的图片文件都在
+      · images-local/ 下的每张图都在清单里（否则是孤儿）
+      · 流派卡里的 [[我的图库-X]] 链接都有对应笔记（否则是悬空链接）
+    """
+    man_path = os.path.join(DATA, "local_library.json")
+    if not os.path.exists(man_path):
+        return []
+    try:
+        man = json.load(open(man_path, encoding="utf-8"))
+    except Exception:
+        return [("local_library.json", "解析失败")]
+    items = man.get("items") or {}
+    problems = []
+    for rel, it in items.items():
+        if not os.path.exists(os.path.join(VAULT, rel)):
+            problems.append((rel, "清单里有但文件不在"))
+    root = os.path.join(VAULT, "99-附件", "images-local")
+    if os.path.isdir(root):
+        for r, _d, fs in os.walk(root):
+            for f in fs:
+                if f.startswith("."):
+                    continue
+                rel = os.path.relpath(os.path.join(r, f), VAULT).replace(os.sep, "/")
+                if rel not in items:
+                    problems.append((rel, "图片在但清单里没有"))
+    # 流派卡引用的本地笔记必须存在
+    notes = {os.path.splitext(os.path.basename(x))[0]
+             for x in glob.glob(os.path.join(VAULT, "15-我的图库", "*.md"))}
+    for md in _notes():
+        try:
+            t = open(md, encoding="utf-8").read()
+        except Exception:
+            continue
+        for m in re.findall(r"\[\[我的图库-([^\]|]+)", t):
+            if ("我的图库-" + m) not in notes:
+                problems.append((os.path.relpath(md, VAULT), "链接了不存在的 我的图库-" + m))
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -431,6 +482,7 @@ def main():
     report("10 署名质量", check_attribution())
     report("11 视频层", check_video_layer())
     report("12 生成物新鲜度", check_generated_freshness())
+    report("13 本地图库", check_local_library())
 
     print("=" * 70)
     if failed:

@@ -34,6 +34,16 @@ _scripts/_data/clip_text_cache.json
 # CLIP 量化模型（约 150MB，跑 clip_embed.py download 自动获取）
 _scripts/vendor/clip/
 
+# ---------------------------------------------------------------- 层 2：我自己的图库
+# 扫描你自己文件夹进来的私人收藏。**全部本地私有**，不随仓库发布：
+#   python3 _scripts/scan_local.py <目录>   →  --list → --file <编号> --to <流派>
+# 清单和图片是私有的，但 15-我的图库/ 的笔记是生成的（build_vault 无条件重写），
+# 一并忽略，避免把你的收藏清单提交上去。
+_scripts/_data/local_library.json
+_scripts/_data/local_pending.json
+15-我的图库/
+99-附件/images-local/
+
 # Vision 特征提取器的编译产物（架构相关，首次使用时自动编译）
 _scripts/vision/vision_feat
 
