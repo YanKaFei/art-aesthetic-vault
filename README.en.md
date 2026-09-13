@@ -6,7 +6,7 @@
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
-162 notes · 442 public-domain images · 37 ready-to-run scripts
+168 notes · 442 public-domain images · 37 ready-to-run scripts
 
 **English** ｜ [中文](README.md)
 

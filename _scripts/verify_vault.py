@@ -727,11 +727,16 @@ def check_semantic_search():
 
     # 不论有没有模型，semantic=True 都不能炸
     try:
-        r = A.search("霓虹雨夜的城市", limit=5, semantic=True)
-        if not r:
-            problems.append(("霓虹雨夜的城市", "加了语义仍然一条都搜不到"))
+        A.search("霓虹雨夜的城市", limit=5, semantic=True)
     except Exception as e:
         problems.append(("semantic search", "抛异常：%s: %s" % (type(e).__name__, e)))
+
+    # 「搜得到东西」只在**模型可用时**才要求。没模型时关键词搜不到
+    # 「霓虹雨夜的城市」是设计内的行为（描述性查询本来就该由语义接住），
+    # 拿它当失败是假阳性 —— 第一版就这么写的，干净克隆上立刻误报。
+    if have_model:
+        if not A.search("霓虹雨夜的城市", limit=5, semantic=True):
+            problems.append(("霓虹雨夜的城市", "有模型却一条都搜不到"))
 
     if have_model:
         cards = A.cards()
