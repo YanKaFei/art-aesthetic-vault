@@ -414,7 +414,7 @@ def main():
         print(render(recs, dups, matches))
         if not Image:
             print("\n⚠ 没有 Pillow，只能列文件。安装：pip3 install --user Pillow")
-        print("\n清单已写入 _scripts/_data/inbox_manifest.json")
+        print("\n清单已写入 .repo/_data/inbox_manifest.json")
     return 0
 
 

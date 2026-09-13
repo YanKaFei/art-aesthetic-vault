@@ -35,8 +35,8 @@ case "${1:-}" in
 esac
 
 # 自检：确认这真的在一个仓库里
-if [ ! -f "$REPO_ROOT/_scripts/artvault.py" ]; then
-  echo "✗ 找不到 $REPO_ROOT/_scripts/artvault.py"
+if [ ! -f "$REPO_ROOT/.repo/artvault.py" ]; then
+  echo "✗ 找不到 $REPO_ROOT/.repo/artvault.py"
   echo "  这个脚本应该放在仓库内的 skill/ 目录里运行。"
   exit 1
 fi

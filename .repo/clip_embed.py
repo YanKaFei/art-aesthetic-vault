@@ -22,7 +22,7 @@ onnxruntime 只用了约 15MB，模型是量化版（视觉 85MB + 文本 61MB�
 
 ## 模型
 
-`Xenova/clip-vit-base-patch32` 的量化 ONNX，放在 `_scripts/vendor/clip/`
+`Xenova/clip-vit-base-patch32` 的量化 ONNX，放在 `.repo/vendor/clip/`
 （vendor/ 已 gitignore，不会进仓库）。首次运行前需要下载：
 
     python3 clip_embed.py download

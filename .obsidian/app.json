@@ -3,9 +3,9 @@
   "newFileFolderPath": "20-我的提示词",
   "alwaysUpdateLinks": true,
   "userIgnoreFilters": [
-    "_scripts/",
-    "skill/",
-    "pinterest/",
+    ".repo/",
+    ".github/",
+    "LICENSE",
     "README.md",
     "README.en.md"
   ]

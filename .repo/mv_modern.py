@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """流派定义 —— 现代主义与战后（19 个）。
 
-注意：1950 年之后的流派大多仍在版权期内，开放数据源里基本拿不到图。
+注意：1950 年之后的流派大多找不到可自由分发的实图。
 这些流派会生成为「纯提示词卡」——只存结构，不存图。这是有意为之，不是缺陷。
 """
 
@@ -334,7 +334,7 @@ MOVEMENTS = [
            "camera": "缓慢 push in 到画布表面，或 static 让表面自身运动",
            "note": "重点是「身体动作的痕迹」，可以暗示画外的手"},
  "pitfalls": ["AI 容易做成随意涂鸦 → 加 gesture, drip and splash, all-over composition, monumental scale",
-              "版权：1950 年后作品基本都在版权期内，仓库只存提示词"],
+              "只存提示词，不收作品图"],
  "sources": {"cleveland": ["abstract expressionism"], "met": ["abstract expressionism"],
              "commons": []},
  "see_also": ["color-field", "expressionism", "dada"],
@@ -370,7 +370,7 @@ MOVEMENTS = [
            "camera": "极缓 push in 直到颜色充满画面",
            "note": "几乎没有运动——色域绘画的动是「呼吸」"},
  "pitfalls": ["AI 会加笔触和细节 → negative 写 visible gestural brushwork, busy detail",
-              "版权：罗斯科、纽曼作品均在版权期内，只存提示词"],
+              "只存提示词，不收作品图"],
  "sources": {"cleveland": ["color field painting"], "met": ["color field"], "commons": []},
  "see_also": ["abstract-expressionism", "minimalism-art", "tonalism"],
 },
@@ -440,7 +440,7 @@ MOVEMENTS = [
            "camera": "static 平面；节奏感来自图像的切换",
            "note": "波普的动是「复制和重复」，像印刷机在运行"},
  "pitfalls": ["AI 会加手工笔触 → negative 写 visible brushwork, impasto, painterly",
-              "版权：波普作品几乎全在版权期内，只存提示词"],
+              "只存提示词，不收作品图"],
  "sources": {"cleveland": ["pop art"], "met": ["pop art"], "commons": []},
  "see_also": ["dada", "op-art", "conceptual-art"],
 },
@@ -475,7 +475,7 @@ MOVEMENTS = [
            "camera": "极缓的直线平移，或 static",
            "note": "极简主义的体验来自身体在空间中的移动，不是画面的运动"},
  "pitfalls": ["AI 会加质感与细节 → negative 写 texture, ornament, expressive brushwork",
-              "版权：几乎全在版权期内，只存提示词"],
+              "只存提示词，不收作品图"],
  "sources": {"cleveland": ["minimalism art"], "met": ["minimalism"], "commons": []},
  "see_also": ["de-stijl", "suprematism", "color-field", "minimalist-design"],
 },
@@ -510,7 +510,7 @@ MOVEMENTS = [
            "camera": "static 记录镜头；不要审美化的运镜",
            "note": "观念艺术的力量在「不表演」——任何炫技都削弱它"},
  "pitfalls": ["AI 会把它做得太好看到失去观念性 → negative 写 beautiful rendering, dramatic lighting",
-              "版权：全在版权期内，只存提示词"],
+              "只存提示词，不收作品图"],
  "sources": {"cleveland": ["conceptual art"], "met": ["conceptual art"], "commons": []},
  "see_also": ["minimalism-art", "dada", "pop-art"],
 },
@@ -580,7 +580,7 @@ MOVEMENTS = [
            "camera": "缓慢 aerial push out 揭示尺度，或高空环绕",
            "note": "大地艺术的动必须是航拍——尺度感来自空中视角"},
  "pitfalls": ["AI 容易做成普通风景 → 加 monumental geometry, earthwork, aerial view, human intervention",
-              "版权：多数有影像版权，只存提示词"],
+              "只存提示词，不收作品图"],
  "sources": {"cleveland": ["land art"], "met": ["land art", "earth art"], "commons": []},
  "see_also": ["conceptual-art", "minimalism-art", "hudson-river-school"],
 },
@@ -615,7 +615,7 @@ MOVEMENTS = [
            "camera": "static 或极缓 zoom；让图案自身动",
            "note": "超扁平的动是「图案的无限增殖」"},
  "pitfalls": ["AI 会加立体和阴影 → negative 写 realistic shading, perspective depth",
-              "版权：全部在版权期内，只存提示词"],
+              "只存提示词，不收作品图"],
  "sources": {"cleveland": [], "met": [], "commons": []},
  "see_also": ["ukiyo-e", "pop-art", "anime-cel"],
 },
@@ -650,7 +650,7 @@ MOVEMENTS = [
            "camera": "handheld 粗粝推进；不要平滑的滑轨",
            "note": "新表现主义的动应该粗鲁、不稳定"},
  "pitfalls": ["AI 会清理画面 → negative 写 clean minimal, digital smoothness",
-              "版权：全部在版权期内，只存提示词"],
+              "只存提示词，不收作品图"],
  "sources": {"cleveland": ["neo-expressionism"], "met": ["neo-expressionism"], "commons": []},
  "see_also": ["expressionism", "abstract-expressionism", "dada"],
 },

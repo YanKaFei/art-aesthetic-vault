@@ -6,7 +6,7 @@
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
-163 notes · 452 public-domain images · 36 ready-to-run scripts
+163 notes · 452 images · 36 ready-to-run scripts
 
 **English** ｜ [中文](README.md)
 
@@ -181,7 +181,7 @@ Art Aesthetic Style Library
 | | |
 |---|---|
 | **Movement cards** | **141**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
-| **Public-domain images** | **452** (152 MB), covering 85 movements |
+| **Images** | **452** (152 MB), covering 85 movements |
 | **Guides & methodology** | 18 notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
 | **Keyword atlas** | All **218 styles / 189 movements / 68 genres** mapped to a card |
 | **Note templates** | 3 |
@@ -208,7 +208,7 @@ Open the folder in Obsidian. Recommended entry points:
 ### 2. From the command line (or let an AI drive it)
 
 ```bash
-cd _scripts
+cd .repo
 
 python3 artvault.py categories              # 6 categories, 141 movements
 python3 artvault.py search "neon rain"      # fuzzy search, Chinese or English
@@ -281,7 +281,7 @@ Start a **new AI session** for it to take effect.
   "mcpServers": {
     "artvault": {
       "command": "python3",
-      "args": ["<absolute path to this repo>/_scripts/mcp_server.py"]
+      "args": ["<absolute path to this repo>/.repo/mcp_server.py"]
     }
   }
 }
@@ -344,119 +344,6 @@ generation, keyword mapping and the AI interfaces all follow automatically.
 
 ---
 
-## Quick start
-
-```bash
-git clone --depth 1 https://github.com/YanKaFei/art-aesthetic-vault.git
-cd art-aesthetic-vault
-
-# immediate self-check
-cd _scripts && python3 artvault.py categories
-```
-
-**Requirements:** Python 3.8+ and Obsidian (recommended).
-
-**The core scripts use only the Python standard library - nothing to pip install.**
-
-Optional dependencies - everything works without them, they just add capability:
-
-```bash
-# Pinterest grabbing and the image inbox
-pip3 install --user requests Pillow
-
-# Enhanced image-analysis dimensions (face framing / Hough lines / saliency)
-# and semantic search
-pip3 install --target ./vendor/libs numpy opencv-python-headless
-```
-
-> Installing into `vendor/libs` keeps your system Python clean, and the
-> directory is gitignored. To skip them explicitly: `ARTVAULT_NO_EXT=1`.
-> Note `artvault_vision.py` is macOS-only (it uses the system Vision
-> framework); elsewhere it degrades gracefully and says why, without
-> affecting any core feature.
-
----
-
-## Regenerate / extend
-
-```bash
-cd _scripts
-
-python3 fetch_art.py                  # fetch images for movements that lack them
-python3 fetch_art.py impressionism    # one movement only
-python3 fetch_art.py --per 12         # 12 images per movement
-python3 build_vault.py                # regenerate every note from the mv_*.py data
-```
-
-### Adding a movement
-
-1. Add an entry to the right `_scripts/mv_*.py` file
-2. Add filter keywords to **`ARTIST_KEYS` in the same file** ← **required, or you'll pull in unrelated works**
-3. `python3 fetch_art.py <slug>` then `python3 build_vault.py`
-
-| Data file | Category |
-|---|---|
-| `mv_core.py` | the original 18 core movements |
-| `mv_west.py` | Western Classical & Modern |
-| `mv_asia.py` / `mv_asia2.py` | East Asia · South Asia · Islam |
-| `mv_modern.py` / `mv_gaps.py` | Modernism & Post-war |
-| `mv_contemporary.py` | Avant-Garde · Contemporary · Postmodern |
-| `mv_visual.py` | Digital · Subculture · Photography |
-| `mv_photo.py` | Photography & Image |
-
----
-
-## Tool inventory
-
-What each script in `_scripts/` does. Unless marked **optional**, all of them
-need only Python 3 + Pillow.
-
-### Entry points
-
-| Script | What it does |
-|---|---|
-| `artvault.py` | Main query interface: `categories` `search` `layers` `show` `palette` `related` `compose` |
-| `mcp_server.py` | Same capabilities exposed as an MCP server for Claude Desktop / Cursor |
-
-### Sources & generation
-
-| Script | What it does |
-|---|---|
-| `movements.py` | Aggregates all 147 movement definitions — the single source of truth |
-| `mv_*.py` | Movement cards and filter keywords (8 files, split by category) |
-| `providers.py` | Four CC0 source adapters + three-layer filtering (AI images / flat works / artist match) |
-| `fetch_art.py` | Image fetching: round-robin across sources, two-layer filtering, `--refresh` clears orphaned files |
-| `build_vault.py` | **Generates** the Obsidian notes / README / LICENSE / .gitignore |
-| `keyword_map.py` | Generates the keyword map |
-
-### Image analysis
-
-| Script | What it does |
-|---|---|
-| `image_analysis.py` | Seven objective dimensions: luminance / contrast / colour / harmony / composition / texture / line. Pure Pillow |
-| `image_analysis_ext.py` | **Optional**: face framing / Hough lines / spectral-residual saliency. Needs numpy + opencv, skipped automatically if absent |
-| `clip_embed.py` | **Optional**: CLIP image/text embeddings (ONNX, no PyTorch). Run `download` once for the model |
-| `clip_match.py` | **Optional**: image-to-movement matching with CLIP (zero-shot + fusion) — the most accurate of the three routes |
-| `artvault_vision.py` | **Optional**: macOS Vision semantic search (search by image / near-duplicates / similar movements) |
-| `ingest_inbox.py` | Processes the `pinterest/` inbox, including the dimensions above in its scan |
-| `verify_vault.py` | **Acceptance checks**: broken links / duplicate names / AI images / frontmatter / near-duplicates / licences / orphans |
-| `github_setup.py` | Push, set as Template, set topics/description in one go (token never appears in argv) |
-| `video_prompt.py` | Generates two Chinese video-prompt blocks per movement (Seedance 2.5 five-part + MiniMax H3 natural language) |
-| `i2v_prompt.py` | **Image-to-video prompts**: turns one image's measurements into subject / motion / camera and fills the placeholders the per-movement version leaves behind |
-| `scan_local.py` | **Scans your own image folders into the vault**: measurement + CLIP suggestions + dedupe → review list → files into `15-我的图库/` |
-| `reverse_prompt.py` | **Composes the reverse-engineering card**: measurements + movement match + 7 layers + video prompts, shared by all three entry points |
-| `pinterest_grab.py` | Pinterest inbox scraper (local use only; images are **not** committed) |
-
-### Two conventions that are easy to miss
-
-1. **Change the template, not the output.**
-   `10-流派/*.md`, `00-导航/*.md` and `README.md` are all generated by
-   `build_vault.py`; editing them directly loses the change on the next rebuild
-   (this tool inventory itself lives in the template).
-2. **`20-我的提示词/` is yours.** Scripts read it but never overwrite it.
-
----
-
 ## Three principles
 
 1. **Better fewer than wrong.**
@@ -471,15 +358,6 @@ need only Python 3 + Pillow.
 3. **Don't invent movement terminology from memory.**
    LLM recall on art movements is unreliable and blurs related schools together.
    Use the concrete terms in the library.
-
----
-
-## Image sources
-
-All images come from public-domain / CC0 open sources (Cleveland, Art Institute of Chicago, The Met, Wikimedia Commons), verified entry by entry.
-Free to use and redistribute. Every work is annotated with its source and license link.
-
-**Code** MIT ｜ **Notes** CC BY 4.0
 
 ---
 

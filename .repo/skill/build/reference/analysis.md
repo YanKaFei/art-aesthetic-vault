@@ -7,7 +7,7 @@
 零依赖（只要 Pillow），纯本地，不联网。
 
 ```bash
-cd ~/Desktop/art-aesthetic-vault/_scripts
+cd ~/Desktop/art-aesthetic-vault/.repo
 
 python3 image_analysis.py 某张图.jpg          # 可读报告
 python3 image_analysis.py 某张图.jpg --json   # 机器可读
@@ -159,7 +159,7 @@ python3 image_analysis_ext.py 某张图.jpg        # 单独跑增强维度
 ARTVAULT_NO_EXT=1 python3 image_analysis.py ... # 全局关掉增强
 ```
 
-装依赖（本仓库已经把依赖放在 `_scripts/vendor/libs`，下面这条是给外部用户）：
+装依赖（本仓库已经把依赖放在 `.repo/vendor/libs`，下面这条是给外部用户）：
 
 ```bash
 pip3 install --target ./vendor/libs numpy opencv-python-headless
@@ -254,7 +254,7 @@ Haar 级联的基特征是 24x24，脸缩到 40px 就基本检不出。
 这个脚本测的是**可解释的客观维度**——每一项都能翻译成提示词
 （「低明调」→ `low-key lighting`，「繁杂」→ `intricate detail`）。
 
-`_scripts/vision/` 下的 T3 是另一回事：用 macOS Vision 框架提取 768 维特征向量，
+`.repo/vision/` 下的 T3 是另一回事：用 macOS Vision 框架提取 768 维特征向量，
 做的是**语义相似度检索**（「找和这张最像的图」），向量本身不可解释。
 
 两者互补：这套给拆解用，T3 给找参考图用。

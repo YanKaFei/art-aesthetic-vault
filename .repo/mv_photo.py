@@ -229,7 +229,7 @@ MOVEMENTS = [
            "camera": "缓慢环绕或 dolly，模仿时装影片",
            "note": "时尚编辑的权力在「构造」——布景与姿态缺一不可"},
  "pitfalls": ["和街头/纪实区分：时尚编辑是完全被构造的",
-              "版权：全部在版权期内，只存提示词"],
+              "只存提示词，不收作品图"],
  "sources": {"cleveland": [], "met": [], "commons": []},
  "see_also": ["art-deco", "surrealist-photography", "polaroid-film", "kitsch"],
 },

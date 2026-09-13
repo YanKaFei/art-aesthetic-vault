@@ -17,26 +17,26 @@
 .obsidian/graph.json
 
 # 脚本缓存与本地依赖
-_scripts/__pycache__/
-_scripts/vendor/
+.repo/__pycache__/
+.repo/vendor/
 
 # 抓取过程的临时清单（每次扫描都会重写）
-_scripts/_data/inbox_manifest.json
+.repo/_data/inbox_manifest.json
 
 # 生成物：换台机器重建即可，不必入库
 #   python3 artvault_vision.py build          （图像语义索引，几 MB）
 # 向量缓存用 npz（比 json 小 6 倍、加载快 100 倍）；旧 json 也一并忽略，
 # 免得升级后残留的文件被提交
-_scripts/_data/vision_index.npz
-_scripts/_data/vision_index.json
-_scripts/_data/feature_cache.npz
-_scripts/_data/feature_cache.json
-_scripts/_data/clip_cache.npz
-_scripts/_data/clip_cache.json
-_scripts/_data/clip_text_cache.json
+.repo/_data/vision_index.npz
+.repo/_data/vision_index.json
+.repo/_data/feature_cache.npz
+.repo/_data/feature_cache.json
+.repo/_data/clip_cache.npz
+.repo/_data/clip_cache.json
+.repo/_data/clip_text_cache.json
 
 # CLIP 量化模型（约 150MB，跑 clip_embed.py download 自动获取）
-_scripts/vendor/clip/
+.repo/vendor/clip/
 
 # ---------------------------------------------------------------- 你的私人工作区
 # 20-我的提示词/ 是「你自己的地盘」，**整个目录都不发布**。
@@ -46,16 +46,16 @@ _scripts/vendor/clip/
 
 # ---------------------------------------------------------------- 层 2：我自己的图库
 # 扫描你自己文件夹进来的私人收藏。**全部本地私有**，不随仓库发布：
-#   python3 _scripts/scan_local.py <目录>   →  --list → --file <编号> --to <流派>
+#   python3 .repo/scan_local.py <目录>   →  --list → --file <编号> --to <流派>
 # 清单和图片是私有的，但 15-我的图库/ 的笔记是生成的（build_vault 无条件重写），
 # 一并忽略，避免把你的收藏清单提交上去。
-_scripts/_data/local_library.json
-_scripts/_data/local_pending.json
+.repo/_data/local_library.json
+.repo/_data/local_pending.json
 15-我的图库/
 99-附件/images-local/
 
 # Vision 特征提取器的编译产物（架构相关，首次使用时自动编译）
-_scripts/vision/vision_feat
+.repo/vision/vision_feat
 
 # Pinterest 抓来的图版权归原作者、无统一授权，**不要提交也不要公开**
 # （10-流派/ 里的 CC0 图不受影响，那是可以随便分发的）

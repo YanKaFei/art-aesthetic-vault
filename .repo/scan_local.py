@@ -166,7 +166,7 @@ def iter_images(folder):
     root_v = os.path.realpath(VAULT)
     skip = [os.path.realpath(os.path.join(VAULT, "99-附件")),
             os.path.realpath(os.path.join(VAULT, ".git")),
-            os.path.realpath(os.path.join(VAULT, "_scripts", "vendor"))]
+            os.path.realpath(os.path.join(VAULT, ".repo", "vendor"))]
     for r, d, fs in os.walk(os.path.expanduser(folder)):
         d[:] = [x for x in d if not x.startswith(".")]
         # 剪掉库自己的目录（用 realpath 比，避免相对路径绕过去）

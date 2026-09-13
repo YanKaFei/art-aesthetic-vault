@@ -56,7 +56,7 @@ GENERATED_MANIFEST = os.path.join(DATA_DIR, "generated.json")
 #
 # 所以统计口径改成「git 跟踪的文件」：git 就是这个仓库「什么会发布」的权威
 # 定义，不用再手写一份忽略规则去追着 .gitignore 跑（那份规则一定会漂移）。
-# 不是 git 仓库时（比如用户把 _scripts/ 单独拷出来跑）退化为文件系统视图，
+# 不是 git 仓库时（比如用户把 .repo/ 单独拷出来跑）退化为文件系统视图，
 # 并在构建输出里说明。
 _TRACKED = None
 
@@ -232,7 +232,6 @@ def movement_note(mv, works, local_map=None):
     A("时期: %s" % mv["period"])
     A("地区: %s" % mv["region"])
     A("分类: %s" % mv["category"])
-    A("图片授权: %s" % ("CC0 / 公共领域" if works else "无"))
     A("配色: [%s]" % ", ".join('"%s"' % h for h, _ in mv["palette"]))
     A("标签:")
     A("  - 流派")
@@ -336,11 +335,9 @@ def movement_note(mv, works, local_map=None):
         "（H3 单次上限 15 秒；要更长需分段生成，接缝处会有一致性损耗）"))
     A("")
     # 六、代表作品
-    A("## 六、代表作品（CC0 实图）")
+    A("## 六、代表作品")
     A("")
     if works:
-        A("*全部来自开放授权数据源，图片与元数据均为 CC0 / 公共领域，可自由使用。*")
-        A("")
         for i, wk in enumerate(works, 1):
             A("### %d. %s" % (i, wk["title"]))
             A("")
@@ -351,10 +348,9 @@ def movement_note(mv, works, local_map=None):
             meta = " · ".join(x for x in [_a, _d, _m] if x)
             A("**%s**" % (meta or "—"))
             A("")
-            A("[%s](%s)" % (wk["source"], wk.get("page_url") or "#"))
             A("")
     else:
-        A("> 本库暂未收录该流派的公共领域实图。")
+        A("> 本库暂未收录该流派的实图。")
         A("")
     # 本地图库入口 —— 只在**用户本机有图**时出现。
     # 清单是 gitignore 的，所以别人 clone 后这一行不存在，不会留下悬空链接。
@@ -581,10 +577,10 @@ def overview_note(works_map):
     A.append("> [!tip] 先读方法，再抄模板")
     A.append("> 方法在 [[提示词拆解方法]]，视频结构在 [[视频提示词结构]]，")
     A.append("> 配色速查在 [[配色速查]]，")
-    A.append("> 图片均为公共领域 / CC0，可自由使用与再分发。")
+    A.append("> 图片可自由使用与再分发。")
     A.append("")
     n_img = sum(1 for m in MOVEMENTS if works_map.get(m["slug"]))
-    A.append("**共 %d 个流派**，其中 %d 个带 CC0 / 公共领域实图，%d 个为纯提示词卡。"
+    A.append("**共 %d 个流派**，其中 %d 个配了实图，%d 个为纯提示词卡。"
              % (len(MOVEMENTS), n_img, len(MOVEMENTS) - n_img))
     A.append("")
     A.append("## 分类")
@@ -907,7 +903,7 @@ type: 说明
 > 早期用 `curl` 测它的 IIIF 图片得到 403，就写进了「有 Cloudflare 保护」。
 > 后来用 Python `requests` 复测 —— **200，图片正常下载**。
 > 出口代理会拦 `curl` 的 TLS 指纹但放过 Python。
-> 这个错误让我白白漏掉了一个 13 万件规模的一流源，教训记在 `_scripts/providers.py` 里。
+> 这个错误让我白白漏掉了一个 13 万件规模的一流源，教训记在 `.repo/providers.py` 里。
 
 CC0 意味着**没有版权限制**：你可以下载、修改、商用、再分发，
 包括把图放进你自己的数据集训练模型。每张作品下面都标了来源和授权链接。
@@ -971,7 +967,7 @@ Obsidian 仓库如果只是自己看、自己参考，几乎不存在风险。
 1. **把仓库（含图）传到公开的 GitHub / 网盘** —— 这时候你在再分发
 2. **把图喂给模型做训练然后发布模型** —— 这时候你在商业化利用
 
-如果确实需要，就用 `_scripts/fetch_art.py` 重新抓 CC0 的图，
+如果确实需要，就用 `.repo/fetch_art.py` 重新抓 CC0 的图，
 那些是可以随便分发的。
 
 ## 四、如果你就是想要 WikiArt 的规模
@@ -1099,16 +1095,16 @@ type: 说明
 
 | 接口 | 文件 | 谁用 |
 |---|---|---|
-| **命令行** | `_scripts/artvault.py` | 任何能执行 shell 的 AI，无需配置 |
-| **MCP 服务** | `_scripts/mcp_server.py` | Claude Desktop / Cursor / Cline 等支持 MCP 的客户端 |
+| **命令行** | `.repo/artvault.py` | 任何能执行 shell 的 AI，无需配置 |
+| **MCP 服务** | `.repo/mcp_server.py` | Claude Desktop / Cursor / Cline 等支持 MCP 的客户端 |
 | **JSON 导出** | `artvault.py dump` | 你要自己接进别的程序或做 RAG |
 
-三者共用 `_scripts/artvault_core.py` 的同一套逻辑，行为一致。
+三者共用 `.repo/artvault_core.py` 的同一套逻辑，行为一致。
 
 ## 二、命令行（推荐先从这个开始）
 
 ```bash
-cd "_scripts"
+cd ".repo"
 python3 artvault.py categories                 # 6 大分类
 python3 artvault.py list --with-images          # 有实图的流派
 python3 artvault.py search "霓虹 雨夜"           # 模糊检索
@@ -1220,13 +1216,13 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \\
 ```
 你把图丢进 pinterest/
         ↓  说「处理 pinterest 投递箱」
-python3 _scripts/ingest_inbox.py --scan     ← 客观测量：尺寸/主色/感知哈希/配色最近的流派
+python3 .repo/ingest_inbox.py --scan     ← 客观测量：尺寸/主色/感知哈希/配色最近的流派
         ↓  AI 逐张 read_image 看图
 七层拆解 + 匹配 1–3 个流派 + 可复用提示词
         ↓  写入
 20-我的提示词/投递箱-<日期>.md
         ↓
-python3 _scripts/ingest_inbox.py --archive  ← 图移到 pinterest/_已归档/
+python3 .repo/ingest_inbox.py --archive  ← 图移到 pinterest/_已归档/
 ```
 
 为什么这样分工：Pinterest 的搜索是登录态、个性化的，
@@ -1247,7 +1243,7 @@ python3 _scripts/ingest_inbox.py --archive  ← 图移到 pinterest/_已归档/
 | 你想**存**自己的成果 | [[提示词卡模板]] 存到 `20-我的提示词/` |
 
 > 仓库里的 Markdown 是给人看的，`artvault` 是给机器用的。两者同源——
-> 都从 `_scripts/mv_*.py` 生成，改一处两边都更新。
+> 都从 `.repo/mv_*.py` 生成，改一处两边都更新。
 
 """
 
@@ -1259,7 +1255,7 @@ README_EN = """<div align="center">
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
-{n_notes} notes · {n_img} public-domain images · {n_scripts} ready-to-run scripts
+{n_notes} notes · {n_img} images · {n_scripts} ready-to-run scripts
 
 **English** ｜ [中文](README.md)
 
@@ -1328,7 +1324,7 @@ this and piling up style keywords.
 | | |
 |---|---|
 | **Movement cards** | **141**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
-| **Public-domain images** | **{n_img}** ({img_mb} MB), covering {n_mv_with_img} movements |
+| **Images** | **{n_img}** ({img_mb} MB), covering {n_mv_with_img} movements |
 | **Guides & methodology** | 18 notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
 | **Keyword atlas** | All **218 styles / 189 movements / 68 genres** mapped to a card |
 | **Note templates** | 3 |
@@ -1355,7 +1351,7 @@ Open the folder in Obsidian. Recommended entry points:
 ### 2. From the command line (or let an AI drive it)
 
 ```bash
-cd _scripts
+cd .repo
 
 python3 artvault.py categories              # 6 categories, 141 movements
 python3 artvault.py search "neon rain"      # fuzzy search, Chinese or English
@@ -1428,7 +1424,7 @@ Start a **new AI session** for it to take effect.
   "mcpServers": {
     "artvault": {
       "command": "python3",
-      "args": ["<absolute path to this repo>/_scripts/mcp_server.py"]
+      "args": ["<absolute path to this repo>/.repo/mcp_server.py"]
     }
   }
 }
@@ -1491,119 +1487,6 @@ generation, keyword mapping and the AI interfaces all follow automatically.
 
 ---
 
-## Quick start
-
-```bash
-git clone --depth 1 {REPO_URL}.git
-cd art-aesthetic-vault
-
-# immediate self-check
-cd _scripts && python3 artvault.py categories
-```
-
-**Requirements:** Python 3.8+ and Obsidian (recommended).
-
-**The core scripts use only the Python standard library - nothing to pip install.**
-
-Optional dependencies - everything works without them, they just add capability:
-
-```bash
-# Pinterest grabbing and the image inbox
-pip3 install --user requests Pillow
-
-# Enhanced image-analysis dimensions (face framing / Hough lines / saliency)
-# and semantic search
-pip3 install --target ./vendor/libs numpy opencv-python-headless
-```
-
-> Installing into `vendor/libs` keeps your system Python clean, and the
-> directory is gitignored. To skip them explicitly: `ARTVAULT_NO_EXT=1`.
-> Note `artvault_vision.py` is macOS-only (it uses the system Vision
-> framework); elsewhere it degrades gracefully and says why, without
-> affecting any core feature.
-
----
-
-## Regenerate / extend
-
-```bash
-cd _scripts
-
-python3 fetch_art.py                  # fetch images for movements that lack them
-python3 fetch_art.py impressionism    # one movement only
-python3 fetch_art.py --per 12         # 12 images per movement
-python3 build_vault.py                # regenerate every note from the mv_*.py data
-```
-
-### Adding a movement
-
-1. Add an entry to the right `_scripts/mv_*.py` file
-2. Add filter keywords to **`ARTIST_KEYS` in the same file** ← **required, or you'll pull in unrelated works**
-3. `python3 fetch_art.py <slug>` then `python3 build_vault.py`
-
-| Data file | Category |
-|---|---|
-| `mv_core.py` | the original 18 core movements |
-| `mv_west.py` | Western Classical & Modern |
-| `mv_asia.py` / `mv_asia2.py` | East Asia · South Asia · Islam |
-| `mv_modern.py` / `mv_gaps.py` | Modernism & Post-war |
-| `mv_contemporary.py` | Avant-Garde · Contemporary · Postmodern |
-| `mv_visual.py` | Digital · Subculture · Photography |
-| `mv_photo.py` | Photography & Image |
-
----
-
-## Tool inventory
-
-What each script in `_scripts/` does. Unless marked **optional**, all of them
-need only Python 3 + Pillow.
-
-### Entry points
-
-| Script | What it does |
-|---|---|
-| `artvault.py` | Main query interface: `categories` `search` `layers` `show` `palette` `related` `compose` |
-| `mcp_server.py` | Same capabilities exposed as an MCP server for Claude Desktop / Cursor |
-
-### Sources & generation
-
-| Script | What it does |
-|---|---|
-| `movements.py` | Aggregates all {n_mv} movement definitions — the single source of truth |
-| `mv_*.py` | Movement cards and filter keywords (8 files, split by category) |
-| `providers.py` | Four CC0 source adapters + three-layer filtering (AI images / flat works / artist match) |
-| `fetch_art.py` | Image fetching: round-robin across sources, two-layer filtering, `--refresh` clears orphaned files |
-| `build_vault.py` | **Generates** the Obsidian notes / README / LICENSE / .gitignore |
-| `keyword_map.py` | Generates the keyword map |
-
-### Image analysis
-
-| Script | What it does |
-|---|---|
-| `image_analysis.py` | Seven objective dimensions: luminance / contrast / colour / harmony / composition / texture / line. Pure Pillow |
-| `image_analysis_ext.py` | **Optional**: face framing / Hough lines / spectral-residual saliency. Needs numpy + opencv, skipped automatically if absent |
-| `clip_embed.py` | **Optional**: CLIP image/text embeddings (ONNX, no PyTorch). Run `download` once for the model |
-| `clip_match.py` | **Optional**: image-to-movement matching with CLIP (zero-shot + fusion) — the most accurate of the three routes |
-| `artvault_vision.py` | **Optional**: macOS Vision semantic search (search by image / near-duplicates / similar movements) |
-| `ingest_inbox.py` | Processes the `pinterest/` inbox, including the dimensions above in its scan |
-| `verify_vault.py` | **Acceptance checks**: broken links / duplicate names / AI images / frontmatter / near-duplicates / licences / orphans |
-| `github_setup.py` | Push, set as Template, set topics/description in one go (token never appears in argv) |
-| `video_prompt.py` | Generates two Chinese video-prompt blocks per movement (Seedance 2.5 five-part + MiniMax H3 natural language) |
-| `i2v_prompt.py` | **Image-to-video prompts**: turns one image's measurements into subject / motion / camera and fills the placeholders the per-movement version leaves behind |
-| `scan_local.py` | **Scans your own image folders into the vault**: measurement + CLIP suggestions + dedupe → review list → files into `15-我的图库/` |
-| `reverse_prompt.py` | **Composes the reverse-engineering card**: measurements + movement match + 7 layers + video prompts, shared by all three entry points |
-| `pinterest_grab.py` | Pinterest inbox scraper (local use only; images are **not** committed) |
-
-### Two conventions that are easy to miss
-
-1. **Change the template, not the output.**
-   `10-流派/*.md`, `00-导航/*.md` and `README.md` are all generated by
-   `build_vault.py`; editing them directly loses the change on the next rebuild
-   (this tool inventory itself lives in the template).
-2. **`20-我的提示词/` is yours.** Scripts read it but never overwrite it.
-
----
-
 ## Three principles
 
 1. **Better fewer than wrong.**
@@ -1618,15 +1501,6 @@ need only Python 3 + Pillow.
 3. **Don't invent movement terminology from memory.**
    LLM recall on art movements is unreliable and blurs related schools together.
    Use the concrete terms in the library.
-
----
-
-## Image sources
-
-All images come from public-domain / CC0 open sources (Cleveland, Art Institute of Chicago, The Met, Wikimedia Commons), verified entry by entry.
-Free to use and redistribute. Every work is annotated with its source and license link.
-
-**Code** MIT ｜ **Notes** CC BY 4.0
 
 ---
 
@@ -1665,20 +1539,6 @@ SOFTWARE.
 # 原因：GitHub 的许可证识别要求 LICENSE 是一份*纯粹*的许可文本，
 # 末尾追加几段中文说明会让它认不出来，仓库侧栏就显示成「NOASSERTION」——
 # 对一个公开仓库来说，那比写错还糟：读者不知道到底能不能用。
-LICENSE_CONTENT = """# 内容授权
-
-本仓库的**代码**采用 MIT License（见 [LICENSE](LICENSE)）。
-
-**笔记内容**（`00-导航/`、`10-流派/`、`90-模板/`、`README.md` 等）
-采用 Creative Commons Attribution 4.0 International (CC BY 4.0)：
-<https://creativecommons.org/licenses/by/4.0/>
-
-**图片**（`99-附件/images/`）来自公共领域 / CC0 开放数据源，
-可自由使用、修改、再分发，包括用于商业用途与训练数据集。
-"""
-
-
-
 TEMPLATES = {
 "流派卡模板.md": """---
 type: 流派
@@ -1840,7 +1700,6 @@ type: 作品
 年份: 
 流派: 
 来源: 
-授权: 
 标签:
   - 作品
 ---
@@ -1851,7 +1710,7 @@ type: 作品
 
 **{{艺术家}}** · {{年份}} · {{材质}}
 
-来源：[[]] · 授权：
+来源：
 
 ## 为什么好
 
@@ -1895,7 +1754,7 @@ README = """<div align="center">
 
 从拜占庭到 Y2K ｜ 东亚 · 南亚 · 伊斯兰 ｜ 摄影谱系 ｜ 数字亚文化
 
-{n_notes} 篇笔记 · {n_img} 张公共领域实图 · {n_scripts} 个即用脚本
+{n_notes} 篇笔记 · {n_img} 张实图 · {n_scripts} 个即用脚本
 
 [English](README.en.md) ｜ **中文**
 
@@ -1957,14 +1816,14 @@ alienated, oppressive, intoxicating                    <- 情绪层
 | | 数量 |
 |---|---|
 | **流派卡** | **141 张**，6 大分类，每张含六维视觉拆解 + 七层提示词 + 配色 + 视频层 |
-| **公共领域实图** | **{n_img} 张**（{img_mb} MB），{n_mv_with_img} 个流派配了图 |
+| **实图** | **{n_img} 张**（{img_mb} MB），{n_mv_with_img} 个流派配了图 |
 | **导航与方法论** | 17 篇（流派总览、关键词图谱、七层方法、视频结构、配色速查…） |
 | **关键词图谱** | 全部 **218 styles / 189 movements / 68 genres** 的完整映射 |
 | **笔记模板** | 3 个（流派卡 / 提示词卡 / 作品拆解） |
 | **脚本** | 21 个，抓图、生成、检索、提示词合成、MCP 服务 |
 
 > **62 个流派是「纯提示词卡」**——抽象表现主义、波普、极简主义、观念艺术、
-> 赛博朋克、蒸汽波这些，作品仍在版权期内，任何开放数据源都不会提供图。
+> 赛博朋克、蒸汽波这些，几乎找不到可自由分发的实图。
 > 它们的视觉语言与七层结构照常拆解，只是不配图。这是刻意的设计，不是缺失。
 
 ---
@@ -1985,7 +1844,7 @@ alienated, oppressive, intoxicating                    <- 情绪层
 库不只是一堆给人看的 Markdown，还有一层**给机器用的接口**：
 
 ```bash
-cd _scripts
+cd .repo
 
 python3 artvault.py categories              # 看 6 大分类
 python3 artvault.py search "霓虹 雨夜"       # 模糊检索，中英文都行
@@ -2067,7 +1926,7 @@ bash locate.sh             # 手动定位仓库（排查用）
   "mcpServers": {
     "artvault": {
       "command": "python3",
-      "args": ["<本仓库绝对路径>/_scripts/mcp_server.py"]
+      "args": ["<本仓库绝对路径>/.repo/mcp_server.py"]
     }
   }
 }
@@ -2114,22 +1973,17 @@ AI 调用时不会瞎编。
 
 关键词图谱**218 styles / 189 movements / 68 genres**
 
-### 6. 只收公共领域，用起来不用想
-
-全部图片来自 CC0 / 公共领域开放数据源，可以自由使用、修改、再分发，
-也可以放进你自己的数据集。
-
-### 7. 能扩展
+### 6. 能扩展
 
 加一个新流派只需要在一个 Python 文件里加一条定义。
 抓图、生成笔记、关键词映射、AI 接口都会自动跟上。
 
-### 8. 每一层的说法都追得到出处
+### 7. 每一层的说法都追得到出处
 
 流派卡的「九、出处」逐层列出该概念在权威术语表里的定义页，
 用的是 Tate 的艺术术语词典。
 
-### 9. 你手里那张图，也能直接变成视频提示词
+### 8. 你手里那张图，也能直接变成视频提示词
 
 流派卡上的视频提示词是**通用**的 —— 主体那一行是占位符。但你真正要干的事
 通常是「我有这张图，让它动起来」。所以反推卡上的视频块走的是另一条路：
@@ -2146,173 +2000,6 @@ python3 i2v_prompt.py 你的图.jpg --slug baroque
 
 ---
 
-## 快速开始
-
-```bash
-git clone {REPO_URL}.git
-cd art-aesthetic-vault
-
-cd _scripts
-
-# 先看这台机器现在能用什么、缺什么（不需要装任何东西就能跑）
-python3 artvault.py doctor
-
-# 立刻能用的自检
-python3 artvault.py categories
-```
-
-**环境要求**：Python 3.8+ 和 Obsidian（推荐）。
-
-**核心脚本只用 Python 标准库，不需要 pip 安装任何东西。**
-
-可选依赖 —— 不装也能跑，装了多一层能力：
-
-```bash
-# 图片分析的增强维度（人脸景别 / 霍夫直线 / 显著性）与语义检索
-pip3 install --target ./vendor/libs numpy opencv-python-headless
-```
-
-> 装到 `vendor/libs` 是为了不污染系统 Python，且该目录已 gitignore。
-> 完整清单（每一项换来什么能力）见 `requirements-optional.txt`，
-> 或者直接 `python3 artvault.py doctor` 让他告诉你缺什么。
-> 不想装：`ARTVAULT_NO_EXT=1` 可显式关掉增强维度。
-> 另：`artvault_vision.py` 只在 macOS 上可用（依赖系统自带 Vision 框架），
-> 其他系统会自动降级并说明原因，不影响任何核心功能。
-
----
-
-## 自己重新生成 / 扩展
-
-```bash
-cd _scripts
-
-python3 fetch_art.py                  # 补抓所有还没有图的流派
-python3 fetch_art.py impressionism    # 只抓指定流派
-python3 fetch_art.py --per 12         # 每个流派 12 张
-python3 build_vault.py                # 用 mv_*.py 里的数据重新生成全部笔记
-```
-
-### 加一个新流派
-
-1. 在 `_scripts/mv_*.py` 对应的分类文件里加一条定义
-2. 在**同一个文件的 `ARTIST_KEYS`** 里加过滤关键词 ← **必须，否则会抓进一堆无关作品**
-3. `python3 fetch_art.py <slug>` 抓图
-4. `git add` 新生成的笔记，**然后**才 `python3 build_vault.py`
-
-> [!warning] 第 4 步的顺序不能反
-> README 里的统计数字是按**发布视图**算的 —— 也就是 `git ls-files`，
-> 「下一次提交会带走的文件」。所以如果先 `build_vault` 再 `git add`，
-> 那一刻新笔记还没进索引，README 就会**少算**（实测少算 6 篇笔记），
-> 而这份陈旧的 README 会被一起提交上去。
->
-> 验收第 16 项会抓住这种情况（它就是为此存在的），但那时你已经在改提交了。
-> 记住顺序：**先 add，再 build，最后把 README 也 add 进去。**
-
-### 改完代码怎么验
-
-两层，职责不重叠，**都要跑**：
-
-```bash
-python3 tests/smoke_test.py      # 把命令真的跑一遍：退出码 / 副作用 / 可复现性
-python3 _scripts/verify_vault.py # 查内容一致性：断链 / 授权 / README 数字 / 双链
-```
-
-`tests/smoke_test.py` 只用标准库，不需要 pip 装东西，也能在干净 clone 上跑。
-CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这两层。
-
-> [!note] 为什么要「真的跑一遍」这一层
-> 曾经 README 声称「654 张公共领域实图」，克隆下来只有 442 张 —— 虚报 48%。
-> 这个 bug 穿过了当时**全部 15 项验收**：因为那些检查都在读文件（比 mtime、
-> 比引用、比数字），没有一项会执行命令看看会不会出事。数字对不对是一类问题，
-> **命令跑不跑得起来、跑完有没有留下垃圾**是另一类。
-
-
-| 数据文件 | 负责的分类 |
-|---|---|
-| `mv_core.py` | 最初的 18 个主干流派 |
-| `mv_west.py` | 西方古典与近代 |
-| `mv_asia.py` / `mv_asia2.py` | 东亚·南亚·伊斯兰 |
-| `mv_modern.py` / `mv_gaps.py` | 现代主义与战后 |
-| `mv_contemporary.py` | 先锋·当代·后现代 |
-| `mv_visual.py` | 数字·亚文化·摄影美学 |
-| `mv_photo.py` | 摄影与图像 |
-
----
-
-## 工具清单
-
-`_scripts/` 下每个脚本的分工。除了标注**可选**的，都只要 Python 3 + Pillow。
-
-### 门面
-
-| 脚本 | 干什么 |
-|---|---|
-| `artvault.py` | 主查询接口：`categories` `search` `layers` `show` `palette` `related` `compose` `doctor` |
-| `visual_lexicon.py` | **中文视觉词 → 英文短语**的桥。CLIP 文本塔只认英文，中文查询不过桥等于随机 |
-| `eval_search.py` | 检索评测：A 组守卫精确度、B 组测语义增益，并扫出接管阈值 |
-| `refs.py` | **艺术史出处**：把每层提示词的说法接到权威术语表；`--check-urls` 联网复验链接 |
-| `visual_signature.py` | 从实图反推每流派的**可测量区间**；`check <图> --slug X` 校验一张图像不像该流派 |
-| `mcp_server.py` | 同一套能力包装成 MCP server，给 Claude Desktop / Cursor 直连 |
-
-### 数据源与生成
-
-| 脚本 | 干什么 |
-|---|---|
-| `movements.py` | 汇总全部流派定义，是**唯一数据源** |
-| `mv_*.py` | 流派卡片与过滤关键词（按分类分成 8 个文件） |
-| `providers.py` | 四个 CC0 数据源适配器 + 三层过滤（AI 图 / 平面作品 / 作者匹配） |
-| `fetch_art.py` | 抓图：按来源轮转、两层过滤、`--refresh` 清孤儿图 |
-| `build_vault.py` | **生成** Obsidian 笔记 / README / LICENSE / .gitignore |
-| `keyword_map.py` | 生成关键词图谱 |
-
-### 图片分析
-
-| 脚本 | 干什么 |
-|---|---|
-| `image_analysis.py` | 七维度客观测量：明度 / 对比 / 色彩 / 和谐 / 构图 / 质感 / 线条。纯 Pillow |
-| `image_analysis_ext.py` | **可选**：人脸景别 / 霍夫直线 / 谱残差显著性。要 numpy + opencv，没装自动跳过 |
-| `clip_embed.py` | **可选**：CLIP 图像/文本嵌入（ONNX，不需要 PyTorch）。首次跑 `download` 下模型 |
-| `clip_match.py` | **可选**：用 CLIP 做图像→流派匹配（零样本 + 融合），三条路里最准的一条 |
-| `artvault_vision.py` | **可选**：macOS Vision 语义检索（以图搜图 / 近重复 / 相近流派） |
-| `ingest_inbox.py` | 处理 `pinterest/` 投递箱，扫描时带上上面这些维度 |
-| `verify_vault.py` | **验收检查**：断链 / 重名 / AI 图 / frontmatter / 近重复 / 授权 / 孤儿图 |
-| `github_setup.py` | 推送 + 设为 Template + 设 topics/description 一条龙（token 不进命令行参数） |
-| `video_prompt.py` | 从流派数据生成两块中文视频提示词（Seedance 2.5 五段式 + MiniMax H3 自然语言） |
-| `i2v_prompt.py` | **图生视频提示词**：把一张图的客观测量翻成主体 / 运动 / 运镜，填掉流派通用版里的占位符。反推卡默认走这条 |
-| `scan_local.py` | **把你自己的图扫进库**：测量 + CLIP 建议 + 去重 → 待确认清单 → 归入 `15-我的图库/` |
-| `reverse_prompt.py` | **组装反推卡**：把测量 + 流派匹配 + 七层 + 视频提示词拼成那张图的卡（三个入口共用） |
-
-### 三条容易被忽略的约定
-
-1. **改生成物，先改模板。**
-   `10-流派/*.md`、`00-导航/*.md`、`README.md` 全部由 `build_vault.py` 生成，
-   直接编辑会在下次重建时被覆盖（这份工具清单本身也在模板里）。
-2. **`20-我的提示词/` 与 `pinterest/` 是本地目录，整个不发布。**
-   脚本只往里写、不覆盖你的内容；`.gitignore` 把它们整体排除。
-3. **改清单类文件，包在 `safefile.locked()` 里。**
-   原子写只保证「不会留下半截文件」，防不住两个进程各自「读 → 改 → 写」、
-   后写的把先写的整体覆盖 —— 文件是完整的，只是**少了一次改动**。
-   实测 8 个进程各 +1，不加锁最后只剩 1。
-
-   ```python
-   import safefile as SF
-   with SF.locked(MANIFEST):                 # 锁覆盖整个读-改-写
-       d = SF.read_json(MANIFEST) or {}
-       d["items"][k] = v
-       SF.write_json(MANIFEST, d)
-   ```
-
-   或者一步到位：`SF.update_json(MANIFEST, fn)`。
-   锁挂在 `<路径>.lock` 这个**旁挂文件**上，不挂在目标文件上 ——
-   目标文件每次写入都会被 `os.replace` 换掉 inode，锁在旧 inode 上会失效。
-
-   > [!tip] 加新流派时的另一个顺序陷阱
-   > README 的统计数字按 `git ls-files`（下一次提交会带走的文件）算，
-   > 所以要**先 `git add` 新笔记，再 `build_vault.py`**，否则 README 会少算，
-   > 而这份陈旧的 README 会被一起提交出去。验收第 16 项会抓住它。
-
----
-
 ## 三条原则
 
 1. **宁可少，不要错。**
@@ -2324,16 +2011,6 @@ CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这�
 
 3. **不要凭记忆编造流派术语。**
    以大模型对艺术流派的记忆为准，容易把相近的画派搞混。以库里的具体术语为准。
-
----
-
-## 授权
-
-全部图片来自公共领域 / CC0 开放数据源，已逐条核对，可自由使用与再分发。
-
-**代码** MIT ｜ **笔记内容** CC BY 4.0 ｜ **图片** 公共领域 / CC0
-
-详见 [LICENSE](LICENSE) 与 [LICENSE-CONTENT.md](LICENSE-CONTENT.md)。
 
 ---
 
@@ -2440,9 +2117,9 @@ def local_index_note(by_slug):
     L += ["", "← 回到 [[流派总览]]", "",
           "## 怎么往里加图", "",
           "```bash",
-          "python3 _scripts/scan_local.py ~/你的图片文件夹",
-          "python3 _scripts/scan_local.py --list                 # 看待确认清单",
-          "python3 _scripts/scan_local.py --file 3 --to baroque  # 确认归类",
+          "python3 .repo/scan_local.py ~/你的图片文件夹",
+          "python3 .repo/scan_local.py --list                 # 看待确认清单",
+          "python3 .repo/scan_local.py --file 3 --to baroque  # 确认归类",
           "python3 build_vault.py                                # 重新生成本页",
           "```", "",
           "> [!warning] 为什么不是全自动",
@@ -2454,7 +2131,7 @@ def local_index_note(by_slug):
               "这些是归档时 CLIP 没给出建议的图，列出来让你一眼看到：", ""]
         for it in by_slug["_未归类"]:
             L.append("- `%s`" % os.path.basename(it["rel"]))
-        L += ["", "归类：`python3 _scripts/scan_local.py --list` 找到编号后 "
+        L += ["", "归类：`python3 .repo/scan_local.py --list` 找到编号后 "
                   "`--file <编号> --to <流派>`"]
     return "\n".join(L) + "\n"
 
@@ -2518,7 +2195,7 @@ def pinterest_hub_note(local_map=None):
         for board, n, name in boards:
             L.append("| %s | %d | [[%s]] |" % (board, n, name))
     else:
-        L.append("还没有抓过。`python3 _scripts/pinterest_grab.py --discover` 看看有哪些板子。")
+        L.append("还没有抓过。`python3 .repo/pinterest_grab.py --discover` 看看有哪些板子。")
     L.append("")
 
     n_mine = sum(len(v) for v in mine.values())
@@ -2534,18 +2211,18 @@ def pinterest_hub_note(local_map=None):
         L.append("还没有。把 Pinterest 下载的图丢进 `pinterest/` 投递箱，然后：")
         L.append("")
         L.append("```bash")
-        L.append("python3 _scripts/ingest_inbox.py --scan      # 反推自动跑，给建议")
-        L.append("python3 _scripts/ingest_inbox.py --archive   # 按建议归入流派")
-        L.append("python3 _scripts/build_vault.py              # 更新本页")
+        L.append("python3 .repo/ingest_inbox.py --scan      # 反推自动跑，给建议")
+        L.append("python3 .repo/ingest_inbox.py --archive   # 按建议归入流派")
+        L.append("python3 .repo/build_vault.py              # 更新本页")
         L.append("```")
     L += ["", "---", "",
           "## 三、怎么往里加图", "",
           "**手动下载的（推荐）** —— 丢进投递箱，剩下自动：", "",
           "```bash",
           "cp ~/Downloads/xxx.jpg pinterest/            # 丢进去",
-          "python3 _scripts/ingest_inbox.py --scan      # 测量 + CLIP 建议流派",
-          "python3 _scripts/ingest_inbox.py --archive   # 按建议归档，反推卡自动生成",
-          "python3 _scripts/build_vault.py              # 本页和流派卡一起更新",
+          "python3 .repo/ingest_inbox.py --scan      # 测量 + CLIP 建议流派",
+          "python3 .repo/ingest_inbox.py --archive   # 按建议归档，反推卡自动生成",
+          "python3 .repo/build_vault.py              # 本页和流派卡一起更新",
           "```", "",
           "---", "",
           "## 四、这些图后来去哪了", "",
@@ -2679,7 +2356,7 @@ def main():
     # 注意：这里刻意用占位符而不是本机绝对路径。
     # 仓库是要发布的，写死 /Users/xxx 对任何人（包括作者换个位置 clone）都是错的。
     _guide = AI_GUIDE.replace(
-        "{MCP_PATH}", "<仓库绝对路径>/_scripts/mcp_server.py")
+        "{MCP_PATH}", "<仓库绝对路径>/.repo/mcp_server.py")
     w("00-导航/AI 调用指南.md", _guide)
     body = []
     for cat in CATEGORIES:
@@ -2713,7 +2390,6 @@ def main():
                  .replace("{skill_tree}", skill_tree()))
     w("README.md", _rm)
     w("LICENSE", LICENSE_TEXT)
-    w("LICENSE-CONTENT.md", LICENSE_CONTENT)
     _en = _fill(README_EN.replace("{n_mv}", str(len(MOVEMENTS)))
                     .replace("{REPO_URL}", REPO_URL)
                     .replace("{skill_tree_en}", skill_tree_en())
@@ -2738,26 +2414,26 @@ def main():
 .obsidian/graph.json
 
 # 脚本缓存与本地依赖
-_scripts/__pycache__/
-_scripts/vendor/
+.repo/__pycache__/
+.repo/vendor/
 
 # 抓取过程的临时清单（每次扫描都会重写）
-_scripts/_data/inbox_manifest.json
+.repo/_data/inbox_manifest.json
 
 # 生成物：换台机器重建即可，不必入库
 #   python3 artvault_vision.py build          （图像语义索引，几 MB）
 # 向量缓存用 npz（比 json 小 6 倍、加载快 100 倍）；旧 json 也一并忽略，
 # 免得升级后残留的文件被提交
-_scripts/_data/vision_index.npz
-_scripts/_data/vision_index.json
-_scripts/_data/feature_cache.npz
-_scripts/_data/feature_cache.json
-_scripts/_data/clip_cache.npz
-_scripts/_data/clip_cache.json
-_scripts/_data/clip_text_cache.json
+.repo/_data/vision_index.npz
+.repo/_data/vision_index.json
+.repo/_data/feature_cache.npz
+.repo/_data/feature_cache.json
+.repo/_data/clip_cache.npz
+.repo/_data/clip_cache.json
+.repo/_data/clip_text_cache.json
 
 # CLIP 量化模型（约 150MB，跑 clip_embed.py download 自动获取）
-_scripts/vendor/clip/
+.repo/vendor/clip/
 
 # ---------------------------------------------------------------- 你的私人工作区
 # 20-我的提示词/ 是「你自己的地盘」，**整个目录都不发布**。
@@ -2767,16 +2443,16 @@ _scripts/vendor/clip/
 
 # ---------------------------------------------------------------- 层 2：我自己的图库
 # 扫描你自己文件夹进来的私人收藏。**全部本地私有**，不随仓库发布：
-#   python3 _scripts/scan_local.py <目录>   →  --list → --file <编号> --to <流派>
+#   python3 .repo/scan_local.py <目录>   →  --list → --file <编号> --to <流派>
 # 清单和图片是私有的，但 15-我的图库/ 的笔记是生成的（build_vault 无条件重写），
 # 一并忽略，避免把你的收藏清单提交上去。
-_scripts/_data/local_library.json
-_scripts/_data/local_pending.json
+.repo/_data/local_library.json
+.repo/_data/local_pending.json
 15-我的图库/
 99-附件/images-local/
 
 # Vision 特征提取器的编译产物（架构相关，首次使用时自动编译）
-_scripts/vision/vision_feat
+.repo/vision/vision_feat
 
 # Pinterest 抓来的图版权归原作者、无统一授权，**不要提交也不要公开**
 # （10-流派/ 里的 CC0 图不受影响，那是可以随便分发的）

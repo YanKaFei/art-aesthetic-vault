@@ -15,16 +15,16 @@ type: 说明
 
 | 接口 | 文件 | 谁用 |
 |---|---|---|
-| **命令行** | `_scripts/artvault.py` | 任何能执行 shell 的 AI，无需配置 |
-| **MCP 服务** | `_scripts/mcp_server.py` | Claude Desktop / Cursor / Cline 等支持 MCP 的客户端 |
+| **命令行** | `.repo/artvault.py` | 任何能执行 shell 的 AI，无需配置 |
+| **MCP 服务** | `.repo/mcp_server.py` | Claude Desktop / Cursor / Cline 等支持 MCP 的客户端 |
 | **JSON 导出** | `artvault.py dump` | 你要自己接进别的程序或做 RAG |
 
-三者共用 `_scripts/artvault_core.py` 的同一套逻辑，行为一致。
+三者共用 `.repo/artvault_core.py` 的同一套逻辑，行为一致。
 
 ## 二、命令行（推荐先从这个开始）
 
 ```bash
-cd "_scripts"
+cd ".repo"
 python3 artvault.py categories                 # 6 大分类
 python3 artvault.py list --with-images          # 有实图的流派
 python3 artvault.py search "霓虹 雨夜"           # 模糊检索
@@ -75,7 +75,7 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \
   "mcpServers": {
     "artvault": {
       "command": "python3",
-      "args": ["<仓库绝对路径>/_scripts/mcp_server.py"]
+      "args": ["<仓库绝对路径>/.repo/mcp_server.py"]
     }
   }
 }
@@ -136,13 +136,13 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \
 ```
 你把图丢进 pinterest/
         ↓  说「处理 pinterest 投递箱」
-python3 _scripts/ingest_inbox.py --scan     ← 客观测量：尺寸/主色/感知哈希/配色最近的流派
+python3 .repo/ingest_inbox.py --scan     ← 客观测量：尺寸/主色/感知哈希/配色最近的流派
         ↓  AI 逐张 read_image 看图
 七层拆解 + 匹配 1–3 个流派 + 可复用提示词
         ↓  写入
 20-我的提示词/投递箱-<日期>.md
         ↓
-python3 _scripts/ingest_inbox.py --archive  ← 图移到 pinterest/_已归档/
+python3 .repo/ingest_inbox.py --archive  ← 图移到 pinterest/_已归档/
 ```
 
 为什么这样分工：Pinterest 的搜索是登录态、个性化的，
@@ -163,4 +163,4 @@ python3 _scripts/ingest_inbox.py --archive  ← 图移到 pinterest/_已归档/
 | 你想**存**自己的成果 | [[提示词卡模板]] 存到 `20-我的提示词/` |
 
 > 仓库里的 Markdown 是给人看的，`artvault` 是给机器用的。两者同源——
-> 都从 `_scripts/mv_*.py` 生成，改一处两边都更新。
+> 都从 `.repo/mv_*.py` 生成，改一处两边都更新。

@@ -20,7 +20,7 @@ metadata:
 bash <本skill目录>/locate.sh
 ```
 
-输出即仓库根目录（记为 `$VAULT`）。找不到就用 `find ~ -name artvault.py -path '*/_scripts/*'` 搜，
+输出即仓库根目录（记为 `$VAULT`）。找不到就用 `find ~ -name artvault.py -path '*/.repo/*'` 搜，
 或直接问用户仓库在哪。**不要猜路径。**
 
 ## 何时使用
@@ -37,7 +37,7 @@ bash <本skill目录>/locate.sh
 ## 怎么查
 
 ```bash
-cd "$VAULT/_scripts"
+cd "$VAULT/.repo"
 
 python3 artvault.py categories            # 6 大分类 141 流派
 python3 artvault.py search "霓虹 雨夜"     # 模糊检索，中英文皆可
@@ -99,7 +99,7 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \
 用户给一张图（或问「这是什么风格」）时，先测量再判断：
 
 ```bash
-cd "$VAULT/_scripts"
+cd "$VAULT/.repo"
 python3 image_analysis.py <图片>            # 七维度：明度/对比/色彩/和谐/构图/质感/线条
 python3 clip_match.py match <图片>          # 最像的流派（CLIP，含零样本）
 ```
@@ -126,7 +126,7 @@ python3 clip_match.py match <图片>          # 最像的流派（CLIP，含零�
 每张卡的「五、AI 视频层」给了**两块可直接粘贴的中文提示词**，格式不同别混用：
 
 ```bash
-cd "$VAULT/_scripts"
+cd "$VAULT/.repo"
 python3 artvault.py video 巴洛克        # A 块 Seedance 2.5 + B 块 MiniMax H3
 ```
 
@@ -142,7 +142,7 @@ python3 artvault.py video 巴洛克        # A 块 Seedance 2.5 + B 块 MiniMax 
 `$VAULT/pinterest/` 是投递箱。用户说「处理 pinterest 投递箱」时：
 
 ```bash
-cd "$VAULT/_scripts" && python3 ingest_inbox.py --scan
+cd "$VAULT/.repo" && python3 ingest_inbox.py --scan
 ```
 
 `--scan` 一次给全：七维度客观测量、人脸景别/霍夫直线/显著性
@@ -167,7 +167,7 @@ cd "$VAULT/_scripts" && python3 ingest_inbox.py --scan
 
 ```json
 {"mcpServers": {"artvault": {"command": "python3",
-  "args": ["<VAULT>/_scripts/mcp_server.py"]}}}
+  "args": ["<VAULT>/.repo/mcp_server.py"]}}}
 ```
 
 工具（10 个）：`search_movements` `get_movement` `get_layers` `compose_prompt`

@@ -6,7 +6,7 @@
 
 从拜占庭到 Y2K ｜ 东亚 · 南亚 · 伊斯兰 ｜ 摄影谱系 ｜ 数字亚文化
 
-163 篇笔记 · 452 张公共领域实图 · 36 个即用脚本
+163 篇笔记 · 452 张实图 · 36 个即用脚本
 
 [English](README.en.md) ｜ **中文**
 
@@ -169,14 +169,14 @@ alienated, oppressive, intoxicating                    <- 情绪层
 | | 数量 |
 |---|---|
 | **流派卡** | **141 张**，6 大分类，每张含六维视觉拆解 + 七层提示词 + 配色 + 视频层 |
-| **公共领域实图** | **452 张**（152 MB），85 个流派配了图 |
+| **实图** | **452 张**（152 MB），85 个流派配了图 |
 | **导航与方法论** | 17 篇（流派总览、关键词图谱、七层方法、视频结构、配色速查…） |
 | **关键词图谱** | 全部 **218 styles / 189 movements / 68 genres** 的完整映射 |
 | **笔记模板** | 3 个（流派卡 / 提示词卡 / 作品拆解） |
 | **脚本** | 21 个，抓图、生成、检索、提示词合成、MCP 服务 |
 
 > **62 个流派是「纯提示词卡」**——抽象表现主义、波普、极简主义、观念艺术、
-> 赛博朋克、蒸汽波这些，作品仍在版权期内，任何开放数据源都不会提供图。
+> 赛博朋克、蒸汽波这些，几乎找不到可自由分发的实图。
 > 它们的视觉语言与七层结构照常拆解，只是不配图。这是刻意的设计，不是缺失。
 
 ---
@@ -197,7 +197,7 @@ alienated, oppressive, intoxicating                    <- 情绪层
 库不只是一堆给人看的 Markdown，还有一层**给机器用的接口**：
 
 ```bash
-cd _scripts
+cd .repo
 
 python3 artvault.py categories              # 看 6 大分类
 python3 artvault.py search "霓虹 雨夜"       # 模糊检索，中英文都行
@@ -279,7 +279,7 @@ bash locate.sh             # 手动定位仓库（排查用）
   "mcpServers": {
     "artvault": {
       "command": "python3",
-      "args": ["<本仓库绝对路径>/_scripts/mcp_server.py"]
+      "args": ["<本仓库绝对路径>/.repo/mcp_server.py"]
     }
   }
 }
@@ -326,22 +326,17 @@ AI 调用时不会瞎编。
 
 关键词图谱**218 styles / 189 movements / 68 genres**
 
-### 6. 只收公共领域，用起来不用想
-
-全部图片来自 CC0 / 公共领域开放数据源，可以自由使用、修改、再分发，
-也可以放进你自己的数据集。
-
-### 7. 能扩展
+### 6. 能扩展
 
 加一个新流派只需要在一个 Python 文件里加一条定义。
 抓图、生成笔记、关键词映射、AI 接口都会自动跟上。
 
-### 8. 每一层的说法都追得到出处
+### 7. 每一层的说法都追得到出处
 
 流派卡的「九、出处」逐层列出该概念在权威术语表里的定义页，
 用的是 Tate 的艺术术语词典。
 
-### 9. 你手里那张图，也能直接变成视频提示词
+### 8. 你手里那张图，也能直接变成视频提示词
 
 流派卡上的视频提示词是**通用**的 —— 主体那一行是占位符。但你真正要干的事
 通常是「我有这张图，让它动起来」。所以反推卡上的视频块走的是另一条路：
@@ -358,173 +353,6 @@ python3 i2v_prompt.py 你的图.jpg --slug baroque
 
 ---
 
-## 快速开始
-
-```bash
-git clone https://github.com/YanKaFei/art-aesthetic-vault.git
-cd art-aesthetic-vault
-
-cd _scripts
-
-# 先看这台机器现在能用什么、缺什么（不需要装任何东西就能跑）
-python3 artvault.py doctor
-
-# 立刻能用的自检
-python3 artvault.py categories
-```
-
-**环境要求**：Python 3.8+ 和 Obsidian（推荐）。
-
-**核心脚本只用 Python 标准库，不需要 pip 安装任何东西。**
-
-可选依赖 —— 不装也能跑，装了多一层能力：
-
-```bash
-# 图片分析的增强维度（人脸景别 / 霍夫直线 / 显著性）与语义检索
-pip3 install --target ./vendor/libs numpy opencv-python-headless
-```
-
-> 装到 `vendor/libs` 是为了不污染系统 Python，且该目录已 gitignore。
-> 完整清单（每一项换来什么能力）见 `requirements-optional.txt`，
-> 或者直接 `python3 artvault.py doctor` 让他告诉你缺什么。
-> 不想装：`ARTVAULT_NO_EXT=1` 可显式关掉增强维度。
-> 另：`artvault_vision.py` 只在 macOS 上可用（依赖系统自带 Vision 框架），
-> 其他系统会自动降级并说明原因，不影响任何核心功能。
-
----
-
-## 自己重新生成 / 扩展
-
-```bash
-cd _scripts
-
-python3 fetch_art.py                  # 补抓所有还没有图的流派
-python3 fetch_art.py impressionism    # 只抓指定流派
-python3 fetch_art.py --per 12         # 每个流派 12 张
-python3 build_vault.py                # 用 mv_*.py 里的数据重新生成全部笔记
-```
-
-### 加一个新流派
-
-1. 在 `_scripts/mv_*.py` 对应的分类文件里加一条定义
-2. 在**同一个文件的 `ARTIST_KEYS`** 里加过滤关键词 ← **必须，否则会抓进一堆无关作品**
-3. `python3 fetch_art.py <slug>` 抓图
-4. `git add` 新生成的笔记，**然后**才 `python3 build_vault.py`
-
-> [!warning] 第 4 步的顺序不能反
-> README 里的统计数字是按**发布视图**算的 —— 也就是 `git ls-files`，
-> 「下一次提交会带走的文件」。所以如果先 `build_vault` 再 `git add`，
-> 那一刻新笔记还没进索引，README 就会**少算**（实测少算 6 篇笔记），
-> 而这份陈旧的 README 会被一起提交上去。
->
-> 验收第 16 项会抓住这种情况（它就是为此存在的），但那时你已经在改提交了。
-> 记住顺序：**先 add，再 build，最后把 README 也 add 进去。**
-
-### 改完代码怎么验
-
-两层，职责不重叠，**都要跑**：
-
-```bash
-python3 tests/smoke_test.py      # 把命令真的跑一遍：退出码 / 副作用 / 可复现性
-python3 _scripts/verify_vault.py # 查内容一致性：断链 / 授权 / README 数字 / 双链
-```
-
-`tests/smoke_test.py` 只用标准库，不需要 pip 装东西，也能在干净 clone 上跑。
-CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这两层。
-
-> [!note] 为什么要「真的跑一遍」这一层
-> 曾经 README 声称「654 张公共领域实图」，克隆下来只有 442 张 —— 虚报 48%。
-> 这个 bug 穿过了当时**全部 15 项验收**：因为那些检查都在读文件（比 mtime、
-> 比引用、比数字），没有一项会执行命令看看会不会出事。数字对不对是一类问题，
-> **命令跑不跑得起来、跑完有没有留下垃圾**是另一类。
-
-
-| 数据文件 | 负责的分类 |
-|---|---|
-| `mv_core.py` | 最初的 18 个主干流派 |
-| `mv_west.py` | 西方古典与近代 |
-| `mv_asia.py` / `mv_asia2.py` | 东亚·南亚·伊斯兰 |
-| `mv_modern.py` / `mv_gaps.py` | 现代主义与战后 |
-| `mv_contemporary.py` | 先锋·当代·后现代 |
-| `mv_visual.py` | 数字·亚文化·摄影美学 |
-| `mv_photo.py` | 摄影与图像 |
-
----
-
-## 工具清单
-
-`_scripts/` 下每个脚本的分工。除了标注**可选**的，都只要 Python 3 + Pillow。
-
-### 门面
-
-| 脚本 | 干什么 |
-|---|---|
-| `artvault.py` | 主查询接口：`categories` `search` `layers` `show` `palette` `related` `compose` `doctor` |
-| `visual_lexicon.py` | **中文视觉词 → 英文短语**的桥。CLIP 文本塔只认英文，中文查询不过桥等于随机 |
-| `eval_search.py` | 检索评测：A 组守卫精确度、B 组测语义增益，并扫出接管阈值 |
-| `refs.py` | **艺术史出处**：把每层提示词的说法接到权威术语表；`--check-urls` 联网复验链接 |
-| `visual_signature.py` | 从实图反推每流派的**可测量区间**；`check <图> --slug X` 校验一张图像不像该流派 |
-| `mcp_server.py` | 同一套能力包装成 MCP server，给 Claude Desktop / Cursor 直连 |
-
-### 数据源与生成
-
-| 脚本 | 干什么 |
-|---|---|
-| `movements.py` | 汇总全部流派定义，是**唯一数据源** |
-| `mv_*.py` | 流派卡片与过滤关键词（按分类分成 8 个文件） |
-| `providers.py` | 四个 CC0 数据源适配器 + 三层过滤（AI 图 / 平面作品 / 作者匹配） |
-| `fetch_art.py` | 抓图：按来源轮转、两层过滤、`--refresh` 清孤儿图 |
-| `build_vault.py` | **生成** Obsidian 笔记 / README / LICENSE / .gitignore |
-| `keyword_map.py` | 生成关键词图谱 |
-
-### 图片分析
-
-| 脚本 | 干什么 |
-|---|---|
-| `image_analysis.py` | 七维度客观测量：明度 / 对比 / 色彩 / 和谐 / 构图 / 质感 / 线条。纯 Pillow |
-| `image_analysis_ext.py` | **可选**：人脸景别 / 霍夫直线 / 谱残差显著性。要 numpy + opencv，没装自动跳过 |
-| `clip_embed.py` | **可选**：CLIP 图像/文本嵌入（ONNX，不需要 PyTorch）。首次跑 `download` 下模型 |
-| `clip_match.py` | **可选**：用 CLIP 做图像→流派匹配（零样本 + 融合），三条路里最准的一条 |
-| `artvault_vision.py` | **可选**：macOS Vision 语义检索（以图搜图 / 近重复 / 相近流派） |
-| `ingest_inbox.py` | 处理 `pinterest/` 投递箱，扫描时带上上面这些维度 |
-| `verify_vault.py` | **验收检查**：断链 / 重名 / AI 图 / frontmatter / 近重复 / 授权 / 孤儿图 |
-| `github_setup.py` | 推送 + 设为 Template + 设 topics/description 一条龙（token 不进命令行参数） |
-| `video_prompt.py` | 从流派数据生成两块中文视频提示词（Seedance 2.5 五段式 + MiniMax H3 自然语言） |
-| `i2v_prompt.py` | **图生视频提示词**：把一张图的客观测量翻成主体 / 运动 / 运镜，填掉流派通用版里的占位符。反推卡默认走这条 |
-| `scan_local.py` | **把你自己的图扫进库**：测量 + CLIP 建议 + 去重 → 待确认清单 → 归入 `15-我的图库/` |
-| `reverse_prompt.py` | **组装反推卡**：把测量 + 流派匹配 + 七层 + 视频提示词拼成那张图的卡（三个入口共用） |
-
-### 三条容易被忽略的约定
-
-1. **改生成物，先改模板。**
-   `10-流派/*.md`、`00-导航/*.md`、`README.md` 全部由 `build_vault.py` 生成，
-   直接编辑会在下次重建时被覆盖（这份工具清单本身也在模板里）。
-2. **`20-我的提示词/` 与 `pinterest/` 是本地目录，整个不发布。**
-   脚本只往里写、不覆盖你的内容；`.gitignore` 把它们整体排除。
-3. **改清单类文件，包在 `safefile.locked()` 里。**
-   原子写只保证「不会留下半截文件」，防不住两个进程各自「读 → 改 → 写」、
-   后写的把先写的整体覆盖 —— 文件是完整的，只是**少了一次改动**。
-   实测 8 个进程各 +1，不加锁最后只剩 1。
-
-   ```python
-   import safefile as SF
-   with SF.locked(MANIFEST):                 # 锁覆盖整个读-改-写
-       d = SF.read_json(MANIFEST) or {}
-       d["items"][k] = v
-       SF.write_json(MANIFEST, d)
-   ```
-
-   或者一步到位：`SF.update_json(MANIFEST, fn)`。
-   锁挂在 `<路径>.lock` 这个**旁挂文件**上，不挂在目标文件上 ——
-   目标文件每次写入都会被 `os.replace` 换掉 inode，锁在旧 inode 上会失效。
-
-   > [!tip] 加新流派时的另一个顺序陷阱
-   > README 的统计数字按 `git ls-files`（下一次提交会带走的文件）算，
-   > 所以要**先 `git add` 新笔记，再 `build_vault.py`**，否则 README 会少算，
-   > 而这份陈旧的 README 会被一起提交出去。验收第 16 项会抓住它。
-
----
-
 ## 三条原则
 
 1. **宁可少，不要错。**
@@ -536,16 +364,6 @@ CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这�
 
 3. **不要凭记忆编造流派术语。**
    以大模型对艺术流派的记忆为准，容易把相近的画派搞混。以库里的具体术语为准。
-
----
-
-## 授权
-
-全部图片来自公共领域 / CC0 开放数据源，已逐条核对，可自由使用与再分发。
-
-**代码** MIT ｜ **笔记内容** CC BY 4.0 ｜ **图片** 公共领域 / CC0
-
-详见 [LICENSE](LICENSE) 与 [LICENSE-CONTENT.md](LICENSE-CONTENT.md)。
 
 ---
 

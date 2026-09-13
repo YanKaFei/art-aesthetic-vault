@@ -31,7 +31,7 @@ HuggingFace 也被挡（http=000）。Vision 是系统自带、完全离线。
     python3 artvault_vision.py dups [--thresh 0.3]    # 近重复检测
 
 非 macOS 或编译失败时**所有功能优雅降级**：CLI 给出明确原因，不抛栈。
-索引是生成物，已 gitignore（`_scripts/_data/vision_index.json`）。
+索引是生成物，已 gitignore（`.repo/_data/vision_index.json`）。
 """
 
 import argparse

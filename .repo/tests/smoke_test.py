@@ -38,9 +38,9 @@ import subprocess
 import sys
 import unittest
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-VAULT = os.path.dirname(HERE)
-SCRIPTS = os.path.join(VAULT, "_scripts")
+HERE = os.path.dirname(os.path.abspath(__file__))          # .repo/tests
+SCRIPTS = os.path.dirname(HERE)                            # .repo（脚本就在这层）
+VAULT = os.path.dirname(SCRIPTS)                           # 仓库根
 PY = sys.executable or "python3"
 
 # 单个命令的超时。--help 类的应当秒回；给足余量但不允许无限挂起。

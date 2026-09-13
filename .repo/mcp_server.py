@@ -278,7 +278,7 @@ def _match_movement(path, topn):
     why = clip_embed.available()
     if why:
         return {"error": why,
-                "how_to_fix": "cd _scripts && python3 clip_embed.py download && python3 clip_embed.py build"}
+                "how_to_fix": "cd .repo && python3 clip_embed.py download && python3 clip_embed.py build"}
     r = clip_match.suggest([path], topn=topn)
     rows = r.get(path) or []
     if not rows:

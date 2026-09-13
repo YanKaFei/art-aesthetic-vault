@@ -145,7 +145,7 @@ MOVEMENTS = [
  "video": {"motion": "点画逐个落下、图案缓慢铺展、沙画被绘制",
            "camera": "俯视 static 或极缓 zoom out 揭示全图",
            "note": "必须尊重：这些图案有具体含义，不要当作纯装饰挪用"},
- "pitfalls": ["伦理提醒：原住民图案常有神圣含义与社群版权，商业挪用是敏感问题",
+ "pitfalls": ["伦理提醒：原住民图案常有神圣含义与社群约定，商业挪用是敏感问题",
               "AI 容易做成泛化的「部落风」→ 加 specific iconography, ancestral, map-like"],
  "sources": {"cleveland": ["aboriginal art", "native american art"],
              "met": ["native american art", "pueblo pottery", "aboriginal"],

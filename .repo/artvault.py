@@ -137,7 +137,7 @@ def doctor():
             print("  · %-24s 需要 %s" % (name, need))
         deps = ["Pillow", "numpy", "opencv-python-headless",
                 "onnxruntime", "tokenizers", "requests"]
-        print("\n【怎么装】在 _scripts/ 下执行（装到 vendor/libs，不动系统 Python）：")
+        print("\n【怎么装】在 .repo/ 下执行（装到 vendor/libs，不动系统 Python）：")
         print("  pip3 install --target ./vendor/libs " + " ".join(deps))
         print("  或只装你要的： pip3 install --target ./vendor/libs Pillow")
         print("  也可以：     pip3 install --target ./vendor/libs -r ../requirements-optional.txt")

@@ -276,7 +276,7 @@ embed 指向了错误的那张（或随机一张）。
 装是可以的（沙箱内唯一可行），但**必须写进 `.gitignore` 并排除同步**。
 
 更稳的做法：让脚本**多路径查找依赖**
-（`$ARTVAULT_DEPS` → `_scripts/vendor/libs` → `~/.artvault/deps` → 用户 site-packages），
+（`$ARTVAULT_DEPS` → `.repo/vendor/libs` → `~/.artvault/deps` → 用户 site-packages），
 找不到就降级（只列文件，不报错退出）。
 
 ### 4.4 同步要保护用户的个人目录

@@ -20,8 +20,8 @@ metadata:
 
 ```
 github.com/YanKaFei/art-aesthetic-vault
-├── _scripts/mv_*.py     ← 141 个流派的完整定义（约 5700 行）
-├── _scripts/*.py        ← 抓图 / 生成 / 检索 / 分析 全部脚本
+├── .repo/mv_*.py     ← 141 个流派的完整定义（约 5700 行）
+├── .repo/*.py        ← 抓图 / 生成 / 检索 / 分析 全部脚本
 ├── skill/               ← 查询 skill（软链安装）
 └── skill/build/         ← 本 skill
 ```
@@ -68,7 +68,7 @@ git clone --depth 1 https://github.com/YanKaFei/art-aesthetic-vault.git my-art-v
 ├── 99-附件/images/   从开放数据源抓来的图
 ├── pinterest/        图片投递箱（丢图进去 → 分析 → 归档）
 ├── skill/            AI skill 源码
-└── _scripts/         数据定义 + 抓图 + 生成 + 检索 + 分析
+└── .repo/         数据定义 + 抓图 + 生成 + 检索 + 分析
 ```
 
 **每张流派卡的结构**：核心主张 / 六维视觉拆解 / 配色板 /
@@ -82,7 +82,7 @@ git clone --depth 1 https://github.com/YanKaFei/art-aesthetic-vault.git my-art-v
 
 ```bash
 python3 -V                      # 需要 3.8+
-cd <仓库>/_scripts && python3 movements.py    # 应输出「合计 141 个流派，6 个分类」
+cd <仓库>/.repo && python3 movements.py    # 应输出「合计 141 个流派，6 个分类」
 ```
 
 **核心脚本只用标准库，不需要 pip 安装任何东西。**
@@ -90,7 +90,7 @@ cd <仓库>/_scripts && python3 movements.py    # 应输出「合计 141 个流�
 ### 阶段 1：抓图（最慢）
 
 ```bash
-cd <仓库>/_scripts
+cd <仓库>/.repo
 python3 -u fetch_art.py --per 6 2>&1 | tee /tmp/fetch.log
 ```
 
@@ -188,7 +188,7 @@ cd <仓库>/skill && ./install.sh
 私人收集、可能没授权、数量不定。这一阶段把它们并进来，而且**并进同一张图谱**。
 
 ```bash
-cd _scripts
+cd .repo
 
 # 扫一个目录（只分析，不复制文件）
 python3 scan_local.py ~/Pictures/refs --name 我的参考图
@@ -250,7 +250,7 @@ python3 build_vault.py
 ### 阶段 7：验收（必做）
 
 ```bash
-cd _scripts
+cd .repo
 python3 verify_vault.py            # 全部检查
 python3 verify_vault.py --quick    # 跳过第 5 项（近重复），其余七项照跑
 ```
@@ -333,7 +333,7 @@ python3 verify_vault.py                       # 会自动带上第 5 项
 
 | 用户想要 | 怎么做 |
 |---|---|
-| 只保留某几个分类 | 改 `_scripts/movements.py` 的 `MODULES` 列表 |
+| 只保留某几个分类 | 改 `.repo/movements.py` 的 `MODULES` 列表 |
 | 加自己的流派 | 在对应 `mv_*.py` 加一条 + **同文件 `ARTIST_KEYS` 加过滤词** |
 | 每个流派多抓几张 | `fetch_art.py --per 12` |
 | 换/加数据源 | 在 `providers.py` 写一个返回统一字段的函数，注册进 `PROVIDERS` |

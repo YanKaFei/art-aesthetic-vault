@@ -75,7 +75,7 @@
 | 工具 | 仓库 | 作用 |
 |---|---|---|
 | **img2dataset** | [rom1504/img2dataset](https://github.com/rom1504/img2dataset) | 从 URL 列表批量下载/缩放/打包成数据集 |
-| **本仓库脚本** | `_scripts/fetch_art.py` | 从 CC0 美术馆 API 抓图 + 元数据 |
+| **本仓库脚本** | `.repo/fetch_art.py` | 从 CC0 美术馆 API 抓图 + 元数据 |
 
 ### 四、提示词工程总纲
 
@@ -119,7 +119,7 @@ style / artist / genre 标签，比你自己爬完再标注省事得多：
 | [WikiArt](https://www.wikiart.org) | **混合** | — | ❌ 只作浏览参考 |
 
 > [!tip] 想再加数据源
-> 在 `_scripts/providers.py` 里写一个函数，返回统一的字段结构
+> 在 `.repo/providers.py` 里写一个函数，返回统一的字段结构
 > （title / artist / date / medium / image_url / page_url / source / license / license_url），
 > 注册进 `PROVIDERS`，然后在流派的 `sources` 里写上 `"提供商名": ["查询词"]` 即可。
 
@@ -133,7 +133,7 @@ WikiArt 的 `robots.txt` 是 `User-agent: * / Allow: /`，技术上**允许抓�
 - 它没有免费的官方 API（只有商业授权）
 
 **结论：可以用它找线索，不要把它的图和文字当成可自由分发的素材。**
-见仓库根目录的 LICENSE 与 LICENSE-CONTENT.md。
+见仓库根目录的 LICENSE。
 
 ---
 

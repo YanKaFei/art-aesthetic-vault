@@ -150,8 +150,8 @@ def compose(rec, mv, image_name, back=None):
               "> 归类之后会自动补上：",
               ">",
               "> ```bash",
-              "> python3 _scripts/scan_local.py --list",
-              "> python3 _scripts/scan_local.py --file <编号> --to <流派>",
+              "> python3 .repo/scan_local.py --list",
+              "> python3 .repo/scan_local.py --file <编号> --to <流派>",
               "> python3 build_vault.py",
               "> ```", ""]
 
@@ -329,8 +329,8 @@ def compose_compact(rec, mv, image_name):
         L += ["归类后会自动补上提示词与视频分析：",
               "",
               "```bash",
-              "python3 _scripts/ingest_inbox.py --scan",
-              "python3 _scripts/ingest_inbox.py --archive",
+              "python3 .repo/ingest_inbox.py --scan",
+              "python3 .repo/ingest_inbox.py --archive",
               "```", ""]
         return "\n".join(L)
 
