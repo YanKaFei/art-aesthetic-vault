@@ -51,6 +51,8 @@ def main():
     p = sub.add_parser("compose")
     p.add_argument("brief", nargs="?", default="")
     p.add_argument("--subject")
+    p.add_argument("--keep-conflicts", action="store_true",
+                   help="只报告层级冲突，不自动丢掉打架的负向词（默认会自动丢）")
     for l in A.LAYERS:
         p.add_argument("--" + l)
     sub.add_parser("dump")
@@ -143,7 +145,8 @@ def main():
 
     elif a.cmd == "compose":
         kw = {l: getattr(a, l) for l in A.LAYERS if getattr(a, l)}
-        r = A.compose(brief=a.brief, subject=a.subject, **kw)
+        r = A.compose(brief=a.brief, subject=a.subject,
+                      resolve_conflicts=not a.keep_conflicts, **kw)
         if out(r, a.json): return 0
         print(A.render(r))
 

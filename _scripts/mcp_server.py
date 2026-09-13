@@ -72,7 +72,8 @@ TOOLS = [
         "description": ("把创意想法拼成完整提示词。支持两种用法："
                         "① brief 传一句自然语言，会自动识别提到的流派并按意图分配到各层；"
                         "② 显式指定 style/lighting/color/composition 等层做跨流派混搭。"
-                        "返回正向、负向、配色、视频层，以及层级冲突警告。"),
+                        "返回正向、负向、配色、视频层；跨流派时打架的负向词会被自动"
+                        "拿掉，拿掉了什么在 dropped 字段里。"),
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -82,6 +83,8 @@ TOOLS = [
                 "color": {"type": "string"}, "composition": {"type": "string"},
                 "medium": {"type": "string"}, "mood": {"type": "string"},
                 "camera": {"type": "string"},
+                "keep_conflicts": {"type": "boolean",
+                                   "description": "默认 false：打架的负向词会被自动拿掉。设 true 则只报告、保留原样合集。"},
             },
         },
     },
@@ -176,12 +179,13 @@ def call_tool(name, args):
                 "negative": c["negative"]}
     if name == "compose_prompt":
         kw = {l: args.get(l) for l in A.LAYERS if args.get(l)}
-        r = A.compose(brief=args.get("brief", ""), subject=args.get("subject"), **kw)
+        r = A.compose(brief=args.get("brief", ""), subject=args.get("subject"),
+                      resolve_conflicts=not args.get("keep_conflicts"), **kw)
         return {"positive": r["positive"], "negative": r["negative"],
                 "palette": ["%s %s" % (h, n) for h, n in r["palette"]],
                 "layers": {A.LAYER_ZH.get(k, k): v["name"] for k, v in r["layers"].items()},
-                "video": r["video"], "conflicts": r["conflicts"], "notes": r["notes"],
-                "rendered": A.render(r)}
+                "video": r["video"], "conflicts": r["conflicts"], "dropped": r["dropped"],
+                "notes": r["notes"], "rendered": A.render(r)}
     if name == "get_palette":
         c, hints = A.resolve(args.get("slug", ""))
         if not c:

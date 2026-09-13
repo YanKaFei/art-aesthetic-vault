@@ -562,6 +562,59 @@ def check_readme_numbers():
     return problems
 
 
+def check_conflict_resolution():
+    """17 冲突消解：被判定为冲突的负向词，绝不能残留在最终负向提示词里。
+
+    compose 默认会把「和正向要求打架」的负向词从结果里拿掉。这是个**不变量**：
+    dropped 里出现的词，不该在 negative 里再出现 —— 一旦出现，说明消解逻辑
+    有分支漏了（比如先 append 到 neg 才判断冲突），而使用者拿到的仍是一份
+    自相矛盾的提示词。这种错不会报异常，只会让出图变差，所以必须由验收来盯。
+
+    抽样是**固定种子**的：同样一批组合，每次跑结果一样，失败可复现。
+    """
+    import random
+    import itertools
+    try:
+        import artvault_core as AC
+        from movements import MOVEMENTS
+    except Exception as e:
+        return [("artvault_core", "导入失败：%s" % e)]
+
+    slugs = [m["slug"] for m in MOVEMENTS]
+    random.seed(11)                 # 固定种子 → 可复现
+    pairs = random.sample(list(itertools.combinations(slugs, 2)), 120)
+    cases = [(s, None) for s in slugs[:40]] + pairs
+
+    problems = []
+    total_conf = total_drop = 0
+    for a, b in cases:
+        try:
+            r = AC.compose(style=a, lighting=b, subject="a lone samurai")
+        except Exception as e:
+            problems.append(("%s+%s" % (a, b), "compose 抛异常：%s" % e))
+            continue
+        neg = {x.strip().lower() for x in r["negative"].split(",") if x.strip()}
+        dropped = [d["term"].lower() for d in r.get("dropped") or []]
+        total_conf += len(r.get("conflicts") or [])
+        total_drop += len(dropped)
+        if len(r.get("conflicts") or []) != len(dropped):
+            problems.append(("%s+%s" % (a, b),
+                             "conflicts %d 处但只消解了 %d 处"
+                             % (len(r["conflicts"]), len(dropped))))
+        for t in set(dropped) & neg:
+            problems.append(("%s+%s" % (a, b), "已消解的 `%s` 仍残留在负向提示词里" % t))
+        # keep_conflicts 必须保留旧行为（只报告、不动负向词）
+        r2 = AC.compose(style=a, lighting=b, subject="a lone samurai",
+                        resolve_conflicts=False)
+        if r2.get("dropped"):
+            problems.append(("%s+%s" % (a, b), "resolve_conflicts=False 时仍产生了 dropped"))
+
+    if not problems:
+        print("      （抽 %d 种组合：检出冲突 %d 处，全部消解，0 残留）"
+              % (len(cases), total_conf))
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -620,6 +673,7 @@ def main():
     report("14 板子反推", check_board_analysis())
     report("15 克隆完整性", check_clone_integrity())
     report("16 README 数字", check_readme_numbers())
+    report("17 冲突消解", check_conflict_resolution())
 
     print("=" * 70)
     if failed:

@@ -1482,13 +1482,18 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \\
         --color vaporwave --composition precisionism --subject "a lone samurai"
 ```
 
-输出包含：**分层结果 + 正向提示词 + 负向提示词 + 配色 + 视频层 + 冲突警告**。
+输出包含：**分层结果 + 正向提示词 + 负向提示词 + 配色 + 视频层 + 冲突消解记录**。
 
-> [!warning] 跨流派混搭的真实陷阱
+> [!tip] 跨流派混搭的冲突已经自动处理了
 > 把不同流派的负向词合并会**打架**。实测例子：
 > 浮世绘要求 `no cast shadows`，而巴洛克的光照层恰恰要 `deep crushed shadows`；
 > 精确主义的负向词里有 `people / figures`，你的主体却是个武士。
-> `compose` 会把这些冲突**逐条列出来**，用之前先删掉对应词。
+>
+> `compose` 会把打架的负向词**自动从负向提示词里拿掉**，并在
+> 「已自动消解的冲突」里逐条说明拿掉了哪个、让位给谁。规则只有一条：
+> **正向是意图，负向是护栏，护栏让位于意图。**
+>
+> 想拿到未经处理的负向词合集（自己判断）：加 `--keep-conflicts`。
 
 ## 三、MCP 服务（一次配置，长期可用）
 
@@ -1540,7 +1545,8 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \\
 当用户描述一个视觉创意时：
 1. 先用 search_movements 找出相关的 2–4 个流派
 2. 用 get_layers 取它们的提示词层
-3. 用 compose_prompt 拼成完整提示词，注意检查返回的 conflicts 字段
+3. 用 compose_prompt 拼成完整提示词；返回的 dropped 字段是**已自动拿掉的**
+   打架负向词，交付时提一句你拿掉了什么、为什么，别默默丢掉
 4. 输出时说明每一层来自哪个流派，以及为什么这样搭配
 
 不要凭记忆编造风格词——库里有 141 个流派，覆盖从拜占庭到 Y2K，
@@ -1890,11 +1896,13 @@ python3 artvault.py --json layers baroque   # machine-readable
 python3 artvault.py compose --style ukiyo-e --lighting baroque --color vaporwave --composition precisionism --subject "a lone samurai"
 ```
 
-It **detects and prints layer conflicts.** When you mix movements, their negative prompts
+It **resolves layer conflicts for you.** When you mix movements, their negative prompts
 fight each other - ukiyo-e forbids `cast shadows` while Baroque lighting *requires*
 `deep crushed shadows`; Precisionism forbids `people` while your subject is a person.
 **The model won't error**, it just produces subtly worse images that are very hard to debug.
-This check saves hours.
+So the conflicting negative terms are **dropped automatically** and listed under
+"resolved conflicts", with the rule stated plainly: *intent wins, guardrails yield*.
+Want the raw union instead? Pass `--keep-conflicts`.
 
 ### 3. Install as an AI skill (recommended)
 
@@ -2542,10 +2550,13 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \\
   --color vaporwave --composition precisionism --subject "a lone samurai"
 ```
 
-它会**检出并打印层级冲突**。跨流派混搭时负向词会互相打架——
+它会**自动消解层级冲突**。跨流派混搭时负向词会互相打架——
 浮世绘禁止 `cast shadows`，巴洛克光照却要求 `deep crushed shadows`；
 精确主义禁止 `people`，而你的主体是个人物。
-**模型不会报错**，只会表现为「出图质量莫名地差」，极难排查。这个检查能省你几个小时。
+**模型不会报错**，只会表现为「出图质量莫名地差」，极难排查。
+所以打架的负向词会被**自动从负向提示词里拿掉**，并在「已自动消解的冲突」里
+逐条说明拿掉了什么、让位给谁。规则一句话：**正向是意图，负向是护栏，护栏让位于意图。**
+想要原样合集自己判断，加 `--keep-conflicts`。
 
 ### 方式三：装成 AI skill（推荐）
 

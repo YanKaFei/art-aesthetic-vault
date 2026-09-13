@@ -6,7 +6,7 @@
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
-162 notes · 442 public-domain images · 33 ready-to-run scripts
+162 notes · 442 public-domain images · 34 ready-to-run scripts
 
 **English** ｜ [中文](README.md)
 
@@ -221,11 +221,13 @@ python3 artvault.py --json layers baroque   # machine-readable
 python3 artvault.py compose --style ukiyo-e --lighting baroque --color vaporwave --composition precisionism --subject "a lone samurai"
 ```
 
-It **detects and prints layer conflicts.** When you mix movements, their negative prompts
+It **resolves layer conflicts for you.** When you mix movements, their negative prompts
 fight each other - ukiyo-e forbids `cast shadows` while Baroque lighting *requires*
 `deep crushed shadows`; Precisionism forbids `people` while your subject is a person.
 **The model won't error**, it just produces subtly worse images that are very hard to debug.
-This check saves hours.
+So the conflicting negative terms are **dropped automatically** and listed under
+"resolved conflicts", with the rule stated plainly: *intent wins, guardrails yield*.
+Want the raw union instead? Pass `--keep-conflicts`.
 
 ### 3. Install as an AI skill (recommended)
 

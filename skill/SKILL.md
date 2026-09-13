@@ -67,12 +67,16 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \
   --color vaporwave --composition precisionism --subject "a lone samurai"
 ```
 
-返回：分层结果 + 正向 + 负向 + 配色 + 视频层 + `conflicts` 冲突警告。
+返回：分层结果 + 正向 + 负向 + 配色 + 视频层 + **已自动消解的冲突**。
 
-> **必须检查 `conflicts`。** 跨流派混搭时负向词会互相打架：
+> **冲突已经自动处理，但你要转述。** 跨流派混搭时负向词会互相打架：
 > 浮世绘禁止 `cast shadows`，巴洛克光照却要 `deep crushed shadows`；
 > 精确主义禁止 `people`，而你给了人物主体。
-> **模型不会报错**，只表现为「出图莫名地差」。检出后要逐条删掉冲突词再交付。
+> **模型不会报错**，只表现为「出图莫名地差」。
+>
+> `compose` 默认把打架的负向词**从负向提示词里拿掉**，拿掉了什么在 `dropped` 里。
+> 交付时**提一句你拿掉了什么、为什么** —— 别默默丢掉，那等于把决策藏起来。
+> 需要原样合集自己判断：加 `--keep-conflicts`。
 
 ## 七层结构
 
