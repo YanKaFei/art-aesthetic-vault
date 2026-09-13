@@ -21,8 +21,9 @@ VAULT = os.path.dirname(HERE)
 DATA_DIR = os.path.join(HERE, "_data")
 
 # 仓库地址只在**这一处**定义，README（中/英）与 skill 文档都引用它。
-# 之前中英两版各写了一遍，结果中文版写成了显示名（GitHub 显示名）而不是
-# 用户名（YanKaFei），克隆命令直接 404 —— 单一来源就不会再漂移。
+# 之前中英两版各写了一遍，结果中文版写成了 GitHub 的**显示名**而不是
+# 用户名，克隆命令直接 404 —— 单一来源就不会再漂移。
+# （显示名不写进这里：它是个人信息，而且对读代码的人没有信息量。）
 REPO_SLUG = "YanKaFei/art-aesthetic-vault"
 REPO_URL = "https://github.com/" + REPO_SLUG
 
