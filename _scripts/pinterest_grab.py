@@ -17,7 +17,7 @@ pinterest_grab.py —— 从 Pinterest 抓取公开的 /ideas/ 分类图，存�
   /search/pins/?q=X                  → 页面是 JS 渲染，HTML 里没有 pin 数据
 
 所以：**按分类抓可以，按关键词搜不行**。关键词检索请用官方的
-[[外部检索入口]] 深链在你自己的浏览器里做。
+在你自己的浏览器里做。
 
 用法：
     python3 pinterest_grab.py --discover              # 列出所有分类与子分类

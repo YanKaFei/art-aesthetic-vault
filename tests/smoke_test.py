@@ -139,8 +139,19 @@ class HelpSafetyTests(unittest.TestCase):
     帮助是最没有破坏性的参数，读者拿到陌生仓库第一个试的就是它。
     """
 
+    @classmethod
+    def setUpClass(cls):
+        """在任何 --help 跑之前抓一次基线。
+
+        为什么不能在各测试里各抓一次：上一版 `test_every_entry_help_is_safe`
+        自己就会制造副作用 —— `make_links.py` 没有 --help 闸门，跑到它就
+        直接生成文件。等 `test_help_does_not_touch_worktree` 再取 before 时，
+        文件已经在那儿了，于是「前后一致」通过，副作用被漏掉。
+        基线必须在**任何测试动手之前**取，并且跨测试共享。
+        """
+        cls.baseline = git_status()
+
     def test_every_entry_help_is_safe(self):
-        before = git_status()
         bad = []
         for name in entry_scripts():
             rc, out, err = run([name, "--help"], timeout=45)
@@ -159,12 +170,13 @@ class HelpSafetyTests(unittest.TestCase):
         self.assertEqual([], bad, "这些入口的 --help 不安全：\n  " + "\n  ".join(bad))
 
     def test_help_does_not_touch_worktree(self):
-        before = git_status()
+        """对着 setUpClass 抓的**基线**比，不是测试自己再抓一次。"""
         for name in entry_scripts():
             run([name, "--help"], timeout=45)
         after = git_status()
-        self.assertEqual(before, after,
-                         "有入口的 --help 改动了工作树 —— 帮助不该有副作用")
+        self.assertEqual(self.baseline, after,
+                         "有入口的 --help 改动了工作树 —— 帮助不该有副作用：\n"
+                         "baseline:\n%s\nafter:\n%s" % (self.baseline, after))
 
 
 # --------------------------------------------------- 2. 核心检索：能跑、结构对

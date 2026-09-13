@@ -6,7 +6,7 @@
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
-163 notes · 447 public-domain images · 39 ready-to-run scripts
+163 notes · 447 public-domain images · 38 ready-to-run scripts
 
 **English** ｜ [中文](README.md)
 
@@ -386,7 +386,6 @@ python3 fetch_art.py                  # fetch images for movements that lack the
 python3 fetch_art.py impressionism    # one movement only
 python3 fetch_art.py --per 12         # 12 images per movement
 python3 build_vault.py                # regenerate every note from the mv_*.py data
-python3 make_links.py                 # regenerate external search deep links
 ```
 
 ### Adding a movement
@@ -428,7 +427,6 @@ need only Python 3 + Pillow.
 | `providers.py` | Four CC0 source adapters + three-layer filtering (AI images / flat works / artist match) |
 | `fetch_art.py` | Image fetching: round-robin across sources, two-layer filtering, `--refresh` clears orphaned files |
 | `build_vault.py` | **Generates** the Obsidian notes / README / LICENSE / .gitignore |
-| `make_links.py` | Generates external search deep links |
 | `keyword_map.py` | Generates the keyword map |
 
 ### Image analysis

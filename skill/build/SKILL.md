@@ -107,7 +107,6 @@ python3 -u fetch_art.py --per 6 2>&1 | tee /tmp/fetch.log
 
 ```bash
 python3 build_vault.py     # 生成全部笔记 + 关键词图谱 + README + LICENSE
-python3 make_links.py      # 生成外部检索深链
 ```
 
 关键词图谱把 **218 styles / 189 movements / 68 genres** 全部投影到库内流派卡 ——

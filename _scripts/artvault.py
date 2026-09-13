@@ -77,7 +77,7 @@ def doctor():
         ("流派检索与分层提示词", True, "categories / search / layers / show / palette / related"),
         ("拼提示词与冲突消解", True, "compose（跨流派混搭自动消解矛盾负向词）"),
         ("视频提示词 / 图生视频", True, "video / i2v_prompt 的文本部分"),
-        ("重建整个仓库", True, "build_vault / make_links"),
+        ("重建整个仓库", True, "build_vault"),
         ("MCP 服务", True, "mcp_server（10 个工具）"),
     ]
     opt = []
