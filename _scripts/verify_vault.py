@@ -1016,8 +1016,10 @@ def main():
     # 所以不走 report() —— 那会把「跑过了、只是没发现问题」印成「跳过」。
     _fit = check_image_card_fit()
     if _fit is None:
-        print("%s 22 图与卡自洽：跳过（没算过视觉签名，先跑 "
-              "python3 visual_signature.py build）" % WARN)
+        # 不在这里猜原因：函数内部已经按真实情况打印过了
+        # （没签名 / 没 Pillow 是两回事）。标签断言一个它不知道的原因，
+        # 就会把人引到错误的修法上 —— 第一版就是这么错的。
+        print("%s 22 图与卡自洽：跳过（原因见上一行）" % WARN)
     else:
         print("%s 22 图与卡自洽：已分诊（提示性，不计入失败）" % OK)
 
