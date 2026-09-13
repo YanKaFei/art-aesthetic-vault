@@ -116,7 +116,7 @@ style / artist / genre 标签，比你自己爬完再标注省事得多：
 | [Rijksmuseum](https://data.rijksmuseum.nl/) | 公共领域 | ❌ 需 key | 可扩展 |
 | [Harvard Art Museums](https://harvardartmuseums.org/collections/api) | 部分 CC0 | ❌ 需 key | 可扩展 |
 | [史密森尼 / Europeana](https://www.europeana.eu/en/apis) | 逐条 | ❌ 需 key | 可扩展 |
-| [WikiArt](https://www.wikiart.org) | **混合** | — | ❌ 只作浏览参考，见 [[版权与来源]] |
+| [WikiArt](https://www.wikiart.org) | **混合** | — | ❌ 只作浏览参考 |
 
 > [!tip] 想再加数据源
 > 在 `_scripts/providers.py` 里写一个函数，返回统一的字段结构
@@ -133,7 +133,7 @@ WikiArt 的 `robots.txt` 是 `User-agent: * / Allow: /`，技术上**允许抓�
 - 它没有免费的官方 API（只有商业授权）
 
 **结论：可以用它找线索，不要把它的图和文字当成可自由分发的素材。**
-详见 [[版权与来源]]。
+见仓库根目录的 LICENSE 与 LICENSE-CONTENT.md。
 
 ---
 

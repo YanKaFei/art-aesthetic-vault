@@ -19,14 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-本仓库采用双许可：
-
-- 代码（_scripts/ 目录下的全部脚本）：MIT License（见上）
-- 笔记内容（00-导航/、10-流派/、90-模板/、README.md 等）：
-  Creative Commons Attribution 4.0 International (CC BY 4.0)
-  https://creativecommons.org/licenses/by/4.0/
-- 图片（99-附件/images/）：来自公共领域 / CC0 开放数据源，
-  各自授权见每张作品下方的标注。

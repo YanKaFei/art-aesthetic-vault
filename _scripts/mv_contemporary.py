@@ -154,7 +154,7 @@ MOVEMENTS = [
               "康定斯基属青骑士/包豪斯/表现主义，克利属青骑士/包豪斯，"
               "李西茨基属至上主义/构成主义，莫霍利-纳吉属包豪斯，莱热属立体主义。"
               "实测 6 张图里 3 张与 der-blaue-reiter / bauhaus 相同，"
-              "跑 verify_vault.py 的第 5 项可以看到。判断标准是「重叠说得通就保留」"],
+              "判断标准是「重叠说得通就保留」"],
  "sources": {"cleveland": ["kandinsky", "klee"],
              "met": ["kandinsky", "klee", "moholy-nagy"],
              "commons": ["Wassily Kandinsky painting", "Paul Klee painting",

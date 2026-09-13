@@ -66,11 +66,26 @@ def detect_slug():
 
 REPO_SLUG = detect_slug()
 
-# 原来是 "…prompt layers, style, lighting, color…"，读起来像一串平铺名词，
-# 看不出这是「七层」。改成破折号把层数列出来。
-DESCRIPTION = ("141 art movements decomposed into 7 swappable AI prompt layers — "
+def _n_movements():
+    """流派数量**从数据里取**，不写死。
+
+    这里原来写着 "141 art movements"，补到 147 张之后它就变成错的了 ——
+    和 README 统计数字、冒烟里的「141 张卡」是同一类坑：写死的数字，
+    唯一的作用就是某天变成错的。
+    """
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from movements import MOVEMENTS
+        return len(MOVEMENTS)
+    except Exception:
+        return None
+
+
+_N_MV = _n_movements()
+DESCRIPTION = ("%s art movements decomposed into 7 swappable AI prompt layers — "
                "style, lighting, color, composition, medium, mood, camera. "
-               "CLI + MCP server. Obsidian vault with public-domain artworks.")
+               "CLI + MCP server. Obsidian vault with public-domain artworks."
+               % (_N_MV if _N_MV else "100+"))
 
 # GitHub 限制：最多 20 个，小写字母/数字/连字符
 TOPICS = [
@@ -155,11 +170,12 @@ def cmd_status(_a):
     return 0
 
 
-def cmd_push(_a):
+def cmd_push(a):
     token = get_token()
     if not token:
         return 1
     user = REPO_SLUG.split("/")[0]
+    force = bool(getattr(a, "force", False))
     # token 只写进临时文件（600），不进命令行参数 —— `ps` 看不到
     fd, path = tempfile.mkstemp(prefix=".gitcred-")
     os.close(fd)
@@ -167,10 +183,27 @@ def cmd_push(_a):
     try:
         with open(path, "w", encoding="utf-8") as f:
             f.write("https://%s:%s@github.com\n" % (user, token))
-        r = subprocess.run(
-            ["git", "-C", VAULT, "-c", "credential.helper=store --file=%s" % path,
-             "push", "origin", "main"],
-            text=True)
+        cmd = ["git", "-C", VAULT, "-c", "credential.helper=store --file=%s" % path,
+               "push", "origin", "main"]
+        if force:
+            # 历史被改写之后，远端那条线已经和本地没有共同后继，普通 push
+            # 必然被拒。--force-with-lease 在这里不可用：它比对的
+            # refs/remotes/origin/* 也一起被改写了，lease 一定不匹配。
+            cmd.insert(-2, "--force")
+        r = subprocess.run(cmd, text=True, capture_output=True)
+        sys.stdout.write(r.stdout)
+        sys.stderr.write(r.stderr)
+        if r.returncode != 0 and not force and (
+                "non-fast-forward" in r.stderr or "rejected" in r.stderr
+                or "fetch first" in r.stderr):
+            print()
+            print("推送被拒：远端有本地没有的提交。常见原因有两个 ——")
+            print("  1. 远程改过（别人推过 / 网页上编辑过）→ 先 `git fetch` 看看差异")
+            print("  2. **本地历史被改写过**（filter-branch / rebase / 改过作者信息）")
+            print("     → 此时远端那条线的提交在本地已经不存在，只能强制推送：")
+            print("       python3 github_setup.py push --force")
+            print("     强制推送会**覆盖远端历史**。若已经有人 clone 过，他们手上的")
+            print("     旧历史不会自动更新；协作仓库请先和所有人确认。")
         return r.returncode
     finally:
         try:                       # 先覆写再删，避免残留在磁盘上
@@ -247,7 +280,11 @@ def main():
                         ("topics", "设置 topics"),
                         ("about", "设置 description"),
                         ("all", "以上全部（推荐）")):
-        sub.add_parser(name, help=help_)
+        sp = sub.add_parser(name, help=help_)
+        if name in ("push", "all"):
+            sp.add_argument("--force", action="store_true",
+                            help="强制推送（**会覆盖远端历史**；"
+                                 "本地历史被改写过后才需要）")
     a = ap.parse_args()
     fn = {"status": cmd_status, "push": cmd_push, "template": cmd_template,
           "topics": cmd_topics, "about": cmd_about, "all": cmd_all}.get(a.cmd)
