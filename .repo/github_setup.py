@@ -98,18 +98,33 @@ TOPICS = [
 
 
 # ------------------------------------------------------------ token
+_TOKEN_CACHE = None
+
+
 def get_token(required=True):
+    """拿 token。**整个进程只问一次。**
+
+    `all` 会依次调 push / template / topics / about，每个子命令都要 token ——
+    原来各问一次，等于让人连着粘贴四遍同一个 token（每次都不能回显，
+    只能盲贴）。缓存一下，问一次就够。
+    """
+    global _TOKEN_CACHE
+    if _TOKEN_CACHE:
+        return _TOKEN_CACHE
     t = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
     if t:
-        return t.strip()
+        _TOKEN_CACHE = t.strip()
+        return _TOKEN_CACHE
     if not required:
         return None
     if not sys.stdin.isatty():
         print("没有 GITHUB_TOKEN 环境变量，且当前不是交互式终端。")
-        print("用法：GITHUB_TOKEN=xxx python3 github_setup.py push")
+        print("用法：GITHUB_TOKEN=xxx python3 .repo/github_setup.py all --force")
         return None
-    print("粘贴 GitHub token（输入不回显）：")
-    return getpass.getpass("token> ").strip() or None
+    print("粘贴 GitHub token（输入不回显，整个流程只问这一次）：")
+    t = getpass.getpass("token> ").strip()
+    _TOKEN_CACHE = t or None
+    return _TOKEN_CACHE
 
 
 # ------------------------------------------------------------ API
