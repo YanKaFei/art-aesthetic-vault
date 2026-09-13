@@ -36,26 +36,39 @@ def out(obj, as_json):
 
 
 def main():
+    # `--json` 要能放在命令**前面或后面**。
+    # 原来只在顶层定义，于是 `artvault.py dump --json` 直接报
+    # 「unrecognized arguments: --json」—— 而帮助里写着「加 --json 到任意命令」，
+    # 使用者自然会写在后面。两处都能认的做法：子命令各挂一个同名的
+    # `--json`，但 default 用 SUPPRESS —— 没写时**不设这个属性**，
+    # 顶层解析到的值就不会被 False 覆盖。（argparse 的经典覆盖陷阱。）
+    common = argparse.ArgumentParser(add_help=False)
+    common.add_argument("--json", action="store_true", default=argparse.SUPPRESS,
+                        help="输出 JSON（放命令前或后都行）")
+
     ap = argparse.ArgumentParser(description="艺术审美风格库 · 检索与提示词组合")
-    ap.add_argument("--json", action="store_true", help="输出 JSON")
+    ap.add_argument("--json", action="store_true", help="输出 JSON（放命令前或后都行）")
     sub = ap.add_subparsers(dest="cmd")
 
-    sub.add_parser("categories")
-    p = sub.add_parser("list"); p.add_argument("--category"); p.add_argument("--with-images", action="store_true")
-    p = sub.add_parser("search"); p.add_argument("query"); p.add_argument("-n", type=int, default=8)
-    p = sub.add_parser("show"); p.add_argument("slug")
-    p = sub.add_parser("layers"); p.add_argument("slug")
-    p = sub.add_parser("palette"); p.add_argument("slug")
-    p = sub.add_parser("related"); p.add_argument("slug")
-    p = sub.add_parser("video"); p.add_argument("slug")   # 两块可粘贴的视频提示词
-    p = sub.add_parser("compose")
+    def add(name, **kw):
+        return sub.add_parser(name, parents=[common], **kw)
+
+    add("categories")
+    p = add("list"); p.add_argument("--category"); p.add_argument("--with-images", action="store_true")
+    p = add("search"); p.add_argument("query"); p.add_argument("-n", type=int, default=8)
+    p = add("show"); p.add_argument("slug")
+    p = add("layers"); p.add_argument("slug")
+    p = add("palette"); p.add_argument("slug")
+    p = add("related"); p.add_argument("slug")
+    p = add("video"); p.add_argument("slug")   # 两块可粘贴的视频提示词
+    p = add("compose")
     p.add_argument("brief", nargs="?", default="")
     p.add_argument("--subject")
     p.add_argument("--keep-conflicts", action="store_true",
                    help="只报告层级冲突，不自动丢掉打架的负向词（默认会自动丢）")
     for l in A.LAYERS:
         p.add_argument("--" + l)
-    sub.add_parser("dump")
+    add("dump")
 
     a = ap.parse_args()
     if not a.cmd:

@@ -381,6 +381,25 @@ python3 make_links.py                 # 重新生成外部检索深链
 2. 在**同一个文件的 `ARTIST_KEYS`** 里加过滤关键词 ← **必须，否则会抓进一堆无关作品**
 3. `python3 fetch_art.py <slug>` 然后 `python3 build_vault.py`
 
+### 改完代码怎么验
+
+两层，职责不重叠，**都要跑**：
+
+```bash
+python3 tests/smoke_test.py      # 把命令真的跑一遍：退出码 / 副作用 / 可复现性
+python3 _scripts/verify_vault.py # 查内容一致性：断链 / 授权 / README 数字 / 双链
+```
+
+`tests/smoke_test.py` 只用标准库，不需要 pip 装东西，也能在干净 clone 上跑。
+CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这两层。
+
+> [!note] 为什么要「真的跑一遍」这一层
+> 曾经 README 声称「654 张公共领域实图」，克隆下来只有 442 张 —— 虚报 48%。
+> 这个 bug 穿过了当时**全部 15 项验收**：因为那些检查都在读文件（比 mtime、
+> 比引用、比数字），没有一项会执行命令看看会不会出事。数字对不对是一类问题，
+> **命令跑不跑得起来、跑完有没有留下垃圾**是另一类。
+
+
 | 数据文件 | 负责的分类 |
 |---|---|
 | `mv_core.py` | 最初的 18 个主干流派 |

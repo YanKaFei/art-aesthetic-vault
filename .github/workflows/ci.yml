@@ -1,0 +1,63 @@
+name: CI
+
+# 这个仓库有两层检查，职责不重叠：
+#   tests/smoke_test.py   把命令真的跑一遍 —— 退出码、副作用、可复现性、发布卫生
+#   _scripts/verify_vault.py  查内容一致性 —— 断链、授权、README 数字、双链
+# 两层都要跑。曾经 README 虚报 48% 的 bug 穿过了当时的全部验收，
+# 就是因为那些检查都在「读文件」，没有一项会真的执行一遍。
+#
+# 零 pip 安装是**故意**的：本仓库的卖点之一是核心只用标准库，
+# 那么 CI 也必须能在不装任何东西的情况下跑通 —— 否则环境差异会伪装成代码问题。
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: ${{ matrix.os }} · Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false          # 一个平台挂了，也要看到另一个平台的结果
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.9", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: 环境信息
+        run: |
+          python -V
+          git --version
+          uname -a
+
+      - name: 冒烟测试（真的执行命令）
+        run: python tests/smoke_test.py -v
+
+      - name: 验收（内容一致性）
+        run: python _scripts/verify_vault.py
+
+      - name: 发布卫生 —— 仓库里不许有个人绝对路径
+        if: runner.os == 'Linux'
+        run: |
+          if git grep -nIE '/Users/[a-zA-Z0-9_.-]+/' -- . ; then
+            echo "::error::已跟踪文件里有个人绝对路径"
+            exit 1
+          fi
+          echo "干净"
+
+      - name: 发布卫生 —— 工作树必须干净（生成物可复现）
+        run: |
+          git diff --exit-code -- . || {
+            echo "::error::重新生成后有改动，生成物不是确定性的"
+            git diff --stat
+            exit 1
+          }
+          echo "干净"
