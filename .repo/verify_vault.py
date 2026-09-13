@@ -272,7 +272,7 @@ def check_data_disk_sync():
 
 
 def check_note_links():
-    """9 笔记双链：每个 [[...]] 都能解析到一篇笔记。
+    r"""9 笔记双链：每个 [[...]] 都能解析到一篇笔记。
 
     这一项一直缺 —— 原来的断链检查只覆盖 `![[图片]]` 嵌入，
     不覆盖 `[[笔记]]` 双链。
@@ -527,6 +527,17 @@ def check_readme_numbers():
 
     做法：**调用 build_vault.publish_stats() 本身**，不另写一份统计 —— 这个 bug
     的教训就是「两处各算各的，于是两处漏了同一件事」。拿同一份口径去比 README。
+
+    第二课（后来才补上）：这一项原来只查「笔记数」和「实图数」两项，于是
+    模板里**另外四组硬编码数字**长期虚报，它一个都没拦住 ——
+
+        流派卡 141 / 实际 147      脚本 21 / 实际 36
+        导航 18（英）·17（中）/ 实际 13（中英还互相矛盾）
+        关键词图谱「218 styles / 189 movements / 68 genres」/ 实际 4 组概念 46 个同义词
+        （最后这组描述的是已经删掉的 WikiArt 对照表，等于一句没人守得住的宣传语）
+
+    所以现在改成**声明式清单**：README 里每一个「说自己有多少东西」的数字都在
+    下面列一行，模板侧全部写成 {占位符}。加一个新数字只要加一行。
     """
     try:
         import build_vault as BV
@@ -537,26 +548,62 @@ def check_readme_numbers():
     except Exception as e:
         return [("build_vault", "统计失败：%s" % e)]
 
+    # (文件, 这项写的是什么, 正则, stats 键, 取第几个捕获组)
+    #
+    # 正则必须**恰好**圈住那个数字：圈错地方就会拿别的数字来比，比绿了也是假的。
+    NO = r"\d+"
+    CLAIMS = [
+        # ---- 中文 README ----
+        ("README.md", "笔记数", r"(\d+)\s*篇笔记", "n_notes", 1),
+        ("README.md", "流派卡数", r"\*\*流派卡\*\*\s*\|\s*\*\*(\d+)\s*张\*\*", "n_mv", 1),
+        ("README.md", "实图数", r"\*\*实图\*\*\s*\|\s*\*\*(\d+)\s*张\*\*", "n_img", 1),
+        ("README.md", "图体积", r"\*\*实图\*\*\s*\|\s*\*\*" + NO + r"\s*张\*\*（(\d+)\s*MB）",
+         "img_mb", 1),
+        ("README.md", "导航篇数", r"\*\*导航与方法论\*\*\s*\|\s*(\d+)\s*篇", "n_guides", 1),
+        ("README.md", "概念组数",
+         r"\*\*关键词图谱\*\*\s*\|\s*最容易混的\s*\*\*(\d+)\s*组\*\*", "n_concepts", 1),
+        ("README.md", "同义词数", r"共\s*\*\*(\d+)\s*个\*\*同义说法", "n_synonyms", 1),
+        ("README.md", "模板数", r"\*\*笔记模板\*\*\s*\|\s*(\d+)\s*个", "n_templates", 1),
+        ("README.md", "脚本数", r"\*\*脚本\*\*\s*\|\s*(\d+)\s*个", "n_scripts", 1),
+        ("README.md", "纯提示词卡", r"\*\*(\d+)\s*个流派是「纯提示词卡」", "n_mv_no_img", 1),
+        # ---- 英文 README ----
+        ("README.en.md", "notes", r"(\d+)\s*notes\s*·", "n_notes", 1),
+        ("README.en.md", "movement cards",
+         r"\*\*Movement cards\*\*\s*\|\s*\*\*(\d+)\*\*", "n_mv", 1),
+        ("README.en.md", "images", r"\*\*Images\*\*\s*\|\s*\*\*(\d+)\*\*", "n_img", 1),
+        ("README.en.md", "image MB",
+         r"\*\*Images\*\*\s*\|\s*\*\*" + NO + r"\*\*\s*\((\d+)\s*MB\)", "img_mb", 1),
+        ("README.en.md", "guides",
+         r"\*\*Guides & methodology\*\*\s*\|\s*(\d+)\s*notes", "n_guides", 1),
+        ("README.en.md", "concept groups",
+         r"The \*\*(\d+) most-confused concept groups\*\*", "n_concepts", 1),
+        ("README.en.md", "synonyms", r"\*\*(\d+) synonyms\*\*", "n_synonyms", 1),
+        ("README.en.md", "templates",
+         r"\*\*Note templates\*\*\s*\|\s*(\d+)\s*\|", "n_templates", 1),
+        ("README.en.md", "scripts", r"\*\*Scripts\*\*\s*\|\s*(\d+)\s*-", "n_scripts", 1),
+        ("README.en.md", "prompt-only",
+         r"\*\*(\d+) movements are \"prompt-only cards\.\"\*\*", "n_mv_no_img", 1),
+    ]
+
     problems = []
-    for fname, pat_notes, pat_img in (
-            ("README.md", r"(\d+)\s*篇笔记", r"\*\*(\d+)\s*张\*\*（(\d+)\s*MB）"),
-            ("README.en.md", r"(\d+)\s*notes", r"\*\*(\d+)\*\*\s*\((\d+)\s*MB\)")):
+    for fname, label, pat, key, grp in CLAIMS:
         p = os.path.join(VAULT, fname)
         if not os.path.exists(p):
             continue
-        t = open(p, encoding="utf-8").read()
-        m = re.search(pat_notes, t)
-        if m and int(m.group(1)) != stats["n_notes"]:
-            problems.append((fname, "笔记数写着 %s，发布视图算出来是 %d"
-                             % (m.group(1), stats["n_notes"])))
-        m = re.search(pat_img, t)
-        if m:
-            if int(m.group(1)) != stats["n_img"]:
-                problems.append((fname, "实图数写着 %s，发布视图算出来是 %d"
-                                 % (m.group(1), stats["n_img"])))
-            if int(m.group(2)) != stats["img_mb"]:
-                problems.append((fname, "图体积写着 %s MB，实际 %d MB"
-                                 % (m.group(2), stats["img_mb"])))
+        with open(p, encoding="utf-8") as f:
+            t = f.read()
+        m = re.search(pat, t)
+        if not m:
+            # **匹配不到也要报。** 文案被改写、正则失配时静默跳过，等于这条声明
+            # 从此没人守 —— 上面那四组数字就是这么漏过去的（检查项在，但它查的
+            # 是别的东西，而没人会发现）。
+            problems.append((fname, "%s：找不到可核对的说法，正则失配"
+                                    "（文案被改过？），这项声明现在无人守" % label))
+            continue
+        got = int(m.group(grp))
+        if got != stats[key]:
+            problems.append((fname, "%s写着 %d，发布视图算出来是 %d"
+                             % (label, got, stats[key])))
     if BV.tracked_files() is None:
         return None                      # 不是 git 仓库，发布视图无从谈起
     return problems

@@ -111,15 +111,27 @@ def publish_stats():
     # （实测那样会得到 92，而真实是 81）。
     mv_dirs = {r.split("images/", 1)[1].split("/")[0] for r in img_rel if "images/" in r}
     note_rel = shipped(glob.glob(os.path.join(VAULT, "*", "**", "*.md"), recursive=True))
+    n_with_img = len(mv_dirs & {m["slug"] for m in MOVEMENTS})
+    # 关键词图谱的规模必须**现算**。README 里那句「218 styles / 189 movements /
+    # 68 genres」曾经是真的，但它描述的是 WikiArt 的跨界对照表，而那张表随着
+    # 「只讲数据从哪来、不讲知识」的清理一起删掉了 —— 数字留在 README 上，
+    # 就变成一句没人守得住的宣传语（实测图谱现在只剩 4 组概念）。
+    import keyword_map as KM
     return {
         "n_img": len(img_rel),
         "img_mb": int(round(sum(os.path.getsize(os.path.join(VAULT, r))
                                 for r in img_rel) / 1048576.0)),
-        "n_mv_with_img": len(mv_dirs & {m["slug"] for m in MOVEMENTS}),
+        "n_mv": len(MOVEMENTS),
+        "n_mv_with_img": n_with_img,
+        "n_mv_no_img": len(MOVEMENTS) - n_with_img,
+        "n_guides": len(shipped(glob.glob(os.path.join(VAULT, "00-guides", "*.md")))),
         "n_scripts": len(shipped(glob.glob(os.path.join(HERE, "*.py")))),
         "n_notes": len([r for r in note_rel
                         if r.split("/", 1)[0] in ("00-guides", "10-movements",
                                                   "20-my-prompts", "90-templates")]),
+        "n_concepts": len(KM.CLUSTERS),
+        "n_synonyms": sum(len(c.get("synonyms") or []) for c in KM.CLUSTERS),
+        "n_templates": len(TEMPLATES),
     }
 
 
@@ -596,14 +608,14 @@ def overview_note(works_map):
     for c in CATEGORIES:
         ms = by_category()[c]
         got = sum(1 for m in ms if works_map.get(m["slug"]))
-        A.append("| [[分类索引-%s\|%s]] | %d | %d | %s |"
+        A.append(r"| [[分类索引-%s\|%s]] | %d | %d | %s |"
                  % (c, c, len(ms), got, covers.get(c, "")))
     A.append("")
     for c in CATEGORIES:
         ms = by_category()[c]
         A.append("## %s" % c)
         A.append("")
-        A.append("[[分类索引-%s\|查看本类索引 →]]" % c)
+        A.append(r"[[分类索引-%s\|查看本类索引 →]]" % c)
         A.append("")
         A.append("| 流派 | English | 时期 | 配图 | 一句话 |")
         A.append("|---|---|---|---|---|")
@@ -1250,7 +1262,7 @@ README_EN = """<div align="center">
 
 # Art Aesthetic Style Library
 
-**141 art movements, decomposed into swappable AI prompt layers**
+**{n_mv} art movements, decomposed into swappable AI prompt layers**
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
@@ -1322,14 +1334,14 @@ this and piling up style keywords.
 
 | | |
 |---|---|
-| **Movement cards** | **141**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
+| **Movement cards** | **{n_mv}**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
 | **Images** | **{n_img}** ({img_mb} MB), covering {n_mv_with_img} movements |
-| **Guides & methodology** | 18 notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
-| **Keyword atlas** | All **218 styles / 189 movements / 68 genres** mapped to a card |
-| **Note templates** | 3 |
-| **Scripts** | 21 - fetch, generate, search, compose, MCP server |
+| **Guides & methodology** | {n_guides} notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
+| **Keyword atlas** | The **{n_concepts} most-confused concept groups**, **{n_synonyms} synonyms** in total - search any of them and land on the same card |
+| **Note templates** | {n_templates} |
+| **Scripts** | {n_scripts} - fetch, generate, search, compose, MCP server |
 
-> **62 movements are "prompt-only cards."** Abstract Expressionism, Pop Art, Minimalism,
+> **{n_mv_no_img} movements are "prompt-only cards."** Abstract Expressionism, Pop Art, Minimalism,
 > Conceptual Art, Cyberpunk, Vaporwave and others are still in copyright, so no open data
 > source will supply images. Their visual language and 7-layer structure are documented
 > exactly the same way - just without pictures. This is deliberate, not a gap.
@@ -1343,7 +1355,7 @@ this and piling up style keywords.
 Open the folder in Obsidian. Recommended entry points:
 
 - `00-guides/提示词拆解方法.md` - **start here**, it explains the 7 layers
-- `00-guides/流派总览.md` - overview of all 141 movements
+- `00-guides/流派总览.md` - overview of all {n_mv} movements
 - `10-movements/` - pick a movement, read its full breakdown
 - `00-guides/关键词图谱.md` - look up any unfamiliar style term
 
@@ -1352,7 +1364,7 @@ Open the folder in Obsidian. Recommended entry points:
 ```bash
 cd .repo
 
-python3 artvault.py categories              # 6 categories, 141 movements
+python3 artvault.py categories              # 6 categories, {n_mv} movements
 python3 artvault.py search "neon rain"      # fuzzy search, Chinese or English
 python3 artvault.py search "oppressive but ornate light" --semantic   # semantic (needs the CLIP model)
 python3 artvault.py layers baroque          # just the 7 prompt layers
@@ -1388,7 +1400,7 @@ The repo ships **two** skills, installed together:
 
 > [!note] Neither skill bundles data
 > Both are **symlinks** into this repo - the data exists in exactly one place.
-> If `mv_*.py` (141 movement definitions) were bundled into a skill there would be
+> If `mv_*.py` ({n_mv} movement definitions) were bundled into a skill there would be
 > two copies, and they would drift. Measured: the bundled copy had 4 files out of
 > sync with the repo, and libraries built from it had **wrong category assignments**.
 
@@ -1467,11 +1479,14 @@ why mixing them breaks, and exactly what this library manages for you.
 
 LLMs have fuzzy memories about art movements and routinely confuse Art Nouveau with
 Art Deco, or Barbizon with Impressionism. This library pins down concrete terminology
-for 141 movements, so an AI calling it won't make things up.
+for {n_mv} movements, so an AI calling it won't make things up.
 
-### 5. Completeness is verifiable
+### 5. Terminology is pinned down, not invented
 
-The keyword atlas maps **all 218 styles / 189 movements / 68 genres** onto cards.
+The keyword atlas covers the **{n_concepts} concept groups** people confuse most -
+avant-garde, contemporary art, postmodernism, surrealism. Each one gets a definition,
+the boundaries ("this is *not* the same as X"), and **{n_synonyms} synonyms** that all
+resolve to the same card.
 
 ### 6. Public domain only - no second thoughts
 
@@ -1748,7 +1763,7 @@ README = """<div align="center">
 
 # 艺术审美风格库
 
-**把 141 个艺术流派的视觉语言，拆成可以直接用的 AI 提示词层**
+**把 {n_mv} 个艺术流派的视觉语言，拆成可以直接用的 AI 提示词层**
 
 从拜占庭到 Y2K ｜ 东亚 · 南亚 · 伊斯兰 ｜ 摄影谱系 ｜ 数字亚文化
 
@@ -1813,14 +1828,14 @@ alienated, oppressive, intoxicating                    <- 情绪层
 
 | | 数量 |
 |---|---|
-| **流派卡** | **141 张**，6 大分类，每张含六维视觉拆解 + 七层提示词 + 配色 + 视频层 |
+| **流派卡** | **{n_mv} 张**，6 大分类，每张含六维视觉拆解 + 七层提示词 + 配色 + 视频层 |
 | **实图** | **{n_img} 张**（{img_mb} MB），{n_mv_with_img} 个流派配了图 |
-| **导航与方法论** | 17 篇（流派总览、关键词图谱、七层方法、视频结构、配色速查…） |
-| **关键词图谱** | 全部 **218 styles / 189 movements / 68 genres** 的完整映射 |
-| **笔记模板** | 3 个（流派卡 / 提示词卡 / 作品拆解） |
-| **脚本** | 21 个，抓图、生成、检索、提示词合成、MCP 服务 |
+| **导航与方法论** | {n_guides} 篇（流派总览、关键词图谱、七层方法、视频结构、配色速查…） |
+| **关键词图谱** | 最容易混的 **{n_concepts} 组**概念，共 **{n_synonyms} 个**同义说法，搜任何一个都落到同一张卡 |
+| **笔记模板** | {n_templates} 个（流派卡 / 提示词卡 / 作品拆解） |
+| **脚本** | {n_scripts} 个，抓图、生成、检索、提示词合成、MCP 服务 |
 
-> **62 个流派是「纯提示词卡」**——抽象表现主义、波普、极简主义、观念艺术、
+> **{n_mv_no_img} 个流派是「纯提示词卡」**——抽象表现主义、波普、极简主义、观念艺术、
 > 赛博朋克、蒸汽波这些，几乎找不到可自由分发的实图。
 > 它们的视觉语言与七层结构照常拆解，只是不配图。这是刻意的设计，不是缺失。
 
@@ -1966,9 +1981,11 @@ bash .repo/skill/locate.sh           # 手动定位仓库（排查用）
 巴比松和印象派搞混。这个库把每个流派的具体术语固化下来，
 AI 调用时不会瞎编。
 
-### 5. 完整性有保证
+### 5. 术语是钉住的，不是编的
 
-关键词图谱**218 styles / 189 movements / 68 genres**
+关键词图谱挑出最容易混的 **{n_concepts} 组**概念 —— 先锋、当代、后现代、超现实。
+每组给一条定义、若干条「它不等于什么」的边界，以及 **{n_synonyms} 个**同义说法，
+搜任何一个都落到同一张卡。
 
 ### 6. 能扩展
 
@@ -2077,7 +2094,7 @@ def local_note(mv, items):
         sat = (a.get("color") or {}).get("saturation")
         sug = (it.get("suggest") or [{}])[0]
         card = os.path.splitext(os.path.basename(it["rel"]))[0]
-        L.append("| %d | [[%s\|%s]] | %s | %s | %s |" % (
+        L.append(r"| %d | [[%s\|%s]] | %s | %s | %s |" % (
             i, card, (it.get("title") or card)[:28], lu,
             ("%.2f" % sat) if sat is not None else "—",
             sug.get("name") or "—"))
@@ -2095,7 +2112,8 @@ def local_index_note(by_slug):
          "---", "",
          "# 我的图库", "",
          "> [!info] 这是什么",
-         "> 你自己扫进来的图，按流派归类。**和权威的 141 张流派卡挂在同一张图谱上** ——",
+         "> 你自己扫进来的图，按流派归类。**和权威的 %d 张流派卡挂在同一张图谱上** ——"
+         % len(MOVEMENTS),
          "> 每篇都链回了对应的流派卡，所以从流派卡也能反查回来。",
          ">",
          "> 全部 gitignore，不会随仓库发布。", "",
@@ -2481,13 +2499,18 @@ push-to-github.sh
     except Exception as e:
         print("  ! 生成清单写入失败：%s（下次清理会退回到读笔记标记）" % e)
 
-    n_img = sum(len(v) for v in works_map.values())
+    # 「列出多少件作品」和「真的配了多少张图」是**两个数**：有几件作品拿不到
+    # 可自由分发的实图，就只在卡上留条目、不配图（实测 2 件）。原来这里把前者
+    # 印成「入库作品图」，比 README 里的 {n_img} 多 2 —— 两个数各自都没错，
+    # 错的是标签。所以分开印，并且和 README 用**同一个来源**（STATS）。
+    n_works = sum(len(v) for v in works_map.values())
     print("生成完成：")
     print("  流派卡      %d 张" % len(MOVEMENTS))
     _nav = [r for r in _WRITTEN if r.startswith("00-guides/")]
     print("  导航与方法  %d 篇" % len(_nav))
     print("  模板        %d 个" % len(TEMPLATES))
-    print("  入库作品图  %d 件" % n_img)
+    print("  代表作品    %d 件（配图 %d 件，仅条目 %d 件）"
+          % (n_works, STATS["n_img"], n_works - STATS["n_img"]))
     empty = [m["name_zh"] for m in MOVEMENTS if not works_map[m["slug"]]]
     if empty:
         print("  无 CC0 图的流派（纯提示词卡）：%s" % "、".join(empty))

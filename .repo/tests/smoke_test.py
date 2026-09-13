@@ -767,7 +767,7 @@ class PublishingTests(unittest.TestCase):
                             "--", "."],
                            capture_output=True, text=True, cwd=VAULT)
         hits = [l for l in p.stdout.splitlines()
-                if "_scripts/vendor" not in l]
+                if ".repo/vendor" not in l]
         self.assertEqual([], hits, "已跟踪文件里有个人绝对路径：\n" + "\n".join(hits[:10]))
 
     def test_no_secrets_looking_strings(self):
@@ -790,6 +790,65 @@ class PublishingTests(unittest.TestCase):
         self.assertTrue(m, "README 里没找到实图统计行")
         self.assertEqual(stats["n_img"], int(m.group(1)),
                          "README 实图数与发布视图不一致")
+
+    def test_readme_number_check_actually_bites(self):
+        """反向对照：把 README 的数字改坏，第 16 项必须报出来。
+
+        为什么非要这一条 —— 第 16 项原来只查「笔记数 / 实图数」两项，于是模板里
+        另外四组硬编码数字长期虚报，它一次都没响过：
+
+            流派卡 141 / 实际 147     脚本 21 / 实际 36
+            导航 18（英）·17（中）/ 实际 13
+            「218 styles / 189 movements / 68 genres」/ 实际 4 组概念 46 个同义词
+
+        **检查项在，却什么也没守住。** 所以这里逐类改坏一个数字，证明它现在真的
+        会咬人，而不是又一块绿色的装饰。
+        """
+        sys.path.insert(0, SCRIPTS)
+        import verify_vault as VV
+        p = os.path.join(VAULT, "README.md")
+        with open(p, encoding="utf-8") as f:
+            orig = f.read()
+        try:
+            for old, new in (("**147 张**", "**141 张**"),            # 流派卡数
+                             ("| **脚本** | 36 个", "| **脚本** | 21 个"),  # 脚本数
+                             ("**46 个**同义说法", "**68 个**同义说法"),  # 同义词数
+                             ("**4 组**概念", "**9 组**概念"),          # 概念组数
+                             ("**452 张**", "**654 张**")):          # 实图数
+                self.assertIn(old, orig, "测试前提失效：README 里找不到 %r" % old)
+                with open(p, "w", encoding="utf-8") as f:
+                    f.write(orig.replace(old, new))
+                got = VV.check_readme_numbers()
+                self.assertTrue(got, "把 %r 改坏成 %r 之后，第 16 项竟然没报"
+                                     % (old, new))
+        finally:
+            with open(p, "w", encoding="utf-8") as f:
+                f.write(orig)
+
+        # 恢复之后必须回到「通过」，否则说明上面把文件写坏了
+        self.assertEqual([], VV.check_readme_numbers(),
+                         "还原 README 之后第 16 项仍在报错，说明测试自己改坏了文件")
+
+    def test_readme_number_check_notices_rewritten_wording(self):
+        """文案被改写、正则失配时也要报。
+
+        静默跳过等于「这条声明从此没人守」—— 而那正是上面四组数字漏过去的方式：
+        检查项一直在跑、一直是绿的，只是它查的根本不是那几个数字。
+        """
+        sys.path.insert(0, SCRIPTS)
+        import verify_vault as VV
+        p = os.path.join(VAULT, "README.md")
+        with open(p, encoding="utf-8") as f:
+            orig = f.read()
+        try:
+            with open(p, "w", encoding="utf-8") as f:
+                f.write(orig.replace("| **脚本** |", "| **脚本数量** |"))
+            got = VV.check_readme_numbers() or []
+            self.assertTrue(any("正则失配" in msg for _f, msg in got),
+                            "改写文案之后第 16 项没报「正则失配」：%r" % (got,))
+        finally:
+            with open(p, "w", encoding="utf-8") as f:
+                f.write(orig)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 
 # Art Aesthetic Style Library
 
-**141 art movements, decomposed into swappable AI prompt layers**
+**147 art movements, decomposed into swappable AI prompt layers**
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
@@ -180,12 +180,12 @@ Art Aesthetic Style Library
 
 | | |
 |---|---|
-| **Movement cards** | **141**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
+| **Movement cards** | **147**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
 | **Images** | **452** (152 MB), covering 85 movements |
-| **Guides & methodology** | 18 notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
-| **Keyword atlas** | All **218 styles / 189 movements / 68 genres** mapped to a card |
+| **Guides & methodology** | 13 notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
+| **Keyword atlas** | The **4 most-confused concept groups**, **46 synonyms** in total - search any of them and land on the same card |
 | **Note templates** | 3 |
-| **Scripts** | 21 - fetch, generate, search, compose, MCP server |
+| **Scripts** | 36 - fetch, generate, search, compose, MCP server |
 
 > **62 movements are "prompt-only cards."** Abstract Expressionism, Pop Art, Minimalism,
 > Conceptual Art, Cyberpunk, Vaporwave and others are still in copyright, so no open data
@@ -201,7 +201,7 @@ Art Aesthetic Style Library
 Open the folder in Obsidian. Recommended entry points:
 
 - `00-guides/提示词拆解方法.md` - **start here**, it explains the 7 layers
-- `00-guides/流派总览.md` - overview of all 141 movements
+- `00-guides/流派总览.md` - overview of all 147 movements
 - `10-movements/` - pick a movement, read its full breakdown
 - `00-guides/关键词图谱.md` - look up any unfamiliar style term
 
@@ -210,7 +210,7 @@ Open the folder in Obsidian. Recommended entry points:
 ```bash
 cd .repo
 
-python3 artvault.py categories              # 6 categories, 141 movements
+python3 artvault.py categories              # 6 categories, 147 movements
 python3 artvault.py search "neon rain"      # fuzzy search, Chinese or English
 python3 artvault.py search "oppressive but ornate light" --semantic   # semantic (needs the CLIP model)
 python3 artvault.py layers baroque          # just the 7 prompt layers
@@ -246,7 +246,7 @@ The repo ships **two** skills, installed together:
 
 > [!note] Neither skill bundles data
 > Both are **symlinks** into this repo - the data exists in exactly one place.
-> If `mv_*.py` (141 movement definitions) were bundled into a skill there would be
+> If `mv_*.py` (147 movement definitions) were bundled into a skill there would be
 > two copies, and they would drift. Measured: the bundled copy had 4 files out of
 > sync with the repo, and libraries built from it had **wrong category assignments**.
 
@@ -325,11 +325,14 @@ why mixing them breaks, and exactly what this library manages for you.
 
 LLMs have fuzzy memories about art movements and routinely confuse Art Nouveau with
 Art Deco, or Barbizon with Impressionism. This library pins down concrete terminology
-for 141 movements, so an AI calling it won't make things up.
+for 147 movements, so an AI calling it won't make things up.
 
-### 5. Completeness is verifiable
+### 5. Terminology is pinned down, not invented
 
-The keyword atlas maps **all 218 styles / 189 movements / 68 genres** onto cards.
+The keyword atlas covers the **4 concept groups** people confuse most -
+avant-garde, contemporary art, postmodernism, surrealism. Each one gets a definition,
+the boundaries ("this is *not* the same as X"), and **46 synonyms** that all
+resolve to the same card.
 
 ### 6. Public domain only - no second thoughts
 
