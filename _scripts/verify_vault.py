@@ -615,6 +615,70 @@ def check_conflict_resolution():
     return problems
 
 
+def check_i2v():
+    """18 图生视频：给一张图，i2v 的两块提示词必须是**这张图的**，且不留占位符。
+
+    这条盯的是「通路有没有断」：图片分析、i2v 转换、视频模板三者分别在
+    三个文件里，中间任何一环退化（比如分析字段改名、i2v 抛异常被吞），
+    结果都是**视频块悄悄变回流派通用版**——不报错，只是那张图的信息没了。
+    所以这里直接断言：占位符必须被填掉。
+
+    没装 Pillow 就跳过（那是合法的可选依赖缺失，不是失败）。
+    """
+    try:
+        import image_analysis as IA
+    except Exception as e:
+        return [("image_analysis", "导入失败：%s" % e)]
+    try:
+        import i2v_prompt as I2V
+    except Exception as e:
+        return [("i2v_prompt", "导入失败：%s" % e)]
+    try:
+        from movements import MOVEMENTS
+    except Exception as e:
+        return [("movements", "导入失败：%s" % e)]
+
+    root = os.path.join(VAULT, "99-附件", "images")
+    imgs = []
+    for r, _d, fs in os.walk(root):
+        for f in sorted(fs):
+            if f.lower().endswith((".jpg", ".jpeg", ".png")):
+                imgs.append(os.path.join(r, f))
+    if not imgs:
+        return None
+    # 固定取样：跨流派、可复现
+    imgs = imgs[:: max(1, len(imgs) // 8)][:8]
+
+    by_slug = {m["slug"]: m for m in MOVEMENTS}
+    problems = []
+    for p in imgs:
+        a = IA.analyze(p)
+        if a.get("error"):
+            if "Pillow" in str(a["error"]):
+                return None                       # 可选依赖缺失，跳过整项
+            problems.append((os.path.basename(p), "分析失败：%s" % a["error"]))
+            continue
+        slug = None
+        for part in p.split(os.sep):
+            if part in by_slug:
+                slug = part
+                break
+        mv = by_slug.get(slug)
+        r = I2V.build(mv, a)
+        blob = (r.get("seedance") or "") + (r.get("h3") or "")
+        if not r.get("seedance") or not r.get("h3"):
+            problems.append((os.path.basename(p), "两块提示词有一块为空"))
+            continue
+        if "<你的主体>" in blob or "<场景>" in blob:
+            problems.append((os.path.basename(p),
+                             "占位符没被填掉 —— i2v 通路断了，退回了通用版"))
+        if not (r.get("image_subject") or "").strip():
+            problems.append((os.path.basename(p), "没有推出主体描述"))
+        if not (r.get("image_evidence") or {}):
+            problems.append((os.path.basename(p), "没有留下推导依据（无法核对）"))
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -674,6 +738,7 @@ def main():
     report("15 克隆完整性", check_clone_integrity())
     report("16 README 数字", check_readme_numbers())
     report("17 冲突消解", check_conflict_resolution())
+    report("18 图生视频", check_i2v())
 
     print("=" * 70)
     if failed:

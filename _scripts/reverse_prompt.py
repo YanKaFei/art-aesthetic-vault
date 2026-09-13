@@ -83,6 +83,34 @@ def _fmt_kv(v, unit="", nd=1):
         return str(v)
 
 
+def video_blocks(rec, mv):
+    """视频提示词：优先给**这张图的**（i2v），退回到流派通用版。
+
+    为什么要有这个选择：流派通用版的主体行是占位符 `<你的主体>`，换一张
+    同流派的图内容完全一样 —— 而使用者手里正拿着这张图。图的景别、位置、
+    线条动势、明暗结构早就测出来了（存在 rec["analysis"] 里），
+    没有理由不填进去。
+
+    返回 (dict, 是否是这张图的)；都给不出来时返回 (None, False)。
+    """
+    ana = (rec or {}).get("analysis") or {}
+    if ana and not ana.get("error"):
+        try:
+            import i2v_prompt as I2V
+            return I2V.build(mv, ana), True
+        except Exception as e:
+            # 不让 i2v 的失败拖垮整张卡，但要**说出来** ——
+            # 原来这里是 `except Exception: pass`，视频块会凭空消失，
+            # 读卡的人只会以为「这个流派没有视频提示词」。
+            print("  ! i2v 生成失败，退回流派通用版：%s: %s" % (type(e).__name__, e))
+    try:
+        import video_prompt as VP
+        return VP.build(mv), False
+    except Exception as e:
+        print("  ! 视频提示词生成失败：%s: %s" % (type(e).__name__, e))
+        return None, False
+
+
 def compose(rec, mv, image_name, back=None):
     """把一条记录 + 匹配到的流派，组装成那张图的卡。
 
@@ -233,15 +261,20 @@ def compose(rec, mv, image_name, back=None):
 
     # ---- 四、视频提示词 ----
     if mv:
-        try:
-            import video_prompt as VP
-            vp = VP.build(mv)
-            L += ["## 四、视频提示词（这个流派的，可直接粘）", "",
-                  "### A. Seedance 2.5 五段式", "", "```text", vp["seedance"], "```", "",
+        vp, from_image = video_blocks(rec, mv)
+        if vp:
+            title = ("## 四、视频提示词（**这张图的**，可直接粘）" if from_image
+                     else "## 四、视频提示词（这个流派的，可直接粘）")
+            L += [title, ""]
+            if from_image:
+                ev = vp.get("image_evidence") or {}
+                if ev:
+                    L += ["<sub>主体/运动/运镜是从这张图测出来的："
+                          + " ｜ ".join("%s %s" % (k, v) for k, v in ev.items())
+                          + "</sub>", ""]
+            L += ["### A. Seedance 2.5 五段式", "", "```text", vp["seedance"], "```", "",
                   "### B. MiniMax H3（中文自然语言）", "", "```text", vp["h3"], "```", "",
                   "> 两块格式不同不能混用，详见 [[视频提示词结构]]。", ""]
-        except Exception:
-            pass
 
     # ---- 五、来源 ----
     L += ["## 五、这张图从哪来", "",
@@ -309,13 +342,11 @@ def compose_compact(rec, mv, image_name):
           "<sub>光照 `%s` ｜ 色彩 `%s` ｜ 构图 `%s` ｜ 媒介 `%s` ｜ 情绪 `%s` ｜ 镜头 `%s`</sub>"
           % (p.get("lighting", ""), p.get("color", ""), p.get("composition", ""),
              p.get("medium", ""), p.get("mood", ""), p.get("camera", "")), ""]
-    try:
-        import video_prompt as VP
-        vp = VP.build(mv)
-        L += ["**视频 · Seedance 2.5**（五段式，直接粘）", "", "```text", vp["seedance"], "```", "",
+    vp, from_image = video_blocks(rec, mv)
+    if vp:
+        label = "这张图" if from_image else "流派通用"
+        L += ["**视频 · Seedance 2.5**（%s，直接粘）" % label, "", "```text", vp["seedance"], "```", "",
               "**视频 · MiniMax H3**（海螺，中文自然语言）", "", "```text", vp["h3"], "```", ""]
-    except Exception:
-        pass
     L += ["<sub>负向 `%s`</sub>" % (mv.get("negative") or "").replace("\n", " "), ""]
     return "\n".join(L)
 

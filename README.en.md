@@ -439,6 +439,7 @@ need only Python 3 + Pillow.
 | `github_setup.py` | Push, set as Template, set topics/description in one go (token never appears in argv) |
 | `movement_fingerprint.py` | Movement fingerprints from objective dimensions for image-to-movement matching (explainable, but measurably worse than Vision) |
 | `video_prompt.py` | Generates two Chinese video-prompt blocks per movement (Seedance 2.5 five-part + MiniMax H3 natural language) |
+| `i2v_prompt.py` | **Image-to-video prompts**: turns one image's measurements into subject / motion / camera and fills the placeholders the per-movement version leaves behind |
 | `scan_local.py` | **Scans your own image folders into the vault**: measurement + CLIP suggestions + dedupe → review list → files into `15-我的图库/` |
 | `reverse_prompt.py` | **Composes the reverse-engineering card**: measurements + movement match + 7 layers + video prompts, shared by all three entry points |
 | `pinterest_grab.py` / `pinterest_export.py` | Pinterest scraping and export (local use only, images are **not** committed) |

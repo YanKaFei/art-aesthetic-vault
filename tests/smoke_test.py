@@ -212,6 +212,91 @@ class CoreCommandTests(unittest.TestCase):
         self.assertEqual(0, rc, err[-300:])
         self.assertEqual(141, len(json.loads(out)), "流派卡应当是 141 张")
 
+    def test_json_flag_works_on_both_sides_of_the_command(self):
+        """`--json` 放命令前、放命令后都要能用。
+
+        帮助里写的是「加 --json 到任意命令」，使用者自然会写在后面；
+        而原来只在顶层 parser 定义了它，`artvault.py dump --json` 直接报
+        「unrecognized arguments」。这条测试就是那次修复的守卫。
+        """
+        for args in (["--json", "categories"], ["categories", "--json"],
+                     ["--json", "layers", "巴洛克"], ["layers", "巴洛克", "--json"]):
+            rc, out, err = run(["artvault.py"] + args)
+            self.assertEqual(0, rc, "`%s` 失败：%s" % (" ".join(args), err[-200:]))
+            json.loads(out)          # 两处都必须是合法 JSON
+
+    def test_json_absent_still_prints_human_text(self):
+        rc, out, _ = run(["artvault.py", "categories"])
+        self.assertEqual(0, rc)
+        with self.assertRaises(Exception):
+            json.loads(out)          # 不带 --json 时不该是 JSON
+
+
+class I2vTests(unittest.TestCase):
+    """图生视频：一张图进去，占位符必须被**这张图的**测量填掉。
+
+    i2v 的价值全在这个「填掉」上 —— 退化成流派通用版不会报错，
+    只会让每张同流派的图拿到一模一样的视频提示词，而使用者手里正拿着那张图。
+    """
+
+    def _analysis(self):
+        """拿一份真图的分析结果；拿不到（缺 Pillow）就 skip 并说明。
+
+        刻意**不用** `has_module("PIL")` 判断：脚本会自己往
+        `_scripts/vendor/libs` 找 Pillow，测试进程 import 失败不代表脚本用不了。
+        第一版就是这么写的，结果本机明明能跑却跳过两条测试 —— 假阴性。
+        改成看行为：真的调一次分析，只有当它说缺 Pillow 时才跳过。
+        """
+        img = a_real_image()
+        if not img:
+            self.skipTest("仓库里没有图片")
+        sys.path.insert(0, SCRIPTS)
+        import image_analysis as IA
+        ana = IA.analyze(img)
+        if ana.get("error"):
+            if "Pillow" in str(ana["error"]):
+                self.skipTest("缺 Pillow，图片分析不可用")
+            self.fail("分析真图失败：%s" % ana["error"])
+        return img, ana
+
+    def test_i2v_fills_placeholders(self):
+        img, ana = self._analysis()
+        import i2v_prompt as I2V
+        r = I2V.build(None, ana)          # 连流派都不给也要能用
+        blob = r["seedance"] + r["h3"]
+        self.assertNotIn("<你的主体>", blob, "占位符没被填掉")
+        self.assertNotIn("<场景>", blob, "占位符没被填掉")
+        self.assertTrue(r["image_subject"].strip(), "没推出主体描述")
+        self.assertTrue(r["image_evidence"], "没留下推导依据")
+
+    def test_generic_build_still_uses_placeholder(self):
+        """没给图的那条路必须保持不变 —— 流派卡上放的是通用版。"""
+        sys.path.insert(0, SCRIPTS)
+        import video_prompt as VP
+        from movements import MOVEMENTS
+        mv = [m for m in MOVEMENTS if m["slug"] == "baroque"][0]
+        r = VP.build(mv)
+        self.assertIn("<你的主体>", r["seedance"], "通用版不该被 i2v 影响")
+
+    def test_reverse_prompt_attaches_image_specific_video(self):
+        img, ana = self._analysis()
+        import reverse_prompt as RP
+        from movements import MOVEMENTS
+        rec = RP.record(img, ana, suggest=[{"slug": "baroque", "name": "巴洛克",
+                                            "score": 0.9}], source="test")
+        mv = [m for m in MOVEMENTS if m["slug"] == "baroque"][0]
+        card = RP.compose(rec, mv, os.path.basename(img))
+        # 断言必须**只看视频那一节**：卡里的七层提示词块本来就留着
+        # `<你的主体>` —— 那是设计如此（「这张画的是什么」只能看图才知道，
+        # 卡上不替你编，见 compose 里的说明）。第一版断言扫了整张卡，
+        # 于是把正确行为报成了失败。
+        self.assertIn("## 四、视频提示词", card, "卡里没有视频节")
+        video = card.split("## 四、视频提示词", 1)[1]
+        self.assertNotIn("<你的主体>", video,
+                         "反推卡的视频块没走 i2v，退回了通用版")
+        self.assertNotIn("<场景>", video, "视频块里还有未填的占位符")
+        self.assertIn("这张图", card, "应当标明视频提示词来自这张图")
+
 
 # ------------------------------------------------------- 3. 冲突消解的不变量
 

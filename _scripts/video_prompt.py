@@ -117,8 +117,17 @@ def _zh(visual, key, fallback):
     return (v or fallback).strip()
 
 
-def build(mv, duration=10):
-    """生成两块中文视频提示词。返回 dict。"""
+def build(mv, duration=10, facts=None):
+    """生成两块中文视频提示词。返回 dict。
+
+    facts=None（默认）→ 输出是**流派的**通用视频提示词，主体留占位符。
+    facts=<i2v_prompt.derive(分析结果)> → 输出是**这张图的**：主体、景别、
+      画面内的动势方向、光要不要动，全部来自客观测量，占位符被填掉。
+
+    两条路都保留，因为用途不同：流派卡上要放通用的，反推卡上要放这张图的。
+    """
+    mv = mv or {}
+    facts = facts or {}
     v = mv.get("video") or {}
     p = mv.get("prompt") or {}
     vis = mv.get("visual") or {}
@@ -129,8 +138,16 @@ def build(mv, duration=10):
 
     dur = int(v.get("duration") or duration)
     seg = max(2, dur // 3)
-    camzh, static = _camera(v.get("camera"))
+    # 流派卡没写运镜时，才让这张图推出来的运镜补位（流派卡优先：运镜是
+    # 该流派视觉语言的一部分，浮世绘「模仿绘卷展开」不该被通用建议盖掉）
+    cam_src = v.get("camera") or ""
+    if not cam_src and facts.get("camera_zh"):
+        cam_src = facts["camera_zh"]
+    camzh, static = _camera(cam_src)
     cl = _clauses(motion) or ["画面内的细微变化"]
+    # 图自己带来的动势线索排在流派通用动作**前面** —— i2v 时它们是主线索
+    if facts.get("motion_zh"):
+        cl = list(facts["motion_zh"]) + cl
     n = max(1, len(cl))
     a = "、".join(cl[:max(1, n // 3)]) or cl[0]
     b = "、".join(cl[max(1, n // 3):max(2, 2 * n // 3)]) or cl[min(1, n - 1)]
@@ -149,6 +166,19 @@ def build(mv, duration=10):
            _zh(vis, "材质", "该流派的典型媒介"),
            _zh(vis, "情绪", "该流派的典型情绪"))
     )
+    if facts.get("subject_zh"):
+        # 主体行只写**主体**（景别 + 位置）。画面的调性放风格行 —— 那里本来
+        # 就在讲光线色彩，实测值跟流派通用说法并排才好对照，也不重复。
+        subject_line = ("【主体】%s。<谁、在做什么，你自己补一句 —— "
+                        "景别与位置是从这张图测出来的，内容不是>"
+                        % facts["subject_zh"])
+        h3_subject = "画面是%s" % facts["subject_zh"]
+    else:
+        subject_line = "【主体】<你的主体>，出现在<场景>。<写清核心事件：谁、在做什么、和什么互动>"
+        h3_subject = "画面是<你的主体>，在<场景>中"
+    if facts.get("scene_zh") or facts.get("light_zh"):
+        _measured = "；".join(x for x in (facts.get("scene_zh"), facts.get("light_zh")) if x)
+        body_style += "这张图实测：%s。" % _measured
 
     # ---------- A. Seedance 2.5 五段式 ----------
     if v.get("shots"):
@@ -163,7 +193,7 @@ def build(mv, duration=10):
         )
     limits = v.get("limits") or ([note] if note else []) + COMMON_LIMITS[:3]
     seedance = "\n".join([
-        "【主体】<你的主体>，出现在<场景>。<写清核心事件：谁、在做什么、和什么互动>",
+        subject_line,
         "",
         "【风格】%d 秒，16:9，高清。%s" % (dur, body_style),
         "风格锚定：%s" % (anchor or mv.get("name_en") or ""),
@@ -182,18 +212,19 @@ def build(mv, duration=10):
     # 时长、镜头意图、声音层次、素材分工。
     # 三元表达式里混 % 格式化很容易写错（实测踩过），改成显式 if/else
     _pre_cam = "" if any(x in camzh for x in ("机位", "镜头")) else "镜头"
+    _mvname = mv.get("name_zh") or "参考图"
     if static:
         h3 = (
-            "一段 %d 秒的%s风格视频。画面是<你的主体>，在<场景>中%s。%s"
+            "一段 %d 秒的%s风格视频。%s%s。%s"
             "开头两秒就要给出最强的视觉信息。这是几乎静止的画面，镜头全程固定不动，"
             "靠画面内部自身的缓慢变化推进（%s），不要加任何运镜。"
-            % (dur, mv.get("name_zh") or "", ("，" + cl[0]) if cl else "", body_style, a)
+            % (dur, _mvname, h3_subject, ("，" + cl[0]) if cl else "", body_style, a)
         )
     else:
         h3 = (
-            "一段 %d 秒的%s风格视频。画面是<你的主体>，在<场景>中%s。%s"
+            "一段 %d 秒的%s风格视频。%s%s。%s"
             "开头两秒就要给出最强的视觉信息，不要用缓慢推进开场。全片%s。"
-            % (dur, mv.get("name_zh") or "", ("，" + cl[0]) if cl else "",
+            % (dur, _mvname, h3_subject, ("，" + cl[0]) if cl else "",
                body_style, _pre_cam + camzh)
         )
     h3 += (
@@ -208,7 +239,10 @@ def build(mv, duration=10):
 
     return {"duration": dur, "seedance": seedance, "h3": h3,
             "key": note, "camera_zh": camzh, "static": static,
-            "anchor": anchor}
+            "anchor": anchor,
+            # 有图时把推导依据一并返回，让人能核对「凭什么这么说」
+            "image_evidence": facts.get("evidence") or {},
+            "image_subject": facts.get("subject_zh") or ""}
 
 
 if __name__ == "__main__":

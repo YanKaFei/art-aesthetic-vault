@@ -2114,6 +2114,7 @@ need only Python 3 + Pillow.
 | `github_setup.py` | Push, set as Template, set topics/description in one go (token never appears in argv) |
 | `movement_fingerprint.py` | Movement fingerprints from objective dimensions for image-to-movement matching (explainable, but measurably worse than Vision) |
 | `video_prompt.py` | Generates two Chinese video-prompt blocks per movement (Seedance 2.5 five-part + MiniMax H3 natural language) |
+| `i2v_prompt.py` | **Image-to-video prompts**: turns one image's measurements into subject / motion / camera and fills the placeholders the per-movement version leaves behind |
 | `scan_local.py` | **Scans your own image folders into the vault**: measurement + CLIP suggestions + dedupe → review list → files into `15-我的图库/` |
 | `reverse_prompt.py` | **Composes the reverse-engineering card**: measurements + movement match + 7 layers + video prompts, shared by all three entry points |
 | `pinterest_grab.py` / `pinterest_export.py` | Pinterest scraping and export (local use only, images are **not** committed) |
@@ -2666,6 +2667,21 @@ AI 调用时不会瞎编。
 加一个新流派只需要在一个 Python 文件里加一条定义。
 抓图、生成笔记、关键词映射、AI 接口都会自动跟上。
 
+### 8. 你手里那张图，也能直接变成视频提示词
+
+流派卡上的视频提示词是**通用**的 —— 主体那一行是占位符。但你真正要干的事
+通常是「我有这张图，让它动起来」。所以反推卡上的视频块走的是另一条路：
+
+```bash
+python3 i2v_prompt.py 你的图.jpg --slug baroque
+```
+
+主体的景别、在画面哪个位置、画面内部的动势方向、光要不要动、镜头推还是移，
+全部从**这张图的客观测量**推出来（人脸景别 / 显著性中心 / 线条方向 /
+细节密度 / 明暗结构），并附一份「推导依据」让你核对。
+生成出来仍留着「谁、在做什么，你自己补一句」—— 内容只有看图的人知道，
+脚本不替你编。
+
 ---
 
 ## 快速开始
@@ -2785,6 +2801,7 @@ CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这�
 | `github_setup.py` | 推送 + 设为 Template + 设 topics/description 一条龙（token 不进命令行参数） |
 | `movement_fingerprint.py` | 用客观维度建流派指纹做图像→流派匹配（可解释，但实测不如 Vision） |
 | `video_prompt.py` | 从流派数据生成两块中文视频提示词（Seedance 2.5 五段式 + MiniMax H3 自然语言） |
+| `i2v_prompt.py` | **图生视频提示词**：把一张图的客观测量翻成主体 / 运动 / 运镜，填掉流派通用版里的占位符。反推卡默认走这条 |
 | `scan_local.py` | **把你自己的图扫进库**：测量 + CLIP 建议 + 去重 → 待确认清单 → 归入 `15-我的图库/` |
 | `reverse_prompt.py` | **组装反推卡**：把测量 + 流派匹配 + 七层 + 视频提示词拼成那张图的卡（三个入口共用） |
 | `pinterest_grab.py` | Pinterest 抓取，**抓完自动补反推**（提示词 + 两块视频提示词，写在每张图下面）｜`--analyze` 可回填已有板子 |
