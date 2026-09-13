@@ -148,8 +148,8 @@ def load_cache():
 
 
 def save_cache(c):
-    os.makedirs(os.path.dirname(CACHE), exist_ok=True)
-    json.dump(c, open(CACHE, "w", encoding="utf-8"), ensure_ascii=False)
+    import safefile as SF
+    return SF.write_json(CACHE, c, indent=None)
 
 
 def build(verbose=True, force=False):

@@ -48,7 +48,8 @@ VISION_DIR = os.path.join(HERE, "vision")
 SOURCE = os.path.join(VISION_DIR, "vision_feat.m")
 BINARY = os.path.join(VISION_DIR, "vision_feat")
 IMAGES = os.path.join(VAULT, "99-附件", "images")
-INDEX = os.path.join(HERE, "_data", "vision_index.json")
+INDEX = os.path.join(HERE, "_data", "vision_index.npz")
+INDEX_LEGACY = os.path.join(HERE, "_data", "vision_index.json")
 
 EXTS = (".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff", ".bmp")
 EXPECTED_DIM = 768
@@ -175,12 +176,15 @@ def iter_images():
 
 
 def load_index():
-    if not os.path.exists(INDEX):
+    """读语义索引（npz，回退旧 json）。"""
+    import safefile as SF
+    keys, vecs, meta = SF.read_vectors(INDEX)
+    if keys is None:
+        keys, vecs, meta = SF.read_vectors(INDEX_LEGACY)
+    if keys is None:
         return None
-    try:
-        return json.load(open(INDEX, encoding="utf-8"))
-    except Exception:
-        return None
+    return {"built_at": (meta or {}).get("built_at"), "dim": (meta or {}).get("dim", EXPECTED_DIM),
+            "count": len(keys), "vectors": {k: [float(x) for x in v] for k, v in zip(keys, vecs)}}
 
 
 def build_index(force=False, verbose=True):
@@ -229,10 +233,14 @@ def build_index(force=False, verbose=True):
     for k in dropped:
         del vecs[k]
 
-    os.makedirs(os.path.dirname(INDEX), exist_ok=True)
-    json.dump({"built_at": time.strftime("%Y-%m-%d %H:%M:%S"),
-               "dim": EXPECTED_DIM, "count": len(vecs), "vectors": vecs},
-              open(INDEX, "w", encoding="utf-8"), ensure_ascii=False)
+    import numpy as np
+    import safefile as SF
+    ks = list(vecs)
+    dim = len(vecs[ks[0]]) if ks else EXPECTED_DIM
+    arr = np.asarray([vecs[k] for k in ks], dtype="f4") if ks else np.zeros((0, EXPECTED_DIM), "f4")
+    SF.write_vectors(INDEX, ks, arr,
+                     {"built_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+                      "dim": dim, "count": len(ks)})
     if verbose:
         print("✓ 索引已写入 %s（%d 张%s）"
               % (os.path.relpath(INDEX, VAULT), len(vecs),

@@ -292,18 +292,28 @@ def archive(recs, verbose=True):
         k = 1
         while os.path.exists(dst):
             dst = os.path.join(dest_dir, "%s-%d%s" % (base, k, ext)); k += 1
+        rel = os.path.relpath(dst, VAULT).replace(os.sep, "/")
+        # **先把记录组装好，再移动文件。**
+        # 早先是先 shutil.move 再 RP.record —— 中间抛异常就留下
+        # 「文件已进库、清单里没有」的孤儿（实测踩过一次）。
+        # 现在组装失败就不移动，移动失败就把记录撤掉。
+        try:
+            import reverse_prompt as RP
+            ana = r.get("analysis") or ana_by_file.get(r["file"])
+            rec = RP.record(r["path"], ana, sug, source="pinterest 投递箱")
+            rec["movement"] = slug
+            rec["title"] = base
+            rec["added_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+        except Exception as e:
+            print("    ! 跳过 %s（组装记录失败：%s）" % (r["file"][:32], str(e)[:40]))
+            continue
+        man["items"][rel] = rec
         try:
             shutil.move(src, dst)
-        except Exception:
+        except Exception as e:
+            man["items"].pop(rel, None)           # 移动失败就撤记录，不留半截状态
+            print("    ! 跳过 %s（移动失败：%s）" % (r["file"][:32], str(e)[:40]))
             continue
-        rel = os.path.relpath(dst, VAULT).replace(os.sep, "/")
-        import reverse_prompt as RP
-        ana = r.get("analysis") or ana_by_file.get(r["file"])
-        rec = RP.record(r["path"], ana, sug, source="pinterest 投递箱")
-        rec["movement"] = slug
-        rec["title"] = base
-        rec["added_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
-        man["items"][rel] = rec
         moved += 1
         if slug == "_未归类":
             unmoved += 1
@@ -311,7 +321,8 @@ def archive(recs, verbose=True):
     # 清掉已经空掉的投递箱目录
     os.makedirs(ARCHIVE, exist_ok=True)
     try:
-        json.dump(man, open(man_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        import safefile as SF
+        SF.write_json(man_path, man)
     except Exception:
         pass
     if verbose:
@@ -384,10 +395,10 @@ def main():
     matches = match_palette(recs, a.palette_match) if a.palette_match else {}
 
     os.makedirs(os.path.dirname(MANIFEST), exist_ok=True)
-    json.dump({"scanned_at": time.strftime("%Y-%m-%d %H:%M:%S"),
-               "count": len(recs), "items": recs,
-               "duplicates": dups, "palette_matches": matches},
-              open(MANIFEST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    import safefile as SF
+    SF.write_json(MANIFEST, {"scanned_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+                             "count": len(recs), "items": recs,
+                             "duplicates": dups, "palette_matches": matches})
 
     if a.json:
         print(json.dumps({"items": recs, "duplicates": dups, "palette_matches": matches},

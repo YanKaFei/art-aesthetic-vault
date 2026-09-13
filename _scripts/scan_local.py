@@ -92,8 +92,9 @@ def _load(path, default):
 
 
 def _save(path, obj):
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    json.dump(obj, open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    """原子写：先写临时文件再 rename。写到一半被打断不会留下截断的 JSON。"""
+    import safefile as SF
+    return SF.write_json(path, obj)
 
 
 def _sha(path, n=16):
@@ -146,9 +147,34 @@ def known_hashes():
 
 
 # ---------------------------------------------------------------- 扫描
+def _inside_vault(folder):
+    """判断目录是否落在仓库的图库范围内。"""
+    full = os.path.realpath(os.path.expanduser(folder))
+    for sub in (os.path.join(VAULT, "99-附件"),):
+        if full == os.path.realpath(sub) or full.startswith(os.path.realpath(sub) + os.sep):
+            return True
+    return False
+
+
 def iter_images(folder):
+    """遍历图片。**跳过仓库自己的图库目录** —— 否则把 `99-附件/images` 当扫描
+    源时会 654 张全复制进 `images-local/`，再扫一次又把副本复制一遍，
+    磁盘越滚越大（实测过这个风险）。
+
+    另外 os.walk 默认 followlinks=False，符号链接环不会造成死循环。
+    """
+    root_v = os.path.realpath(VAULT)
+    skip = [os.path.realpath(os.path.join(VAULT, "99-附件")),
+            os.path.realpath(os.path.join(VAULT, ".git")),
+            os.path.realpath(os.path.join(VAULT, "_scripts", "vendor"))]
     for r, d, fs in os.walk(os.path.expanduser(folder)):
         d[:] = [x for x in d if not x.startswith(".")]
+        # 剪掉库自己的目录（用 realpath 比，避免相对路径绕过去）
+        rr = os.path.realpath(r)
+        d[:] = [x for x in d
+                if not any(os.path.realpath(os.path.join(rr, x)) == sp or
+                           os.path.realpath(os.path.join(rr, x)).startswith(sp + os.sep)
+                           for sp in skip)]
         for f in sorted(fs):
             if f.lower().endswith(EXTS) and not f.startswith("."):
                 yield os.path.join(r, f)
@@ -160,18 +186,31 @@ def scan(folder, name=None, verbose=True):
     if not os.path.isdir(folder):
         print("目录不存在：%s" % folder); return None
 
+    if _inside_vault(folder):
+        print("✗ 这个目录在仓库自己的图库范围内：%s" % folder)
+        print("  扫它会把库里的图复制进 99-附件/images-local/，自己复制自己。")
+        print("  要扫的是你自己的图片文件夹，例如 ~/Pictures/refs。")
+        return None
+
     files = list(iter_images(folder))
     if not files:
         print("这个目录里没找到图片（支持 %s）" % "、".join(EXTS)); return None
 
+    # 依赖检查放在打印之前 —— 不然会先说「找到 4 张图」再说「需要 Pillow」，
+    # 顺序读起来别扭，也容易让人以为已经开始了
+    import image_analysis as IA
+    if IA.Image is None:
+        # **要在这里拦住**。早先只 guard 了 import，而 image_analysis 模块
+        # 本身能 import 成功（只是 Image 是 None），于是脚本继续往下跑，
+        # 给每张图生成一条「读取失败」的记录 —— 用户拿到一列没有分析的清单，
+        # 却不知道为什么。宁可明确报错。
+        print("需要 Pillow：pip3 install --user Pillow")
+        print("  或装到本地：pip3 install --target ./vendor/libs Pillow")
+        return None
+
     if verbose:
         print("扫描 %s" % folder)
         print("  找到 %d 张图" % len(files))
-
-    try:
-        import image_analysis as IA
-    except Exception as e:
-        print("需要 Pillow：%s" % e); return None
 
     # CLIP 建议（一次性批量，避免每张图重算文本矩阵）
     import clip_embed as CE

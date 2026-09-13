@@ -51,7 +51,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 VAULT = os.path.dirname(HERE)
-CACHE = os.path.join(HERE, "_data", "clip_cache.json")
+CACHE = os.path.join(HERE, "_data", "clip_cache.npz")
 TEXT_CACHE = os.path.join(HERE, "_data", "clip_text_cache.json")
 
 sys.path.insert(0, HERE)
@@ -183,12 +183,9 @@ def text_matrix():
 
 # ------------------------------------------------------------ 图像侧
 def load_cache():
-    if os.path.exists(CACHE):
-        try:
-            return json.load(open(CACHE, encoding="utf-8"))
-        except Exception:
-            return {}
-    return {}
+    """读 CLIP 向量缓存（npz，回退旧 json）。实现在 clip_embed 一份，这里转发。"""
+    import clip_embed as CE
+    return CE.load_cache()
 
 
 def _np_matrix(cache, slugs=None):
@@ -218,6 +215,13 @@ def evaluate(min_samples=3, verbose=True):
     零样本不需要留一法（它完全不用参考图），质心法用留一法。
     两者都是「在候选流派里选一个」，所以数字可以并排看。
     """
+    import clip_embed as C
+    why = C.available() or C.text_available()
+    if why:
+        print("CLIP 不可用：%s" % why)
+        print("  装依赖：pip3 install --target ./vendor/libs numpy opencv-python-headless")
+        print("  下模型：python3 clip_embed.py download")
+        return None
     import numpy as np
     cache = load_cache()
     if not cache:
@@ -336,10 +340,10 @@ def suggest(paths, topn=3):
     供投递箱扫描调用：一次算好文本矩阵与质心，再批量编码所有图。
     CLIP 不可用时返回空 dict（调用方据此决定要不要提示）。
     """
-    import numpy as np
     import clip_embed as C
     if C.available():
         return {}
+    import numpy as np
     tm = text_matrix()
     if tm is None:
         return {}
@@ -392,18 +396,24 @@ def match(path, topn=5):
 
     **按融合分排序**，不是按零样本排 —— 实测零样本单独只有 21.5%，
     质心 37.6%，融合 39.1%。只用零样本排等于扔掉最强信号。
+
+    ⚠ 依赖检查必须放在 `import numpy` **之前**。实测踩过：numpy 没装时
+    这里先 import 就抛 ModuleNotFoundError，后面那句 available() 的
+    友好提示永远执行不到，用户看到的是一个栈。
     """
-    import numpy as np
     import clip_embed as C
-    tm = text_matrix()
-    if tm is None:
-        print("CLIP 不可用。先跑：python3 clip_embed.py download")
-        return 1
-    slugs, M = tm
-    why = C.available()
+    why = C.available() or C.text_available()
     if why:
         print("CLIP 不可用：%s" % why)
+        print("  装依赖：pip3 install --target ./vendor/libs numpy opencv-python-headless")
+        print("  下模型：python3 clip_embed.py download")
         return 1
+    import numpy as np
+    tm = text_matrix()
+    if tm is None:
+        print("CLIP 文本塔不可用。先跑：python3 clip_embed.py download")
+        return 1
+    slugs, M = tm
     emb = C.embed_batch([path])
     if not emb:
         print("图像编码失败（文件不存在或不是有效图片）：%s" % path)
