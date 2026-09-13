@@ -613,6 +613,72 @@ def extract_artist_from_title(raw_title, keys):
     return None
 
 
+
+# ---------------------------------------------------------------- 复制品 / 机构署名
+# 这两个名单是**一次失败的批量补图**逼出来的。为了让 57 个 20 世纪流派有图，
+# 我对它们跑了一遍重抓，结果混进来三类错误：
+#
+#   秘鲁邮票（图案是 Sabogal 的画）        → 是印刷品，不是画作本身
+#   华纳兄弟的电影宣传剧照                 → 机构署名，且不是艺术作品
+#   「Edward Payson Weston, 1839-1929」   → 人名撞车：照片拍的是**同名的一个人**，
+#                                          不是摄影家 Edward Weston
+#
+# 这三类都不会被原有的「AI 生成 / 平面作品 / 作者匹配」挡住。
+REPRO_WORDS = (
+    "stamp", "postage", "postcard", "banknote", "bank note", "coin", "medal",
+    "book cover", "album cover", "promotional", "publicity", "press photo",
+    "press photograph", "film still", "movie still", "advertis", "poster",
+    "matchbox", "cigarette card", "trade card", "lobby card", "screenshot",
+    "logo", "letterhead", "currency", "reproduction of a stamp",
+)
+
+# 只收**明确不是艺术家**的机构名。
+# 第一版把 museum / gallery / collection / library / institute 也写进来了，
+# 结果把梵高的《L'Arlésienne》当成「机构署名」拒掉 —— 因为公共领域记录的
+# author 字段常常填的是**收藏机构**而不是画家。名单宁窄勿宽：
+# 漏掉一个机构，代价是少一张图；多写一个词，代价是误杀真作品。
+CORPORATE_WORDS = (
+    "bros", "brothers", "studios", "pictures", "inc", "ltd", "corp",
+    "company", "co.", "agency", "news service", "post of", "post office",
+)
+
+
+def is_artifact_reproduction(w):
+    """标题里出现「邮票 / 明信片 / 宣传剧照」这类词 → 不是艺术作品本身。
+
+    刻意不收录裸的 "still" —— 那会把 still life（静物）整类误杀。
+    """
+    t = _norm(w.get("raw_title") or w.get("title"))
+    return any(_norm(k) in t for k in REPRO_WORDS)
+
+
+def is_corporate_artist(w):
+    """作者字段是机构（华纳兄弟、秘鲁邮政、Bain News Service）→ 不是艺术家署名。"""
+    a = _norm(w.get("artist") or "")
+    if not a:
+        return False
+    return any(_norm(k) in a for k in CORPORATE_WORDS)
+
+
+def looks_like_person_subject(w, keys):
+    """匿名作品里，标题在讲**一个同名的人** → 人名撞车，不是这位艺术家的作品。
+
+    实测：找 Edward Weston（摄影家）时抓到「Edward Payson Weston, 1839-1929」
+    —— 那是一位同名的竞走名人，照片拍的是他。判据是标题里带生卒年
+    （`1839-1929` 这种跨度），而且命中的关键词出现在标题里。
+    生卒年是一个很强的人物传记信号，正常作品标题很少带。
+    """
+    if not keys:
+        return False
+    artist = _norm(w.get("artist") or "")
+    # 只有当作者字段不可信（空 / 匿名 / 像上传者）时才启用这条
+    if artist and not any(x in artist for x in ANON_ARTIST):
+        return False
+    t = _norm(w.get("raw_title") or w.get("title"))
+    if not re.search(r"\b1[5-9]\d\d\s*[-–—]\s*(1[5-9]|20)\d\d\b", t):
+        return False
+    return any(_norm(k) in t for k in keys)
+
 def is_flat_work(w):
     m = (w.get("medium") or "").lower()
     if not m:

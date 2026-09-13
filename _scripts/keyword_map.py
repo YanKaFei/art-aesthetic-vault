@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
+"""keyword_map.py —— 关键词辨析的数据层。
+
+同一个视觉概念常有多个叫法（先锋 / 前卫 / avant-garde；超现实 /
+超现实主义 / surrealism）。这里把它们聚成簇，说清彼此的差别，
+让「搜任何一说都能找到同一张卡」这件事成立。
+
+`CLUSTERS` 同时供两处使用：
+  · `artvault_core.search` 的别名表（同义词 → slug）
+  · 笔记 [[关键词图谱]] 的正文
 """
-keyword_map.py —— 关键词图谱的数据层。
-
-解决两个问题：
-  1. 网站分类混乱：WikiArt 的 218 styles / 189 movements、Pinterest 的 tag 体系、
-     Art-Ba-Ba 的论坛板块，用的是三套互不对齐的命名。这里把它们投影到本库的
-     流派卡片上，形成一张统一的映射表。
-  2. 同义与近义：一个概念在不同语境下有多个说法（先锋/前卫/avant-garde；
-     超现实/超现实主义/surrealism）。这里做聚类，让搜任何一说都能找到同一张卡。
-
-WIKIART_MAP 的值是本库的 slug；None 表示 WikiArt 收录但本库未单独建卡，
-会在图谱里标为「未建卡」并给出最近的关联卡。
-"""
-
 # ---------------------------------------------------------------------------
 # 四个核心关键词的语义簇
 # ---------------------------------------------------------------------------
@@ -99,145 +95,16 @@ CLUSTERS = [
 # ---------------------------------------------------------------------------
 # 关键词 → 流派卡 的显式近义映射（网站命名 → 本库 slug）
 # ---------------------------------------------------------------------------
-WIKIART_MAP = {
- # 直接对应
- "realism": "realism", "impressionism": "impressionism", "romanticism": "romanticism",
- "expressionism": "expressionism", "post-impressionism": "post-impressionism",
- "baroque": "baroque", "art-nouveau-modern": "art-nouveau", "surrealism": "surrealism",
- "symbolism": "symbolism", "abstract-expressionism": "abstract-expressionism",
- "neoclassicism": "neoclassicism", "naive-art-primitivism": "naive-art",
- "rococo": "rococo", "cubism": "cubism", "northern-renaissance": "early-netherlandish",
- "academicism": "academic-art", "pop-art": "pop-art",
- "mannerism-late-renaissance": "mannerism", "conceptual-art": "conceptual-art",
- "minimalism": "minimalism-art", "abstract-art": "abstract-art",
- "art-informel": "art-informel", "early-renaissance": "early-renaissance",
- "ukiyo-e": "ukiyo-e", "magic-realism": "magic-realism",
- "neo-expressionism": "neo-expressionism", "high-renaissance": "renaissance",
- "contemporary-realism": "classical-realism", "color-field-painting": "color-field",
- "orientalism": "orientalism", "fauvism": "fauvism", "op-art": "op-art",
- "contemporary": "contemporary-art", "lyrical-abstraction": "lyrical-abstraction",
- "neo-impressionism": "neo-impressionism", "art-deco": "art-deco",
- "social-realism": "social-realism", "neo-pop-art": "neo-pop",
- "naturalism": "naturalism", "kitsch": "kitsch", "neo-romanticism": "neo-romanticism",
- "ink-and-wash-painting": "ink-wash-xieyi", "socialist-realism": "socialist-realism",
- "hard-edge-painting": "hard-edge", "neo-dada": "neo-dada",
- "transavantgarde": "transavantgarde", "pointillism": "neo-impressionism",
- "regionalism": "regionalism", "tachisme": "tachisme", "native-art": "native-art",
- "tenebrism": "caravaggisti", "feminist-art": "feminist-art",
- "pictorialism": "pictorialism", "art-brut": "art-brut", "outsider-art": "outsider-art",
- "s-saku-hanga": "sosaku-hanga", "light-and-space": "light-and-space",
- "divisionism": "neo-impressionism", "shin-hanga": "shin-hanga",
- "documentary-photography": "documentary-photography",
- "street-photography": "street-photography", "zen": "zen-art",
- "kinetic-art": "kinetic-art", "digital-art": "digital-art",
- "hyper-realism": "hyper-realism", "muralism": "muralism",
- "precisionism": "precisionism", "luminism": "luminism", "japonism": "japonism",
- "classicism": "classicism", "metaphysical-art": "metaphysical-art",
- "new-objectivity": "new-objectivity", "post-painterly-abstraction": "post-painterly-abstraction",
- "fantastic-realism": "magic-realism", "synthetic-cubism": "cubism",
- "neoplasticism": "de-stijl", "de-stijl": "de-stijl", "orphism": "orphism",
- "suprematism": "suprematism", "constructivism": "constructivism",
- "dada": "dada", "futurism": "futurism", "purism": "cubism",
- "cubo-futurism": "cubo-futurism", "spatialism": "spatialism",
- "social-realism-2": "social-realism", "neo-geo": "neo-geo",
- "color-field": "color-field", "action-painting": "abstract-expressionism",
- "automatic-painting": "surrealism", "fantasy-art": "fantasy-art",
- "street-art": "street-art", "graffiti": "street-art",
- "nouveau-r-alisme": "neo-dada", "new-realism": "neo-dada",
- "environmental-land-art": "land-art", "post-minimalism": "post-minimalism",
- "neo-minimalism": "post-minimalism", "neo-baroque": "neo-baroque",
- "neo-figurative-art": "transavantgarde", "figurative-expressionism": "neo-expressionism",
- "classical-realism": "classical-realism", "american-realism": "american-realism",
- "costumbrismo": "naturalism", "biedermeier": "biedermeier",
- "proto-renaissance": "international-gothic", "international-gothic": "international-gothic",
- "medieval-art": "gothic", "gothic": "gothic", "romanesque": "romanesque",
- "byzantine": "byzantine", "coptic-art": "byzantine",
- "early-byzantine-c-330-750": "byzantine", "middle-byzantine-c-850-1204": "byzantine",
- "late-byzantine-c-1261-1453": "byzantine", "mozarabic": "romanesque",
- "mosan-art": "romanesque", "viking-art": "romanesque",
- "moscow-school-of-icon-painting": "byzantine", "novgorod-school-of-icon-painting": "byzantine",
- "cretan-school-of-icon-painting": "byzantine", "pskov-school-of-icon-painting": "byzantine",
- "yaroslavl-school-of-icon-painting": "byzantine", "vladimir-school-of-icon-painting": "byzantine",
- "stroganov-school-of-icon-painting": "byzantine",
- "geometric-period": "classicism", "archaic-period": "classicism",
- "classical-period": "classicism", "hellenistic-period": "classicism",
- "amarna": "native-art", "new-kingdom": "native-art", "old-kingdom": "native-art",
- "middle-kingdom": "native-art", "late-period": "native-art",
- "ptolemaic": "classicism", "roman-period": "classicism",
- "harlem-renaissance-new-negro-movement": "social-realism",
- "indigenism": "indigenism", "muralism-2": "muralism",
- "young-poland": "symbolism", "secession": "vienna-secession",
- "aestheticism": "pre-raphaelite", "modernismo": "art-nouveau",
- "arts-and-crafts": "arts-and-crafts",
- "shin-hanga-2": "shin-hanga", "sumi-e": "suiboku-ga", "suiboku-ga-0": "suiboku-ga",
- "mughal-painting": "mughal-miniature", "persian-miniature": "persian-miniature",
- "safavid-period": "safavid-painting", "islamic-art": "islamic-geometric",
- "calligraphy": "arabic-calligraphy", "korean-art": "minhwa",
- "thangka": "tibetan-thangka", "chinese-art": "ink-wash-xieyi",
- "gongbi": "gongbi", "blue-green-landscape": "blue-green-landscape",
- "song-dynasty": "song-academic", "dunhuang": "dunhuang-murals",
- "photo-realism": "photorealism", "photorealism": "photorealism",
- "surrealist-photography": "surrealist-photography",
- "social-photography": "documentary-photography",
- "modern-photography": "straight-photography",
- "contemporary-photography": "fashion-editorial",
- "neo-concretism": "kinetic-art", "concretism": "hard-edge",
- "lettrism": "dada", "vorticism": "futurism", "rayonism": "orphism",
- "synchromism": "orphism", "existential-art": "art-informel",
- "haute-p-te-matter-painting": "art-informel",
- "p-d-pattern-and-decoration": "feminist-art",
- "light-and-space-movement": "light-and-space",
- # ---- 一次图谱对账补的三条：卡片一直在，但没接进映射，于是图谱上显示「—」
- # （这三张卡因此长期没有任何 WikiArt 名能指过来，检索也搜不到它们）
- "tonalism": "tonalism", "yamato-e": "yamato-e", "superflat": "superflat",
- # 这两条是在 movements 表（不是 styles 表）里找到同名的 —— 只查 styles 会漏
- "dutch-golden-age": "dutch-golden-age", "avant-garde": "avant-garde",
- # ---- 对账还查出 7 个**自指**条目（"neo-baroque": "neo-baroque" 这种）：
- # 值写成了键本身，于是 resolve() 返回一个不存在的 slug，图谱以为建了卡、
- # 实际什么都没有。逐条判定后 6 个补了真卡（biedermeier / cubo-futurism /
- # fantasy-art / neo-geo / post-minimalism / spatialism，见 mv_gaps.py），
- # 只剩 neo-baroque 判定为**伞形词**（19–20 世纪对巴洛克语汇的各种复兴，
- # 视觉语言不够独立）→ 按本文件开头的约定写 None，由 NEAREST 指向 baroque。
- "neo-baroque": None,
-}
-
-# 这些 WikiArt 条目本库不单独建卡，但可以指向最近的一张
-NEAREST = {
- # 只在 WIKIART_MAP **解析不出来**时才会被用到（见 build_vault._wiki_rows）。
- # 所以这里每一条都必须满足「WIKIART_MAP 里查不到、或查到 None」——
- # 否则就是一条永远走不到的死值，还会误导后来的人以为那张卡还没建。
- # 验收第 20 项会查这个（它上线当天就揪出 6 条过期兜底）。
- "neo-baroque": "baroque",
- "confessional-art": "feminist-art", "postcolonial-art": "contemporary-art",
- "new-european-painting": "neo-expressionism",
- "self-portrait": "renaissance",
- # 原来这里还有 "figurative-expressionism": "expressionism"，删了 ——
- # WIKIART_MAP 里已经有 "figurative-expressionism": "neo-expressionism"，
- # 兜底永远走不到。顺带记一下**两张表本来就不一致**（具象表现主义更接近
- # expressionism，还是 1980 年代的新表现主义？），现在生效的是 map 那一版。
- # 真要改口径，改 WIKIART_MAP，别在兜底表里留第二个答案。
-}
 
 
-def norm(s):
-    import re
-    return re.sub(r'[^a-z0-9]+', '-', (s or '').lower()).strip('-')
+# ---------------------------------------------------------------------------
+# 索引
+# ---------------------------------------------------------------------------
+def by_slug_map(cards):
+    """cards: [{'slug', 'name_zh', ...}] → {slug: card}。
 
-
-def build_index(cards):
-    """cards: [{'slug','name_zh','name_en'}] → 关键词 → 卡片 的解析函数"""
-    by_slug = {c['slug']: c for c in cards}
-
-    def resolve(wiki_slug):
-        s = WIKIART_MAP.get(wiki_slug)
-        if s and s in by_slug:
-            return s
-        n = norm(wiki_slug)
-        if n in by_slug:
-            return n
-        for c in cards:
-            if norm(c['name_en']) == n:
-                return c['slug']
-        return None
-
-    return by_slug, resolve
+    原来这里还有一张 175 条的 WikiArt 风格名映射表和一份兜底表 ——
+    它们的唯一用途是生成「关键词图谱」里那几张跨界对照表，而那些表已经
+    不发布了（讲的是数据从哪来，不是知识）。表留着没人用，删掉。
+    """
+    return {c["slug"]: c for c in cards}

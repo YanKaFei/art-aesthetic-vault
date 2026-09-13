@@ -36,12 +36,6 @@ import artvault_core as _AC  # noqa: E402  （层的中文名只在这里定义�
 
 LEGEND_LAYER = dict(_AC.LAYER_ZH)
 
-WIKI_TAX = {}
-try:
-    WIKI_TAX = json.load(open(os.path.join(HERE, "wikiart_taxonomy.json"), encoding="utf-8"))
-except Exception:
-    pass
-
 # 笔记里**不再**写「本文件由脚本生成」这类工程标记 —— 读者打开一张流派卡
 # 应该看到艺术作品，而不是构建信息。
 #
@@ -1046,28 +1040,8 @@ type: 速查
 
 
 # ------------------------------------------------------------------ 关键词图谱
-def _wiki_rows(kind, en_key, zh_key, resolve, by_slug, limit=None):
-    """把 WikiArt 的某类分类表渲染成 Markdown 表格行"""
-    en = WIKI_TAX.get(en_key) or {}
-    zh = WIKI_TAX.get(zh_key) or {}
-    rows = []
-    for slug, v in sorted(en.items(), key=lambda x: -x[1]["count"]):
-        z = (zh.get(slug) or {}).get("name", "")
-        tgt = resolve(slug)
-        if tgt and tgt in by_slug:
-            card = "[[%s]]" % by_slug[tgt]["name_zh"]
-        else:
-            near = keyword_map.NEAREST.get(slug)
-            card = ("≈ [[%s]]" % by_slug[near]["name_zh"]) if near in by_slug else "—"
-        rows.append("| %s | %s | %s | %s | %s |"
-                    % (v["name"], z or "—", v["count"], card, slug))
-        if limit and len(rows) >= limit:
-            break
-    return rows
-
-
 def keyword_graph_note(works_map):
-    by_slug, resolve = keyword_map.build_index(
+    by_slug = keyword_map.by_slug_map(
         [{"slug": m["slug"], "name_zh": m["name_zh"], "name_en": m["name_en"]} for m in MOVEMENTS])
     A = []
     A.append("---"); A.append("type: MOC"); A.append("---"); A.append("")
@@ -1614,12 +1588,11 @@ need only Python 3 + Pillow.
 | `ingest_inbox.py` | Processes the `pinterest/` inbox, including the dimensions above in its scan |
 | `verify_vault.py` | **Acceptance checks**: broken links / duplicate names / AI images / frontmatter / near-duplicates / licences / orphans |
 | `github_setup.py` | Push, set as Template, set topics/description in one go (token never appears in argv) |
-| `movement_fingerprint.py` | Movement fingerprints from objective dimensions for image-to-movement matching (explainable, but measurably worse than Vision) |
 | `video_prompt.py` | Generates two Chinese video-prompt blocks per movement (Seedance 2.5 five-part + MiniMax H3 natural language) |
 | `i2v_prompt.py` | **Image-to-video prompts**: turns one image's measurements into subject / motion / camera and fills the placeholders the per-movement version leaves behind |
 | `scan_local.py` | **Scans your own image folders into the vault**: measurement + CLIP suggestions + dedupe → review list → files into `15-我的图库/` |
 | `reverse_prompt.py` | **Composes the reverse-engineering card**: measurements + movement match + 7 layers + video prompts, shared by all three entry points |
-| `pinterest_grab.py` / `pinterest_export.py` | Pinterest scraping and export (local use only, images are **not** committed) |
+| `pinterest_grab.py` | Pinterest inbox scraper (local use only; images are **not** committed) |
 
 ### Two conventions that are easy to miss
 
@@ -2304,7 +2277,6 @@ CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这�
 | `ingest_inbox.py` | 处理 `pinterest/` 投递箱，扫描时带上上面这些维度 |
 | `verify_vault.py` | **验收检查**：断链 / 重名 / AI 图 / frontmatter / 近重复 / 授权 / 孤儿图 |
 | `github_setup.py` | 推送 + 设为 Template + 设 topics/description 一条龙（token 不进命令行参数） |
-| `movement_fingerprint.py` | 用客观维度建流派指纹做图像→流派匹配（可解释，但实测不如 Vision） |
 | `video_prompt.py` | 从流派数据生成两块中文视频提示词（Seedance 2.5 五段式 + MiniMax H3 自然语言） |
 | `i2v_prompt.py` | **图生视频提示词**：把一张图的客观测量翻成主体 / 运动 / 运镜，填掉流派通用版里的占位符。反推卡默认走这条 |
 | `scan_local.py` | **把你自己的图扫进库**：测量 + CLIP 建议 + 去重 → 待确认清单 → 归入 `15-我的图库/` |
@@ -2696,8 +2668,7 @@ def main():
     w("20-我的提示词/Pinterest.md", pinterest_hub_note(local_map))
 
     w("00-导航/流派总览.md", overview_note(works_map))
-    if WIKI_TAX:
-        w("00-导航/关键词图谱.md", keyword_graph_note(works_map))
+    w("00-导航/关键词图谱.md", keyword_graph_note(works_map))
     _sig = signature_note(works_map)
     if _sig:
         w("00-导航/视觉签名.md", _sig)
@@ -2775,7 +2746,6 @@ _scripts/_data/inbox_manifest.json
 
 # 生成物：换台机器重建即可，不必入库
 #   python3 artvault_vision.py build          （图像语义索引，几 MB）
-#   python3 movement_fingerprint.py build     （客观维度特征缓存，约 1 分钟）
 # 向量缓存用 npz（比 json 小 6 倍、加载快 100 倍）；旧 json 也一并忽略，
 # 免得升级后残留的文件被提交
 _scripts/_data/vision_index.npz

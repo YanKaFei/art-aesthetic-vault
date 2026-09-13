@@ -757,19 +757,16 @@ def check_semantic_search():
 
 
 def check_keyword_map():
-    """20 关键词图谱：映射表不许承诺一张不存在的卡。
+    """20 关键词辨析：`CLUSTERS` 里每个簇都必须指向一张真的存在的卡。
 
-    这条是有来历的。图谱对账时查出 7 个**自指**条目：
+    这一项原来查的是 `WIKIART_MAP`（175 条 WikiArt 风格名 → 本库 slug 的
+    映射表）有没有自指、`NEAREST` 兜底表有没有死值 —— 那张表当时查出了
+    7 个自指条目和 6 条过期兜底，是有价值的。
 
-        "neo-baroque": "neo-baroque"      ← 值写成键本身
-
-    本文件开头的约定写得很清楚 —— 未建卡用 `None`，由 `NEAREST` 指最近的一张。
-    但自指条目绕过了这个约定：`resolve()` 返回一个存在的字符串，只是那个
-    slug 没有对应卡片，于是图谱以为建了卡、实际什么都没有，静默降级成「—」。
-    这种错**不会报异常**，只会让图谱长期少几条线，所以要由验收来盯。
-
-    同时反向查一条：`NEAREST` 指向的兜底卡必须真实存在，否则图谱上会出现
-    一张点不进去的「≈ [[某流派]]」。
+    但那些表唯一的用途是生成「关键词图谱」里的跨界对照表，而那些表已经
+    不再发布了（它们讲的是数据从哪来，不是知识本身）。**表随用途一起删掉，
+    检查也跟着改查现在真正在用的数据** —— 留一个查死数据的检查，
+    比没有检查更坏：它会绿，但什么也没守住。
     """
     try:
         import keyword_map as KM
@@ -781,18 +778,31 @@ def check_keyword_map():
         return [("movements", "导入失败：%s" % e)]
     slugs = {m["slug"] for m in MOVEMENTS}
     problems = []
-    for k, v in sorted(KM.WIKIART_MAP.items()):
-        if v is None:
-            continue                      # 约定的「未建卡」
-        if v not in slugs:
-            problems.append((k, "映射到不存在的卡 `%s`（未建卡应当写 None）" % v))
-    for k, v in sorted(KM.NEAREST.items()):
-        if v not in slugs:
-            problems.append((k, "NEAREST 兜底指向不存在的卡 `%s`" % v))
-    # 兜底表不该给已经建了卡的条目留旧值 —— 那会误导后来的人以为还得靠兜底
-    stale = [k for k in KM.NEAREST if KM.WIKIART_MAP.get(k) in slugs]
-    if stale:
-        problems.append(("NEAREST", "这些条目已经有卡了，兜底值该删：%s" % stale))
+    for cl in KM.CLUSTERS:
+        for field in ("key", "en", "card", "define", "synonyms"):
+            if not cl.get(field):
+                problems.append((cl.get("key") or "?", "缺字段 `%s`" % field))
+        if cl.get("card") not in slugs:
+            problems.append((cl.get("key") or "?",
+                             "指向不存在的卡 `%s`" % cl.get("card")))
+        # 同义词表是 search 的别名来源，重复键会让后者静默覆盖前者
+        seen = set()
+        for syn in cl.get("synonyms") or []:
+            k = syn.lower()
+            if k in seen:
+                problems.append((cl.get("key") or "?", "同义词重复：`%s`" % syn))
+            seen.add(k)
+    # 同一个同义词出现在两个簇里 → 别名表会互相覆盖
+    owner = {}
+    for cl in KM.CLUSTERS:
+        for syn in (cl.get("synonyms") or []) + [cl.get("key"), cl.get("en")]:
+            if not syn:
+                continue
+            k = syn.lower()
+            if k in owner and owner[k] != cl.get("card"):
+                problems.append((syn, "同义词被两个簇共用（%s / %s）"
+                                 % (owner[k], cl.get("card"))))
+            owner[k] = cl.get("card")
     return problems
 
 

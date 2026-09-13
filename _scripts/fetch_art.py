@@ -31,9 +31,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 VAULT = os.path.dirname(HERE)
 IMG_DIR = os.path.join(VAULT, "99-附件", "images")
 DATA_DIR = os.path.join(HERE, "_data")
+# 「看过了，确实没有合适的」记录。
+# 为什么要单独记一笔：光写一个空 [] 分不清「没抓过」和「抓过但没有」，
+# 于是要么永远重试（每次抓取都白跑一遍网络、还把已判定不合格的图加回来），
+# 要么永远不重试（真正的遗漏再也补不上）。分开记，两种状态都能表达。
+NO_RESULTS = os.path.join(DATA_DIR, "no_results.json")
 
 sys.path.insert(0, HERE)
 from movements import MOVEMENTS, BY_SLUG                     # noqa: E402
+import providers as P  # noqa: E402
 from providers import (PROVIDERS, download, is_flat_work,  # noqa: E402
                        artist_matches, is_ai_generated, extract_artist_from_title)
 
@@ -57,6 +63,20 @@ def fetch_one(provider, query, want, allow_ccby):
     if provider == "commons":
         return fn(query, want, allow_ccby=allow_ccby)
     return fn(query, want)
+
+
+def _load_no_results():
+    try:
+        with open(NO_RESULTS, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _save_no_results(d):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(NO_RESULTS, "w", encoding="utf-8") as f:
+        json.dump(d, f, ensure_ascii=False, indent=1, sort_keys=True)
 
 
 def collect(mv, per, allow_ccby=False):
@@ -93,6 +113,16 @@ def collect(mv, per, allow_ccby=False):
         if not mv.get("allow_3d") and not is_flat_work(w):
             return False
         if not artist_matches(w, keys, excl, tkeys):
+            return False
+        # 三道闸，各对应一类实测混进来的错误（见 providers.py 的注释）
+        if P.is_artifact_reproduction(w):
+            print("    ✗ 排除复制品/印刷品: %s" % w["title"][:46])
+            return False
+        if P.is_corporate_artist(w):
+            print("    ✗ 排除机构署名: %s" % w["title"][:46])
+            return False
+        if P.looks_like_person_subject(w, keys):
+            print("    ✗ 排除人名撞车: %s" % w["title"][:46])
             return False
         if w.get("raw_title"):
             real = extract_artist_from_title(w["raw_title"], keys)
@@ -156,19 +186,41 @@ def run(only=None, per=6, refresh=False, allow_ccby=False, tier=None):
         targets = [m for m in MOVEMENTS if (tier is None or m.get("tier") == tier)]
 
     done = skipped = total_imgs = 0
+    _no_res = _load_no_results()
     for mv in targets:
         slug = mv["slug"]
         out_json = os.path.join(DATA_DIR, slug + ".json")
         if os.path.exists(out_json) and not refresh:
-            skipped += 1
-            continue
+            # **空结果不算「已有数据」。**
+            # 原来只看文件在不在 —— 于是某次没抓到（源里确实没有、或那次
+            # 关键词没调好）就会被记成 []，之后每次跑都跳过，**永远不会重试**。
+            # 实测 55 个流派就是这样被卡住的。
+            try:
+                with open(out_json, encoding="utf-8") as _f:
+                    _prev = json.load(_f)
+            except Exception:
+                _prev = None
+            if _prev:
+                skipped += 1
+                continue
+            if slug in _no_res and not refresh:
+                skipped += 1
+                continue
+            print("· %s (%s) —— 上次没抓到，重试" % (mv["name_zh"], slug))
         print("· %s (%s)" % (mv["name_zh"], slug))
         works = collect(mv, per, allow_ccby)
         if not works:
             print("    (无可用公共领域图片 —— 生成纯提示词卡)")
             json.dump([], open(out_json, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            _no_res[slug] = {"checked": time.strftime("%Y-%m-%d %H:%M:%S"),
+                             "note": "查过，没有符合收录标准的公版实图"}
+            _save_no_results(_no_res)
             done += 1
             continue
+        # 抓到了：把这个 slug 从「确实没有」名单里撤掉
+        if slug in _no_res:
+            _no_res.pop(slug, None)
+            _save_no_results(_no_res)
         d = os.path.join(IMG_DIR, slug)
         # --refresh 时必须先清空这个流派的图片目录。
         # 否则换了数据源之后，旧图还在、新图又进来，会留下一堆
