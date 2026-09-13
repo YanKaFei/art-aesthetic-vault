@@ -39,6 +39,19 @@ import sys
 import time
 import urllib.parse
 
+# 帮助闸门放在 requests 的检查**之前**：缺 requests 时 `--help` 应该照样能看，
+# 而不是把人挡在「先装依赖」那句话上（他可能只是想先读一下用法再决定装不装）。
+from clihelp import guard  # noqa: E402
+
+guard(sys.argv[1:], "python3 pinterest_grab.py <选项>",
+      ["--discover              列出所有分类与子分类",
+       "--crawl <分类…>         抓指定分类（含子分类）",
+       "--crawl-all             抓所有分类",
+       "--url /ideas/…/         只抓一个板子",
+       "--max-per N             每个板最多抓几张",
+       "--analyze [分类…]       给已抓的图补反推（提示词 + 视频）",
+       "--no-analyze            抓完不自动补反推"])
+
 try:
     import requests
 except ImportError:

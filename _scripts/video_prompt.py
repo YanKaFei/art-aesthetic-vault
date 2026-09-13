@@ -214,6 +214,12 @@ def build(mv, duration=10):
 if __name__ == "__main__":
     import sys, os
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from clihelp import guard
+    guard(sys.argv[1:], "python3 video_prompt.py <流派 slug>",
+          ["打印该流派的两块中文视频提示词：",
+           "  A 块 → Seedance 2.5 五段式",
+           "  B 块 → MiniMax H3 海螺（纯自然语言，不要和 A 块混用）",
+           "不给 slug 时默认 baroque；slug 列表见 python3 artvault.py categories。"])
     from movements import MOVEMENTS
     slug = sys.argv[1] if len(sys.argv) > 1 else "baroque"
     m = [x for x in MOVEMENTS if x["slug"] == slug]

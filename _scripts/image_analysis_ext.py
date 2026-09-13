@@ -358,11 +358,17 @@ def missing_hint():
 if __name__ == "__main__":
     import argparse
     import json as _json
-    from PIL import Image
     ap = argparse.ArgumentParser(description="可选增强维度（numpy / opencv）")
     ap.add_argument("target", nargs="+")
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()
+    # PIL 的 import 必须在 parse_args **之后**：放在前面时 `--help` 会因为缺
+    # Pillow 直接抛 ModuleNotFoundError traceback —— 打印帮助本来不需要 Pillow。
+    try:
+        from PIL import Image
+    except ImportError:
+        print("需要 Pillow 才能读图：pip3 install --user Pillow", file=sys.stderr)
+        sys.exit(1)
     have = available()
     print("可用增强维度:", ", ".join(have) or "无")
     if missing_hint():

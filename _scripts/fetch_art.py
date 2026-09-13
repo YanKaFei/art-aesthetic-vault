@@ -199,6 +199,14 @@ def run(only=None, per=6, refresh=False, allow_ccby=False, tier=None):
 
 if __name__ == "__main__":
     argv = sys.argv[1:]
+    from clihelp import guard
+    guard(argv, "python3 fetch_art.py [流派…] [选项]",
+          ["不给流派名就补抓所有还没有图的流派。",
+           "--per N          每个流派抓几张（默认 6）",
+           "--refresh        先删掉该流派的图目录再重抓",
+           "--only-tier T    只处理某一层",
+           "--include-ccby   连同 CC-BY 一起收（默认只收 CC0 / 公共领域）",
+           "--list           列出全部流派，不抓图"])
     per = 6
     if "--per" in argv:
         i = argv.index("--per")

@@ -255,6 +255,15 @@ def slug_of(relpath):
 
 
 def require_index(verbose=True):
+    # 先查 numpy：索引是 npz，没有 numpy 时 safefile.read_vectors 只能返回「读不到」，
+    # 于是下面那句「还没有索引，先 build」会把真正的原因（缺 numpy）说错 ——
+    # 用户照着 build 一遍，还是会失败。先说真话。
+    if not _have_numpy():
+        if verbose:
+            print("需要 numpy 才能读写语义索引。装：\n"
+                  "  pip3 install --target ./vendor/libs numpy\n"
+                  "（装到 vendor/libs 是为了不污染系统 Python，该目录已 gitignore）")
+        return None
     idx = load_index()
     if not idx or not idx.get("vectors"):
         if verbose:

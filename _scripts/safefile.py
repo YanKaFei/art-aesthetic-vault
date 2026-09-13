@@ -83,7 +83,14 @@ def read_vectors(path):
     同时兼容旧的 JSON 格式（早期版本把向量直接存成 JSON），
     这样升级后不用重建索引就能继续用。
     """
-    import numpy as np
+    # numpy 的 import 放在 try 里，兑现上面「读不了返回 (None, None, None)」的承诺：
+    # 原来它是裸 import，缺 numpy 时直接把 ModuleNotFoundError 抛给调用方 ——
+    # 于是 `artvault_vision.py dups` 在没装 numpy 的机器上是一段 traceback，
+    # 而不是一句「需要 numpy」。函数签名承诺了优雅降级，就得做到。
+    try:
+        import numpy as np
+    except ImportError:
+        return None, None, None
     if not os.path.exists(path):
         return None, None, None
     # np.load 对 JSON 文件会抛（不是 zip），但也加一道魔数检查更稳

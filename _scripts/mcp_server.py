@@ -347,4 +347,10 @@ def main():
 
 
 if __name__ == "__main__":
+    from clihelp import guard
+    guard(sys.argv[1:], "python3 mcp_server.py",
+          ["起一个 stdio MCP 服务，供 Claude Desktop / Cursor / DSH 直连。",
+           "没有任何选项：服务通过 stdin/stdout 收发 JSON-RPC，",
+           "所以直接运行它会「卡住」—— 那是在等客户端说话，不是死循环。",
+           "配置样例见本文件开头和 README 的「方式四：接入 MCP」。"])
     sys.exit(main())

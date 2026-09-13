@@ -405,8 +405,12 @@ def render(r, compact=False):
         try:
             import image_analysis_ext as _ext
             L.extend(_ext.render_extended(r["extended"]))
-        except Exception:
-            pass
+        except Exception as e:
+            # 原来这里是 `except Exception: pass` —— 渲染失败时报告里**什么都不显示**，
+            # 读者以为「这个流派就没有增强维度」，其实是有数据但渲染炸了。
+            # 下面的 elif 分支说明作者本来打算把失败讲出来，只是这条路径漏了。
+            # 渲染是纯展示，失败不该让整份报告失败，所以照常返回、只加一行说明。
+            L.append("  ⚠ 增强维度读取失败: %s: %s" % (type(e).__name__, e))
     elif r.get("extended_error"):
         L.append("  ⚠ 增强维度失败: %s" % r["extended_error"])
     return "\n".join(L)

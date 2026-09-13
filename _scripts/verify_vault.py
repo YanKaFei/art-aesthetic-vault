@@ -512,6 +512,56 @@ def check_clone_integrity():
     return problems
 
 
+def check_readme_numbers():
+    """16 README 数字：README 承诺的规模，必须等于 clone 之后真拿到的规模。
+
+    为什么单开一项：第 15 项查的是「引用会不会断」，数字对不对它管不着；第 12 项
+    只比 **mtime**，不比内容。所以下面这个 bug 能一路全绿：
+
+        README 写「654 张公共领域实图」，克隆下来只有 442 张 —— 因为统计
+        os.walk 了 99-附件/images/，把 gitignore 的 212 张 Pinterest 图算了进去
+        （作者机上存在，克隆里不存在）。20-我的提示词/ 的笔记数同理。
+
+    虚报 48% 不是小事：数字是读者判断「这个库值不值得 clone」的第一依据，而且
+    他 clone 完第一件事就是发现对不上。
+
+    做法：**调用 build_vault.publish_stats() 本身**，不另写一份统计 —— 这个 bug
+    的教训就是「两处各算各的，于是两处漏了同一件事」。拿同一份口径去比 README。
+    """
+    try:
+        import build_vault as BV
+    except Exception as e:
+        return [("build_vault", "导入失败，无法比对：%s" % e)]
+    try:
+        stats = BV.publish_stats()
+    except Exception as e:
+        return [("build_vault", "统计失败：%s" % e)]
+
+    problems = []
+    for fname, pat_notes, pat_img in (
+            ("README.md", r"(\d+)\s*篇笔记", r"\*\*(\d+)\s*张\*\*（(\d+)\s*MB）"),
+            ("README.en.md", r"(\d+)\s*notes", r"\*\*(\d+)\*\*\s*\((\d+)\s*MB\)")):
+        p = os.path.join(VAULT, fname)
+        if not os.path.exists(p):
+            continue
+        t = open(p, encoding="utf-8").read()
+        m = re.search(pat_notes, t)
+        if m and int(m.group(1)) != stats["n_notes"]:
+            problems.append((fname, "笔记数写着 %s，发布视图算出来是 %d"
+                             % (m.group(1), stats["n_notes"])))
+        m = re.search(pat_img, t)
+        if m:
+            if int(m.group(1)) != stats["n_img"]:
+                problems.append((fname, "实图数写着 %s，发布视图算出来是 %d"
+                                 % (m.group(1), stats["n_img"])))
+            if int(m.group(2)) != stats["img_mb"]:
+                problems.append((fname, "图体积写着 %s MB，实际 %d MB"
+                                 % (m.group(2), stats["img_mb"])))
+    if BV.tracked_files() is None:
+        return None                      # 不是 git 仓库，发布视图无从谈起
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -569,6 +619,7 @@ def main():
     report("13 本地图库", check_local_library())
     report("14 板子反推", check_board_analysis())
     report("15 克隆完整性", check_clone_integrity())
+    report("16 README 数字", check_readme_numbers())
 
     print("=" * 70)
     if failed:
