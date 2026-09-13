@@ -145,8 +145,10 @@ def doctor():
     else:
         print("\n可选依赖都齐了。")
     print("\n【核对】依赖装在哪：ARTVAULT_DEPS 环境变量 > vendor/libs > ~/.artvault/deps")
-    print("\n【验收】python3 verify_vault.py（22 项）｜ "
-          "python3 ../tests/smoke_test.py（38 项）")
+    # 不写死项数 —— 这个仓库已经因为写死数字吃过好几次亏（README 统计、
+    # 冒烟里的「141 张卡」、以及这里原本写着的「22 项 / 38 项」）。
+    # 项数会随改动变化，写死那个数字唯一的作用就是某天变成错的。
+    print("\n【验收】python3 verify_vault.py ｜ python3 ../tests/smoke_test.py")
     return 0
 
 
