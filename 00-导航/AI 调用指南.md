@@ -29,6 +29,7 @@ cd "_scripts"
 python3 artvault.py categories                 # 6 大分类
 python3 artvault.py list --with-images          # 有实图的流派
 python3 artvault.py search "霓虹 雨夜"           # 模糊检索
+python3 artvault.py search "压抑但华丽的光" --semantic   # 语义检索（需下过 CLIP 模型）
 python3 artvault.py layers 巴洛克                # 只要七层提示词（最省 token）
 python3 artvault.py show 印象派                  # 完整卡片
 python3 artvault.py palette 印象派               # 配色

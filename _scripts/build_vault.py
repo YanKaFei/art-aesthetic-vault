@@ -1458,6 +1458,7 @@ cd "_scripts"
 python3 artvault.py categories                 # 6 大分类
 python3 artvault.py list --with-images          # 有实图的流派
 python3 artvault.py search "霓虹 雨夜"           # 模糊检索
+python3 artvault.py search "压抑但华丽的光" --semantic   # 语义检索（需下过 CLIP 模型）
 python3 artvault.py layers 巴洛克                # 只要七层提示词（最省 token）
 python3 artvault.py show 印象派                  # 完整卡片
 python3 artvault.py palette 印象派               # 配色
@@ -1882,6 +1883,7 @@ cd _scripts
 
 python3 artvault.py categories              # 6 categories, 141 movements
 python3 artvault.py search "neon rain"      # fuzzy search, Chinese or English
+python3 artvault.py search "oppressive but ornate light" --semantic   # semantic (needs the CLIP model)
 python3 artvault.py layers baroque          # just the 7 prompt layers
 python3 artvault.py show ukiyo-e            # full card
 python3 artvault.py palette cyberpunk       # 6-color palette
@@ -2533,6 +2535,7 @@ cd _scripts
 
 python3 artvault.py categories              # 看 6 大分类
 python3 artvault.py search "霓虹 雨夜"       # 模糊检索，中英文都行
+python3 artvault.py search "压抑但华丽的光" --semantic   # 描述性说法：关键词抓不住，语义能
 python3 artvault.py layers 巴洛克            # 只要七层提示词（最省 token）
 python3 artvault.py show 浮世绘              # 完整卡片
 python3 artvault.py palette 赛博朋克         # 六色配色
@@ -2773,6 +2776,8 @@ CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这�
 | 脚本 | 干什么 |
 |---|---|
 | `artvault.py` | 主查询接口：`categories` `search` `layers` `show` `palette` `related` `compose` |
+| `visual_lexicon.py` | **中文视觉词 → 英文短语**的桥。CLIP 文本塔只认英文，中文查询不过桥等于随机 |
+| `eval_search.py` | 检索评测：A 组守卫精确度、B 组测语义增益，并扫出接管阈值 |
 | `mcp_server.py` | 同一套能力包装成 MCP server，给 Claude Desktop / Cursor 直连 |
 
 ### 数据源与生成

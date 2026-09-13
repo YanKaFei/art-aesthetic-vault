@@ -6,7 +6,7 @@
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
-162 notes · 442 public-domain images · 34 ready-to-run scripts
+162 notes · 442 public-domain images · 35 ready-to-run scripts
 
 **English** ｜ [中文](README.md)
 
@@ -207,6 +207,7 @@ cd _scripts
 
 python3 artvault.py categories              # 6 categories, 141 movements
 python3 artvault.py search "neon rain"      # fuzzy search, Chinese or English
+python3 artvault.py search "oppressive but ornate light" --semantic   # semantic (needs the CLIP model)
 python3 artvault.py layers baroque          # just the 7 prompt layers
 python3 artvault.py show ukiyo-e            # full card
 python3 artvault.py palette cyberpunk       # 6-color palette

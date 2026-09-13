@@ -181,6 +181,55 @@ def text_matrix():
     return _TEXT_CACHE
 
 
+# ------------------------------------------------------------ 文本检索
+_SEM_CACHE = {}
+
+
+def semantic_search(query, topn=8, query_override=None):
+    """自然语言 → 最像的流派。返回 [(slug, 分数)]；不可用时返回 None。
+
+    **中文查询必须先过 visual_lexicon 的桥。** 文本塔是纯英文训练的，实测把
+    「赛博朋克 霓虹 雨夜」直接喂进去，命中的是工笔重彩 / 宋代院体画，
+    而且分数挤在 0.837—0.843，完全没有区分度。过桥之后（霓虹 → neon colours）
+    才有意义。
+
+    query_override：调用方已经过好桥时直接给英文，省一次翻译（也便于测试）。
+    """
+    import clip_embed as C
+    if C.available():
+        return None
+    import numpy as np
+    tm = text_matrix()
+    if tm is None:
+        return None
+    slugs, M = tm
+
+    if query_override is not None:
+        q = query_override
+    else:
+        import visual_lexicon as VL
+        q, _matched, _miss = VL.to_english(query or "")
+        if not q and (query or "").strip():
+            # 全中文且一个词都没命中 —— 过桥失败，别硬编（硬编等于随机）
+            return None
+        if not q:
+            return None
+
+    key = (q, topn)
+    if key in _SEM_CACHE:
+        return _SEM_CACHE[key]
+    E = C.text_embed([q])
+    if E is None:
+        return None
+    v = np.asarray(E[0], dtype="f4")
+    n = float(np.linalg.norm(v)) or 1.0
+    s = M @ (v / n)
+    order = np.argsort(-s)[:topn]
+    out = [(slugs[i], float(s[i])) for i in order]
+    _SEM_CACHE[key] = out
+    return out
+
+
 # ------------------------------------------------------------ 图像侧
 def load_cache():
     """读 CLIP 向量缓存（npz，回退旧 json）。实现在 clip_embed 一份，这里转发。"""

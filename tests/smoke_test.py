@@ -232,6 +232,67 @@ class CoreCommandTests(unittest.TestCase):
             json.loads(out)          # 不带 --json 时不该是 JSON
 
 
+class SemanticSearchTests(unittest.TestCase):
+    """中文语义检索：过桥要通，且**搜得到的时候不许动关键词的结果**。
+
+    CLIP 文本塔是纯英文的，中文直接喂进去等于随机（实测「赛博朋克 霓虹 雨夜」
+    命中的是工笔重彩）。所以中间必须有一座中文视觉词 → 英文短语的桥。
+    """
+
+    def test_lexicon_bridges_core_visual_terms(self):
+        sys.path.insert(0, SCRIPTS)
+        import visual_lexicon as VL
+        for w in ("霓虹", "明暗对照", "留白", "水墨", "厚涂", "压抑"):
+            en, matched, _ = VL.to_english(w)
+            self.assertTrue(en, "词表没覆盖 %s" % w)
+        # 无视觉内容的串不该被硬编成英文
+        self.assertEqual("", VL.to_english("今天天气不错")[0])
+
+    def test_lexicon_prefers_longer_terms(self):
+        """长词优先：否则「不对称」会被「对称」先吃掉、「无阴影」被「阴影」吃掉。"""
+        sys.path.insert(0, SCRIPTS)
+        import visual_lexicon as VL
+        _, matched, _ = VL.to_english("不对称构图")
+        self.assertIn("不对称", matched, "长词没优先，被短词吃了")
+        _, matched2, _ = VL.to_english("无阴影平面")
+        self.assertIn("无阴影", matched2, "长词没优先，被短词吃了")
+
+    def test_search_semantic_flag_never_crashes(self):
+        """有没有下模型都必须能跑 —— 语义是不可选增量，不该让 search 也坏。"""
+        for q in ("霓虹雨夜的城市", "巴洛克", "a serene japanese woodblock print"):
+            rc, out, err = run(["artvault.py", "search", q, "--semantic"])
+            self.assertEqual(0, rc, "`search %s --semantic` 失败：%s" % (q, err[-300:]))
+            self.assertNotIn("Traceback (most recent call last)", out + err)
+
+    def test_semantic_never_displaces_keyword_hits(self):
+        """零损失不变量：关键词 top-1 搜对的，加语义之后必须还是它。
+
+        这是设计方案的核心（分档接管，不是分数融合）。融合那版实测 A 组
+        从 99.3% 掉到 78.7%，这条测试就是防守它再犯。
+        """
+        sys.path.insert(0, SCRIPTS)
+        import artvault_core as A
+        try:
+            import clip_match as CM
+            if CM.text_matrix() is None:
+                self.skipTest("没有 CLIP 模型，语义不生效（此时行为等于纯关键词）")
+        except Exception:
+            self.skipTest("CLIP 不可用")
+        cards = A.cards()
+        sample = cards[:: max(1, len(cards) // 20)][:20]
+        worse = []
+        for c in sample:
+            q = (c.get("one_liner") or "").strip()
+            if len(q) < 6:
+                continue
+            kw = [x["slug"] for x in A.search(q, limit=1, semantic=False)]
+            se = [x["slug"] for x in A.search(q, limit=1, semantic=True)]
+            if kw == [c["slug"]] and se != [c["slug"]]:
+                worse.append(c["slug"])
+        self.assertEqual([], worse,
+                         "加语义后这些流派的自身查询被挤下去了：%s" % worse)
+
+
 class I2vTests(unittest.TestCase):
     """图生视频：一张图进去，占位符必须被**这张图的**测量填掉。
 

@@ -679,6 +679,78 @@ def check_i2v():
     return problems
 
 
+def check_semantic_search():
+    """19 语义检索：中文过桥要通，且**语义不能把关键词搜对的结果挤下去**。
+
+    两层断言，分别对应两类失败：
+
+    · **不过桥就废**：CLIP 文本塔是纯英文的，中文直接喂进去等于随机
+      （实测「赛博朋克 霓虹 雨夜」→ 工笔重彩）。所以先断言词表对核心视觉词
+      确实给出英文 —— 这一条不需要模型，CI 上也能跑。
+    · **过桥过猛也是废**：把语义分当排序权重融进去，实测 A 组（查询=流派自己
+      的简介）从 99.3% 摔到 78.7%。所以设计成「关键词搜得到就不动它」，
+      并在这里守住这个不变量：抽样比对加语义前后 top-1 是否变差。
+
+    没有 CLIP 模型时只跑第一层（那是合法状态，不是失败）。
+    """
+    problems = []
+    try:
+        import visual_lexicon as VL
+    except Exception as e:
+        return [("visual_lexicon", "导入失败：%s" % e)]
+
+    # --- 第一层：过桥必须通（不需要模型）
+    probes = ["霓虹", "明暗对照", "留白", "水墨", "厚涂", "压抑", "华丽",
+              "暖调", "对称", "金箔"]
+    for w in probes:
+        en, matched, _ = VL.to_english(w)
+        if not en:
+            problems.append((w, "词表没覆盖这个核心视觉词（中文查询会退化成随机）"))
+        elif w not in matched:
+            problems.append((w, "过桥漏了（matched=%s）" % matched))
+    # 无意义的中文串应当过不了桥 —— 不然任何中文都会被硬编成英文
+    if VL.to_english("今天天气不错")[0]:
+        problems.append(("今天天气不错", "无视觉内容的串不该过桥（会硬编成随机英文）"))
+
+    # --- 第二层：语义不得挤掉关键词的正确结果
+    try:
+        import artvault_core as A
+    except Exception as e:
+        problems.append(("artvault_core", "导入失败：%s" % e))
+        return problems
+
+    try:
+        import clip_match as CM
+        have_model = CM.text_matrix() is not None
+    except Exception:
+        have_model = False
+
+    # 不论有没有模型，semantic=True 都不能炸
+    try:
+        r = A.search("霓虹雨夜的城市", limit=5, semantic=True)
+        if not r:
+            problems.append(("霓虹雨夜的城市", "加了语义仍然一条都搜不到"))
+    except Exception as e:
+        problems.append(("semantic search", "抛异常：%s: %s" % (type(e).__name__, e)))
+
+    if have_model:
+        cards = A.cards()
+        sample = cards[:: max(1, len(cards) // 24)][:24]
+        worse = []
+        for c in sample:
+            q = (c.get("one_liner") or "").strip()
+            if len(q) < 6:
+                continue
+            kw = [x["slug"] for x in A.search(q, limit=3, semantic=False)]
+            se = [x["slug"] for x in A.search(q, limit=3, semantic=True)]
+            if kw[:1] == [c["slug"]] and se[:1] != [c["slug"]]:
+                worse.append((c["slug"], se[:1]))
+        if worse:
+            problems.append(("抽样 %d 例" % len(worse),
+                             "语义把关键词搜对的挤下去了：%s" % worse[:3]))
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -739,6 +811,7 @@ def main():
     report("16 README 数字", check_readme_numbers())
     report("17 冲突消解", check_conflict_resolution())
     report("18 图生视频", check_i2v())
+    report("19 语义检索", check_semantic_search())
 
     print("=" * 70)
     if failed:

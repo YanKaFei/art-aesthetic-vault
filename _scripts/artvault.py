@@ -56,6 +56,9 @@ def main():
     add("categories")
     p = add("list"); p.add_argument("--category"); p.add_argument("--with-images", action="store_true")
     p = add("search"); p.add_argument("query"); p.add_argument("-n", type=int, default=8)
+    p.add_argument("--semantic", action="store_true",
+                   help="把 CLIP 语义分融进来（中文会先过 visual_lexicon 的桥）；"
+                        "没下模型时自动退回纯关键词")
     p = add("show"); p.add_argument("slug")
     p = add("layers"); p.add_argument("slug")
     p = add("palette"); p.add_argument("slug")
@@ -93,8 +96,14 @@ def main():
             print("  %-12s %-30s %s" % (c["slug"], c["name_zh"], "有图" if c["has_images"] else ""))
 
     elif a.cmd == "search":
-        r = A.search(a.query, a.n)
+        r = A.search(a.query, a.n, semantic=a.semantic)
         if out([{k: c[k] for k in ("slug", "name_zh", "name_en", "category", "one_liner")} for c in r], a.json):
+            return 0
+        if not r:
+            print("  没找到。试试换个说法，或加 --semantic（要下过 CLIP 模型）")
+            if not a.semantic:
+                print("  提示：中文描述性查询（如「压抑但华丽的光」）关键词匹配抓不住，"
+                      "语义检索才有用")
             return 0
         for c in r:
             print("  %-12s %-10s %s" % (c["slug"], c["name_zh"], c["one_liner"]))

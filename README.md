@@ -6,7 +6,7 @@
 
 从拜占庭到 Y2K ｜ 东亚 · 南亚 · 伊斯兰 ｜ 摄影谱系 ｜ 数字亚文化
 
-162 篇笔记 · 442 张公共领域实图 · 34 个即用脚本
+162 篇笔记 · 442 张公共领域实图 · 35 个即用脚本
 
 [English](README.en.md) ｜ **中文**
 
@@ -196,6 +196,7 @@ cd _scripts
 
 python3 artvault.py categories              # 看 6 大分类
 python3 artvault.py search "霓虹 雨夜"       # 模糊检索，中英文都行
+python3 artvault.py search "压抑但华丽的光" --semantic   # 描述性说法：关键词抓不住，语义能
 python3 artvault.py layers 巴洛克            # 只要七层提示词（最省 token）
 python3 artvault.py show 浮世绘              # 完整卡片
 python3 artvault.py palette 赛博朋克         # 六色配色
@@ -436,6 +437,8 @@ CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这�
 | 脚本 | 干什么 |
 |---|---|
 | `artvault.py` | 主查询接口：`categories` `search` `layers` `show` `palette` `related` `compose` |
+| `visual_lexicon.py` | **中文视觉词 → 英文短语**的桥。CLIP 文本塔只认英文，中文查询不过桥等于随机 |
+| `eval_search.py` | 检索评测：A 组守卫精确度、B 组测语义增益，并扫出接管阈值 |
 | `mcp_server.py` | 同一套能力包装成 MCP server，给 Claude Desktop / Cursor 直连 |
 
 ### 数据源与生成

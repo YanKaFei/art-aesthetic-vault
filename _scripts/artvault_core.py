@@ -201,13 +201,18 @@ def _haystack(c):
 _HAY = {}
 
 
-def search(query, limit=8, category=None):
-    """模糊检索：精确名 > 别名 > 子串命中数。返回按相关度排序的卡。"""
+def search(query, limit=8, category=None, semantic=False):
+    """模糊检索：精确名 > 别名 > 子串命中数。返回按相关度排序的卡。
+
+    semantic=True 时叠加 CLIP 语义检索（需要模型；不可用就自动退回纯关键词）。
+    规则是**分档接管**而不是分数融合：关键词搜得到就不动它，搜不到才让语义上。
+    阈值 SEM_TAKEOVER 是实测扫出来的，复跑：`python3 eval_search.py`。
+    """
     q = (query or "").strip().lower()
     if not q:
         return []
     al = _aliases()
-    scored = []
+    scored = {}
     for c in cards():
         if category and c["category"] != category:
             continue
@@ -228,9 +233,67 @@ def search(query, limit=8, category=None):
             if _HAY.setdefault(c["slug"], _haystack(c)).count(term):
                 score += 2
         if score:
-            scored.append((score, c))
-    scored.sort(key=lambda x: -x[0])
-    return [c for _, c in scored[:limit]]
+            scored[c["slug"]] = score
+
+    if semantic:
+        # 语义检索**不是一个再加权的排序器**，而是关键词接不住时的接管者。
+        #
+        # 为什么不融合分数：试过三种关键词归一（除以最大值 / 开方 / 饱和曲线）
+        # × 两种语义归一（min-max / 固定标定），**A 组全部摔到 78.7%**
+        # （基准 99.3%）。原因是语义分是余弦相似度，任意查询的 top40 都落在
+        # 0.80–0.90 这条窄带里、跨度只有 0.03 —— 无论怎么归一，都是在把一条
+        # 本来没有区分度的分布拉成满量程，噪声于是变成信号：art-informel /
+        # outsider-art 这类「谁的英文描述都沾一点」的流派抢走了几乎所有查询，
+        # 而正确答案在关键词里明明排第 0。
+        #
+        # 所以改成**分档**，阈值同样是实测扫出来的（见 eval_search.py）：
+        #   关键词命中任何东西（最高分 ≥ SEM_TAKEOVER）→ 原样返回，语义不插手
+        #   关键词什么都没找到                        → 语义接管
+        # T=2 处 A 组**零损失**（99.3% / 100%），B 组 Top-3 从 26.7% 翻到 53.3%。
+        # 规则一句话说得清，用户也能预期：**搜得到就不动它，搜不到才让语义上。**
+        top_kw = max(scored.values()) if scored else 0.0
+        if top_kw < SEM_TAKEOVER:
+            sem = _semantic_scores(query)
+            if sem:
+                bs = by_slug()
+                order = [s for s, _ in sorted(sem.items(), key=lambda x: -x[1])]
+                # 关键词那点弱命中垫在语义结果后面，别丢
+                order += [s for s, _ in sorted(scored.items(), key=lambda x: -x[1])
+                          if s not in order]
+                out = []
+                for s in order:
+                    c = bs.get(s)
+                    if not c or (category and c["category"] != category):
+                        continue
+                    out.append(c)
+                    if len(out) >= limit:
+                        break
+                return out
+
+    ranked = sorted(scored.items(), key=lambda x: -x[1])[:limit]
+    bs = by_slug()
+    return [bs[s] for s, _ in ranked if s in bs]
+
+
+# 关键词最高分低于这个值（=什么都没命中）时才让语义检索接管。
+# 实测扫描见 eval_search.py：T=2 处 A 组零损失、B 组 Top-3 翻倍；
+# T=5 起 A 组明显掉（82.3%），因为连「单个词面命中」都被判成不可信。
+SEM_TAKEOVER = 2
+
+
+def _semantic_scores(query):
+    """CLIP 语义分 {slug: 相似度}；不可用时返回 None。
+
+    **绝不抛异常** —— 语义检索是可选的增量能力，它坏了不该把 `search` 也带坏。
+    """
+    try:
+        import clip_match as CM
+        res = CM.semantic_search(query, topn=40)
+    except Exception:
+        return None
+    if not res:
+        return None
+    return {slug: score for slug, score in res}
 
 
 def detect(text):
