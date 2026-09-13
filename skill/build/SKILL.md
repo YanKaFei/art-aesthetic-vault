@@ -325,6 +325,7 @@ python3 verify_vault.py                       # 会自动带上第 5 项
 | `reference/method.md` | 七层拆解法、为什么这么分、怎么调、冲突检测 |
 | `reference/sources.md` | 数据源端点、授权分级、可达性实测、预估产出 |
 | `reference/analysis.md` | 图片客观测量（七维度）、怎么用数字交叉验证、和谐维度的踩坑 |
+| `reference/tools.md` | **反推管道内部参考**：现在管线做了什么、主体描述为什么没自动化、要扩展时接哪些工具 |
 
 ---
 

@@ -293,17 +293,12 @@ def archive(recs, verbose=True):
         except Exception:
             continue
         rel = os.path.relpath(dst, VAULT).replace(os.sep, "/")
-        man["items"][rel] = {
-            "movement": slug,
-            "title": base,
-            "source": "pinterest 投递箱",
-            "added_at": time.strftime("%Y-%m-%d %H:%M:%S"),
-            "summary": (r.get("analysis") and {
-                "明度": (r["analysis"].get("luminance") or {}).get("key"),
-                "饱和度": (r["analysis"].get("color") or {}).get("saturation"),
-                "繁杂度": (r["analysis"].get("texture") or {}).get("busyness"),
-            }) or None,
-        }
+        import reverse_prompt as RP
+        rec = RP.record(r["path"], r.get("analysis"), sug, source="pinterest 投递箱")
+        rec["movement"] = slug
+        rec["title"] = base
+        rec["added_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+        man["items"][rel] = rec
         moved += 1
         if slug == "_未归类":
             unmoved += 1

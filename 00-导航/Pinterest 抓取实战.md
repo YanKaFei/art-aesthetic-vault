@@ -113,7 +113,7 @@ python3 ../pinterest_grab.py --url /ideas/oil-painting/907077517247/
 
 ```
 Pinterest 上的参考图
-    ↓  用 [[反推工具链]] 里的 CLIP Interrogator / JoyCaption 反推
+    ↓  反推自动跑完（测量 + 流派匹配 + 七层组装）
     ↓  artvault 帮你把反推结果归到七层
 python3 artvault.py compose --style ... --lighting ... --subject "..."
     ↓

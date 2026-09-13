@@ -217,6 +217,10 @@ def scan(folder, name=None, verbose=True):
         else:
             rec["size"] = r["size"]
             rec["orientation"] = r["orientation"]
+            # 存**完整分析结果**：反推卡是事后由 build_vault 生成的，那时原图
+            # 未必还在原处，只存摘要不够用来组七层提示词。（实测踩过：
+            # 只存 summary，结果生成的反推卡里测量一栏是空的。）
+            rec["analysis"] = {k: v for k, v in r.items() if k != "path"}
             lu, cl, tx = r["luminance"], r["color"], r["texture"]
             rec["summary"] = {
                 "明度": lu["key"], "饱和度": cl["saturation"],
@@ -332,13 +336,17 @@ def file_items(nums, slug=None, drop=False, verbose=True):
         except Exception as e:
             print("  ✗ 复制失败 %s：%s" % (it["file"], str(e)[:50])); continue
         rel = os.path.relpath(dest, VAULT).replace(os.sep, "/")
-        man["items"][rel] = {
-            "movement": slug, "title": stem, "source": it["source"],
-            "dhash": it.get("dhash"), "sha": _sha(dest),
-            "suggest_score": ((it.get("suggest") or [{}])[0].get("score")),
-            "added_at": time.strftime("%Y-%m-%d %H:%M:%S"),
-            "summary": it.get("summary"),
-        }
+        # 存**完整分析结果**而不是摘要 —— 卡是事后由 build_vault 生成的，
+        # 那时原图已经不在原处了，摘要不够用来组反推。
+        import reverse_prompt as RP
+        rec = RP.record(it["source"], it.get("analysis"),
+                        [(x["slug"], x["name"], x["score"]) for x in (it.get("suggest") or [])],
+                        source=it["source"],
+                        extra={"dhash": it.get("dhash"), "sha": _sha(dest)})
+        rec["movement"] = slug
+        rec["title"] = stem
+        rec["added_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+        man["items"][rel] = rec
         it["filed"] = True
         it["filed_as"] = rel
         ok += 1
