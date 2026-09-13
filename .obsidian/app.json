@@ -3,9 +3,10 @@
   "newFileFolderPath": "20-我的提示词",
   "alwaysUpdateLinks": true,
   "userIgnoreFilters": [
-    "_scripts",
-    "skill",
-    "pinterest",
-    "README"
+    "_scripts/",
+    "skill/",
+    "pinterest/",
+    "README.md",
+    "README.en.md"
   ]
 }
