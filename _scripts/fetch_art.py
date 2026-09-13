@@ -65,6 +65,65 @@ def fetch_one(provider, query, want, allow_ccby):
     return fn(query, want)
 
 
+# CC-BY 的适用上限年份。
+#
+# **这不是保守，是实测踩出来的。** --include-ccby 加进来的东西比不加更糟：
+# Commons 上的 CC BY / CC BY-SA 绝大多数是**拍摄者**给自己拍的「仍在版权期内
+# 的作品照片」打的标 —— 不是作品权利人的授权。于是这个开关系统性地拉进
+# 「20 世纪作品的照片」：
+#
+#     动力艺术 → 巴尔的摩自制器械赛跑的照片（Flickr，CC BY-SA 2.0）
+#     形而上绘画 → De Chirico 1958 年作品（他 1978 年去世，作品不在公版）
+#     后极简主义 → Eva Hesse 雕塑的参观者照片
+#     空间主义 → Fontana 作品的游客照
+#
+# 判据放在**作品年代**而不是许可标签上：只有作品本身早已进入公版时，
+# CC-BY 才只是拍摄者的一句客套（复制品照片的权利归拍摄者，作品权利已过期）。
+# 作品还在版权期内时，标 CC-BY 并不能让它变成可再分发 —— 那是陷阱。
+CCBY_MAX_YEAR = 1930
+
+
+# 「至今 / present / 现代」这类写法意味着流派还在延续 —— 里面必然有
+# 版权期内的作品，一律不放行。
+_ONGOING = ("今", "present", "now", "当代", "现代", "至今")
+
+
+def ccby_safe(period):
+    """这个流派的年代是否早到「CC-BY 只是拍摄者客套」的程度。
+
+    判据要**全部**年份都早于 CCBY_MAX_YEAR，不能只看最早那个：
+    「1920–1939」的最早年是 1920，但 1939 年的作品照样在版权期内 ——
+    放宽到最早年就等于允许把 1939 年的画当公版发出去。
+    另外「1850–今」这种开放区间的，直接判不安全。
+    """
+    p = period or ""
+    low = p.lower()
+    if any(x in p or x in low for x in _ONGOING):
+        return False
+    years = [int(y) for y in re.findall(r"(1[5-9]\d\d|20\d\d)", p)]
+    if not years:
+        return False
+    return max(years) < CCBY_MAX_YEAR
+
+
+def _is_ccby(w):
+    """这一件的许可是否属于 CC BY 系列（CC0 / 公共领域不算）。"""
+    lic = (w.get("license") or "").lower()
+    return ("cc by" in lic or "cc-by" in lic) and "cc0" not in lic
+
+
+def _work_early(w):
+    """作品自己的年代是否早于 CCBY_MAX_YEAR。
+
+    **这条是必需的**：只按流派年代放行会漏 —— 实测给「形而上绘画」
+    （1910–1920）抓 CC-BY，Commons 返回了 De Chirico **1958 年**的作品，
+    还挂着 CC BY-SA 4.0。流派年代对，作品年代不对。
+    作品的公版状态取决于它自己，所以判据必须落到每一件上。
+    """
+    years = [int(y) for y in re.findall(r"(1[5-9]\d\d|20\d\d)", w.get("date") or "")]
+    return bool(years) and max(years) < CCBY_MAX_YEAR
+
+
 def _load_no_results():
     try:
         with open(NO_RESULTS, encoding="utf-8") as f:
@@ -123,6 +182,10 @@ def collect(mv, per, allow_ccby=False):
             return False
         if P.looks_like_person_subject(w, keys):
             print("    ✗ 排除人名撞车: %s" % w["title"][:46])
+            return False
+        if allow_ccby and _is_ccby(w) and not _work_early(w):
+            print("    ✗ 排除 CC-BY 但在版权期内: %s（%s）"
+                  % (w["title"][:36], w.get("date") or "年代不明"))
             return False
         if w.get("raw_title"):
             real = extract_artist_from_title(w["raw_title"], keys)
@@ -208,7 +271,13 @@ def run(only=None, per=6, refresh=False, allow_ccby=False, tier=None):
                 continue
             print("· %s (%s) —— 上次没抓到，重试" % (mv["name_zh"], slug))
         print("· %s (%s)" % (mv["name_zh"], slug))
-        works = collect(mv, per, allow_ccby)
+        # CC-BY 只在这个流派的年代早到作品已进入公版时才放行（见 CCBY_MAX_YEAR）
+        _ccby = allow_ccby and ccby_safe(mv.get("period"))
+        if allow_ccby and not _ccby:
+            print("    （%s 的年代 %s 还在版权期内，CC-BY 只会拉进他人拍摄的"
+                  "作品照片 —— 本次对该流派不收 CC-BY）"
+                  % (mv["name_zh"], mv.get("period") or "不明"))
+        works = collect(mv, per, _ccby)
         if not works:
             print("    (无可用公共领域图片 —— 生成纯提示词卡)")
             json.dump([], open(out_json, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
@@ -257,7 +326,10 @@ if __name__ == "__main__":
            "--per N          每个流派抓几张（默认 6）",
            "--refresh        先删掉该流派的图目录再重抓",
            "--only-tier T    只处理某一层",
-           "--include-ccby   连同 CC-BY 一起收（默认只收 CC0 / 公共领域）",
+           "--include-ccby   连同 CC-BY 一起收。**只在流派年代早于 %d 年时才生效**："
+           "实测 CC-BY 在 Commons 上多是拍摄者给自己拍的「仍在版权期作品」打的标，"
+           "对 20 世纪流派只会拉进游客照/复制品，而且构成版权陷阱。"
+           % CCBY_MAX_YEAR,
            "--list           列出全部流派，不抓图"])
     per = 6
     if "--per" in argv:

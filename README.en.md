@@ -6,7 +6,7 @@
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
-163 notes · 451 public-domain images · 36 ready-to-run scripts
+163 notes · 452 public-domain images · 36 ready-to-run scripts
 
 **English** ｜ [中文](README.md)
 
@@ -181,7 +181,7 @@ Art Aesthetic Style Library
 | | |
 |---|---|
 | **Movement cards** | **141**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
-| **Public-domain images** | **451** (152 MB), covering 84 movements |
+| **Public-domain images** | **452** (152 MB), covering 85 movements |
 | **Guides & methodology** | 18 notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
 | **Keyword atlas** | All **218 styles / 189 movements / 68 genres** mapped to a card |
 | **Note templates** | 3 |
