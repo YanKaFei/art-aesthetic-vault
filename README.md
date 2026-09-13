@@ -2,6 +2,10 @@
 
 # 艺术审美风格库
 
+[![DeepSeek Harness](https://img.shields.io/badge/DeepSeek%20Harness-dsh--plugin-4D6BFE?style=flat-square)](https://github.com/deepseek-ai/deepseek-harness)
+[![Agent Skill](https://img.shields.io/badge/Agent-Skill-7C3AED?style=flat-square)](.repo/skill)
+[![License](https://img.shields.io/github/license/YanKaFei/art-aesthetic-vault?style=flat-square)](LICENSE)
+
 **把 147 个艺术流派的视觉语言，拆成可以直接用的 AI 提示词层**
 
 从拜占庭到 Y2K ｜ 东亚 · 南亚 · 伊斯兰 ｜ 摄影谱系 ｜ 数字亚文化

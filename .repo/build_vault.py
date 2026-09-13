@@ -1262,6 +1262,10 @@ README_EN = """<div align="center">
 
 # Art Aesthetic Style Library
 
+[![DeepSeek Harness](https://img.shields.io/badge/DeepSeek%20Harness-dsh--plugin-4D6BFE?style=flat-square)](https://github.com/deepseek-ai/deepseek-harness)
+[![Agent Skill](https://img.shields.io/badge/Agent-Skill-7C3AED?style=flat-square)](.repo/skill)
+[![License](https://img.shields.io/github/license/{REPO_SLUG}?style=flat-square)](LICENSE)
+
 **{n_mv} art movements, decomposed into swappable AI prompt layers**
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
@@ -1762,6 +1766,10 @@ type: 作品
 README = """<div align="center">
 
 # 艺术审美风格库
+
+[![DeepSeek Harness](https://img.shields.io/badge/DeepSeek%20Harness-dsh--plugin-4D6BFE?style=flat-square)](https://github.com/deepseek-ai/deepseek-harness)
+[![Agent Skill](https://img.shields.io/badge/Agent-Skill-7C3AED?style=flat-square)](.repo/skill)
+[![License](https://img.shields.io/github/license/{REPO_SLUG}?style=flat-square)](LICENSE)
 
 **把 {n_mv} 个艺术流派的视觉语言，拆成可以直接用的 AI 提示词层**
 
@@ -2402,11 +2410,13 @@ def main():
 
     _rm = _fill(README.replace("{n_mv}", str(len(MOVEMENTS)))
                  .replace("{REPO_URL}", REPO_URL)
+                 .replace("{REPO_SLUG}", REPO_SLUG)
                  .replace("{skill_tree}", skill_tree()))
     w("README.md", _rm)
     w("LICENSE", LICENSE_TEXT)
     _en = _fill(README_EN.replace("{n_mv}", str(len(MOVEMENTS)))
                     .replace("{REPO_URL}", REPO_URL)
+                    .replace("{REPO_SLUG}", REPO_SLUG)
                     .replace("{skill_tree_en}", skill_tree_en())
                     .replace("{cat_table_en}", category_table_en()))
     w("README.en.md", _en)

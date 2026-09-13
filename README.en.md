@@ -2,6 +2,10 @@
 
 # Art Aesthetic Style Library
 
+[![DeepSeek Harness](https://img.shields.io/badge/DeepSeek%20Harness-dsh--plugin-4D6BFE?style=flat-square)](https://github.com/deepseek-ai/deepseek-harness)
+[![Agent Skill](https://img.shields.io/badge/Agent-Skill-7C3AED?style=flat-square)](.repo/skill)
+[![License](https://img.shields.io/github/license/YanKaFei/art-aesthetic-vault?style=flat-square)](LICENSE)
+
 **147 art movements, decomposed into swappable AI prompt layers**
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
