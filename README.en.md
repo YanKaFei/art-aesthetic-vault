@@ -251,7 +251,7 @@ The repo ships **two** skills, installed together:
 > sync with the repo, and libraries built from it had **wrong category assignments**.
 
 ```bash
-cd skill && ./install.sh
+cd .repo/skill && ./install.sh
 ```
 
 It **symlinks** the skill into every skill directory present on your machine:
@@ -267,8 +267,8 @@ root from it, and therefore **finds the vault wherever it lives - no configurati
 survives moving the repo**. No path is hardcoded anywhere in the skill.
 
 ```bash
-./install.sh --copy        # copy instead of symlink (breaks if you move the repo)
-./install.sh --uninstall   # remove
+.repo/skill/install.sh --copy        # copy instead of symlink (breaks if you move the repo)
+.repo/skill/install.sh --uninstall   # remove
 bash locate.sh             # manual vault lookup (for troubleshooting)
 ```
 
@@ -290,9 +290,8 @@ Start a **new AI session** for it to take effect.
 10 tools: `search_movements` `get_movement` `get_layers` `compose_prompt`
 `get_palette` `find_related` `list_categories` `analyze_image` `match_movement`
 `get_video_prompt`.
-Pure standard library - **no `pip install mcp` needed** (the last two also need
-Pillow / the CLIP model; without them they return a clear reason and the other
-seven keep working).
+The last two need Pillow and the CLIP model; when unavailable they say why
+and the other seven keep working.
 
 ---
 

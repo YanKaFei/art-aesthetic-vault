@@ -234,7 +234,7 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \
 会自动查这个库，而不是凭记忆编造流派术语。
 
 ```bash
-cd skill && ./install.sh
+cd .repo/skill && ./install.sh
 ```
 
 仓库提供**两个** skill，一次装好：
@@ -265,9 +265,9 @@ skill 里**没有写死任何路径**。
 其他用法：
 
 ```bash
-./install.sh --copy        # 复制安装（不用软链，但仓库移动后要重装）
-./install.sh --uninstall   # 卸载
-bash locate.sh             # 手动定位仓库（排查用）
+.repo/skill/install.sh --copy        # 复制安装（不用软链，但仓库移动后要重装）
+.repo/skill/install.sh --uninstall   # 卸载
+bash .repo/skill/locate.sh           # 手动定位仓库（排查用）
 ```
 
 装完**新开一个 AI 会话**才会生效。
@@ -288,8 +288,7 @@ bash locate.sh             # 手动定位仓库（排查用）
 暴露 10 个工具：`search_movements` `get_movement` `get_layers` `compose_prompt`
 `get_palette` `find_related` `list_categories` `analyze_image` `match_movement`
 `get_video_prompt`。
-纯标准库实现，**不需要 pip 安装任何东西**（后两个工具另需 Pillow / CLIP 模型，
-没装会返回明确原因，不影响前七个）。
+后两个工具另需 Pillow / CLIP 模型；条件不满足时会说明原因，不影响前七个。
 
 ---
 

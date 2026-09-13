@@ -1183,9 +1183,8 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \\
 | `analyze_image(path)` | **图片客观测量**：七维度 + 人脸景别/霍夫直线/显著性（新） |
 | `match_movement(path, topn)` | **给一张图找最像的流派**（CLIP 语义匹配，含零样本）（新） |
 
-纯标准库实现，**不需要 `pip install mcp`**。
-后两个工具依赖 Pillow（图片分析）与 CLIP 模型（语义匹配），未装时会返回
-明确原因和修复命令，不影响前七个工具。
+后两个工具需要 Pillow 与 CLIP 模型；条件不满足时它们会说明原因，
+不影响前七个工具。
 
 ## 四、给 AI 的提示词怎么写
 
@@ -1394,7 +1393,7 @@ The repo ships **two** skills, installed together:
 > sync with the repo, and libraries built from it had **wrong category assignments**.
 
 ```bash
-cd skill && ./install.sh
+cd .repo/skill && ./install.sh
 ```
 
 It **symlinks** the skill into every skill directory present on your machine:
@@ -1410,8 +1409,8 @@ root from it, and therefore **finds the vault wherever it lives - no configurati
 survives moving the repo**. No path is hardcoded anywhere in the skill.
 
 ```bash
-./install.sh --copy        # copy instead of symlink (breaks if you move the repo)
-./install.sh --uninstall   # remove
+.repo/skill/install.sh --copy        # copy instead of symlink (breaks if you move the repo)
+.repo/skill/install.sh --uninstall   # remove
 bash locate.sh             # manual vault lookup (for troubleshooting)
 ```
 
@@ -1433,9 +1432,8 @@ Start a **new AI session** for it to take effect.
 10 tools: `search_movements` `get_movement` `get_layers` `compose_prompt`
 `get_palette` `find_related` `list_categories` `analyze_image` `match_movement`
 `get_video_prompt`.
-Pure standard library - **no `pip install mcp` needed** (the last two also need
-Pillow / the CLIP model; without them they return a clear reason and the other
-seven keep working).
+The last two need Pillow and the CLIP model; when unavailable they say why
+and the other seven keep working.
 
 ---
 
@@ -1881,7 +1879,7 @@ python3 artvault.py compose --style ukiyo-e --lighting baroque \\
 会自动查这个库，而不是凭记忆编造流派术语。
 
 ```bash
-cd skill && ./install.sh
+cd .repo/skill && ./install.sh
 ```
 
 仓库提供**两个** skill，一次装好：
@@ -1912,9 +1910,9 @@ skill 里**没有写死任何路径**。
 其他用法：
 
 ```bash
-./install.sh --copy        # 复制安装（不用软链，但仓库移动后要重装）
-./install.sh --uninstall   # 卸载
-bash locate.sh             # 手动定位仓库（排查用）
+.repo/skill/install.sh --copy        # 复制安装（不用软链，但仓库移动后要重装）
+.repo/skill/install.sh --uninstall   # 卸载
+bash .repo/skill/locate.sh           # 手动定位仓库（排查用）
 ```
 
 装完**新开一个 AI 会话**才会生效。
@@ -1935,8 +1933,7 @@ bash locate.sh             # 手动定位仓库（排查用）
 暴露 10 个工具：`search_movements` `get_movement` `get_layers` `compose_prompt`
 `get_palette` `find_related` `list_categories` `analyze_image` `match_movement`
 `get_video_prompt`。
-纯标准库实现，**不需要 pip 安装任何东西**（后两个工具另需 Pillow / CLIP 模型，
-没装会返回明确原因，不影响前七个）。
+后两个工具另需 Pillow / CLIP 模型；条件不满足时会说明原因，不影响前七个。
 
 ---
 
