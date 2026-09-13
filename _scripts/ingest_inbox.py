@@ -255,13 +255,17 @@ def archive(recs, verbose=True):
 
     没指定流派的图进 99-附件/images-local/_未归类/，在总览页里能看到、等着归。
     """
-    # 取 CLIP 建议：优先读 --scan 写下的清单（不必重跑一遍分析）
-    sug_by_file = {}
+    # 取 CLIP 建议**和完整分析**：都从 --scan 写下的清单里读。
+    # --archive 用的是 analyze=False 的扫描（快），所以这里不读的话
+    # 归档记录里就没有分析结果，反推卡上「客观测量」和「尺寸」会是空的。
+    sug_by_file, ana_by_file = {}, {}
     if os.path.exists(MANIFEST):
         try:
             for it in (json.load(open(MANIFEST, encoding="utf-8")).get("items") or []):
                 if it.get("suggested"):
                     sug_by_file[it["file"]] = it["suggested"]
+                if it.get("analysis"):
+                    ana_by_file[it["file"]] = it["analysis"]
         except Exception:
             pass
 
@@ -294,7 +298,8 @@ def archive(recs, verbose=True):
             continue
         rel = os.path.relpath(dst, VAULT).replace(os.sep, "/")
         import reverse_prompt as RP
-        rec = RP.record(r["path"], r.get("analysis"), sug, source="pinterest 投递箱")
+        ana = r.get("analysis") or ana_by_file.get(r["file"])
+        rec = RP.record(r["path"], ana, sug, source="pinterest 投递箱")
         rec["movement"] = slug
         rec["title"] = base
         rec["added_at"] = time.strftime("%Y-%m-%d %H:%M:%S")

@@ -114,6 +114,7 @@ python3 ../pinterest_grab.py --url /ideas/oil-painting/907077517247/
 ```
 Pinterest 上的参考图
     ↓  反推自动跑完（测量 + 流派匹配 + 七层组装）
+    ↓  汇总在 [[Pinterest]]
     ↓  artvault 帮你把反推结果归到七层
 python3 artvault.py compose --style ... --lighting ... --subject "..."
     ↓

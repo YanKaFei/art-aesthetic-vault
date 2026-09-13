@@ -49,6 +49,19 @@ def record(path, analysis, suggest=None, source=None, extra=None):
     存**完整的分析结果**而不是摘要 —— 卡是事后由 build_vault 生成的，
     那时图已经不在原处了，摘要不够用。
     """
+    # 两个调用点的 suggest 形状不一样：scan_local 给的是 (slug, name, score)
+    # 元组，ingest_inbox 给的是 {"slug","name","score"} 字典（那是
+    # ingest_inbox.suggest() 的返回格式）。实测直接按元组解包会炸
+    # （TypeError: type str doesn't define __round__ method），
+    # 所以这里两种都收 —— 比在两个调用点各转一次更不容易再错。
+    sug = []
+    for x in (suggest or []):
+        if isinstance(x, dict):
+            sug.append({"slug": x.get("slug"), "name": x.get("name"),
+                        "score": round(float(x.get("score") or 0), 3)})
+        else:
+            s_, n_, sc_ = x
+            sug.append({"slug": s_, "name": n_, "score": round(float(sc_), 3)})
     rec = {
         "file": os.path.basename(path),
         "source": source or path,
@@ -56,8 +69,7 @@ def record(path, analysis, suggest=None, source=None, extra=None):
         "size": (analysis or {}).get("size"),
         "orientation": (analysis or {}).get("orientation"),
         "analysis": analysis,
-        "suggest": [{"slug": s, "name": n, "score": round(sc, 3)}
-                    for s, n, sc in (suggest or [])],
+        "suggest": sug,
     }
     if extra:
         rec.update(extra)
@@ -237,6 +249,13 @@ def compose(rec, mv, image_name, back=None):
           "- 加入时间：%s" % (rec.get("added_at") or "—"),
           "- 尺寸：%s" % ("×".join(str(x) for x in rec["size"]) if rec.get("size") else "—"),
           ""]
+    # 来源回链：从投递箱进来的图要指回 [[Pinterest]]，
+    # 这样「按来源」那条轴在图谱上也连起来（不然它只有流派一条轴）。
+    src = str(rec.get("source") or "")
+    if "投递箱" in src or "pinterest" in src.lower():
+        L += ["> [!note] 来源",
+              "> 这张是从 Pinterest 收进来的（投递箱 `pinterest/`）。",
+              "> 按来源汇总在 [[Pinterest]]，那里能看到同来源的全部图。", ""]
     if back:
         L += ["← 回到 [[%s]] ｜ [[我的图库总览]]" % back, ""]
     return "\n".join(L)

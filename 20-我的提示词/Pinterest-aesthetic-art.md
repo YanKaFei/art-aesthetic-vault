@@ -9,14 +9,16 @@ type: Pinterest抓取
 
 # Pinterest · aesthetic-art
 
+← 回到 [[Pinterest]]
+
 > [!warning] 版权
 > Pinterest 是二次聚合平台，图片版权归各自原作者，**没有统一授权**。
-> 这些图只供你个人做审美参考，不要像 [[版权与来源]] 里的 CC0 图那样再分发。
+> 图片版权归各自原作者，**没有统一授权**，只供个人审美参考、不要再分发。
+> 完整说明见 [[Pinterest]]。
 
 > [!tip] 下一步
-> 挑出真正有用的丢进投递箱（`pinterest/`），反推会自动跑完，
-> 再存成 [[提示词卡模板]]。
-> 或者直接让 AI 调 `artvault` 帮你把参考图拆成七层。
+> 挑出真正有用的丢进投递箱（`pinterest/`），反推会自动跑完。
+> 流程见 [[Pinterest]]。
 
 来源页：<https://www.pinterest.com/ideas/aesthetic-art/902231121155/>
 
