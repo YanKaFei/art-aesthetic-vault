@@ -10,7 +10,7 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/caravaggisti/01-caravaggisti-the-crucifixion-of-saint-andrew.jpg"
+  "local_image": "99-attachments/images/caravaggisti/01-caravaggisti-the-crucifixion-of-saint-andrew.jpg"
  },
  {
   "title": "The Resurrection",
@@ -23,7 +23,7 @@
   "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://www.artic.edu/open-access/open-access-images",
-  "local_image": "99-附件/images/caravaggisti/02-caravaggisti-the-resurrection.jpg"
+  "local_image": "99-attachments/images/caravaggisti/02-caravaggisti-the-resurrection.jpg"
  },
  {
   "title": "The Musicians",
@@ -36,7 +36,7 @@
   "source": "大都会艺术博物馆",
   "license": "CC0 1.0（Open Access 公共领域）",
   "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
-  "local_image": "99-附件/images/caravaggisti/03-caravaggisti-the-musicians.jpg"
+  "local_image": "99-attachments/images/caravaggisti/03-caravaggisti-the-musicians.jpg"
  },
  {
   "title": "Saint Peter Repentant",
@@ -49,7 +49,7 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/caravaggisti/04-caravaggisti-saint-peter-repentant.jpg"
+  "local_image": "99-attachments/images/caravaggisti/04-caravaggisti-saint-peter-repentant.jpg"
  },
  {
   "title": "Flight of Celia",
@@ -62,7 +62,7 @@
   "source": "芝加哥艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://www.artic.edu/open-access/open-access-images",
-  "local_image": "99-附件/images/caravaggisti/05-caravaggisti-flight-of-celia.jpg"
+  "local_image": "99-attachments/images/caravaggisti/05-caravaggisti-flight-of-celia.jpg"
  },
  {
   "title": "The Fortune-Teller",
@@ -75,6 +75,6 @@
   "source": "大都会艺术博物馆",
   "license": "CC0 1.0（Open Access 公共领域）",
   "license_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
-  "local_image": "99-附件/images/caravaggisti/06-caravaggisti-the-fortune-teller.jpg"
+  "local_image": "99-attachments/images/caravaggisti/06-caravaggisti-the-fortune-teller.jpg"
  }
 ]

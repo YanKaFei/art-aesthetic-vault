@@ -39,27 +39,27 @@
 .repo/vendor/clip/
 
 # ---------------------------------------------------------------- 你的私人工作区
-# 20-我的提示词/ 是「你自己的地盘」，**整个目录都不发布**。
+# 20-my-prompts/ 是「你自己的地盘」，**整个目录都不发布**。
 # 早先只放行了一个 README，但那自相矛盾：一份说明「这个目录不进版本库」
 # 的 README，本身就在版本库里。现在整个目录忽略，clone 下来不会有它。
-20-我的提示词/
+20-my-prompts/
 
 # ---------------------------------------------------------------- 层 2：我自己的图库
 # 扫描你自己文件夹进来的私人收藏。**全部本地私有**，不随仓库发布：
 #   python3 .repo/scan_local.py <目录>   →  --list → --file <编号> --to <流派>
-# 清单和图片是私有的，但 15-我的图库/ 的笔记是生成的（build_vault 无条件重写），
+# 清单和图片是私有的，但 15-my-library/ 的笔记是生成的（build_vault 无条件重写），
 # 一并忽略，避免把你的收藏清单提交上去。
 .repo/_data/local_library.json
 .repo/_data/local_pending.json
-15-我的图库/
-99-附件/images-local/
+15-my-library/
+99-attachments/images-local/
 
 # Vision 特征提取器的编译产物（架构相关，首次使用时自动编译）
 .repo/vision/vision_feat
 
 # Pinterest 抓来的图版权归原作者、无统一授权，**不要提交也不要公开**
-# （10-流派/ 里的 CC0 图不受影响，那是可以随便分发的）
-99-附件/images/pinterest/
+# （10-movements/ 里的 CC0 图不受影响，那是可以随便分发的）
+99-attachments/images/pinterest/
 
 # 投递箱（本地工作目录，整个不发布）：
 # 里面是抓来的图和投递箱笔记，版权归原作者；那个 README 讲的是抓取流程，

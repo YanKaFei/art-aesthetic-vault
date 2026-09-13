@@ -60,12 +60,12 @@ git clone --depth 1 https://github.com/YanKaFei/art-aesthetic-vault.git my-art-v
 
 ```
 <仓库根>/
-├── 00-导航/          流派总览、分类索引、关键词图谱、七层方法、
+├── 00-guides/          流派总览、分类索引、关键词图谱、七层方法、
 │                     视频结构、配色速查、反推工具链、版权说明、AI 调用指南
-├── 10-流派/          141 张流派卡（六维视觉拆解 + 七层提示词 + 配色 + 视频层）
-├── 20-我的提示词/     用户自己的卡片（脚本永不覆盖）
-├── 90-模板/          新建笔记用的模板
-├── 99-附件/images/   从开放数据源抓来的图
+├── 10-movements/          141 张流派卡（六维视觉拆解 + 七层提示词 + 配色 + 视频层）
+├── 20-my-prompts/     用户自己的卡片（脚本永不覆盖）
+├── 90-templates/          新建笔记用的模板
+├── 99-attachments/images/   从开放数据源抓来的图
 ├── pinterest/        图片投递箱（丢图进去 → 分析 → 归档）
 ├── skill/            AI skill 源码
 └── .repo/         数据定义 + 抓图 + 生成 + 检索 + 分析
@@ -168,7 +168,7 @@ CLIP 还能做**零样本** —— 用流派卡的英文描述直接匹配图像
 实测一张神奈川冲浪里被配色匹配判成「宝丽来与胶片」，CLIP 正确判成 ukiyo-e。
 
 投递箱工作流：用户把参考图丢进 `pinterest/` → AI 逐张 `read_image` 看图 →
-七层拆解 + 匹配流派 → 写 `20-我的提示词/投递箱-<日期>.md` → `--archive` 归档。
+七层拆解 + 匹配流派 → 写 `20-my-prompts/投递箱-<日期>.md` → `--archive` 归档。
 
 详见 `reference/analysis.md`（含和谐维度换过三版、人脸不能缩到 256 检测、
 霍夫 threshold=45 会把噪声当直线、CLIP 融合权重扫过才知道等踩坑记录）。
@@ -204,7 +204,7 @@ python3 scan_local.py --file 12 --drop              # 不要这张
 # 或者只自动归「很有把握」的
 python3 scan_local.py --auto --min-margin 1.0
 
-# 生成 15-我的图库/ 的笔记，并在流派卡里加一行入口
+# 生成 15-my-library/ 的笔记，并在流派卡里加一行入口
 python3 build_vault.py
 ```
 
@@ -212,9 +212,9 @@ python3 build_vault.py
 
 | 层 | 位置 | 发布吗 |
 |---|---|---|
-| 层 1 · 权威 | `10-流派/` + `99-附件/images/<流派>/` | ✅ 随仓库发布 |
-| **层 2 · 你的图库** | `15-我的图库/` + `99-附件/images-local/<流派>/` | ❌ gitignore |
-| 层 3 · 你的提示词 | `20-我的提示词/` | ❌ gitignore |
+| 层 1 · 权威 | `10-movements/` + `99-attachments/images/<流派>/` | ✅ 随仓库发布 |
+| **层 2 · 你的图库** | `15-my-library/` + `99-attachments/images-local/<流派>/` | ❌ gitignore |
+| 层 3 · 你的提示词 | `20-my-prompts/` | ❌ gitignore |
 | 暂存 | `pinterest/` 投递箱 | ❌ gitignore，不进图谱 |
 
 **图谱是一张连通的图**，不是两块：每篇 `我的图库-<流派>.md` 都链回 `[[流派卡]]`，
@@ -227,7 +227,7 @@ python3 build_vault.py
 ```
 
 刻意**只放一行链接、不铺开图片**：万一这行被误提交，也只暴露「有几张」，
-不暴露图片本身（图在 gitignore 的 `99-附件/images-local/` 里）。
+不暴露图片本身（图在 gitignore 的 `99-attachments/images-local/` 里）。
 清单是 gitignore 的，所以别人 clone 后这一行根本不存在，不会留下悬空链接。
 
 > [!warning] 为什么不是「扫一遍自动分好类」
@@ -244,7 +244,7 @@ python3 build_vault.py
 > 所以脚本只给建议，归档要你看一眼确认 —— 这和这个库的「宁可少不要错」一致。
 
 **投递箱也会汇进这一层**：`ingest_inbox.py --archive` 不再把图堆在
-`pinterest/_已归档/`，而是按 CLIP 建议归入 `99-附件/images-local/<流派>/`，
+`pinterest/_已归档/`，而是按 CLIP 建议归入 `99-attachments/images-local/<流派>/`，
 让你从投递箱进来的图也进图谱（没给出建议的进 `_未归类/`，在总览页里列出来等你归）。
 
 ### 阶段 7：验收（必做）
@@ -264,7 +264,7 @@ python3 verify_vault.py --quick    # 跳过第 5 项（近重复），其余七�
 
 
 ```
-1 断链        每个 ![[...]] 都能在 99-附件/images/ 下找到文件
+1 断链        每个 ![[...]] 都能在 99-attachments/images/ 下找到文件
 2 重名        全库 basename 唯一 —— Obsidian 的 ![[名]] 按 basename 解析，
               重名会让嵌入指向错误的那张
 3 AI 图       全库 0 命中 —— 用模型的输出当模型的参考是致命的
@@ -312,7 +312,7 @@ python3 verify_vault.py                       # 会自动带上第 5 项
 6. **不要用 curl 测站点可达性。** 出口代理可能拦 curl 的 TLS 指纹却放过 Python。
    实测因为这条错误判断，白白漏掉了芝加哥艺术博物馆（13 万件的一流源）。
 
-7. **改生成物之前先改模板。** `README.md` / `10-流派/*.md` / `.gitignore`
+7. **改生成物之前先改模板。** `README.md` / `10-movements/*.md` / `.gitignore`
    都是 `build_vault.py` 生成的 —— 直接手改会在下次重跑时被覆盖。
 
 ---

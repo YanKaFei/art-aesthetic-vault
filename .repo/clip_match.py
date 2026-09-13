@@ -94,7 +94,7 @@ TEMPLATES = [
 
 def slug_of(relpath):
     parts = relpath.split("/")
-    return parts[2] if len(parts) >= 4 and parts[0] == "99-附件" else "?"
+    return parts[2] if len(parts) >= 4 and parts[0] == "99-attachments" else "?"
 
 
 # ------------------------------------------------------------ 文本侧

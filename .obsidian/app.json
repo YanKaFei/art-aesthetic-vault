@@ -1,6 +1,6 @@
 {
-  "attachmentFolderPath": "99-附件/images",
-  "newFileFolderPath": "20-我的提示词",
+  "attachmentFolderPath": "99-attachments/images",
+  "newFileFolderPath": "20-my-prompts",
   "alwaysUpdateLinks": true,
   "userIgnoreFilters": [
     ".repo/",

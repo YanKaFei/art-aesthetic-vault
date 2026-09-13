@@ -139,7 +139,7 @@ python3 .repo/ingest_inbox.py --scan     ← 客观测量：尺寸/主色/感知
         ↓  AI 逐张 read_image 看图
 七层拆解 + 匹配 1–3 个流派 + 可复用提示词
         ↓  写入
-20-我的提示词/投递箱-<日期>.md
+20-my-prompts/投递箱-<日期>.md
         ↓
 python3 .repo/ingest_inbox.py --archive  ← 图移到 pinterest/_已归档/
 ```
@@ -159,7 +159,7 @@ python3 .repo/ingest_inbox.py --archive  ← 图移到 pinterest/_已归档/
 | 你想**读**、建立审美直觉 | Obsidian 里看 [[流派总览]] 和流派卡 |
 | 你想**查**某个词是什么 | Obsidian 里搜 [[关键词图谱]] |
 | 你想**用**、生成东西 | 让 AI 调 `artvault` |
-| 你想**存**自己的成果 | [[提示词卡模板]] 存到 `20-我的提示词/` |
+| 你想**存**自己的成果 | [[提示词卡模板]] 存到 `20-my-prompts/` |
 
 > 仓库里的 Markdown 是给人看的，`artvault` 是给机器用的。两者同源——
 > 都从 `.repo/mv_*.py` 生成，改一处两边都更新。

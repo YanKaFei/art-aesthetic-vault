@@ -116,7 +116,7 @@ def a_real_image():
     不能用 README.md 冒充图片：脚本会先撞「不是图片」再撞「缺 Pillow」，
     测试就测错了东西（第一版就是这么写错的）。
     """
-    root = os.path.join(VAULT, "99-附件", "images")
+    root = os.path.join(VAULT, "99-attachments", "images")
     for dirpath, _dirnames, filenames in os.walk(root):
         for f in sorted(filenames):
             if f.lower().endswith((".jpg", ".jpeg", ".png")):
@@ -396,7 +396,7 @@ class RefsTests(unittest.TestCase):
         mv = next((m for m in MOVEMENTS if m["slug"] == slugs[0]), None)
         if not mv:
             self.skipTest("首个有出处的 slug 不在库里")
-        path = os.path.join(VAULT, "10-流派", mv["name_zh"] + ".md")
+        path = os.path.join(VAULT, "10-movements", mv["name_zh"] + ".md")
         if not os.path.exists(path):
             self.skipTest("卡片还没生成")
         with open(path, encoding="utf-8") as f:

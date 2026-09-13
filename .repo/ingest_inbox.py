@@ -249,11 +249,11 @@ def archive(recs, verbose=True):
 
     原来的做法是移到 pinterest/_已归档/ —— 结果图仍留在投递箱区域，
     而投递箱是刻意排除在图谱外的，于是「处理完了」等于「从图谱里消失了」。
-    现在改为移进 99-附件/images-local/<流派>/，并写进 local_library.json，
-    跑一次 build_vault.py 就会生成 15-我的图库/ 的笔记、链回流派卡 ——
+    现在改为移进 99-attachments/images-local/<流派>/，并写进 local_library.json，
+    跑一次 build_vault.py 就会生成 15-my-library/ 的笔记、链回流派卡 ——
     这些图从此和权威库挂在同一张图谱上。
 
-    没指定流派的图进 99-附件/images-local/_未归类/，在总览页里能看到、等着归。
+    没指定流派的图进 99-attachments/images-local/_未归类/，在总览页里能看到、等着归。
     """
     # 取 CLIP 建议**和完整分析**：都从 --scan 写下的清单里读。
     # --archive 用的是 analyze=False 的扫描（快），所以这里不读的话
@@ -289,7 +289,7 @@ def archive(recs, verbose=True):
             # 用 CLIP 的第一建议作为去处；没有建议就进 _未归类
             sug = r.get("suggested") or sug_by_file.get(r["file"]) or []
             slug = (sug[0].get("slug") if sug else None) or "_未归类"
-            dest_dir = os.path.join(VAULT, "99-附件", "images-local", slug)
+            dest_dir = os.path.join(VAULT, "99-attachments", "images-local", slug)
             os.makedirs(dest_dir, exist_ok=True)
             dst = os.path.join(dest_dir, r["file"])
             base, ext = os.path.splitext(r["file"])
@@ -333,10 +333,10 @@ def archive(recs, verbose=True):
             # 但那时已经不知道是哪一步坏的）。这里至少要说出来。
             print("    ! 清单写入失败：%s: %s" % (type(e).__name__, e))
     if verbose:
-        print("已归档 %d 张 → 99-附件/images-local/（按 CLIP 建议分流派）" % moved)
+        print("已归档 %d 张 → 99-attachments/images-local/（按 CLIP 建议分流派）" % moved)
         if unmoved:
             print("  其中 %d 张进了 _未归类/ —— 建议没把握，等着你归" % unmoved)
-        print("  下一步：python3 build_vault.py   （生成 15-我的图库/ 的笔记并链回流派卡）")
+        print("  下一步：python3 build_vault.py   （生成 15-my-library/ 的笔记并链回流派卡）")
         print("  要改归类：python3 scan_local.py --list  然后 --file <编号> --to <流派>")
     return moved
 
@@ -372,7 +372,7 @@ def render(recs, dups, matches):
         for a, b, d in dups:
             L.append("   %s  ≈  %s   (距离 %d)" % (a, b, d))
     L.append("")
-    L.append("下一步：让 AI 逐张看图（read_image），按七层拆解，写入 20-我的提示词/。")
+    L.append("下一步：让 AI 逐张看图（read_image），按七层拆解，写入 20-my-prompts/。")
     L.append("拆完执行：python3 ingest_inbox.py --archive")
     return "\n".join(L)
 

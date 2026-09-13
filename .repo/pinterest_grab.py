@@ -27,8 +27,8 @@ pinterest_grab.py —— 从 Pinterest 抓取公开的 /ideas/ 分类图，存�
     python3 pinterest_grab.py --crawl-all --max-per 20
 
 产出：
-    99-附件/images/pinterest/<分类>/<hash>.jpg
-    20-我的提示词/Pinterest-<分类>.md     每张图带来源链接与反推提示
+    99-attachments/images/pinterest/<分类>/<hash>.jpg
+    20-my-prompts/Pinterest-<分类>.md     每张图带来源链接与反推提示
 """
 
 import argparse
@@ -60,7 +60,7 @@ except ImportError:
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 VAULT = os.path.dirname(HERE)
-IMG_ROOT = os.path.join(VAULT, "99-附件", "images", "pinterest")
+IMG_ROOT = os.path.join(VAULT, "99-attachments", "images", "pinterest")
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36")
 BASE = "https://www.pinterest.com"
@@ -169,7 +169,7 @@ def grab_board(s, path, max_n=25, download=True, label=None):
                 except Exception as e:
                     print("      ! 下载失败 %s" % str(e)[:50])
             if os.path.exists(dest):
-                w["local_image"] = "99-附件/images/pinterest/%s/%s" % (name, fn)
+                w["local_image"] = "99-attachments/images/pinterest/%s/%s" % (name, fn)
         out.append(w)
         print("    %s %s" % ("✓" if w["local_image"] else "✗", u.rsplit("/", 1)[-1][:40]))
     return out, name
@@ -205,7 +205,7 @@ def write_note(name, works, board_path, analysis=None):
             import reverse_prompt as RP
             L += [RP.compose_compact(rec, mv, fn), ""]
         L += ["[原图直链](%s)" % w["image_url_hi"], "", "---", ""]
-    p = os.path.join(VAULT, "20-我的提示词", "Pinterest-%s.md" % name)
+    p = os.path.join(VAULT, "20-my-prompts", "Pinterest-%s.md" % name)
     os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, "w", encoding="utf-8").write("\n".join(L).rstrip() + "\n")
     return p
@@ -230,7 +230,7 @@ def analyze_boards(only=None, verbose=True):
     """
     import reverse_prompt as RP
     from movements import MOVEMENTS
-    root = os.path.join(VAULT, "99-附件", "images", "pinterest")
+    root = os.path.join(VAULT, "99-attachments", "images", "pinterest")
     if not os.path.isdir(root):
         print("还没有抓过图：%s 不存在" % root)
         return 0
@@ -249,7 +249,7 @@ def analyze_boards(only=None, verbose=True):
         analysis = {os.path.basename(k): v for k, v in recs.items()}
         # 原图直链在本地文件名里是找不回来的（文件名只有序号和 hash），
         # 所以从**已有笔记里解析出来复用** —— 否则回填一次就把原始出处丢了。
-        old_note = os.path.join(VAULT, "20-我的提示词", "Pinterest-%s.md" % board)
+        old_note = os.path.join(VAULT, "20-my-prompts", "Pinterest-%s.md" % board)
         links, board_path = [], "/ideas/"
         if os.path.exists(old_note):
             old_txt = open(old_note, encoding="utf-8").read()
@@ -261,7 +261,7 @@ def analyze_boards(only=None, verbose=True):
         works = []
         for k, f in enumerate(imgs):
             works.append({
-                "title": f, "local_image": "99-附件/images/pinterest/%s/%s" % (board, f),
+                "title": f, "local_image": "99-attachments/images/pinterest/%s/%s" % (board, f),
                 "image_url_hi": links[k] if k < len(links) else (BASE + "/ideas/"),
                 "artist": "Pinterest 用户（见来源页）", "page_url": BASE,
             })

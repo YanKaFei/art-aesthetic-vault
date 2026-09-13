@@ -6,7 +6,7 @@ build_vault.py —— 用 movements.py 的数据 + _data/*.json 的抓取结果�
 
 用法：  python3 build_vault.py
 重复运行是安全的：所有自动生成的文件都会被整体覆盖。
-你自己写的笔记请放在 20-我的提示词/ 下，那个目录不会被碰。
+你自己写的笔记请放在 20-my-prompts/ 下，那个目录不会被碰。
 """
 
 import glob
@@ -40,7 +40,7 @@ LEGEND_LAYER = dict(_AC.LAYER_ZH)
 # 应该看到艺术作品，而不是构建信息。
 #
 # 但清理必须仍然是安全的：不能误删用户自己放进这些目录的笔记（实测踩过 ——
-# 早先按「不在本次生成列表里就删」，用户在 10-流派/ 放一篇手写笔记，
+# 早先按「不在本次生成列表里就删」，用户在 10-movements/ 放一篇手写笔记，
 # 跑一次 build_vault 就没了）。原来靠笔记里的生成标记当判据，现在改成
 # 靠**上一次的生成清单**：这里只记我们自己写过哪些文件，除此之外一律不碰。
 GENERATED_MANIFEST = os.path.join(DATA_DIR, "generated.json")
@@ -50,9 +50,9 @@ GENERATED_MANIFEST = os.path.join(DATA_DIR, "generated.json")
 # 真正拿到的东西**，不能描述作者这台机器上的工作树。
 #
 # 踩过的坑：README 写着「654 张公共领域实图」，克隆下来只有 442 张。原因是
-# 统计直接 os.walk 了 99-附件/images/，而里面 212 张 Pinterest 图是 gitignore 的
+# 统计直接 os.walk 了 99-attachments/images/，而里面 212 张 Pinterest 图是 gitignore 的
 # —— 在作者机上存在，在克隆里不存在。同一份 README，作者看是对的，读者看到
-# 的就是虚报。20-我的提示词/ 的笔记数同理（本地 16 篇、克隆 3 篇）。
+# 的就是虚报。20-my-prompts/ 的笔记数同理（本地 16 篇、克隆 3 篇）。
 #
 # 所以统计口径改成「git 跟踪的文件」：git 就是这个仓库「什么会发布」的权威
 # 定义，不用再手写一份忽略规则去追着 .gitignore 跑（那份规则一定会漂移）。
@@ -101,7 +101,7 @@ def publish_stats():
     而这次的 bug 恰恰就是两者都漏了同一件事（把 gitignore 的图算进去）。
     """
     img_abs = []
-    for r, _d, fs in os.walk(os.path.join(VAULT, "99-附件", "images")):
+    for r, _d, fs in os.walk(os.path.join(VAULT, "99-attachments", "images")):
         for f in fs:
             if f.lower().endswith((".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff")):
                 img_abs.append(os.path.join(r, f))
@@ -118,8 +118,8 @@ def publish_stats():
         "n_mv_with_img": len(mv_dirs & {m["slug"] for m in MOVEMENTS}),
         "n_scripts": len(shipped(glob.glob(os.path.join(HERE, "*.py")))),
         "n_notes": len([r for r in note_rel
-                        if r.split("/", 1)[0] in ("00-导航", "10-流派",
-                                                  "20-我的提示词", "90-模板")]),
+                        if r.split("/", 1)[0] in ("00-guides", "10-movements",
+                                                  "20-my-prompts", "90-templates")]),
     }
 
 
@@ -135,10 +135,10 @@ def w(rel, text):
     return rel
 
 
-def sweep_generated(dirs=("00-导航", "10-流派", "15-我的图库")):
+def sweep_generated(dirs=("00-guides", "10-movements", "15-my-library")):
     """删掉这些目录里**本次没有生成**的 .md。
 
-    这三个目录是 100% 生成物，所以清理是安全的（`20-我的提示词/` 绝不碰）。
+    这三个目录是 100% 生成物，所以清理是安全的（`20-my-prompts/` 绝不碰）。
     不加这一步的话，删掉一个页面模板之后旧文件会永远留在库里 ——
     实测踩过：把「反推工具链」从生成列表里去掉后，那份 .md 还在，
     链接也还都能解析，于是没有任何检查能发现它已经成了孤儿。
@@ -355,7 +355,7 @@ def movement_note(mv, works, local_map=None):
     # 本地图库入口 —— 只在**用户本机有图**时出现。
     # 清单是 gitignore 的，所以别人 clone 后这一行不存在，不会留下悬空链接。
     # 刻意只放一行链接、不铺开图片：万一这一行被误提交，也只暴露「有几张」，
-    # 不暴露图片本身（图在 gitignore 的 99-附件/images-local/ 里）。
+    # 不暴露图片本身（图在 gitignore 的 99-attachments/images-local/ 里）。
     _n_local = len((local_map or {}).get(mv["slug"], []))
     if _n_local:
         A("> [!tip] 我的收藏")
@@ -700,7 +700,7 @@ type: 方法
 
 这就是「用古典光打未来场景」的做法。
 
-混搭搭配可以记在你自己的笔记里 —— `20-我的提示词/` 是本地目录，不进版本库。
+混搭搭配可以记在你自己的笔记里 —— `20-my-prompts/` 是本地目录，不进版本库。
 
 ## 四、每层的关键词数量
 
@@ -730,7 +730,7 @@ type: 方法
 ## 六、配套工具
 
 拆解流程里**反推是自动的** —— 图丢进投递箱或扫进本地图库时会自动跑完
-测量与流派匹配，产物落在**那张图自己的卡**上（`15-我的图库/`）。
+测量与流派匹配，产物落在**那张图自己的卡**上（`15-my-library/`）。
 不用你去装任何外部工具。
 
 > [!tip] 反推结果长什么样
@@ -748,7 +748,7 @@ type: 方法
 | [[提示词卡模板]] | 把拆解结果固化成一张能反复用的提示词卡 |
 | [[流派卡模板]] | 想给库里补一个流派时用 |
 
-模板在 `90-模板/`，frontmatter 里的字段都是空的，填完即可。
+模板在 `90-templates/`，frontmatter 里的字段都是空的，填完即可。
 """
 
 
@@ -890,7 +890,7 @@ type: 说明
 
 ## 一、这个仓库里的图，授权是什么
 
-`10-流派/` 里的所有图片都来自 **CC0 / 公共领域**的开放数据源：
+`10-movements/` 里的所有图片都来自 **CC0 / 公共领域**的开放数据源：
 
 | 来源 | 授权 | 本仓库的使用方式 |
 |---|---|---|
@@ -984,7 +984,7 @@ Obsidian 仓库如果只是自己看、自己参考，几乎不存在风险。
 - [ ] 笔记里的每张图都来自 CC0 表里的来源
 - [ ] 每张图下面有来源链接和授权标注
 - [ ] 没有批量下载 WikiArt / Google Arts & Culture / Pinterest 的图
-- [ ] 如果公开仓库，确认 `99-附件/` 里没有版权图
+- [ ] 如果公开仓库，确认 `99-attachments/` 里没有版权图
 """
 
 
@@ -1219,7 +1219,7 @@ python3 .repo/ingest_inbox.py --scan     ← 客观测量：尺寸/主色/感知
         ↓  AI 逐张 read_image 看图
 七层拆解 + 匹配 1–3 个流派 + 可复用提示词
         ↓  写入
-20-我的提示词/投递箱-<日期>.md
+20-my-prompts/投递箱-<日期>.md
         ↓
 python3 .repo/ingest_inbox.py --archive  ← 图移到 pinterest/_已归档/
 ```
@@ -1239,7 +1239,7 @@ python3 .repo/ingest_inbox.py --archive  ← 图移到 pinterest/_已归档/
 | 你想**读**、建立审美直觉 | Obsidian 里看 [[流派总览]] 和流派卡 |
 | 你想**查**某个词是什么 | Obsidian 里搜 [[关键词图谱]] |
 | 你想**用**、生成东西 | 让 AI 调 `artvault` |
-| 你想**存**自己的成果 | [[提示词卡模板]] 存到 `20-我的提示词/` |
+| 你想**存**自己的成果 | [[提示词卡模板]] 存到 `20-my-prompts/` |
 
 > 仓库里的 Markdown 是给人看的，`artvault` 是给机器用的。两者同源——
 > 都从 `.repo/mv_*.py` 生成，改一处两边都更新。
@@ -1342,10 +1342,10 @@ this and piling up style keywords.
 
 Open the folder in Obsidian. Recommended entry points:
 
-- `00-导航/提示词拆解方法.md` - **start here**, it explains the 7 layers
-- `00-导航/流派总览.md` - overview of all 141 movements
-- `10-流派/` - pick a movement, read its full breakdown
-- `00-导航/关键词图谱.md` - look up any unfamiliar style term
+- `00-guides/提示词拆解方法.md` - **start here**, it explains the 7 layers
+- `00-guides/流派总览.md` - overview of all 141 movements
+- `10-movements/` - pick a movement, read its full breakdown
+- `00-guides/关键词图谱.md` - look up any unfamiliar style term
 
 ### 2. From the command line (or let an AI drive it)
 
@@ -1832,10 +1832,10 @@ alienated, oppressive, intoxicating                    <- 情绪层
 
 用 Obsidian 打开这个文件夹。建议从这个顺序进入：
 
-1. `00-导航/提示词拆解方法.md` —— **先读这个**，理解七层是怎么回事
-2. `00-导航/流派总览.md` —— 全部流派的总入口
-3. `10-流派/` —— 挑一个你喜欢的流派，看它的完整拆解
-4. `00-导航/关键词图谱.md` —— 以后看到陌生风格词就来这里查
+1. `00-guides/提示词拆解方法.md` —— **先读这个**，理解七层是怎么回事
+2. `00-guides/流派总览.md` —— 全部流派的总入口
+3. `10-movements/` —— 挑一个你喜欢的流派，看它的完整拆解
+4. `00-guides/关键词图谱.md` —— 以后看到陌生风格词就来这里查
 
 ### 方式二：让 AI 直接调用它
 
@@ -2042,7 +2042,7 @@ def load_local():
 
 
 def local_image_note(mv, it, image_name):
-    """生成**单张图**的反推卡：15-我的图库/<流派>/<图片名>.md
+    """生成**单张图**的反推卡：15-my-library/<流派>/<图片名>.md
 
     这是用户上传一张图之后「打开就能看到反推结果」的那个页面。
     反推的实现在 reverse_prompt.py —— 扫描/投递箱归档/渲染三处共用一份。
@@ -2066,7 +2066,7 @@ def local_note(mv, items):
          "> 这是**你自己扫进来的**图，按流派归到了这里。每张图都有自己的反推卡",
          "> （点图名进去看七层提示词、客观测量、视频提示词）。",
          ">",
-         "> 这些图是本地私有的（`15-我的图库/` 与 `99-附件/images-local/` 都已 gitignore），",
+         "> 这些图是本地私有的（`15-my-library/` 与 `99-attachments/images-local/` 都已 gitignore），",
          "> 不会随仓库发布。",
          "",
          "← 回到 [[%s]] ｜ [[我的图库总览]]" % mv["name_zh"], "",
@@ -2085,7 +2085,7 @@ def local_note(mv, items):
 
 
 def local_index_note(by_slug):
-    """15-我的图库/我的图库总览.md —— 把所有本地笔记和流派卡串起来。"""
+    """15-my-library/我的图库总览.md —— 把所有本地笔记和流派卡串起来。"""
     total = sum(len(v) for v in by_slug.values())
     L = ["---",
          "type: 我的图库",
@@ -2135,26 +2135,26 @@ def local_index_note(by_slug):
 
 # ---------------------------------------------------------------- Pinterest 汇总（按来源的组织轴）
 def pinterest_hub_note(local_map=None):
-    """生成 20-我的提示词/Pinterest.md —— Pinterest 来源的图全汇总在这里。
+    """生成 20-my-prompts/Pinterest.md —— Pinterest 来源的图全汇总在这里。
 
     为什么要有这一页：库里有两套组织轴，各管一件事。
 
-      **按流派**（15-我的图库/<流派>/）—— 拼提示词时用，找「这种风格还有什么参考」
+      **按流派**（15-my-library/<流派>/）—— 拼提示词时用，找「这种风格还有什么参考」
       **按来源**（本页）——          授权与出处用，Pinterest 的图版权归原作者，
                                      没有统一授权，和 CC0 的流派图不是一回事
 
     两轴不冲突：一张图可以既在某个流派的图库里，也出现在本页。
 
     收录两种来源，它们走同一条管线（反推 → 按流派归类 → 落成卡），只是入口不同：
-      · 脚本抓的板子 → 20-我的提示词/Pinterest-<板子>.md + 99-附件/images/pinterest/<板子>/
-      · 手动下载后丢进 pinterest/ 投递箱的 → 归档后进 15-我的图库/，来源记为投递箱
+      · 脚本抓的板子 → 20-my-prompts/Pinterest-<板子>.md + 99-attachments/images/pinterest/<板子>/
+      · 手动下载后丢进 pinterest/ 投递箱的 → 归档后进 15-my-library/，来源记为投递箱
     """
     import glob as _glob
     boards = []
-    for p in sorted(_glob.glob(os.path.join(VAULT, "20-我的提示词", "Pinterest-*.md"))):
+    for p in sorted(_glob.glob(os.path.join(VAULT, "20-my-prompts", "Pinterest-*.md"))):
         name = os.path.basename(p)[:-3]
         board = name[len("Pinterest-"):]
-        d = os.path.join(VAULT, "99-附件", "images", "pinterest", board)
+        d = os.path.join(VAULT, "99-attachments", "images", "pinterest", board)
         n = len([f for f in os.listdir(d)]) if os.path.isdir(d) else 0
         boards.append((board, n, name))
 
@@ -2182,7 +2182,7 @@ def pinterest_hub_note(local_map=None):
          "| 轴 | 在哪 | 干什么用 |",
          "|---|---|---|",
          "| **按来源** | 本页 | 授权与出处 —— Pinterest 的图和 CC0 的流派图不是一回事 |",
-         "| **按流派** | `15-我的图库/<流派>/` | 拼提示词 —— 找「这种风格还有什么参考」 |", "",
+         "| **按流派** | `15-my-library/<流派>/` | 拼提示词 —— 找「这种风格还有什么参考」 |", "",
          "一张图可以同时在两边。", "",
          "---", ""]
 
@@ -2223,7 +2223,7 @@ def pinterest_hub_note(local_map=None):
           "```", "",
           "---", "",
           "## 四、这些图后来去哪了", "",
-          "归档之后每张图都有一张**反推卡**（`15-我的图库/<流派>/<图名>.md`），",
+          "归档之后每张图都有一张**反推卡**（`15-my-library/<流派>/<图名>.md`），",
           "里面有：客观测量七维、最接近的流派、**按那个流派组好的七层提示词**、",
           "配色、两块视频提示词。打开就能用。", "",
           "顺带一提：这些反推卡也链回对应的流派卡，所以从 [[流派总览]] 一路点过来也能到。", ""]
@@ -2313,7 +2313,7 @@ def main():
     local_map = load_local()
 
     for mv in MOVEMENTS:
-        w("10-流派/%s.md" % mv["name_zh"],
+        w("10-movements/%s.md" % mv["name_zh"],
           movement_note(mv, works_map[mv["slug"]], local_map))
 
     # 本地图库（层 2）：只在用户本机有清单时才生成
@@ -2329,32 +2329,32 @@ def main():
                     continue
                 # **每张图一张反推卡** —— 这是「上传一张图，打开就能看到反推结果」
                 # 的那个页面。放在 <流派>/ 子目录下，和它的索引放一起。
-                w("15-我的图库/%s/%s.md" % (mv["name_zh"], os.path.splitext(image_name)[0]),
+                w("15-my-library/%s/%s.md" % (mv["name_zh"], os.path.splitext(image_name)[0]),
                   local_image_note(mv, it, image_name))
                 n_cards += 1
             if mv:
-                w("15-我的图库/我的图库-%s.md" % mv["name_zh"], local_note(mv, items))
-        w("15-我的图库/我的图库总览.md", local_index_note(local))
+                w("15-my-library/我的图库-%s.md" % mv["name_zh"], local_note(mv, items))
+        w("15-my-library/我的图库总览.md", local_index_note(local))
         print("  我的图库    %d 张反推卡" % n_cards)
 
     # Pinterest 汇总页：按来源的组织轴。**无论有没有本地图库都要生成** ——
     # 抓来的板子可能已经存在，而它正是这颗「星」应该有的中心。
-    w("20-我的提示词/Pinterest.md", pinterest_hub_note(local_map))
+    w("20-my-prompts/Pinterest.md", pinterest_hub_note(local_map))
 
-    w("00-导航/流派总览.md", overview_note(works_map))
-    w("00-导航/关键词图谱.md", keyword_graph_note(works_map))
+    w("00-guides/流派总览.md", overview_note(works_map))
+    w("00-guides/关键词图谱.md", keyword_graph_note(works_map))
     _sig = signature_note(works_map)
     if _sig:
-        w("00-导航/视觉签名.md", _sig)
+        w("00-guides/视觉签名.md", _sig)
     for cat in CATEGORIES:
-        w("00-导航/分类索引-%s.md" % cat, category_note(cat, works_map))
-    w("00-导航/提示词拆解方法.md", METHOD)
-    w("00-导航/视频提示词结构.md", VIDEO)
+        w("00-guides/分类索引-%s.md" % cat, category_note(cat, works_map))
+    w("00-guides/提示词拆解方法.md", METHOD)
+    w("00-guides/视频提示词结构.md", VIDEO)
     # 注意：这里刻意用占位符而不是本机绝对路径。
     # 仓库是要发布的，写死 /Users/xxx 对任何人（包括作者换个位置 clone）都是错的。
     _guide = AI_GUIDE.replace(
         "{MCP_PATH}", "<仓库绝对路径>/.repo/mcp_server.py")
-    w("00-导航/AI 调用指南.md", _guide)
+    w("00-guides/AI 调用指南.md", _guide)
     body = []
     for cat in CATEGORIES:
         body.append("## %s" % cat)
@@ -2367,10 +2367,10 @@ def main():
             body.append("")
             body.append("> `%s`" % ", ".join("%s %s" % (n, h) for h, n in m["palette"]))
             body.append("")
-    w("00-导航/配色速查.md", PALETTE.format(palette_body="\n".join(body)))
+    w("00-guides/配色速查.md", PALETTE.format(palette_body="\n".join(body)))
 
     for name, tpl in TEMPLATES.items():
-        w("90-模板/%s" % name, tpl)
+        w("90-templates/%s" % name, tpl)
 
     STATS = publish_stats()
     if tracked_files() is None:
@@ -2433,27 +2433,27 @@ def main():
 .repo/vendor/clip/
 
 # ---------------------------------------------------------------- 你的私人工作区
-# 20-我的提示词/ 是「你自己的地盘」，**整个目录都不发布**。
+# 20-my-prompts/ 是「你自己的地盘」，**整个目录都不发布**。
 # 早先只放行了一个 README，但那自相矛盾：一份说明「这个目录不进版本库」
 # 的 README，本身就在版本库里。现在整个目录忽略，clone 下来不会有它。
-20-我的提示词/
+20-my-prompts/
 
 # ---------------------------------------------------------------- 层 2：我自己的图库
 # 扫描你自己文件夹进来的私人收藏。**全部本地私有**，不随仓库发布：
 #   python3 .repo/scan_local.py <目录>   →  --list → --file <编号> --to <流派>
-# 清单和图片是私有的，但 15-我的图库/ 的笔记是生成的（build_vault 无条件重写），
+# 清单和图片是私有的，但 15-my-library/ 的笔记是生成的（build_vault 无条件重写），
 # 一并忽略，避免把你的收藏清单提交上去。
 .repo/_data/local_library.json
 .repo/_data/local_pending.json
-15-我的图库/
-99-附件/images-local/
+15-my-library/
+99-attachments/images-local/
 
 # Vision 特征提取器的编译产物（架构相关，首次使用时自动编译）
 .repo/vision/vision_feat
 
 # Pinterest 抓来的图版权归原作者、无统一授权，**不要提交也不要公开**
-# （10-流派/ 里的 CC0 图不受影响，那是可以随便分发的）
-99-附件/images/pinterest/
+# （10-movements/ 里的 CC0 图不受影响，那是可以随便分发的）
+99-attachments/images/pinterest/
 
 # 投递箱（本地工作目录，整个不发布）：
 # 里面是抓来的图和投递箱笔记，版权归原作者；那个 README 讲的是抓取流程，
@@ -2484,7 +2484,7 @@ push-to-github.sh
     n_img = sum(len(v) for v in works_map.values())
     print("生成完成：")
     print("  流派卡      %d 张" % len(MOVEMENTS))
-    _nav = [r for r in _WRITTEN if r.startswith("00-导航/")]
+    _nav = [r for r in _WRITTEN if r.startswith("00-guides/")]
     print("  导航与方法  %d 篇" % len(_nav))
     print("  模板        %d 个" % len(TEMPLATES))
     print("  入库作品图  %d 件" % n_img)

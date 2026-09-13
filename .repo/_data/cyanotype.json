@@ -10,7 +10,7 @@
   "source": "克利夫兰艺术博物馆",
   "license": "CC0 1.0 公共领域奉献",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "local_image": "99-附件/images/cyanotype/01-cyanotype-scolopendrium-vulgare.jpg"
+  "local_image": "99-attachments/images/cyanotype/01-cyanotype-scolopendrium-vulgare.jpg"
  },
  {
   "title": "Anna Atkins Bangia fusco-purpurea",
@@ -23,7 +23,7 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/cyanotype/02-cyanotype-anna-atkins-bangia-fusco-purpurea.jpg"
+  "local_image": "99-attachments/images/cyanotype/02-cyanotype-anna-atkins-bangia-fusco-purpurea.jpg"
  },
  {
   "title": "Anna Atkins Cystoseira ericoides",
@@ -36,7 +36,7 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/cyanotype/03-cyanotype-anna-atkins-cystoseira-ericoides.jpg"
+  "local_image": "99-attachments/images/cyanotype/03-cyanotype-anna-atkins-cystoseira-ericoides.jpg"
  },
  {
   "title": "Anna Atkins Cystoseira foeniculacea",
@@ -49,7 +49,7 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/cyanotype/04-cyanotype-anna-atkins-cystoseira-foeniculacea.jpg"
+  "local_image": "99-attachments/images/cyanotype/04-cyanotype-anna-atkins-cystoseira-foeniculacea.jpg"
  },
  {
   "title": "Anna Atkins Cystoseira granulata",
@@ -62,7 +62,7 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/cyanotype/05-cyanotype-anna-atkins-cystoseira-granulata.jpg"
+  "local_image": "99-attachments/images/cyanotype/05-cyanotype-anna-atkins-cystoseira-granulata.jpg"
  },
  {
   "title": "Anna Atkins Himanthalia lorea",
@@ -75,6 +75,6 @@
   "source": "维基共享资源",
   "license": "Public domain",
   "license_url": "https://commons.wikimedia.org/wiki/Commons:Licensing",
-  "local_image": "99-附件/images/cyanotype/06-cyanotype-anna-atkins-himanthalia-lorea.jpg"
+  "local_image": "99-attachments/images/cyanotype/06-cyanotype-anna-atkins-himanthalia-lorea.jpg"
  }
 ]

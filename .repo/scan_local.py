@@ -26,9 +26,9 @@ scan_local.py —— 把你**自己文件夹里的图**扫进库，按流派归�
 
 ## 三层结构
 
-    层 1 · 权威    10-流派/            141 张流派卡 + 99-附件/images/<流派>/   随仓库发布
-    层 2 · 你的图库 15-我的图库/          ← 本脚本产出，链回 [[流派卡]]         gitignore
-                   99-附件/images-local/<流派>/                               gitignore
+    层 1 · 权威    10-movements/            141 张流派卡 + 99-attachments/images/<流派>/   随仓库发布
+    层 2 · 你的图库 15-my-library/          ← 本脚本产出，链回 [[流派卡]]         gitignore
+                   99-attachments/images-local/<流派>/                               gitignore
     暂存            pinterest/          丢图区，不进图谱
 
 层 2 的每篇笔记都 `[[链回]]` 对应的流派卡，所以图谱是**一张连通的图**：
@@ -51,7 +51,7 @@ scan_local.py —— 把你**自己文件夹里的图**扫进库，按流派归�
     # 只自动归「很有把握」的那些（准确率高但覆盖少，上限由 --min-margin 控制）
     python3 scan_local.py --auto --min-margin 1.0
 
-    # 4. 生成/更新 15-我的图库/ 的笔记（跑 build_vault 也行，它会顺带生成）
+    # 4. 生成/更新 15-my-library/ 的笔记（跑 build_vault 也行，它会顺带生成）
     python3 build_vault.py
 """
 
@@ -68,10 +68,10 @@ VAULT = os.path.dirname(HERE)
 DATA = os.path.join(HERE, "_data")
 PENDING = os.path.join(DATA, "local_pending.json")
 MANIFEST = os.path.join(DATA, "local_library.json")
-LOCAL_IMAGES = os.path.join(VAULT, "99-附件", "images-local")
-LOCAL_NOTES = os.path.join(VAULT, "15-我的图库")
+LOCAL_IMAGES = os.path.join(VAULT, "99-attachments", "images-local")
+LOCAL_NOTES = os.path.join(VAULT, "15-my-library")
 
-IMAGES_DIR = os.path.join(VAULT, "99-附件", "images")
+IMAGES_DIR = os.path.join(VAULT, "99-attachments", "images")
 EXTS = (".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff", ".bmp", ".heic", ".gif")
 
 sys.path.insert(0, HERE)
@@ -150,21 +150,21 @@ def known_hashes():
 def _inside_vault(folder):
     """判断目录是否落在仓库的图库范围内。"""
     full = os.path.realpath(os.path.expanduser(folder))
-    for sub in (os.path.join(VAULT, "99-附件"),):
+    for sub in (os.path.join(VAULT, "99-attachments"),):
         if full == os.path.realpath(sub) or full.startswith(os.path.realpath(sub) + os.sep):
             return True
     return False
 
 
 def iter_images(folder):
-    """遍历图片。**跳过仓库自己的图库目录** —— 否则把 `99-附件/images` 当扫描
+    """遍历图片。**跳过仓库自己的图库目录** —— 否则把 `99-attachments/images` 当扫描
     源时会 654 张全复制进 `images-local/`，再扫一次又把副本复制一遍，
     磁盘越滚越大（实测过这个风险）。
 
     另外 os.walk 默认 followlinks=False，符号链接环不会造成死循环。
     """
     root_v = os.path.realpath(VAULT)
-    skip = [os.path.realpath(os.path.join(VAULT, "99-附件")),
+    skip = [os.path.realpath(os.path.join(VAULT, "99-attachments")),
             os.path.realpath(os.path.join(VAULT, ".git")),
             os.path.realpath(os.path.join(VAULT, ".repo", "vendor"))]
     for r, d, fs in os.walk(os.path.expanduser(folder)):
@@ -188,7 +188,7 @@ def scan(folder, name=None, verbose=True):
 
     if _inside_vault(folder):
         print("✗ 这个目录在仓库自己的图库范围内：%s" % folder)
-        print("  扫它会把库里的图复制进 99-附件/images-local/，自己复制自己。")
+        print("  扫它会把库里的图复制进 99-attachments/images-local/，自己复制自己。")
         print("  要扫的是你自己的图片文件夹，例如 ~/Pictures/refs。")
         return None
 
@@ -372,7 +372,7 @@ def file_items(nums, slug=None, drop=False, verbose=True):
             stem, ext = os.path.splitext(it["file"])
             safe = "".join(c if c.isalnum() or c in "-_" else "-" for c in stem)[:48]
             seq = len([k for k in man["items"]
-                       if k.startswith("99-附件/images-local/%s/" % slug)]) + 1
+                       if k.startswith("99-attachments/images-local/%s/" % slug)]) + 1
             fn = "%02d-%s-%s%s" % (seq, slug, safe, ext.lower())
             dest = os.path.join(dest_dir, fn)
             try:
@@ -399,7 +399,7 @@ def file_items(nums, slug=None, drop=False, verbose=True):
         _save(PENDING, p)
         _save(MANIFEST, man)
     if verbose:
-        print("\n归入 %d 张。跑 python3 build_vault.py 生成 15-我的图库/ 的笔记。" % ok)
+        print("\n归入 %d 张。跑 python3 build_vault.py 生成 15-my-library/ 的笔记。" % ok)
     return ok
 
 

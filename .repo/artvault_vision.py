@@ -47,7 +47,7 @@ VAULT = os.path.dirname(HERE)
 VISION_DIR = os.path.join(HERE, "vision")
 SOURCE = os.path.join(VISION_DIR, "vision_feat.m")
 BINARY = os.path.join(VISION_DIR, "vision_feat")
-IMAGES = os.path.join(VAULT, "99-附件", "images")
+IMAGES = os.path.join(VAULT, "99-attachments", "images")
 INDEX = os.path.join(HERE, "_data", "vision_index.npz")
 INDEX_LEGACY = os.path.join(HERE, "_data", "vision_index.json")
 
@@ -249,9 +249,9 @@ def build_index(force=False, verbose=True):
 
 
 def slug_of(relpath):
-    """从图库相对路径取出流派 slug：99-附件/images/<slug>/<file>"""
+    """从图库相对路径取出流派 slug：99-attachments/images/<slug>/<file>"""
     parts = relpath.split("/")
-    return parts[2] if len(parts) >= 4 and parts[0] == "99-附件" else "?"
+    return parts[2] if len(parts) >= 4 and parts[0] == "99-attachments" else "?"
 
 
 def require_index(verbose=True):

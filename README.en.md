@@ -200,10 +200,10 @@ Art Aesthetic Style Library
 
 Open the folder in Obsidian. Recommended entry points:
 
-- `00-导航/提示词拆解方法.md` - **start here**, it explains the 7 layers
-- `00-导航/流派总览.md` - overview of all 141 movements
-- `10-流派/` - pick a movement, read its full breakdown
-- `00-导航/关键词图谱.md` - look up any unfamiliar style term
+- `00-guides/提示词拆解方法.md` - **start here**, it explains the 7 layers
+- `00-guides/流派总览.md` - overview of all 141 movements
+- `10-movements/` - pick a movement, read its full breakdown
+- `00-guides/关键词图谱.md` - look up any unfamiliar style term
 
 ### 2. From the command line (or let an AI drive it)
 

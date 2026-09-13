@@ -29,7 +29,7 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 VAULT = os.path.dirname(HERE)
-IMG_DIR = os.path.join(VAULT, "99-附件", "images")
+IMG_DIR = os.path.join(VAULT, "99-attachments", "images")
 DATA_DIR = os.path.join(HERE, "_data")
 # 「看过了，确实没有合适的」记录。
 # 为什么要单独记一笔：光写一个空 [] 分不清「没抓过」和「抓过但没有」，
@@ -304,7 +304,7 @@ def run(only=None, per=6, refresh=False, allow_ccby=False, tier=None):
             dest = os.path.join(d, fn)
             if not os.path.exists(dest):
                 download(w["image_url"], dest)
-            w["local_image"] = ("99-附件/images/%s/%s" % (slug, fn)) if os.path.exists(dest) else ""
+            w["local_image"] = ("99-attachments/images/%s/%s" % (slug, fn)) if os.path.exists(dest) else ""
             w["image_url_hi"] = w.get("image_url_hi") or w["image_url"]
             w.pop("raw_title", None)
             print("    %s %s — %s" % ("✓" if w["local_image"] else "✗",

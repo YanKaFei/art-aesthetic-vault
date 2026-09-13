@@ -128,7 +128,7 @@ https://openaccess-api.clevelandart.org/api/artworks/?q=<词>&cc0=1&has_image=1&
 
 1. 每张作品**必须记录**：来源、授权名称、授权链接、原始页面 URL
 2. 版权期内的作品**不存图，只存提示词结构**
-3. `99-附件/images/<非CC0来源>/` 目录**写进 `.gitignore`**
+3. `99-attachments/images/<非CC0来源>/` 目录**写进 `.gitignore`**
 4. 在库里放一份 `版权与来源.md`，把上表抄进去
 
 ---

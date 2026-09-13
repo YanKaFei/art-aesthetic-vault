@@ -11,7 +11,7 @@ verify_vault.py —— 抓完/改完之后的验收检查。
     python3 verify_vault.py --quick    # 跳过第 5 项（近重复），其余七项照跑
 
 检查项
-    1 断链       每个 ![[...]] 都能在 99-附件/images/ 下找到文件
+    1 断链       每个 ![[...]] 都能在 99-attachments/images/ 下找到文件
     2 重名       全库 basename 唯一（Obsidian 的 ![[名]] 按 basename 解析，
                  重名会让嵌入指向错误的那张）
     3 AI 图      全库 0 命中（用模型的输出当模型的参考是致命的）
@@ -41,16 +41,16 @@ from collections import Counter, defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 VAULT = os.path.dirname(HERE)
-IMAGES = os.path.join(VAULT, "99-附件", "images")
+IMAGES = os.path.join(VAULT, "99-attachments", "images")
 DATA = os.path.join(HERE, "_data")
 
-NOTE_DIRS = ("00-导航", "10-流派", "15-我的图库", "20-我的提示词", "90-模板")
-# 图片有两个根：权威层的 99-附件/images/ 和用户自己的 99-附件/images-local/。
+NOTE_DIRS = ("00-guides", "10-movements", "15-my-library", "20-my-prompts", "90-templates")
+# 图片有两个根：权威层的 99-attachments/images/ 和用户自己的 99-attachments/images-local/。
 # 断链与孤儿图两项都要同时认这两个根，否则本地图库的嵌入会被误报成断链。
-IMAGE_ROOTS = ("99-附件/images", "99-附件/images-local")
+IMAGE_ROOTS = ("99-attachments/images", "99-attachments/images-local")
 # 模板目录里是给用户抄的骨架，本来就带占位符（如 `![[此处放图]]`），
 # 检查断链时要跳过，否则每次都会报一个假问题。
-TEMPLATE_DIR = "90-模板"
+TEMPLATE_DIR = "90-templates"
 EMBED = re.compile(r"!\[\[([^\]|#]+)")
 IMG_EXT = (".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".tif", ".tiff")
 
@@ -59,7 +59,7 @@ OK, BAD, WARN = "  ✓", "  ✗", "  ·"
 
 def _notes(skip_templates=False):
     """遍历笔记。README.md 不算笔记 —— 它是给人看的说明文档，
-    没有 frontmatter 也不该有（实测踩过：给 20-我的提示词/ 加了个 README
+    没有 frontmatter 也不该有（实测踩过：给 20-my-prompts/ 加了个 README
     说明那目录是私人的，结果 frontmatter 检查把它当笔记报了错）。"""
     for d in NOTE_DIRS:
         if skip_templates and d == TEMPLATE_DIR:
@@ -340,7 +340,7 @@ def check_video_layer():
       B. MiniMax H3 自然语言 —— 不许出现 [Shot N] / 时间戳（会和 Context-IR 打架）
     """
     problems = []
-    for md in glob.glob(os.path.join(VAULT, "10-流派", "*.md")):
+    for md in glob.glob(os.path.join(VAULT, "10-movements", "*.md")):
         try:
             t = open(md, encoding="utf-8").read()
         except Exception:
@@ -370,7 +370,7 @@ def check_generated_freshness():
     """12 生成物新鲜度：生成脚本比笔记新 → 上次重建失败或没重建。
 
     这是今天踩了两次的坑：`build_vault.py` 报错退出（exit 1）时，
-    **10-流派/ 下的笔记还是上一次成功构建的旧文件**，于是所有检查照常通过 ——
+    **10-movements/ 下的笔记还是上一次成功构建的旧文件**，于是所有检查照常通过 ——
     验收全绿，但内容是旧的。只查「笔记里的东西对不对」看不出这个问题，
     必须比对**时间**。
     """
@@ -384,7 +384,7 @@ def check_generated_freshness():
     newest_name = os.path.basename(max(srcs, key=os.path.getmtime))
 
     stale = []
-    for d in ("10-流派", "00-导航"):
+    for d in ("10-movements", "00-guides"):
         for p in glob.glob(os.path.join(VAULT, d, "*.md")):
             if os.path.getmtime(p) < newest - 1:      # 容 1 秒误差
                 stale.append((os.path.relpath(p, VAULT), "比 " + newest_name + " 旧"))
@@ -412,7 +412,7 @@ def check_local_library():
     for rel, it in items.items():
         if not os.path.exists(os.path.join(VAULT, rel)):
             problems.append((rel, "清单里有但文件不在"))
-    root = os.path.join(VAULT, "99-附件", "images-local")
+    root = os.path.join(VAULT, "99-attachments", "images-local")
     if os.path.isdir(root):
         for r, _d, fs in os.walk(root):
             for f in fs:
@@ -423,7 +423,7 @@ def check_local_library():
                     problems.append((rel, "图片在但清单里没有"))
     # 流派卡引用的本地笔记必须存在
     notes = {os.path.splitext(os.path.basename(x))[0]
-             for x in glob.glob(os.path.join(VAULT, "15-我的图库", "*.md"))}
+             for x in glob.glob(os.path.join(VAULT, "15-my-library", "*.md"))}
     for md in _notes():
         try:
             t = open(md, encoding="utf-8").read()
@@ -444,7 +444,7 @@ def check_board_analysis():
     分开之后很容易只做前一半，所以这里固定查一次。
     """
     problems = []
-    for p in sorted(glob.glob(os.path.join(VAULT, "20-我的提示词", "Pinterest-*.md"))):
+    for p in sorted(glob.glob(os.path.join(VAULT, "20-my-prompts", "Pinterest-*.md"))):
         name = os.path.basename(p)
         if name == "Pinterest.md":
             continue                       # 汇总页，不含单图
@@ -466,13 +466,13 @@ def check_clone_integrity():
     """15 克隆完整性：**别人 clone 下来**会不会断链。
 
     前面 1/9 两项查的是「在你本机对不对」，这一项查的是「发布出去对不对」。
-    两者会不一致 —— 实测踩过一个大的：`20-我的提示词/` 下的板子笔记被跟踪，
-    但它们嵌入的图在 `99-附件/images/pinterest/`（gitignore），
+    两者会不一致 —— 实测踩过一个大的：`20-my-prompts/` 下的板子笔记被跟踪，
+    但它们嵌入的图在 `99-attachments/images/pinterest/`（gitignore），
     结果别人 clone 下来看到 **214 个加载不出来的图**，
     而本机检查全绿（因为本机图都在）。
 
     做法：只看 git 跟踪的文件，模拟 clone 后的状态再查一遍引用。
-      · 嵌入：只算图片扩展名（`90-模板/` 的 `![[此处放图]]` 是有意占位符）
+      · 嵌入：只算图片扩展名（`90-templates/` 的 `![[此处放图]]` 是有意占位符）
       · 双链：先剥掉围栏代码块和**行内代码**，否则文档里的示例会被误报
         （实测：`skill` 文档里的 `` `![[文件名]]` `` 和 `` `[[流派卡]]` `` 被误报过）
     """
@@ -488,7 +488,7 @@ def check_clone_integrity():
 
     notes = [p for p in tracked if p.endswith(".md")]
     have_note = {os.path.splitext(os.path.basename(p))[0] for p in notes}
-    have_img = {os.path.basename(p) for p in tracked if p.startswith("99-附件/")}
+    have_img = {os.path.basename(p) for p in tracked if p.startswith("99-attachments/")}
     IMG_EXT = (".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".tif", ".tiff")
 
     def strip_code(t):
@@ -519,8 +519,8 @@ def check_readme_numbers():
     只比 **mtime**，不比内容。所以下面这个 bug 能一路全绿：
 
         README 写「654 张公共领域实图」，克隆下来只有 442 张 —— 因为统计
-        os.walk 了 99-附件/images/，把 gitignore 的 212 张 Pinterest 图算了进去
-        （作者机上存在，克隆里不存在）。20-我的提示词/ 的笔记数同理。
+        os.walk 了 99-attachments/images/，把 gitignore 的 212 张 Pinterest 图算了进去
+        （作者机上存在，克隆里不存在）。20-my-prompts/ 的笔记数同理。
 
     虚报 48% 不是小事：数字是读者判断「这个库值不值得 clone」的第一依据，而且
     他 clone 完第一件事就是发现对不上。
@@ -638,7 +638,7 @@ def check_i2v():
     except Exception as e:
         return [("movements", "导入失败：%s" % e)]
 
-    root = os.path.join(VAULT, "99-附件", "images")
+    root = os.path.join(VAULT, "99-attachments", "images")
     imgs = []
     for r, _d, fs in os.walk(root):
         for f in sorted(fs):
@@ -858,7 +858,7 @@ def _pillow_ok():
         sys.path.insert(0, HERE)
         import image_analysis as IA
         import glob as _g
-        root = os.path.join(VAULT, "99-附件", "images")
+        root = os.path.join(VAULT, "99-attachments", "images")
         for r, _d, fs in os.walk(root):
             for f in sorted(fs):
                 if f.lower().endswith((".jpg", ".jpeg", ".png")):

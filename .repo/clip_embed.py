@@ -41,7 +41,7 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 VAULT = os.path.dirname(HERE)
-IMAGES = os.path.join(VAULT, "99-附件", "images")
+IMAGES = os.path.join(VAULT, "99-attachments", "images")
 MODEL_DIR = os.path.join(HERE, "vendor", "clip")
 VISION_ONNX = os.path.join(MODEL_DIR, "vision.onnx")
 TEXT_ONNX = os.path.join(MODEL_DIR, "text.onnx")

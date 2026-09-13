@@ -40,7 +40,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 VAULT = os.path.dirname(HERE)
 DATA = os.path.join(HERE, "_data")
 CACHE = os.path.join(DATA, "signatures.json")
-IMAGES = os.path.join(VAULT, "99-附件", "images")
+IMAGES = os.path.join(VAULT, "99-attachments", "images")
 
 # 参与签名的数值维度。刻意剔掉几类：
 #   ratio / orientation        画面比例受题材支配，跨流派几乎不区分

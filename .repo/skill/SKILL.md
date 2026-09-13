@@ -135,7 +135,7 @@ python3 artvault.py video 巴洛克        # A 块 Seedance 2.5 + B 块 MiniMax 
 
 ⚠ H3 前面有 Context-IR 做理解与改写，**手工塞分镜和时间戳会和它打架**
 （镜头数翻倍、时间戳错位），所以 B 块刻意不结构化。细节见
-`00-导航/视频提示词结构.md`。
+`00-guides/视频提示词结构.md`。
 
 ## Pinterest 投递箱
 
@@ -153,12 +153,12 @@ cd "$VAULT/.repo" && python3 ingest_inbox.py --scan
 「宝丽来与胶片」，CLIP 正确判成 ukiyo-e。但它仍是**建议**（Top-1 39%）。
 
 然后**逐张 `read_image` 看图**，做七层拆解 + 匹配 1–3 个流派，
-写入 `20-我的提示词/投递箱-<日期>.md`，最后 `--archive` 归档。
+写入 `20-my-prompts/投递箱-<日期>.md`，最后 `--archive` 归档。
 （需要 Pillow；没有就 `pip3 install --user Pillow`）
 
 ## 更多文档
 
-库内 `00-导航/`：流派总览、关键词图谱（218 styles / 189 movements / 68 genres 映射）、
+库内 `00-guides/`：流派总览、关键词图谱（218 styles / 189 movements / 68 genres 映射）、
 提示词拆解方法、视频提示词结构、AI 调用指南、反推工具链、版权与来源。
 
 ## MCP（可选）
