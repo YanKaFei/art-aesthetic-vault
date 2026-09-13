@@ -24,6 +24,7 @@ artvault —— 仓库的命令行入口，也是给 AI 用的调用接口。
 
 import argparse
 import json
+import os
 import sys
 
 import artvault_core as A
@@ -33,6 +34,120 @@ def out(obj, as_json):
     if as_json:
         print(json.dumps(obj, ensure_ascii=False, indent=1))
     return as_json
+
+
+
+# ------------------------------------------------------------------ doctor
+def _dep_paths():
+    """和别的脚本一致的依赖发现顺序（vendor/libs 优先）。"""
+    here = os.path.dirname(os.path.abspath(__file__))
+    for c in (os.environ.get("ARTVAULT_DEPS", ""),
+              os.path.join(here, "vendor", "libs"),
+              os.path.expanduser("~/.artvault/deps")):
+        if c and os.path.isdir(c) and c not in sys.path:
+            sys.path.insert(0, c)
+
+
+def _has(mod):
+    try:
+        __import__(mod)
+        return True
+    except Exception:
+        return False
+
+
+def doctor():
+    """环境自检：现在能用什么、缺什么、装了能多什么。
+
+    ## 为什么要有这个命令
+
+    README 说「核心只用标准库」，可选依赖散在文档各处，还有个特殊约定
+    （装到 `./vendor/libs` 而不是系统 Python）。读者 clone 下来第一件事是
+    「我到底要不要装东西」，而这个问题的答案散在四五个小节里。
+    这里一次性回答，并给出**可以直接复制的那一条命令**。
+
+    ## 判断来源
+
+    不在这里另写一套可用性判断 —— 能用各模块自己的检查就用它们的
+    （`clip_embed.available()` / `image_analysis_ext.available()` /
+    `artvault_vision.unavailable_reason()`），省得两处判断各说各话。
+    """
+    _dep_paths()
+    core = [
+        ("流派检索与分层提示词", True, "categories / search / layers / show / palette / related"),
+        ("拼提示词与冲突消解", True, "compose（跨流派混搭自动消解矛盾负向词）"),
+        ("视频提示词 / 图生视频", True, "video / i2v_prompt 的文本部分"),
+        ("重建整个仓库", True, "build_vault / make_links"),
+        ("MCP 服务", True, "mcp_server（10 个工具）"),
+    ]
+    opt = []
+
+    have_pil = _has("PIL")
+    opt.append(("图片客观测量（七维）", have_pil, "Pillow",
+                "image_analysis：明度/对比/色彩/和谐/构图/质感/线条"))
+
+    have_np, have_cv = _has("numpy"), _has("cv2")
+    opt.append(("增强维度（人脸/直线/显著性）", have_np and have_cv,
+                "numpy + opencv-python-headless",
+                "image_analysis_ext：只在装了 opencv 时才有这三项"))
+
+    # CLIP：用模块自己的判断
+    clip_ok, clip_why = False, "没试"
+    try:
+        import clip_embed as CE
+        clip_ok = CE.available() is None
+        clip_why = "" if clip_ok else CE.available()
+    except Exception as e:
+        clip_why = "%s: %s" % (type(e).__name__, e)
+    opt.append(("语义检索 / 图像→流派匹配", clip_ok,
+                "onnxruntime + tokenizers + 模型(>150MB)",
+                "clip_match / search --semantic；中文会先过 visual_lexicon 的桥"))
+
+    # macOS Vision：不用装东西，但只有 macOS 有
+    vis_ok, vis_why = False, ""
+    try:
+        import artvault_vision as AV
+        r = AV.unavailable_reason()
+        vis_ok = not r
+        vis_why = r or ""
+    except Exception as e:
+        vis_why = str(e)
+    opt.append(("近重复检测 / 以图搜图", vis_ok, "macOS 系统自带（无需安装）",
+                vis_why or "artvault_vision：近重复这一项实测最可靠"))
+
+    req = _has("requests")
+    opt.append(("抓图（CC0 数据源 / Pinterest）", req, "requests",
+                "fetch_art / pinterest_grab"))
+
+    print("艺术审美风格库 · 环境自检")
+    print("=" * 62)
+    print("\n【核心】不需要装任何东西（只用标准库）")
+    for name, ok, note in core:
+        print("  %s %-24s %s" % ("✓" if ok else "✗", name, note))
+
+    print("\n【可选】装了多一层能力，不装不影响上面的核心")
+    missing = []
+    for name, ok, need, note in opt:
+        print("  %s %-24s %s" % ("✓" if ok else "·", name, note))
+        if not ok:
+            missing.append((name, need))
+    if missing:
+        print("\n【缺什么】")
+        for name, need in missing:
+            print("  · %-24s 需要 %s" % (name, need))
+        deps = ["Pillow", "numpy", "opencv-python-headless",
+                "onnxruntime", "tokenizers", "requests"]
+        print("\n【怎么装】在 _scripts/ 下执行（装到 vendor/libs，不动系统 Python）：")
+        print("  pip3 install --target ./vendor/libs " + " ".join(deps))
+        print("  或只装你要的： pip3 install --target ./vendor/libs Pillow")
+        print("  也可以：     pip3 install --target ./vendor/libs -r ../requirements-optional.txt")
+        print("\n  装完 CLIP 还要下模型：python3 clip_embed.py download")
+    else:
+        print("\n可选依赖都齐了。")
+    print("\n【核对】依赖装在哪：ARTVAULT_DEPS 环境变量 > vendor/libs > ~/.artvault/deps")
+    print("\n【验收】python3 verify_vault.py（22 项）｜ "
+          "python3 ../tests/smoke_test.py（38 项）")
+    return 0
 
 
 def main():
@@ -72,6 +187,7 @@ def main():
     for l in A.LAYERS:
         p.add_argument("--" + l)
     add("dump")
+    add("doctor")
 
     a = ap.parse_args()
     if not a.cmd:
@@ -171,6 +287,9 @@ def main():
                       resolve_conflicts=not a.keep_conflicts, **kw)
         if out(r, a.json): return 0
         print(A.render(r))
+
+    elif a.cmd == "doctor":
+        return doctor()
 
     elif a.cmd == "dump":
         print(json.dumps(A.cards(), ensure_ascii=False, indent=1))

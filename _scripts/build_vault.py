@@ -2758,8 +2758,13 @@ python3 i2v_prompt.py 你的图.jpg --slug baroque
 git clone {REPO_URL}.git
 cd art-aesthetic-vault
 
+cd _scripts
+
+# 先看这台机器现在能用什么、缺什么（不需要装任何东西就能跑）
+python3 artvault.py doctor
+
 # 立刻能用的自检
-cd _scripts && python3 artvault.py categories
+python3 artvault.py categories
 ```
 
 **环境要求**：Python 3.8+ 和 Obsidian（推荐）。
@@ -2777,6 +2782,8 @@ pip3 install --target ./vendor/libs numpy opencv-python-headless
 ```
 
 > 装到 `vendor/libs` 是为了不污染系统 Python，且该目录已 gitignore。
+> 完整清单（每一项换来什么能力）见 `requirements-optional.txt`，
+> 或者直接 `python3 artvault.py doctor` 让他告诉你缺什么。
 > 不想装：`ARTVAULT_NO_EXT=1` 可显式关掉增强维度。
 > 另：`artvault_vision.py` 只在 macOS 上可用（依赖系统自带 Vision 框架），
 > 其他系统会自动降级并说明原因，不影响任何核心功能。
@@ -2850,7 +2857,7 @@ CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这�
 
 | 脚本 | 干什么 |
 |---|---|
-| `artvault.py` | 主查询接口：`categories` `search` `layers` `show` `palette` `related` `compose` |
+| `artvault.py` | 主查询接口：`categories` `search` `layers` `show` `palette` `related` `compose` `doctor` |
 | `visual_lexicon.py` | **中文视觉词 → 英文短语**的桥。CLIP 文本塔只认英文，中文查询不过桥等于随机 |
 | `eval_search.py` | 检索评测：A 组守卫精确度、B 组测语义增益，并扫出接管阈值 |
 | `refs.py` | **艺术史出处**：把每层提示词的说法接到权威术语表；`--check-urls` 联网复验链接 |

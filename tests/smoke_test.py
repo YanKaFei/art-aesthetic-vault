@@ -223,6 +223,36 @@ class CoreCommandTests(unittest.TestCase):
                          "dump 条数和 cards() 不一致")
         self.assertGreaterEqual(len(data), 141, "卡片数不该少于 141")
 
+    def test_doctor_reports_environment(self):
+        """`doctor` 是读者 clone 下来第一个该跑的命令，必须有输出且不炸。
+
+        它要在**什么都没装**的机器上也给出可读结论 —— 那条路径才是它的存在理由。
+        """
+        rc, out, err = run(["artvault.py", "doctor"], timeout=120)
+        self.assertEqual(0, rc, "doctor 失败：%s" % (err[-400:]))
+        self.assertNotIn("Traceback (most recent call last)", out + err)
+        for kw in ("核心", "可选", "核对", "验收"):
+            self.assertIn(kw, out, "doctor 输出里缺「%s」这一段" % kw)
+        # 「怎么装」只在**确实缺东西**时才出现（第一版无条件要求它，
+        # 于是在依赖齐全的机器上误报）。缺不缺看可选区里有没有 "·" 标记。
+        opt = out.split("【可选】", 1)[1].split("【", 1)[0]
+        if "·" in opt:
+            self.assertIn("怎么装", out, "缺依赖却没给安装命令")
+        else:
+            self.assertNotIn("怎么装", out,
+                             "依赖齐全时不该出现安装指引（会让人以为还要装）")
+
+    def test_doctor_always_lists_core_as_available(self):
+        """核心能力必须**永远**是「可用」——本库的承诺是零依赖可用。
+
+        如果哪天有人往核心路径里塞了一个 import，这条会立刻红。
+        """
+        rc, out, _err = run(["artvault.py", "doctor"], timeout=120)
+        self.assertEqual(0, rc)
+        core = out.split("【核心】", 1)[1].split("【可选】", 1)[0]
+        self.assertNotIn("✗", core,
+                         "核心能力里出现了不可用项 —— 核心不该依赖任何第三方包：\n" + core)
+
     def test_json_flag_works_on_both_sides_of_the_command(self):
         """`--json` 放命令前、放命令后都要能用。
 

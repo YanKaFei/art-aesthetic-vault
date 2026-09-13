@@ -1,0 +1,56 @@
+# 艺术审美风格库 · 可选依赖
+#
+# ## 先说清楚：**核心功能一个都不需要装**
+#
+# 下面这些一个都不装，也能用：
+#   流派检索（categories / search / layers / show / palette / related）
+#   分层提示词与冲突消解（compose）
+#   视频提示词、图生视频的文本部分（video / i2v_prompt）
+#   生成整个仓库（build_vault）
+#   MCP 服务（mcp_server）
+#
+# 核心只用 Python 标准库。这是本库的承诺，不是「理论上」——
+# CI（.github/workflows/ci.yml）在**零 pip 安装**的干净环境里跑完整验收。
+#
+# ## 装到哪里
+#
+# 推荐装进 `_scripts/vendor/libs/`，而不是系统 Python：
+#
+#     cd _scripts
+#     pip3 install --target ./vendor/libs -r ../requirements-optional.txt
+#
+# 脚本会自己把这个目录加进 sys.path（`ARTVAULT_DEPS` 环境变量可以覆盖），
+# 所以不需要设 PYTHONPATH，也不会污染系统环境。该目录已 gitignore。
+#
+# 先跑 `python3 artvault.py doctor` 看你现在缺什么、装了能多什么能力。
+#
+# ## 每一项换来什么能力
+
+# 读图的基础。没有它，一切「看图」的能力都没有。
+#   → image_analysis.py 的七维客观测量
+#   → 反推卡、投递箱扫描、clip_embed 的图像编码
+Pillow
+
+# 数值计算。近重复检测、CLIP 图像/文本向量、客观维度指纹都要它。
+numpy
+
+# 人脸景别 / 霍夫直线 / 谱残差显著性（image_analysis_ext 的增强维度）。
+# 只有 numpy 时那三项会跳过；装上 cv2 才有。
+opencv-python-headless
+
+# CLIP 推理（量化 ONNX，**不需要 PyTorch**）。
+#   onnxruntime  推理引擎
+#   tokenizers   文本塔的分词器
+# 装完还要下模型（约 150MB）：python3 clip_embed.py download
+# 换来：图像→流派匹配（Top-1 约四成）、中文语义检索、零样本匹配
+onnxruntime
+tokenizers
+
+# 只有这几条抓取路径需要：
+#   fetch_art.py   从 Cleveland / AIC / Met / Commons 抓 CC0 实图
+#   pinterest_grab.py  Pinterest 投递箱抓取
+requests
+
+# Pinterest 抓取的可选增强（反爬与解析）
+# beautifulsoup4
+# fake-useragent
