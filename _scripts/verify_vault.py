@@ -842,6 +842,23 @@ def check_refs():
     return problems
 
 
+def _pillow_ok():
+    """Pillow 是否可用（脚本会自己往 vendor/libs 找，所以不能只 import）。"""
+    try:
+        sys.path.insert(0, HERE)
+        import image_analysis as IA
+        import glob as _g
+        root = os.path.join(VAULT, "99-附件", "images")
+        for r, _d, fs in os.walk(root):
+            for f in sorted(fs):
+                if f.lower().endswith((".jpg", ".jpeg", ".png")):
+                    a = IA.analyze(os.path.join(r, f))
+                    return not a.get("error")
+        return False
+    except Exception:
+        return False
+
+
 def check_image_card_fit():
     """22 图与卡自洽 —— 用视觉签名把「最不像本流派的图」挑出来，供人工分诊。
 
@@ -909,6 +926,12 @@ def check_image_card_fit():
                 scored.append((out / float(tot), by_slug[slug]["name_zh"],
                                os.path.basename(f)))
     if not scored:
+        # 分清两种情况 —— 第一版一律报「没算过签名」，而**干净克隆上没有 Pillow**，
+        # 一张图都分析不了，也走到了这里，于是把一个「缺可选依赖」说成了
+        # 「你没建签名」。两者处理办法完全不同，不能混为一谈。
+        if not _pillow_ok():
+            print("      （跳过：本机没有 Pillow，测不了图）")
+            return None
         return None
     scored.sort(reverse=True)
     flagged = [x for x in scored if x[0] > 0.70]

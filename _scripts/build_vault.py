@@ -2799,7 +2799,17 @@ python3 make_links.py                 # 重新生成外部检索深链
 
 1. 在 `_scripts/mv_*.py` 对应的分类文件里加一条定义
 2. 在**同一个文件的 `ARTIST_KEYS`** 里加过滤关键词 ← **必须，否则会抓进一堆无关作品**
-3. `python3 fetch_art.py <slug>` 然后 `python3 build_vault.py`
+3. `python3 fetch_art.py <slug>` 抓图
+4. `git add` 新生成的笔记，**然后**才 `python3 build_vault.py`
+
+> [!warning] 第 4 步的顺序不能反
+> README 里的统计数字是按**发布视图**算的 —— 也就是 `git ls-files`，
+> 「下一次提交会带走的文件」。所以如果先 `build_vault` 再 `git add`，
+> 那一刻新笔记还没进索引，README 就会**少算**（实测少算 6 篇笔记），
+> 而这份陈旧的 README 会被一起提交上去。
+>
+> 验收第 16 项会抓住这种情况（它就是为此存在的），但那时你已经在改提交了。
+> 记住顺序：**先 add，再 build，最后把 README 也 add 进去。**
 
 ### 改完代码怎么验
 

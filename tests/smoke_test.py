@@ -371,11 +371,22 @@ class VisualSignatureTests(unittest.TestCase):
     """
 
     def _sigs(self):
+        """拿签名；没有签名**或分析不了图**都 skip。
+
+        第二类是第一版漏掉的：干净克隆上没有 Pillow，`VS.check()` 对任何图
+        都返回 unknown，于是断言直接 KeyError 崩掉。缺可选依赖是合法状态，
+        不该是 error —— 这个坑本仓库已经踩过三次（image_analysis_ext /
+        i2v 两次假阴性 / 这里）。
+        """
         sys.path.insert(0, SCRIPTS)
         import visual_signature as VS
         sigs, meta = VS.load()
         if not sigs:
             self.skipTest("还没算过签名（python3 visual_signature.py build）")
+        by_mv = VS.images_by_movement()
+        probe = next((f for fs in by_mv.values() for f in fs), None)
+        if probe and VS.check(probe, next(iter(sigs)))["verdict"] == "unknown":
+            self.skipTest("图片分析不可用（缺 Pillow），签名无从比对")
         return VS, sigs, meta
 
     def test_signature_intervals_are_ordered(self):
