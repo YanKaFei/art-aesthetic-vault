@@ -94,6 +94,46 @@ CONCEPTS = {
     "assemblage":     ("集合艺术（assemblage）", TATE, _T % ("a", "assemblage")),
     "readymade":      ("现成品（readymade）", TATE, _T % ("r", "readymade")),
 
+    # ---- 第二批（同样逐条验证过 200）----
+    "feminist-art":   ("女性主义艺术（Feminist art）", TATE, _T % ("f", "feminist-art")),
+    "body-art":       ("身体艺术（Body art）", TATE, _T % ("b", "body-art")),
+    "fluxus":         ("激浪派（Fluxus）", TATE, _T % ("f", "fluxus")),
+    "situationist-international": ("情境主义国际（Situationist International）", TATE,
+                                    _T % ("s", "situationist-international")),
+    "arte-povera":    ("贫穷艺术（Arte povera）", TATE, _T % ("a", "arte-povera")),
+    "institutional-critique": ("制度批判（Institutional critique）", TATE,
+                                _T % ("i", "institutional-critique")),
+    "op-art":         ("欧普艺术（Op art）", TATE, _T % ("o", "op-art")),
+    "kinetic-art":    ("动力艺术（Kinetic art）", TATE, _T % ("k", "kinetic-art")),
+    "happening":      ("偶发艺术（Happening）", TATE, _T % ("h", "happening")),
+    "process-art":    ("过程艺术（Process art）", TATE, _T % ("p", "process-art")),
+    "tachisme":       ("斑点主义（Tachisme）", TATE, _T % ("t", "tachisme")),
+    "art-informel":   ("无形式艺术（Art informel）", TATE, _T % ("a", "art-informel")),
+    "matter-painting": ("物质绘画（Matter painting）", TATE, _T % ("m", "matter-painting")),
+    "colour-field-painting": ("色域绘画（Colour field painting）", TATE,
+                               _T % ("c", "colour-field-painting")),
+    "hard-edge-painting": ("硬边绘画（Hard-edge painting）", TATE,
+                            _T % ("h", "hard-edge-painting")),
+    "systems-art":    ("系统艺术（Systems art）", TATE, _T % ("s", "systems-art")),
+    "digital-art":    ("数字艺术（Digital art）", TATE, _T % ("d", "digital-art")),
+    "internet-art":   ("互联网艺术（Internet art）", TATE, _T % ("i", "internet-art")),
+    "relational-aesthetics": ("关系美学（Relational aesthetics）", TATE,
+                               _T % ("r", "relational-aesthetics")),
+    "outsider-art":   ("域外艺术（Outsider art）", TATE, _T % ("o", "outsider-art")),
+    "art-brut":       ("原生艺术（Art brut）", TATE, _T % ("a", "art-brut")),
+    "naive-art":      ("稚拙艺术（Naive art）", TATE, _T % ("n", "naive-art")),
+    "mosaic":         ("镶嵌（Mosaic）", TATE, _T % ("m", "mosaic")),
+    "screenprint":    ("丝网印（Screenprint）", TATE, _T % ("s", "screenprint")),
+    "etching":        ("蚀刻版画（Etching）", TATE, _T % ("e", "etching")),
+    "aquatint":       ("飞尘法（Aquatint）", TATE, _T % ("a", "aquatint")),
+    "mezzotint":      ("美柔汀（Mezzotint）", TATE, _T % ("m", "mezzotint")),
+    "monotype":       ("独幅版画（Monotype）", TATE, _T % ("m", "monotype")),
+    "gouache":        ("水粉（Gouache）", TATE, _T % ("g", "gouache")),
+    "pastel":         ("色粉（Pastel）", TATE, _T % ("p", "pastel")),
+    "caricature":     ("讽刺画（Caricature）", TATE, _T % ("c", "caricature")),
+    "allegory":       ("寓意（Allegory）", TATE, _T % ("a", "allegory")),
+    "vanitas":        ("虚空派（Vanitas）", TATE, _T % ("v", "vanitas")),
+
     # 题材
     "still-life":     ("静物（still life）", TATE, _T % ("s", "still-life")),
     "portrait":       ("肖像（portrait）", TATE, _T % ("p", "portrait")),
@@ -253,6 +293,82 @@ def check_urls(timeout=25, workers=6):
         return list(ex.map(one, sorted(CONCEPTS.items())))
 
 
+ASSIGN.update({
+    "neoclassicism":     {"构图": ["history-painting", "allegory"]},
+    "academic-art":      {"构图": ["history-painting", "allegory"]},
+    "classicism":        {"构图": ["history-painting"]},
+    "pre-raphaelite":    {"构图": ["allegory", "figurative-art"]},
+    "nabis":             {"风格": ["symbolism"], "构图": ["landscape"]},
+    "vienna-secession":  {"风格": ["art-nouveau"]},
+    "arts-and-crafts":   {"风格": ["art-nouveau"], "媒介": ["mosaic"]},
+    "hudson-river-school": {"构图": ["landscape"]},
+    "luminism":          {"构图": ["landscape"]},
+    "ashcan-school":     {"构图": ["figurative-art"]},
+    "orientalism":       {"构图": ["figurative-art"]},
+    "japonism":          {"媒介": ["woodcut"]},
+    "naive-art":         {"风格": ["naive-art"]},
+    "socialist-realism": {"构图": ["figurative-art"]},
+    "regionalism":       {"构图": ["figurative-art"]},
+    "precisionism":      {"构图": ["abstract-art"]},
+    "muralism":          {"媒介": ["fresco"]},
+    "magic-realism":     {"风格": ["surrealism"]},
+    "metaphysical-art":  {"风格": ["surrealism"]},
+    "american-realism":  {"风格": ["realism"]},
+    "classical-realism": {"风格": ["realism"]},
+    "new-objectivity":   {"风格": ["realism"], "构图": ["portrait"]},
+    "biedermeier":       {"构图": ["portrait", "still-life"]},
+    "kitsch":            {"风格": ["pop-art"]},
+    "suprematism":       {"构图": ["abstract-art"]},
+    "de-stijl":          {"构图": ["abstract-art"]},
+    "op-art":            {"风格": ["op-art"], "构图": ["abstract-art"]},
+    "superflat":         {"风格": ["pop-art"]},
+    "neo-expressionism": {"风格": ["expressionism"]},
+    "abstract-art":      {"风格": ["abstract-art"]},
+    "art-informel":      {"风格": ["art-informel"], "媒介": ["matter-painting"]},
+    "tachisme":          {"风格": ["tachisme"]},
+    "lyrical-abstraction": {"风格": ["art-informel"]},
+    "hard-edge":         {"风格": ["hard-edge-painting"], "构图": ["abstract-art"]},
+    "post-painterly-abstraction": {"风格": ["colour-field-painting"]},
+    "neo-dada":          {"风格": ["dada"], "媒介": ["readymade"]},
+    "neo-pop":           {"风格": ["pop-art"]},
+    "art-brut":          {"风格": ["art-brut"]},
+    "outsider-art":      {"风格": ["outsider-art"]},
+    "feminist-art":      {"风格": ["feminist-art"]},
+    "hyper-realism":     {"风格": ["photorealism"], "构图": ["figurative-art"]},
+    "kinetic-art":       {"风格": ["kinetic-art"]},
+    "digital-art":       {"风格": ["digital-art"]},
+    # 数字亚文化：这批没有艺术运动可引，但「互联网艺术」这个词条确实描述了
+    # 它们的产生环境，且不会误导 —— 引的是**语境**，不是风格归属。
+    "vaporwave":         {"风格": ["internet-art"]},
+    "synthwave":         {"风格": ["internet-art"]},
+    "dreamcore":         {"风格": ["internet-art"]},
+    "y2k":               {"风格": ["internet-art"]},
+    "pixel-art":         {"风格": ["digital-art"]},
+    # 东亚/南亚
+    "suiboku-ga":        {"构图": ["landscape"]},
+    "blue-green-landscape": {"构图": ["landscape"]},
+    "ink-wash-xieyi":    {"构图": ["landscape"]},
+    "song-academic":     {"构图": ["landscape", "figurative-art"]},
+    "mughal-miniature":  {"构图": ["portrait"]},
+    "islamic-geometric": {"构图": ["abstract-art"]},
+    "minhwa":            {"构图": ["figurative-art"]},
+    "tibetan-thangka":   {"媒介": ["tempera"]},
+    "dunhuang-murals":   {"媒介": ["fresco"]},
+    "indigenism":        {"构图": ["figurative-art"]},
+    # 设计
+    "minimalist-design": {"风格": ["minimalism"]},
+    "swiss-style":       {"风格": ["bauhaus"], "构图": ["abstract-art"]},
+    "postmodernism":     {"风格": ["postmodernism"]},
+    "pop-art":           {"媒介": ["screenprint"]},
+    "ukiyo-e":           {"媒介": ["woodcut"]},
+    "shin-hanga":        {"媒介": ["woodcut"]},
+    "sosaku-hanga":      {"媒介": ["woodcut"]},
+    "dutch-golden-age":  {"构图": ["still-life", "landscape"], "光照": ["chiaroscuro"]},
+    "byzantine":         {"媒介": ["fresco", "mosaic"]},
+    "romanesque":        {"媒介": ["fresco"]},
+})
+
+
 if __name__ == "__main__":
     from clihelp import guard
     import sys
@@ -275,3 +391,8 @@ if __name__ == "__main__":
     print("引用了不存在概念：%s" % (bad or "无"))
     bad2 = unknown_slugs()
     print("引用了不存在流派：%s" % (bad2 or "无"))
+
+# ---- 第二批挂载：仍然只写「这个概念确实适用于这一层」的组合。
+# 没挂的那 60 多张不是遗漏，是**找不到站得住的出处** —— 比如摄影类术语
+# （蓝晒法 / 湿版 / 直接摄影）在已核验的术语表里没有对应词条，
+# 而我不打算拿一个不相干的链接凑数。
