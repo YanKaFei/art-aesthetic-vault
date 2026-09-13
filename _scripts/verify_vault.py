@@ -26,6 +26,7 @@ verify_vault.py —— 抓完/改完之后的验收检查。
    12 新鲜度     生成脚本没比笔记新（否则说明上次重建失败，笔记是旧的）
    13 本地图库   层 2 的清单 / 图片 / 笔记三者一致（没有本地图库时自动跳过）
    14 板子反推   Pinterest 每个板子笔记里，每张图下面都有提示词与视频分析
+   15 克隆完整性 只看 git 跟踪的文件：别人 clone 下来不会断链
 
 退出码：0 全部通过；1 有问题（便于写进 CI 或 pre-commit）。
 """
@@ -57,10 +58,15 @@ OK, BAD, WARN = "  ✓", "  ✗", "  ·"
 
 
 def _notes(skip_templates=False):
+    """遍历笔记。README.md 不算笔记 —— 它是给人看的说明文档，
+    没有 frontmatter 也不该有（实测踩过：给 20-我的提示词/ 加了个 README
+    说明那目录是私人的，结果 frontmatter 检查把它当笔记报了错）。"""
     for d in NOTE_DIRS:
         if skip_templates and d == TEMPLATE_DIR:
             continue
         for p in sorted(glob.glob(os.path.join(VAULT, d, "**", "*.md"), recursive=True)):
+            if os.path.basename(p).lower().startswith("readme"):
+                continue
             yield p
 
 
@@ -456,6 +462,56 @@ def check_board_analysis():
     return problems
 
 
+def check_clone_integrity():
+    """15 克隆完整性：**别人 clone 下来**会不会断链。
+
+    前面 1/9 两项查的是「在你本机对不对」，这一项查的是「发布出去对不对」。
+    两者会不一致 —— 实测踩过一个大的：`20-我的提示词/` 下的板子笔记被跟踪，
+    但它们嵌入的图在 `99-附件/images/pinterest/`（gitignore），
+    结果别人 clone 下来看到 **214 个加载不出来的图**，
+    而本机检查全绿（因为本机图都在）。
+
+    做法：只看 git 跟踪的文件，模拟 clone 后的状态再查一遍引用。
+      · 嵌入：只算图片扩展名（`90-模板/` 的 `![[此处放图]]` 是有意占位符）
+      · 双链：先剥掉围栏代码块和**行内代码**，否则文档里的示例会被误报
+        （实测：`skill` 文档里的 `` `![[文件名]]` `` 和 `` `[[流派卡]]` `` 被误报过）
+    """
+    import subprocess
+    try:
+        r = subprocess.run(["git", "-c", "core.quotepath=false", "ls-files"],
+                           capture_output=True, text=True, cwd=VAULT, timeout=60)
+        tracked = {p for p in r.stdout.split("\n") if p}
+    except Exception:
+        return None                      # 不是 git 仓库就跳过
+    if not tracked:
+        return None
+
+    notes = [p for p in tracked if p.endswith(".md")]
+    have_note = {os.path.splitext(os.path.basename(p))[0] for p in notes}
+    have_img = {os.path.basename(p) for p in tracked if p.startswith("99-附件/")}
+    IMG_EXT = (".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".tif", ".tiff")
+
+    def strip_code(t):
+        t = re.sub(r"```.*?```", "", t, flags=re.S)
+        return re.sub(r"`[^`\n]*`", "", t)
+
+    problems = []
+    for p in notes:
+        try:
+            t = strip_code(open(os.path.join(VAULT, p), encoding="utf-8").read())
+        except Exception:
+            continue
+        for m in re.findall(r"!\[\[([^\]|#]+)", t):
+            name = m.strip()
+            if name.lower().endswith(IMG_EXT) and name not in have_img:
+                problems.append((p, "嵌入的图没发布：" + name[:44]))
+        for m in re.findall(r"(?<!!)\[\[([^\]|#\\]+)", t):
+            name = m.strip()
+            if name and name not in have_note:
+                problems.append((p, "链接的笔记没发布：" + name[:44]))
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -512,6 +568,7 @@ def main():
     report("12 生成物新鲜度", check_generated_freshness())
     report("13 本地图库", check_local_library())
     report("14 板子反推", check_board_analysis())
+    report("15 克隆完整性", check_clone_integrity())
 
     print("=" * 70)
     if failed:
