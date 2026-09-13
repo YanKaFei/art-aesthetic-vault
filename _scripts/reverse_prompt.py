@@ -259,3 +259,78 @@ def compose(rec, mv, image_name, back=None):
     if back:
         L += ["← 回到 [[%s]] ｜ [[我的图库总览]]" % back, ""]
     return "\n".join(L)
+
+
+def compose_compact(rec, mv, image_name):
+    """紧凑版：给**板子笔记里每张图**用的内联分析块。
+
+    和 compose() 的区别：compose() 是「一张图一整页卡」，这里是「一页里
+    二十张图各带一块」，所以砍掉了客观测量明细、来源、七层表格，
+    只留最有用的三样：匹配到的流派、拼好的提示词、两块视频提示词。
+
+    返回 markdown 片段（不含图片嵌入本身 —— 那是调用方的事）。
+    """
+    L = []
+    a = rec.get("analysis") or {}
+    sug = rec.get("suggest") or []
+    lu = (a.get("luminance") or {}).get("key", "")
+    sat = (a.get("color") or {}).get("saturation")
+    tx = (a.get("texture") or {}).get("busyness", "")
+
+    if mv:
+        score = sug[0]["score"] if sug else None
+        conf = ""
+        if len(sug) > 1:
+            m = sug[0]["score"] - sug[1]["score"]
+            conf = " · 把握%s" % ("高" if m >= 1.0 else "中" if m >= 0.6 else "低")
+        L.append("**最接近 [[%s]]**（融合分 %.2f%s）" % (mv["name_zh"], score or 0, conf))
+    else:
+        L.append("**未归类** —— CLIP 没给出有把握的建议")
+    bits = [x for x in [lu, ("饱和度 %.2f" % sat) if sat is not None else None, tx] if x]
+    if bits:
+        L.append("")
+        L.append("`%s`" % " ｜ ".join(bits))
+    L.append("")
+
+    if not mv:
+        L += ["归类后会自动补上提示词与视频分析：",
+              "",
+              "```bash",
+              "python3 _scripts/ingest_inbox.py --scan",
+              "python3 _scripts/ingest_inbox.py --archive",
+              "```", ""]
+        return "\n".join(L)
+
+    p = mv.get("prompt") or {}
+    L += ["**提示词**（按 [[%s]] 的七层拼好，`<你的主体>` 自己补）" % mv["name_zh"], "",
+          "```text",
+          "<你的主体>, %s" % (p.get("style") or "").strip().rstrip(","),
+          "```", "",
+          "<sub>光照 `%s` ｜ 色彩 `%s` ｜ 构图 `%s` ｜ 媒介 `%s` ｜ 情绪 `%s` ｜ 镜头 `%s`</sub>"
+          % (p.get("lighting", ""), p.get("color", ""), p.get("composition", ""),
+             p.get("medium", ""), p.get("mood", ""), p.get("camera", "")), ""]
+    try:
+        import video_prompt as VP
+        vp = VP.build(mv)
+        L += ["**视频 · Seedance 2.5**（五段式，直接粘）", "", "```text", vp["seedance"], "```", "",
+              "**视频 · MiniMax H3**（海螺，中文自然语言）", "", "```text", vp["h3"], "```", ""]
+    except Exception:
+        pass
+    L += ["<sub>负向 `%s`</sub>" % (mv.get("negative") or "").replace("\n", " "), ""]
+    return "\n".join(L)
+
+
+def analyze_images(paths, verbose=False):
+    """批量给图跑分析 + 流派匹配，返回 {路径: 记录}。抓取脚本和回填都用它。"""
+    import image_analysis as IA
+    import clip_match as CM
+    sug = CM.suggest(paths, topn=3) if paths else {}
+    out = {}
+    for i, p in enumerate(paths, 1):
+        a = IA.analyze(p)
+        if a.get("error"):
+            continue
+        out[p] = record(p, a, sug.get(p, []), source="Pinterest")
+        if verbose and (i % 10 == 0 or i == len(paths)):
+            print("    分析 %d/%d" % (i, len(paths)))
+    return out

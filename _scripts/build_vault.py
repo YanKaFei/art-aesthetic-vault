@@ -2658,7 +2658,8 @@ python3 make_links.py                 # 重新生成外部检索深链
 | `video_prompt.py` | 从流派数据生成两块中文视频提示词（Seedance 2.5 五段式 + MiniMax H3 自然语言） |
 | `scan_local.py` | **把你自己的图扫进库**：测量 + CLIP 建议 + 去重 → 待确认清单 → 归入 `15-我的图库/` |
 | `reverse_prompt.py` | **组装反推卡**：把测量 + 流派匹配 + 七层 + 视频提示词拼成那张图的卡（三个入口共用） |
-| `pinterest_grab.py` / `pinterest_export.py` | Pinterest 抓取与导出（本地自用，图**不入库**） |
+| `pinterest_grab.py` | Pinterest 抓取，**抓完自动补反推**（提示词 + 两块视频提示词，写在每张图下面）｜`--analyze` 可回填已有板子 |
+| `pinterest_export.py` | Pinterest 导出 |
 
 ### 两条容易被忽略的约定
 

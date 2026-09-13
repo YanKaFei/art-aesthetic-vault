@@ -25,6 +25,7 @@ verify_vault.py —— 抓完/改完之后的验收检查。
    11 视频层     每张卡都有 Seedance 五段式 + H3 自然语言两块中文提示词
    12 新鲜度     生成脚本没比笔记新（否则说明上次重建失败，笔记是旧的）
    13 本地图库   层 2 的清单 / 图片 / 笔记三者一致（没有本地图库时自动跳过）
+   14 板子反推   Pinterest 每个板子笔记里，每张图下面都有提示词与视频分析
 
 退出码：0 全部通过；1 有问题（便于写进 CI 或 pre-commit）。
 """
@@ -428,6 +429,33 @@ def check_local_library():
     return problems
 
 
+def check_board_analysis():
+    """14 Pinterest 板子：每张图下面都要有反推（提示词 + 视频分析）。
+
+    实测踩过：抓取脚本原来只写图片和原图直链，212 张图下面**什么都没有** ——
+    而用户在库里看到这些图时，期待的是「图下面有提示词分析和视频分析」。
+    抓取和分析是两件事（一个要联网、一个是纯本地计算），
+    分开之后很容易只做前一半，所以这里固定查一次。
+    """
+    problems = []
+    for p in sorted(glob.glob(os.path.join(VAULT, "20-我的提示词", "Pinterest-*.md"))):
+        name = os.path.basename(p)
+        if name == "Pinterest.md":
+            continue                       # 汇总页，不含单图
+        try:
+            t = open(p, encoding="utf-8").read()
+        except Exception:
+            continue
+        n_img = t.count("[原图直链]")
+        n_prompt = t.count("**提示词**（按")
+        n_video = t.count("视频 · Seedance")
+        if n_img and n_prompt < n_img:
+            problems.append((name, "%d 张图只有 %d 个提示词块" % (n_img, n_prompt)))
+        if n_img and n_video < n_img:
+            problems.append((name, "%d 张图只有 %d 个视频块" % (n_img, n_video)))
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -483,6 +511,7 @@ def main():
     report("11 视频层", check_video_layer())
     report("12 生成物新鲜度", check_generated_freshness())
     report("13 本地图库", check_local_library())
+    report("14 板子反推", check_board_analysis())
 
     print("=" * 70)
     if failed:
