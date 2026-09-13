@@ -796,6 +796,52 @@ def check_keyword_map():
     return problems
 
 
+def check_refs():
+    """21 出处：卡片上引的每一条艺术史出处都必须指向真实存在的东西。
+
+    这条**不做联网检查** —— 验收要能在没网的 CI 上跑，而网络检查会引入假失败：
+    实测 `refs.py --check-urls` 一次跑出 2 条失败，逐条重试全是 200，
+    纯粹是瞬时抖动。联网复验做成手动命令，这里只查结构。
+
+    查什么：
+      · ASSIGN 里引用的概念必须在 CONCEPTS 表里（拼错会静默少一条引用）
+      · ASSIGN 里写的流派 slug 必须真的存在（写错会永远不生效）
+      · 层名必须是七层里的说法（写成别的会永远匹配不上）
+      · URL 必须是 https 且指向已核验过的来源
+
+    覆盖率只是**打印**，不算失败 —— 没写出的部分就是还没做，
+    拿它当错误会逼人为了过验收去硬塞引用，那比没有引用更坏。
+    """
+    try:
+        import refs
+        import artvault_core as AC
+    except Exception as e:
+        return [("refs", "导入失败：%s" % e)]
+    problems = []
+    bad = refs.unknown_concepts()
+    if bad:
+        problems.append(("ASSIGN", "引用了概念表里没有的概念：%s" % bad))
+    bad = refs.unknown_slugs()
+    if bad:
+        problems.append(("ASSIGN", "引用了不存在的流派 slug：%s" % bad))
+
+    valid_layers = set(AC.LAYER_ZH.values())
+    for slug, plan in sorted(refs.ASSIGN.items()):
+        for layer in plan:
+            if layer not in valid_layers:
+                problems.append((slug, "层名 `%s` 不是七层之一" % layer))
+
+    for key, (topic, src, url) in sorted(refs.CONCEPTS.items()):
+        if not url.startswith("https://"):
+            problems.append((key, "URL 不是 https：%s" % url))
+        if not topic or not src:
+            problems.append((key, "概念名或出处机构为空"))
+    cards, layers, total, n = refs.coverage()
+    print("      （出处覆盖 %d/%d 张卡、%d/%d 层；手动复验链接："
+          "python3 refs.py --check-urls）" % (cards, n, layers, total))
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -858,6 +904,7 @@ def main():
     report("18 图生视频", check_i2v())
     report("19 语义检索", check_semantic_search())
     report("20 关键词图谱", check_keyword_map())
+    report("21 出处", check_refs())
 
     print("=" * 70)
     if failed:

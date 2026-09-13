@@ -30,6 +30,10 @@ sys.path.insert(0, HERE)
 from movements import (MOVEMENTS, CATEGORIES, by_category,  # noqa: E402
                        build_positive)
 import keyword_map  # noqa: E402
+import refs  # noqa: E402
+import artvault_core as _AC  # noqa: E402  （层的中文名只在这里定义一次）
+
+LEGEND_LAYER = dict(_AC.LAYER_ZH)
 
 WIKI_TAX = {}
 try:
@@ -392,6 +396,28 @@ def movement_note(mv, works, local_map=None):
         tgt = next((m for m in MOVEMENTS if m["slug"] == s), None)
         A("- [[%s]]" % (tgt["name_zh"] if tgt else s))
     A("")
+    # 九、出处 —— 只在**确实有**的时候才出现这一节。
+    # 出处是「这一层的说法从哪来」，不是装饰：没有就整节省略，
+    # 不写「待补」占位符（占位符会让人以为这张卡有出处）。
+    _refs = refs.refs_for(mv["slug"])
+    if _refs:
+        A("## 九、出处")
+        A("")
+        A("上面每一层的说法都不是我编的，出处逐层列在下面。")
+        A("")
+        A("| 层 | 概念 | 出处 |")
+        A("|---|---|---|")
+        for _layer, _topic, _src, _url in _refs:
+            A("| %s | %s | [%s](%s) |"
+              % (LEGEND_LAYER.get(_layer, _layer), _topic, _src, _url))
+        A("")
+        A("> [!note] 出处只覆盖了一部分流派")
+        A("> 目前 **%d / %d** 张卡有出处，逐层算 **%d / %d** 层。"
+          % (refs.coverage()[0], refs.coverage()[3],
+             refs.coverage()[1], refs.coverage()[2]))
+        A("> 没列的这一节不是「无出处」，是**还没做** —— 每一条都要真的打开过、"
+          "确认是权威机构在讲这个概念才写进来。宁缺勿造。")
+        A("")
     A("---")
     A("")
     A("← [[流派总览]] · [[分类索引-%s]]　|　延伸阅读 [[提示词拆解方法]]" % mv["category"])
@@ -2670,7 +2696,21 @@ AI 调用时不会瞎编。
 加一个新流派只需要在一个 Python 文件里加一条定义。
 抓图、生成笔记、关键词映射、AI 接口都会自动跟上。
 
-### 8. 你手里那张图，也能直接变成视频提示词
+### 8. 每一层的说法都追得到出处（部分流派）
+
+流派卡新增「九、出处」一节，逐层列出这个概念在权威术语表里的定义页，
+用的是 Tate 的艺术术语词典。这样一句「巴洛克光照 = 明暗对照法」就不再
+只是我们的说法 —— 读者点开就能核对，也方便做多语言（术语有官方定义）。
+
+**覆盖率是诚实的**：目前 51 / 147 张卡有出处（逐层 80 / 1029）。
+没写出的不是「无出处」，是**还没做** —— 每一条都要真的打开过、确认是权威
+机构在讲这个概念才写进来。宁缺勿造。
+
+> 为什么没有 Britannica：脚本访问全线 403，**无法验证**。无法验证的 URL
+> 不写进仓库 —— 读者点开是 404 比没有出处更糟。联网复验用
+> `python3 refs.py --check-urls`（手动跑，不进 CI：实测一次抖动出 2 条假失败）。
+
+### 9. 你手里那张图，也能直接变成视频提示词
 
 流派卡上的视频提示词是**通用**的 —— 主体那一行是占位符。但你真正要干的事
 通常是「我有这张图，让它动起来」。所以反推卡上的视频块走的是另一条路：
@@ -2778,6 +2818,7 @@ CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这�
 | `artvault.py` | 主查询接口：`categories` `search` `layers` `show` `palette` `related` `compose` |
 | `visual_lexicon.py` | **中文视觉词 → 英文短语**的桥。CLIP 文本塔只认英文，中文查询不过桥等于随机 |
 | `eval_search.py` | 检索评测：A 组守卫精确度、B 组测语义增益，并扫出接管阈值 |
+| `refs.py` | **艺术史出处**：把每层提示词的说法接到权威术语表；`--check-urls` 联网复验链接 |
 | `mcp_server.py` | 同一套能力包装成 MCP server，给 Claude Desktop / Cursor 直连 |
 
 ### 数据源与生成

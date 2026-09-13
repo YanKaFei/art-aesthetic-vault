@@ -304,6 +304,65 @@ class SemanticSearchTests(unittest.TestCase):
                          "加语义后这些流派的自身查询被挤下去了：%s" % worse)
 
 
+class RefsTests(unittest.TestCase):
+    """艺术史出处：**不许编造**，所以每条引用的结构必须能被机械检查。
+
+    联网可达性刻意不在这里查（CI 无网、且网站抖动会造成假失败 ——
+    实测一次跑出 2 条失败，重试全是 200）。这里只查「引用指向的东西存在」。
+    """
+
+    def test_concepts_are_well_formed(self):
+        sys.path.insert(0, SCRIPTS)
+        import refs
+        for key, (topic, src, url) in sorted(refs.CONCEPTS.items()):
+            self.assertTrue(topic.strip(), "%s 缺中文概念名" % key)
+            self.assertTrue(src.strip(), "%s 缺出处机构" % key)
+            self.assertTrue(url.startswith("https://"),
+                            "%s 的 URL 不是 https：%s" % (key, url))
+
+    def test_no_dangling_concept_or_slug(self):
+        sys.path.insert(0, SCRIPTS)
+        import refs
+        self.assertEqual([], refs.unknown_concepts(),
+                         "ASSIGN 引用了概念表里没有的概念（会静默少一条引用）")
+        self.assertEqual([], refs.unknown_slugs(),
+                         "ASSIGN 引用了不存在的流派 slug（永远不会生效）")
+
+    def test_layer_names_are_the_seven_layers(self):
+        sys.path.insert(0, SCRIPTS)
+        import refs
+        import artvault_core as AC
+        valid = set(AC.LAYER_ZH.values())
+        for slug, plan in refs.ASSIGN.items():
+            for layer in plan:
+                self.assertIn(layer, valid,
+                              "%s 的层名 `%s` 不在七层里" % (slug, layer))
+
+    def test_rendered_card_shows_refs_section(self):
+        """有出处的卡必须真的渲染出「九、出处」那一节。
+
+        只 `git grep` 检查会漏掉模板断了的情况 —— 数据在、渲染没接上，
+        读者看到的仍是一张没有出处的卡。
+        """
+        sys.path.insert(0, SCRIPTS)
+        import refs
+        slugs = [s for s in refs.ASSIGN if refs.refs_for(s)]
+        if not slugs:
+            self.skipTest("还没有任何流派配了出处")
+        sys.path.insert(0, SCRIPTS)
+        from movements import MOVEMENTS
+        mv = next((m for m in MOVEMENTS if m["slug"] == slugs[0]), None)
+        if not mv:
+            self.skipTest("首个有出处的 slug 不在库里")
+        path = os.path.join(VAULT, "10-流派", mv["name_zh"] + ".md")
+        if not os.path.exists(path):
+            self.skipTest("卡片还没生成")
+        with open(path, encoding="utf-8") as f:
+            text = f.read()
+        self.assertIn("## 九、出处", text, "%s 有出处数据但卡上没有出处节" % mv["slug"])
+        self.assertIn("tate.org.uk", text, "出处节里没有来源链接")
+
+
 class I2vTests(unittest.TestCase):
     """图生视频：一张图进去，占位符必须被**这张图的**测量填掉。
 
