@@ -25,7 +25,6 @@ _scripts/_data/inbox_manifest.json
 
 # 生成物：换台机器重建即可，不必入库
 #   python3 artvault_vision.py build          （图像语义索引，几 MB）
-#   python3 movement_fingerprint.py build     （客观维度特征缓存，约 1 分钟）
 # 向量缓存用 npz（比 json 小 6 倍、加载快 100 倍）；旧 json 也一并忽略，
 # 免得升级后残留的文件被提交
 _scripts/_data/vision_index.npz
