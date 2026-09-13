@@ -347,52 +347,57 @@ def file_items(nums, slug=None, drop=False, verbose=True):
             print("你是不是想找：%s" % "、".join(cands))
         return 1
 
-    man = _load(MANIFEST, {"items": {}})
-    dest_dir = os.path.join(LOCAL_IMAGES, slug) if not drop else None
-    by_id = {it.get("id"): it for it in items}
-    ok = 0
-    for n in nums:
-        it = by_id.get(n)
-        if it is None:
-            print("  没有这个编号：%d（编号是扫描时分配的，用 --list 查）" % n)
-            continue
-        if drop:
-            it["dropped"] = True
+    # 读-改-写整段加锁：原子写只保证「不留半截文件」，防不住两个进程
+    # 各自读-改-写、后写的把先写的整体覆盖（实测 8 个进程各 +1，不加锁只剩 1）。
+    # 锁挂在 MANIFEST 上，同一段里对 PENDING 的写也一并串行化了。
+    import safefile as SF
+    with SF.locked(MANIFEST):
+        man = _load(MANIFEST, {"items": {}})
+        dest_dir = os.path.join(LOCAL_IMAGES, slug) if not drop else None
+        by_id = {it.get("id"): it for it in items}
+        ok = 0
+        for n in nums:
+            it = by_id.get(n)
+            if it is None:
+                print("  没有这个编号：%d（编号是扫描时分配的，用 --list 查）" % n)
+                continue
+            if drop:
+                it["dropped"] = True
+                ok += 1
+                if verbose:
+                    print("  ✗ 丢弃 %s" % it["file"])
+                continue
+            # 复制进库（用流派做子目录，文件名带序号避免撞名）
+            os.makedirs(dest_dir, exist_ok=True)
+            stem, ext = os.path.splitext(it["file"])
+            safe = "".join(c if c.isalnum() or c in "-_" else "-" for c in stem)[:48]
+            seq = len([k for k in man["items"]
+                       if k.startswith("99-附件/images-local/%s/" % slug)]) + 1
+            fn = "%02d-%s-%s%s" % (seq, slug, safe, ext.lower())
+            dest = os.path.join(dest_dir, fn)
+            try:
+                shutil.copy2(it["source"], dest)
+            except Exception as e:
+                print("  ✗ 复制失败 %s：%s" % (it["file"], str(e)[:50])); continue
+            rel = os.path.relpath(dest, VAULT).replace(os.sep, "/")
+            # 存**完整分析结果**而不是摘要 —— 卡是事后由 build_vault 生成的，
+            # 那时原图已经不在原处了，摘要不够用来组反推。
+            import reverse_prompt as RP
+            rec = RP.record(it["source"], it.get("analysis"),
+                            [(x["slug"], x["name"], x["score"]) for x in (it.get("suggest") or [])],
+                            source=it["source"],
+                            extra={"dhash": it.get("dhash"), "sha": _sha(dest)})
+            rec["movement"] = slug
+            rec["title"] = stem
+            rec["added_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+            man["items"][rel] = rec
+            it["filed"] = True
+            it["filed_as"] = rel
             ok += 1
             if verbose:
-                print("  ✗ 丢弃 %s" % it["file"])
-            continue
-        # 复制进库（用流派做子目录，文件名带序号避免撞名）
-        os.makedirs(dest_dir, exist_ok=True)
-        stem, ext = os.path.splitext(it["file"])
-        safe = "".join(c if c.isalnum() or c in "-_" else "-" for c in stem)[:48]
-        seq = len([k for k in man["items"]
-                   if k.startswith("99-附件/images-local/%s/" % slug)]) + 1
-        fn = "%02d-%s-%s%s" % (seq, slug, safe, ext.lower())
-        dest = os.path.join(dest_dir, fn)
-        try:
-            shutil.copy2(it["source"], dest)
-        except Exception as e:
-            print("  ✗ 复制失败 %s：%s" % (it["file"], str(e)[:50])); continue
-        rel = os.path.relpath(dest, VAULT).replace(os.sep, "/")
-        # 存**完整分析结果**而不是摘要 —— 卡是事后由 build_vault 生成的，
-        # 那时原图已经不在原处了，摘要不够用来组反推。
-        import reverse_prompt as RP
-        rec = RP.record(it["source"], it.get("analysis"),
-                        [(x["slug"], x["name"], x["score"]) for x in (it.get("suggest") or [])],
-                        source=it["source"],
-                        extra={"dhash": it.get("dhash"), "sha": _sha(dest)})
-        rec["movement"] = slug
-        rec["title"] = stem
-        rec["added_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
-        man["items"][rel] = rec
-        it["filed"] = True
-        it["filed_as"] = rel
-        ok += 1
-        if verbose:
-            print("  ✓ %s → %s" % (it["file"][:34], rel))
-    _save(PENDING, p)
-    _save(MANIFEST, man)
+                print("  ✓ %s → %s" % (it["file"][:34], rel))
+        _save(PENDING, p)
+        _save(MANIFEST, man)
     if verbose:
         print("\n归入 %d 张。跑 python3 build_vault.py 生成 15-我的图库/ 的笔记。" % ok)
     return ok

@@ -124,3 +124,83 @@ def read_vectors(path):
             vecs = np.asarray(list(old.values()), dtype="f4")
             return keys, vecs, meta
     return None, None, None
+
+# ------------------------------------------------------------------ 并发锁
+def locked(path, timeout=15.0, poll=0.05):
+    """对 `path` 配一把排他锁，覆盖整个「读 → 改 → 写」过程。
+
+        with safefile.locked(MANIFEST):
+            d = safefile.read_json(MANIFEST) or {}
+            d["items"][k] = v
+            safefile.write_json(MANIFEST, d)
+
+    ## 为什么原子写还不够
+
+    `write_json` 保证的是「不会留下半截文件」。但两个进程各自
+    「读 → 改 → 写」时，后写的那个会把先写的**改动整体覆盖掉** ——
+    文件始终是完整的，只是丢了一次更新。原子性防不住这个。
+
+    实测场景：DSH 里并行起两个子代理、或者你手动跑 scan_local 的同时
+    另一个脚本在归档投递箱，都会碰到。
+
+    ## 实现
+
+    锁放在 `<path>.lock` 这个**旁挂文件**上，而不是目标文件本身 ——
+    目标文件每次写入都会被 `os.replace` 换成新 inode，锁在旧 inode 上会失效。
+    这是 `flock` 类锁的经典陷阱。
+
+    非 POSIX（没有 fcntl）时退化成不加锁，但**明确返回 False 让调用方知道**，
+    不假装有保护。超时抛 TimeoutError，不静默继续 —— 静默继续就等于丢更新。
+    """
+    import contextlib
+
+    @contextlib.contextmanager
+    def _cm():
+        lock_path = path + ".lock"
+        d = os.path.dirname(os.path.abspath(lock_path))
+        os.makedirs(d, exist_ok=True)
+        try:
+            import fcntl
+        except ImportError:
+            yield False                     # 没有 fcntl：明确告知未加锁
+            return
+        f = open(lock_path, "a+")
+        got = False
+        try:
+            import time
+            deadline = time.time() + timeout
+            while True:
+                try:
+                    fcntl.flock(f.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    got = True
+                    break
+                except OSError:
+                    if time.time() >= deadline:
+                        raise TimeoutError(
+                            "等 %s 的锁超时（%.0fs）—— 可能有另一个进程在写同一个文件。"
+                            "若确定没有，删掉 %s 重试。" % (path, timeout, lock_path))
+                    time.sleep(poll)
+            yield True
+        finally:
+            if got:
+                try:
+                    fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+                except Exception:
+                    pass
+            f.close()
+
+    return _cm()
+
+
+def update_json(path, fn, default=None, timeout=15.0):
+    """加锁地「读 → 让 fn 改 → 原子写」。fn 收到当前值（读不到时是 default）。
+
+    fn 的返回值就是新值；返回 None 表示「不改，别写」（省掉一次无谓写盘）。
+    """
+    with locked(path, timeout=timeout):
+        cur = read_json(path, default)
+        new = fn(cur)
+        if new is None:
+            return cur
+        write_json(path, new)
+        return new

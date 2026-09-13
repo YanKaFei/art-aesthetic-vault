@@ -269,62 +269,69 @@ def archive(recs, verbose=True):
         except Exception:
             pass
 
-    man_path = os.path.join(HERE, "_data", "local_library.json")
-    man = {"items": {}}
-    if os.path.exists(man_path):
-        try:
-            man = json.load(open(man_path, encoding="utf-8"))
-            man.setdefault("items", {})
-        except Exception:
-            pass
-    moved, unmoved = 0, 0
-    for r in recs:
-        src = r["path"]
-        if not os.path.exists(src):
-            continue
-        # 用 CLIP 的第一建议作为去处；没有建议就进 _未归类
-        sug = r.get("suggested") or sug_by_file.get(r["file"]) or []
-        slug = (sug[0].get("slug") if sug else None) or "_未归类"
-        dest_dir = os.path.join(VAULT, "99-附件", "images-local", slug)
-        os.makedirs(dest_dir, exist_ok=True)
-        dst = os.path.join(dest_dir, r["file"])
-        base, ext = os.path.splitext(r["file"])
-        k = 1
-        while os.path.exists(dst):
-            dst = os.path.join(dest_dir, "%s-%d%s" % (base, k, ext)); k += 1
-        rel = os.path.relpath(dst, VAULT).replace(os.sep, "/")
-        # **先把记录组装好，再移动文件。**
-        # 早先是先 shutil.move 再 RP.record —— 中间抛异常就留下
-        # 「文件已进库、清单里没有」的孤儿（实测踩过一次）。
-        # 现在组装失败就不移动，移动失败就把记录撤掉。
-        try:
-            import reverse_prompt as RP
-            ana = r.get("analysis") or ana_by_file.get(r["file"])
-            rec = RP.record(r["path"], ana, sug, source="pinterest 投递箱")
-            rec["movement"] = slug
-            rec["title"] = base
-            rec["added_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
-        except Exception as e:
-            print("    ! 跳过 %s（组装记录失败：%s）" % (r["file"][:32], str(e)[:40]))
-            continue
-        man["items"][rel] = rec
-        try:
-            shutil.move(src, dst)
-        except Exception as e:
-            man["items"].pop(rel, None)           # 移动失败就撤记录，不留半截状态
-            print("    ! 跳过 %s（移动失败：%s）" % (r["file"][:32], str(e)[:40]))
-            continue
-        moved += 1
-        if slug == "_未归类":
-            unmoved += 1
+    # 读-改-写整段加锁：这一段跨了很多次文件移动，两个进程同时归档会
+    # 互相覆盖清单（原子写防不住丢更新：实测 8 进程各 +1，不加锁只剩 1）。
+    import safefile as SF
+    with SF.locked(man_path):
+        man_path = os.path.join(HERE, "_data", "local_library.json")
+        man = {"items": {}}
+        if os.path.exists(man_path):
+            try:
+                man = json.load(open(man_path, encoding="utf-8"))
+                man.setdefault("items", {})
+            except Exception:
+                pass
+        moved, unmoved = 0, 0
+        for r in recs:
+            src = r["path"]
+            if not os.path.exists(src):
+                continue
+            # 用 CLIP 的第一建议作为去处；没有建议就进 _未归类
+            sug = r.get("suggested") or sug_by_file.get(r["file"]) or []
+            slug = (sug[0].get("slug") if sug else None) or "_未归类"
+            dest_dir = os.path.join(VAULT, "99-附件", "images-local", slug)
+            os.makedirs(dest_dir, exist_ok=True)
+            dst = os.path.join(dest_dir, r["file"])
+            base, ext = os.path.splitext(r["file"])
+            k = 1
+            while os.path.exists(dst):
+                dst = os.path.join(dest_dir, "%s-%d%s" % (base, k, ext)); k += 1
+            rel = os.path.relpath(dst, VAULT).replace(os.sep, "/")
+            # **先把记录组装好，再移动文件。**
+            # 早先是先 shutil.move 再 RP.record —— 中间抛异常就留下
+            # 「文件已进库、清单里没有」的孤儿（实测踩过一次）。
+            # 现在组装失败就不移动，移动失败就把记录撤掉。
+            try:
+                import reverse_prompt as RP
+                ana = r.get("analysis") or ana_by_file.get(r["file"])
+                rec = RP.record(r["path"], ana, sug, source="pinterest 投递箱")
+                rec["movement"] = slug
+                rec["title"] = base
+                rec["added_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+            except Exception as e:
+                print("    ! 跳过 %s（组装记录失败：%s）" % (r["file"][:32], str(e)[:40]))
+                continue
+            man["items"][rel] = rec
+            try:
+                shutil.move(src, dst)
+            except Exception as e:
+                man["items"].pop(rel, None)           # 移动失败就撤记录，不留半截状态
+                print("    ! 跳过 %s（移动失败：%s）" % (r["file"][:32], str(e)[:40]))
+                continue
+            moved += 1
+            if slug == "_未归类":
+                unmoved += 1
 
-    # 清掉已经空掉的投递箱目录
-    os.makedirs(ARCHIVE, exist_ok=True)
-    try:
-        import safefile as SF
-        SF.write_json(man_path, man)
-    except Exception:
-        pass
+        # 清掉已经空掉的投递箱目录
+        os.makedirs(ARCHIVE, exist_ok=True)
+        try:
+            import safefile as SF
+            SF.write_json(man_path, man)
+        except Exception as e:
+            # 原来是 `except Exception: pass` —— 清单写不进去就**静默丢记录**，
+            # 而图片已经移走了，于是图和清单对不上（验收第 13 项会报，
+            # 但那时已经不知道是哪一步坏的）。这里至少要说出来。
+            print("    ! 清单写入失败：%s: %s" % (type(e).__name__, e))
     if verbose:
         print("已归档 %d 张 → 99-附件/images-local/（按 CLIP 建议分流派）" % moved)
         if unmoved:

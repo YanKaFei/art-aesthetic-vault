@@ -2896,12 +2896,33 @@ CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这�
 | `pinterest_grab.py` | Pinterest 抓取，**抓完自动补反推**（提示词 + 两块视频提示词，写在每张图下面）｜`--analyze` 可回填已有板子 |
 | `pinterest_export.py` | Pinterest 导出 |
 
-### 两条容易被忽略的约定
+### 三条容易被忽略的约定
 
 1. **改生成物，先改模板。**
    `10-流派/*.md`、`00-导航/*.md`、`README.md` 全部由 `build_vault.py` 生成，
    直接编辑会在下次重建时被覆盖（这份工具清单本身也在模板里）。
 2. **`20-我的提示词/` 是你自己的。** 脚本只读不覆盖，可以放心写。
+3. **改清单类文件，包在 `safefile.locked()` 里。**
+   原子写只保证「不会留下半截文件」，防不住两个进程各自「读 → 改 → 写」、
+   后写的把先写的整体覆盖 —— 文件是完整的，只是**少了一次改动**。
+   实测 8 个进程各 +1，不加锁最后只剩 1。
+
+   ```python
+   import safefile as SF
+   with SF.locked(MANIFEST):                 # 锁覆盖整个读-改-写
+       d = SF.read_json(MANIFEST) or {}
+       d["items"][k] = v
+       SF.write_json(MANIFEST, d)
+   ```
+
+   或者一步到位：`SF.update_json(MANIFEST, fn)`。
+   锁挂在 `<路径>.lock` 这个**旁挂文件**上，不挂在目标文件上 ——
+   目标文件每次写入都会被 `os.replace` 换掉 inode，锁在旧 inode 上会失效。
+
+   > [!tip] 加新流派时的另一个顺序陷阱
+   > README 的统计数字按 `git ls-files`（下一次提交会带走的文件）算，
+   > 所以要**先 `git add` 新笔记，再 `build_vault.py`**，否则 README 会少算，
+   > 而这份陈旧的 README 会被一起提交出去。验收第 16 项会抓住它。
 
 ---
 

@@ -689,6 +689,59 @@ class OptionalDegradationTests(unittest.TestCase):
             self.assertIn("Pillow", blob, "失败时必须明确说缺 Pillow")
 
 
+class ConcurrencyTests(unittest.TestCase):
+    """并发写不许丢更新。
+
+    `write_json` 的原子写只保证「不会留下半截文件」，防不住两个进程各自
+    「读 → 改 → 写」、后写的把先写的整体覆盖 —— 文件始终完整，只是少了一次改动。
+
+    这条测试用**真进程**跑，不是模拟：8 个进程各 +1，不加锁实测只剩 1。
+    """
+
+    def test_locked_update_does_not_lose_writes(self):
+        import tempfile
+        import subprocess as sp
+        sys.path.insert(0, SCRIPTS)
+        import safefile as SF
+
+        d = tempfile.mkdtemp()
+        target = os.path.join(d, "counter.json")
+        SF.write_json(target, {"n": 0})
+        code = (
+            "import sys, time\n"
+            "sys.path.insert(0, %r)\n"
+            "import safefile as SF\n"
+            "def inc(cur):\n"
+            "    cur = cur or {'n': 0}\n"
+            "    time.sleep(0.05)\n"          # 放大竞争窗口
+            "    cur['n'] += 1\n"
+            "    return cur\n"
+            "SF.update_json(%r, inc, {'n': 0})\n"
+        ) % (SCRIPTS, target)
+        wp = os.path.join(d, "w.py")
+        with open(wp, "w") as f:
+            f.write(code)
+        procs = [sp.Popen([PY, wp]) for _ in range(6)]
+        for pr in procs:
+            pr.wait(timeout=60)
+        got = (SF.read_json(target) or {}).get("n")
+        self.assertEqual(6, got,
+                         "6 个并发 +1 只留下 %s 次 —— 锁没起作用（丢更新）" % got)
+
+    def test_lock_times_out_loudly_not_silently(self):
+        """抢不到锁要**报错**，不能静默继续 —— 静默继续就等于丢更新。"""
+        import tempfile
+        sys.path.insert(0, SCRIPTS)
+        import safefile as SF
+        d = tempfile.mkdtemp()
+        target = os.path.join(d, "x.json")
+        SF.write_json(target, {})
+        with SF.locked(target):
+            with self.assertRaises(TimeoutError):
+                with SF.locked(target, timeout=0.2):
+                    self.fail("不该拿到锁")
+
+
 # ------------------------------------------------------------ 7. 发布视图卫生
 
 class PublishingTests(unittest.TestCase):
