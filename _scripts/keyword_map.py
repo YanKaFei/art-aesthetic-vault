@@ -187,19 +187,35 @@ WIKIART_MAP = {
  "haute-p-te-matter-painting": "art-informel",
  "p-d-pattern-and-decoration": "feminist-art",
  "light-and-space-movement": "light-and-space",
+ # ---- 一次图谱对账补的三条：卡片一直在，但没接进映射，于是图谱上显示「—」
+ # （这三张卡因此长期没有任何 WikiArt 名能指过来，检索也搜不到它们）
+ "tonalism": "tonalism", "yamato-e": "yamato-e", "superflat": "superflat",
+ # 这两条是在 movements 表（不是 styles 表）里找到同名的 —— 只查 styles 会漏
+ "dutch-golden-age": "dutch-golden-age", "avant-garde": "avant-garde",
+ # ---- 对账还查出 7 个**自指**条目（"neo-baroque": "neo-baroque" 这种）：
+ # 值写成了键本身，于是 resolve() 返回一个不存在的 slug，图谱以为建了卡、
+ # 实际什么都没有。逐条判定后 6 个补了真卡（biedermeier / cubo-futurism /
+ # fantasy-art / neo-geo / post-minimalism / spatialism，见 mv_gaps.py），
+ # 只剩 neo-baroque 判定为**伞形词**（19–20 世纪对巴洛克语汇的各种复兴，
+ # 视觉语言不够独立）→ 按本文件开头的约定写 None，由 NEAREST 指向 baroque。
+ "neo-baroque": None,
 }
 
 # 这些 WikiArt 条目本库不单独建卡，但可以指向最近的一张
 NEAREST = {
- "concretism": "hard-edge", "post-minimalism": "minimalism-art",
- "biedermeier": "naturalism", "neo-baroque": "baroque",
- "p-d-pattern-and-decoration": "feminist-art",
+ # 只在 WIKIART_MAP **解析不出来**时才会被用到（见 build_vault._wiki_rows）。
+ # 所以这里每一条都必须满足「WIKIART_MAP 里查不到、或查到 None」——
+ # 否则就是一条永远走不到的死值，还会误导后来的人以为那张卡还没建。
+ # 验收第 20 项会查这个（它上线当天就揪出 6 条过期兜底）。
+ "neo-baroque": "baroque",
  "confessional-art": "feminist-art", "postcolonial-art": "contemporary-art",
  "new-european-painting": "neo-expressionism",
- "neo-concretism": "kinetic-art", "spatialism": "kinetic-art",
- "haute-p-te-matter-painting": "art-informel",
- "costumbrismo": "naturalism", "self-portrait": "renaissance",
- "figurative-expressionism": "expressionism",
+ "self-portrait": "renaissance",
+ # 原来这里还有 "figurative-expressionism": "expressionism"，删了 ——
+ # WIKIART_MAP 里已经有 "figurative-expressionism": "neo-expressionism"，
+ # 兜底永远走不到。顺带记一下**两张表本来就不一致**（具象表现主义更接近
+ # expressionism，还是 1980 年代的新表现主义？），现在生效的是 map 那一版。
+ # 真要改口径，改 WIKIART_MAP，别在兜底表里留第二个答案。
 }
 
 

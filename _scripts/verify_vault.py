@@ -751,6 +751,46 @@ def check_semantic_search():
     return problems
 
 
+def check_keyword_map():
+    """20 关键词图谱：映射表不许承诺一张不存在的卡。
+
+    这条是有来历的。图谱对账时查出 7 个**自指**条目：
+
+        "neo-baroque": "neo-baroque"      ← 值写成键本身
+
+    本文件开头的约定写得很清楚 —— 未建卡用 `None`，由 `NEAREST` 指最近的一张。
+    但自指条目绕过了这个约定：`resolve()` 返回一个存在的字符串，只是那个
+    slug 没有对应卡片，于是图谱以为建了卡、实际什么都没有，静默降级成「—」。
+    这种错**不会报异常**，只会让图谱长期少几条线，所以要由验收来盯。
+
+    同时反向查一条：`NEAREST` 指向的兜底卡必须真实存在，否则图谱上会出现
+    一张点不进去的「≈ [[某流派]]」。
+    """
+    try:
+        import keyword_map as KM
+    except Exception as e:
+        return [("keyword_map", "导入失败：%s" % e)]
+    try:
+        from movements import MOVEMENTS
+    except Exception as e:
+        return [("movements", "导入失败：%s" % e)]
+    slugs = {m["slug"] for m in MOVEMENTS}
+    problems = []
+    for k, v in sorted(KM.WIKIART_MAP.items()):
+        if v is None:
+            continue                      # 约定的「未建卡」
+        if v not in slugs:
+            problems.append((k, "映射到不存在的卡 `%s`（未建卡应当写 None）" % v))
+    for k, v in sorted(KM.NEAREST.items()):
+        if v not in slugs:
+            problems.append((k, "NEAREST 兜底指向不存在的卡 `%s`" % v))
+    # 兜底表不该给已经建了卡的条目留旧值 —— 那会误导后来的人以为还得靠兜底
+    stale = [k for k in KM.NEAREST if KM.WIKIART_MAP.get(k) in slugs]
+    if stale:
+        problems.append(("NEAREST", "这些条目已经有卡了，兜底值该删：%s" % stale))
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -812,6 +852,7 @@ def main():
     report("17 冲突消解", check_conflict_resolution())
     report("18 图生视频", check_i2v())
     report("19 语义检索", check_semantic_search())
+    report("20 关键词图谱", check_keyword_map())
 
     print("=" * 70)
     if failed:

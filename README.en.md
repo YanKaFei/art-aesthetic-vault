@@ -6,7 +6,7 @@
 
 Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
 
-162 notes · 442 public-domain images · 35 ready-to-run scripts
+162 notes · 442 public-domain images · 37 ready-to-run scripts
 
 **English** ｜ [中文](README.md)
 
@@ -67,7 +67,7 @@ this and piling up style keywords.
 ```
 Art Aesthetic Style Library
 │
-├─ Western Classical & Modern · 47
+├─ Western Classical & Modern · 48
 │  ├─ Medieval & Byzantine
 │  │  ├ Byzantine Art . Romanesque . Gothic Art
 │  │  └ International Gothic
@@ -85,13 +85,15 @@ Art Aesthetic Style Library
 │  │  └ Les Nabis . Symbolism . Japonism
 │  ├─ Fin de Siecle
 │  │  └ Art Nouveau . Vienna Secession . Arts and Crafts
-│  └─ American & Modern Schools
-│      ├ Hudson River School . Luminism . Tonalism
-│      ├ Ashcan School . American Realism . Regionalism
-│      ├ Precisionism . Social Realism . Socialist Realism
-│      ├ Muralism . Magic Realism . Metaphysical Art
-│      ├ Neo-Romanticism . Naïve Art (Primitivism) . Classical Realism
-│      └ Kitsch . New Objectivity
+│  ├─ American & Modern Schools
+│  │  ├ Hudson River School . Luminism . Tonalism
+│  │  ├ Ashcan School . American Realism . Regionalism
+│  │  ├ Precisionism . Social Realism . Socialist Realism
+│  │  ├ Muralism . Magic Realism . Metaphysical Art
+│  │  ├ Neo-Romanticism . Naïve Art (Primitivism) . Classical Realism
+│  │  └ Kitsch . New Objectivity
+│  └─ Others
+│      └ Biedermeier
 ├─ East Asia · South Asia · Islam · 21
 │  ├─ China
 │  │  ├ Blue-Green Landscape . Ink Wash Xieyi . Gongbi
@@ -109,7 +111,7 @@ Art Aesthetic Style Library
 │  │  └ Tibetan Thangka . Indigenism
 │  └─ Others
 │      └ Native Art
-├─ Modernism & Post-war · 23
+├─ Modernism & Post-war · 24
 │  ├─ Expressionism & Fauvism
 │  │  └ Expressionism . Fauvism . Der Blaue Reiter
 │  ├─ Cubism & Futurism
@@ -126,8 +128,8 @@ Art Aesthetic Style Library
 │  │  └ Art Deco
 │  └─ Others
 │      ├ Conceptual Art . Photorealism . Land Art
-│      └ Superflat . Neo-Expressionism
-├─ Digital · Subculture · Photography · 24
+│      └ Superflat . Neo-Expressionism . Cubo-Futurism
+├─ Digital · Subculture · Photography · 25
 │  ├─ Five Punks
 │  │  ├ Cyberpunk . Steampunk . Dieselpunk
 │  │  └ Solarpunk . Biopunk
@@ -143,9 +145,11 @@ Art Aesthetic Style Library
 │  │  └ Gothic Subculture . Wasteland
 │  ├─ Graphic Design
 │  │  └ Minimalist Design . Swiss Style . Memphis Design
-│  └─ Cinematic
-│      └ Film Noir
-├─ Avant-Garde · Contemporary · Postmodern · 20
+│  ├─ Cinematic
+│  │  └ Film Noir
+│  └─ Others
+│      └ Fantasy Art
+├─ Avant-Garde · Contemporary · Postmodern · 23
 │  ├─ The Three Umbrellas
 │  │  └ Avant-Garde . Contemporary Art . Postmodernism
 │  ├─ Abstract Branches
@@ -159,6 +163,7 @@ Art Aesthetic Style Library
 │  ├─ New Media & Post-Conceptual
 │  │  └ Digital Art . Hyper-Realism
 │  └─ Others
+│      ├ Neo-Geo . Post-Minimalism . Spatialism
 │      └ Art Informel . Tachisme . Lyrical Abstraction
 └─ Photography & Image · 6
    ├─ Two Traditions
@@ -418,7 +423,7 @@ need only Python 3 + Pillow.
 
 | Script | What it does |
 |---|---|
-| `movements.py` | Aggregates all 141 movement definitions — the single source of truth |
+| `movements.py` | Aggregates all 147 movement definitions — the single source of truth |
 | `mv_*.py` | Movement cards and filter keywords (8 files, split by category) |
 | `providers.py` | Four CC0 source adapters + three-layer filtering (AI images / flat works / artist match) |
 | `fetch_art.py` | Image fetching: round-robin across sources, two-layer filtering, `--refresh` clears orphaned files |

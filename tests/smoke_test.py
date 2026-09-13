@@ -208,9 +208,20 @@ class CoreCommandTests(unittest.TestCase):
             self.assertTrue(out.strip())
 
     def test_dump_is_valid_json(self):
+        """dump 的条数必须等于 cards() 的条数 —— 而且**不写死数字**。
+
+        第一版这里写死了 141。图谱对账补了 6 张卡之后它立刻失败 ——
+        这正说明硬编码的数字会烂掉（README 的统计数字吃过同款亏）。
+        改成跟数据源比，补卡时不会再假报错。
+        """
+        sys.path.insert(0, SCRIPTS)
+        import artvault_core as A
         rc, out, err = run(["artvault.py", "dump", "--json"])
         self.assertEqual(0, rc, err[-300:])
-        self.assertEqual(141, len(json.loads(out)), "流派卡应当是 141 张")
+        data = json.loads(out)
+        self.assertEqual(len(A.cards()), len(data),
+                         "dump 条数和 cards() 不一致")
+        self.assertGreaterEqual(len(data), 141, "卡片数不该少于 141")
 
     def test_json_flag_works_on_both_sides_of_the_command(self):
         """`--json` 放命令前、放命令后都要能用。

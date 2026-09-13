@@ -26,6 +26,12 @@ CATEGORY_OVERRIDE = {
     "bauhaus": "现代主义与战后",
     "art-deco": "现代主义与战后",
     "cyberpunk": "数字·亚文化·摄影美学",
+    # 图谱对账补的 6 张卡：按视觉谱系归到各自的分类
+    "fantasy-art": "数字·亚文化·摄影美学",
+    "cubo-futurism": "现代主义与战后",
+    "neo-geo": "先锋·当代·后现代",
+    "post-minimalism": "先锋·当代·后现代",
+    "spatialism": "先锋·当代·后现代",
     "ukiyo-e": "东亚·南亚·伊斯兰",
     "zen-art": "东亚·南亚·伊斯兰",
 }
