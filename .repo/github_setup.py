@@ -88,12 +88,22 @@ DESCRIPTION = ("%s art movements decomposed into 7 swappable AI prompt layers �
                % (_N_MV if _N_MV else "100+"))
 
 # GitHub 限制：最多 20 个，小写字母/数字/连字符
+#
+# 前 5 个是 **DSH 生态标识**：社区的索引仓库（dsh-plugin-index、
+# dsh-plugins、awesome-dsh-plugin、dsh-plugin-radar）都按 `topic:dsh-plugin`
+# 抓取，实测全站 1.4 万个仓库挂了这个话题。`deepseek-harness` / `dsh`
+# 是官方仓库自己也在用的配套标识，`agent-skills` / `skills` 说明本仓库
+# 提供的到底是什么。技能型仓库普遍也挂 dsh-plugin（ruvlo 挂 ai-skills、
+# distilly 挂 claude-skills/codex-skills），所以这不是蹭词。
 TOPICS = [
-    "aesthetics", "art", "art-history", "artificial-intelligence", "ai-art",
-    "prompt-engineering", "text-to-image", "stable-diffusion", "concept-art",
-    "digital-art", "style-reference", "public-domain", "image-analysis",
-    "knowledge-base", "obsidian", "mcp", "claude", "design-tools",
-    "creative-tools", "reference",
+    # —— DSH / DeepSeek 生态标识 ——
+    "dsh-plugin", "deepseek-harness", "dsh", "agent-skills", "skills",
+    # —— 这个库本身是什么 ——
+    "art", "art-history", "aesthetics", "ai-art", "artificial-intelligence",
+    "design-tools", "digital-art", "prompt-engineering", "text-to-image",
+    "style-reference", "public-domain",
+    # —— 它跑在什么上面、给谁用 ——
+    "knowledge-base", "obsidian", "mcp", "reference",
 ]
 
 
