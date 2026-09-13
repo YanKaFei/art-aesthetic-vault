@@ -368,10 +368,35 @@ def movement_note(mv, works, local_map=None):
                 wk["source"], wk.get("page_url") or "#", wk["license"], wk["image_url_hi"]))
             A("")
     else:
+        # 「为什么没有图」分三种，因为**处理办法完全不同**。
+        # 原来一律写「版权期内」—— 对毕德麦雅（1815–1848，早就是公版）
+        # 这类卡是错的，而且会让人以为没办法。现在按真实原因给不同出口。
         A("> [!warning] 该流派暂无 CC0 可用图片")
-        A("> 原因是这个流派的代表作品多在版权保护期内（例如 1930 年之后的现代作品）。")
-        A("> 想找视觉参考，去 [WikiArt 该流派页面](https://www.wikiart.org/en/paintings-by-style) 看图，")
-        A("> 但**不要把图下载进仓库再对外分享**——只存链接和提示词。")
+        _reason = _no_image_reason(mv)
+        if _reason == "not_fetched":
+            A("> 原因很简单：**这张卡是后来补的，还没跑过抓图。**")
+            A("> 补图：`python3 fetch_art.py %s`" % mv["slug"])
+        elif _reason == "copyright":
+            A("> 原因：这个流派的代表作品多在版权保护期内（%s），"
+              "开放数据源里没有可分发的公版实图。" % (mv.get("period") or "20 世纪"))
+            A("> 想找视觉参考，去 [WikiArt 该流派页面](https://www.wikiart.org/en/paintings-by-style) 看图，")
+            A("> 但**不要把图下载进仓库再对外分享**——只存链接和提示词。")
+        else:
+            A("> 原因：这个流派（%s）的作品**早已进入公版**，但四个开放数据源没有以 "
+              "CC0 收录它 —— 是**源覆盖不足**，不是版权问题。" % (mv.get("period") or "近代"))
+            A("> 可以试：`python3 fetch_art.py %s --include-ccby`（放宽到 CC-BY，"
+              "但会打破本库「只收 CC0」的承诺，需要你确认）。" % mv["slug"])
+        A("")
+        A("> [!tip] 用自己的图校准")
+        A("> 这一节空着不影响使用 —— 七层提示词和视频层都是完整的。")
+        A("> 想补上视觉锚点，可以把你自己的参考图扫进来：")
+        # 这里**不写 [[我的图库-…]] 双链**：那个笔记只在用户本机有图时才生成，
+        # 写成链接会让 66 张无图卡片全部变成悬空链接（验收第 9 项当场报了 64 处）。
+        # 用行内代码给出路径就够了 —— 它描述的是「你可以做的一件事」，
+        # 不是「这里有一个存在的笔记」。
+        A("> `python3 scan_local.py <你的文件夹>` → 归到本流派 → "
+          "会生成 `15-我的图库/%s/` 下的反推卡，"
+          "那个目录是**本地私有、不发布**的。" % mv["name_zh"])
         A("")
     # 本地图库入口 —— 只在**用户本机有图**时出现。
     # 清单是 gitignore 的，所以别人 clone 后这一行不存在，不会留下悬空链接。
@@ -646,7 +671,7 @@ def overview_note(works_map):
         A.append("")
     A.append("---")
     A.append("")
-    A.append("延伸：[[提示词拆解方法]] · [[视频提示词结构]] · [[配色速查]] · [[版权与来源]]")
+    A.append("延伸：[[提示词拆解方法]] · [[视频提示词结构]] · [[配色速查]] · [[视觉签名]] · [[版权与来源]]")
     return "\n".join(A)
 
 
@@ -2819,6 +2844,7 @@ CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这�
 | `visual_lexicon.py` | **中文视觉词 → 英文短语**的桥。CLIP 文本塔只认英文，中文查询不过桥等于随机 |
 | `eval_search.py` | 检索评测：A 组守卫精确度、B 组测语义增益，并扫出接管阈值 |
 | `refs.py` | **艺术史出处**：把每层提示词的说法接到权威术语表；`--check-urls` 联网复验链接 |
+| `visual_signature.py` | 从实图反推每流派的**可测量区间**；`check <图> --slug X` 校验一张图像不像该流派 |
 | `mcp_server.py` | 同一套能力包装成 MCP server，给 Claude Desktop / Cursor 直连 |
 
 ### 数据源与生成
@@ -3107,6 +3133,84 @@ def pinterest_hub_note(local_map=None):
     return "\n".join(L) + "\n"
 
 
+def _no_image_reason(mv):
+    """这张卡为什么没有图 —— 三选一，因为处理办法完全不同。
+
+    not_fetched  从来没跑过抓图（新补的卡）→ 跑一下就有
+    copyright    代表作在版权期内             → 没有办法，只能存链接
+    coverage     早已公版但开放源没收录        → 可以放宽到 CC-BY
+
+    原来一律写「版权期内」，对毕德麦雅（1815–1848）这类卡是错的，
+    而且会让人以为无解。
+    """
+    import os as _os
+    if not _os.path.exists(_os.path.join(DATA_DIR, mv["slug"] + ".json")):
+        return "not_fetched"
+    m = re.findall(r"(1[5-9]\d\d|20\d\d)", mv.get("period") or "")
+    if m and int(m[0]) < 1930:
+        return "coverage"
+    return "copyright"
+
+
+def signature_note(works_map):
+    """视觉签名页 —— 从实图反推的可测量区间。
+
+    只在**算出过签名**时才生成（需要 Pillow + 跑过 visual_signature.py build）。
+    没有就直接不生成这一页，并在 README 里也不提 —— 不写「待生成」的占位页。
+    """
+    try:
+        import visual_signature as VS
+    except Exception:
+        return None
+    sigs, meta = VS.load()
+    if not sigs:
+        return None
+    L = ["---", GEN_MARK, "type: MOC", "---", "",
+         "# 视觉签名", "",
+         "每个流派的可测量区间，从**实图反推**出来的。", "",
+         "## 它回答的是哪个问题", "",
+         "不是「这是哪个流派」（那件事物理测量做不好，见下），而是：", "",
+         "> **这张图真的像它声称的那个流派吗？**", "",
+         "分类要求跨流派可比，物理测量做不到；而验收只要求同一流派内部自洽，",
+         "这就宽松得多 —— 所以这一页的用法是**校验**，不是分类。", "",
+         "```bash",
+         "python3 visual_signature.py check <图片> --slug <流派>",
+         "```", "",
+         "## 有多少区分度（如实说）", "",
+         "类间方差 / 类内方差，越大越能区分流派：", "",
+         "| 维度 | 类间 | 类内 | 比值 |", "|---|---|---|---|"]
+    for d in (meta.get("discriminative") or [])[:12]:
+        L.append("| %s | %.3f | %.3f | %s |"
+                 % (d["zh"], d["between"], d["within"], d["ratio"]))
+    L += ["",
+          "**比值只有 1–1.6，别高估它。** 这说明同一流派内部 6 张图的差异，",
+          "和流派之间的差异差不多大 —— 和另一条实测结论一致：",
+          "纯客观维度做「图像→流派」匹配只有 13.4%（随机基准 1.4%）。", ""]
+    ns = meta.get("no_signal") or []
+    if ns:
+        L += ["这些维度**没有区分度**（类间/类内 < 0.25），不要拿它们判像不像：",
+              "", "> " + "、".join(ns), ""]
+    L += ["用法是看**偏离幅度**，不是看「有没有越界」：签名由 p10–p90 构造，",
+          "样本内的图天然就有约 20% 的维度落在区间外。", "",
+          "## 各流派的签名", "",
+          "只列**最有信息**的几个维度（按上面的区分度排）。", "",
+          "| 流派 | 样本 | 签名（p10–p90） |", "|---|---|---|"]
+    bs = {m["slug"]: m for m in MOVEMENTS}
+    for slug in sorted(sigs, key=lambda s: bs.get(s, {}).get("name_zh", s)):
+        mv = bs.get(slug)
+        if not mv:
+            continue
+        L.append("| [[%s]] | %d 张 | %s |"
+                 % (mv["name_zh"], sigs[slug]["n_img"], VS.describe(slug)))
+    L += ["", "---", "",
+          "覆盖 %d 个流派 / %d 张实图（每流派至少 %d 张才算，样本太少区间宽到没有约束力）。"
+          % (meta.get("n_movements", len(sigs)), meta.get("n_images", 0),
+             meta.get("min_n", 4)), "",
+          "重算：`python3 visual_signature.py build`", "",
+          "← [[流派总览]] · [[关键词图谱]]", ""]
+    return "\n".join(L)
+
+
 def main():
     works_map = {m["slug"]: load_works(m["slug"]) for m in MOVEMENTS}
     local_map = load_local()
@@ -3143,6 +3247,9 @@ def main():
     w("00-导航/流派总览.md", overview_note(works_map))
     if WIKI_TAX:
         w("00-导航/关键词图谱.md", keyword_graph_note(works_map))
+    _sig = signature_note(works_map)
+    if _sig:
+        w("00-导航/视觉签名.md", _sig)
     for cat in CATEGORIES:
         w("00-导航/分类索引-%s.md" % cat, category_note(cat, works_map))
     w("00-导航/提示词拆解方法.md", METHOD.replace("{mark}", GEN_MARK))

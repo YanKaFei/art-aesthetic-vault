@@ -842,6 +842,90 @@ def check_refs():
     return problems
 
 
+def check_image_card_fit():
+    """22 图与卡自洽 —— 用视觉签名把「最不像本流派的图」挑出来，供人工分诊。
+
+    ## 它是被一次真实事故逼出来的
+
+    给新补的 6 张卡抓图后，`spatialism` 抓到一张「公园里的青铜球」——
+    文件名 KMM_Fontana_02、署名 Gerardus（拍摄者），内容是雕塑园景观，
+    而空间主义的视觉语言是**割裂的单色画布**。那张图会直接误导读者。
+
+    当时**没有任何检查会报警**：第 3 项查 AI 生成（它是真照片，过）、
+    第 10 项查署名质量（"Gerardus" 也过）、第 6/7 项查授权与孤儿图（都过）。
+    管线里缺一条「**图到底画的是不是这个流派**」。
+
+    ## 为什么它是提示性的，不是判决门
+
+    实测过：拿每张图对自己流派的签名，越界比例的分布是
+    中位 0.26、>0.5 有 18%、>0.7 有 2.3%。看 >0.7 那 10 张，**真错和
+    「只是落在 6 样本区间的边缘」混在一起**（比如 de-stijl 那张 Mondrian
+    是正确的，只是格式塔太极端）。签名本身的区分度只有 1.2–1.6，
+    扛不动判决 —— 所以这里只**打印分诊清单**，和近重复（第 5 项）同一处理方式。
+
+    拿它当红绿灯会逼人去「修」本来正确的数据，比不查更坏。
+
+    ## 它抓不到什么（如实说）
+
+    只有 1–3 张图的流派**没有签名**（样本太少，区间没有约束力），
+    查不到它们 —— spatialism 那次正是 1 张图。这类流派会被列出来（不算失败）：
+    它们的图没有任何自动校验兜着，只能人看。这是能力边界，不是噪音。
+    """
+    try:
+        import visual_signature as VS
+        import image_analysis as IA
+    except Exception as e:
+        return None                      # 可选依赖缺失，跳过
+    sigs, meta = VS.load()
+    if not sigs:
+        return None                      # 没算过签名，跳过（不是失败）
+
+    import artvault_core as AC
+    by_slug = {c["slug"]: c for c in AC.cards()}
+    scored, thin = [], []
+    for slug, files in sorted(VS.images_by_movement().items()):
+        if slug not in by_slug:
+            continue
+        if slug not in sigs:
+            if len(files) <= 3:
+                thin.append((by_slug[slug]["name_zh"], len(files)))
+            continue
+        for f in files:
+            a = IA.analyze(f)
+            if a.get("error"):
+                continue
+            out = tot = 0
+            for k, _zh in VS.DIMS:
+                d = (sigs[slug]["dims"] or {}).get(k)
+                if not d:
+                    continue
+                v = VS._get(a, k)
+                if v is None:
+                    continue
+                tot += 1
+                if not (d["p10"] <= v <= d["p90"]):
+                    out += 1
+            if tot:
+                scored.append((out / float(tot), by_slug[slug]["name_zh"],
+                               os.path.basename(f)))
+    if not scored:
+        return None
+    scored.sort(reverse=True)
+    flagged = [x for x in scored if x[0] > 0.70]
+    print("      （分诊：%d/%d 张越界比例 >0.70，最像的几张见下 —— "
+          "**当线索用，签名区分度只有 1.2–1.6，扛不动判决**）"
+          % (len(flagged), len(scored)))
+    for r, name, f in scored[:6]:
+        print("        %.2f  %-16s %s" % (r, name, f[:52]))
+    if thin:
+        print("      （另有 %d 个流派只有 1–3 张图、没有签名兜底，"
+              "图对不对只能人看：%s）"
+              % (len(thin), "、".join("%s(%d张)" % t for t in thin[:6])))
+    # 返回空列表而不是 None：**分诊跑过了**（跑过和没跑过要分得开，
+    # 否则「已分诊、没发现问题」会被印成「跳过」）。
+    return []
+
+
 def main():
     ap = argparse.ArgumentParser(description="艺术审美风格库验收检查")
     ap.add_argument("--quick", action="store_true",
@@ -905,6 +989,14 @@ def main():
     report("19 语义检索", check_semantic_search())
     report("20 关键词图谱", check_keyword_map())
     report("21 出处", check_refs())
+    # 第 22 项是**提示性**的（签名区分度只有 1.2–1.6，扛不动判决），
+    # 所以不走 report() —— 那会把「跑过了、只是没发现问题」印成「跳过」。
+    _fit = check_image_card_fit()
+    if _fit is None:
+        print("%s 22 图与卡自洽：跳过（没算过视觉签名，先跑 "
+              "python3 visual_signature.py build）" % WARN)
+    else:
+        print("%s 22 图与卡自洽：已分诊（提示性，不计入失败）" % OK)
 
     print("=" * 70)
     if failed:

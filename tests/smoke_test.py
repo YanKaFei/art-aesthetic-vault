@@ -363,6 +363,71 @@ class RefsTests(unittest.TestCase):
         self.assertIn("tate.org.uk", text, "出处节里没有来源链接")
 
 
+class VisualSignatureTests(unittest.TestCase):
+    """视觉签名：从实图反推区间，用来**校验**而不是分类。
+
+    这条能力是被一次真实事故逼出来的 —— 抓图抓进一张「公园里的青铜球」，
+    而空间主义的视觉语言是割裂的单色画布。当时没有任何检查会报警。
+    """
+
+    def _sigs(self):
+        sys.path.insert(0, SCRIPTS)
+        import visual_signature as VS
+        sigs, meta = VS.load()
+        if not sigs:
+            self.skipTest("还没算过签名（python3 visual_signature.py build）")
+        return VS, sigs, meta
+
+    def test_signature_intervals_are_ordered(self):
+        VS, sigs, _meta = self._sigs()
+        for slug, s in sigs.items():
+            for dim, d in s["dims"].items():
+                self.assertLessEqual(d["p10"], d["median"],
+                                     "%s 的 %s：p10 > 中位数" % (slug, dim))
+                self.assertLessEqual(d["median"], d["p90"],
+                                     "%s 的 %s：中位数 > p90" % (slug, dim))
+
+    def test_signature_slugs_exist(self):
+        VS, sigs, _meta = self._sigs()
+        sys.path.insert(0, SCRIPTS)
+        from movements import MOVEMENTS
+        known = {m["slug"] for m in MOVEMENTS}
+        ghosts = sorted(s for s in sigs if s not in known)
+        self.assertEqual([], ghosts, "签名里有库里不存在的流派：%s" % ghosts)
+
+    def test_check_separates_same_from_cross(self):
+        """签名必须真的能区分「同流派的图」和「别派的图」。
+
+        只断言「跑得起来」是不够的 —— 一条永远返回同一结论的检查没有价值。
+        """
+        VS, sigs, _meta = self._sigs()
+        by_mv = VS.images_by_movement()
+        a = [s for s in ("baroque", "ukiyo-e") if s in sigs and s in by_mv]
+        if len(a) < 2:
+            self.skipTest("需要 baroque 与 ukiyo-e 两个流派都有签名")
+        s1, s2 = a[0], a[1]
+        img1 = by_mv[s1][0]
+        same = VS.check(img1, s1)
+        cross = VS.check(img1, s2)
+        rank = {"fit": 0, "partial": 1, "off": 2}
+        self.assertLess(rank[same["verdict"]], rank[cross["verdict"]],
+                        "同一张图对自家流派判 %s、对别派判 %s —— 没有区分力"
+                        % (same["verdict"], cross["verdict"]))
+
+    def test_zero_width_interval_does_not_explode(self):
+        """区间宽为 0 的维度不能拿它当分母（第一版输出过「偏离 2200000 倍」）。"""
+        VS, sigs, _meta = self._sigs()
+        by_mv = VS.images_by_movement()
+        for slug in list(sigs)[:12]:
+            if slug not in by_mv:
+                continue
+            r = VS.check(by_mv[slug][0], slug)
+            for _zh, _v, _d, rel, _dist in r.get("outside", []):
+                if rel is not None:
+                    self.assertLess(rel, 1000,
+                                    "偏离倍数大得离谱，说明又拿零宽区间当分母了")
+
+
 class I2vTests(unittest.TestCase):
     """图生视频：一张图进去，占位符必须被**这张图的**测量填掉。
 

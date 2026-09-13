@@ -6,7 +6,7 @@
 
 从拜占庭到 Y2K ｜ 东亚 · 南亚 · 伊斯兰 ｜ 摄影谱系 ｜ 数字亚文化
 
-168 篇笔记 · 442 张公共领域实图 · 37 个即用脚本
+168 篇笔记 · 442 张公共领域实图 · 38 个即用脚本
 
 [English](README.en.md) ｜ **中文**
 
@@ -459,6 +459,7 @@ CI（GitHub Actions）在 Ubuntu × macOS、Python 3.9 × 3.12 上自动跑这�
 | `visual_lexicon.py` | **中文视觉词 → 英文短语**的桥。CLIP 文本塔只认英文，中文查询不过桥等于随机 |
 | `eval_search.py` | 检索评测：A 组守卫精确度、B 组测语义增益，并扫出接管阈值 |
 | `refs.py` | **艺术史出处**：把每层提示词的说法接到权威术语表；`--check-urls` 联网复验链接 |
+| `visual_signature.py` | 从实图反推每流派的**可测量区间**；`check <图> --slug X` 校验一张图像不像该流派 |
 | `mcp_server.py` | 同一套能力包装成 MCP server，给 Claude Desktop / Cursor 直连 |
 
 ### 数据源与生成
