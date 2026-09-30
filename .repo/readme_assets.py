@@ -87,6 +87,19 @@ _CACHE = {}
 
 
 def font(role, size):
+    """取字体。**一台机器上缺字体就报错，不退回默认位图字体。**
+
+    这里原来最后会 `ImageFont.load_default()` 兜底 —— 听起来是「优雅降级」，
+    实际是把一个必须被发现的错误变成了看不见的错误：
+
+      · 图的**字节取决于字体**，「同一份源码重建出同一张图」这条承诺，
+        在缺字体的机器上会静默失效；
+      · 而校验只在装了 Pillow 的机器上跑 —— 恰好就是字体齐全的那一台，
+        所以谁也不会发现，直到有人在别处重建出一套不一样的图并提交上去。
+
+    候选字体都是 macOS 自带的。在没有它们的机器上，正确的行为是**停下来说明**，
+    而不是画一张看起来没问题的图。
+    """
     key = (role, size)
     if key in _CACHE:
         return _CACHE[key]
@@ -100,9 +113,12 @@ def font(role, size):
             return f
         except Exception:
             continue
-    f = ImageFont.load_default()
-    _CACHE[key] = f
-    return f
+    raise RuntimeError(
+        "找不到可用的字体，拒绝生成配图 —— 图的字节取决于字体，"
+        "退回 Pillow 默认位图字体会让「配图可复现」静默失效。\n"
+        "需要下面任一个（本脚本的选图与排版按它们的度量调过）：\n  %s\n"
+        "如果只是想核对已有配图，用 `python3 readme_assets.py --check`，它不需要字体。"
+        % "\n  ".join(p for p, _r in _FONTS))
 
 
 # ---------------------------------------------------------------- 绘制小工具

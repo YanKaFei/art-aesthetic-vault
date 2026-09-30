@@ -263,6 +263,29 @@ class ReadmeAssetTests(unittest.TestCase):
         self.assertEqual([], sorted(srcs - git_tracked(sorted(srcs))),
                          "清单记的源图没被 git 跟踪（别人 clone 后重建不出来）")
 
+    def test_generator_refuses_to_run_without_its_fonts(self):
+        """缺字体时必须**报错**，不能悄悄退回默认位图字体。
+
+        图的字节取决于字体。没有字体时 Pillow 的 load_default() 会照常出图，
+        只是画出来的是另一套东西 —— 于是「同一份源码在任何机器上重建出同一张图」
+        这条承诺就静默失效了，而且校验只跑在有 Pillow 的机器上，恰好是字体齐全
+        的那一台。所以要求它在字体缺失时直接失败。
+        """
+        try:
+            import PIL  # noqa: F401
+            import readme_assets as RA
+        except Exception as e:
+            self.skipTest("本机没有 Pillow：%s" % str(e)[:60])
+        keep = RA._FONTS
+        try:
+            RA._FONTS = ()
+            RA._CACHE.clear()
+            with self.assertRaises(RuntimeError):
+                RA.font("sans", 20)
+        finally:
+            RA._FONTS = keep
+            RA._CACHE.clear()
+
     def test_assets_are_reproducible(self):
         """有 Pillow 时：重画一遍，逐字节比。没有就跳过（CI 不装 Pillow）。"""
         try:
