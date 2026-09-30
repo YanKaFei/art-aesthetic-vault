@@ -47,11 +47,30 @@ for _c in (os.environ.get("ARTVAULT_DEPS", ""),
     if _c and os.path.isdir(_c) and _c not in sys.path:
         sys.path.insert(0, _c)
 
+# Pillow 是**可选**的，而且这个 import 必须在 argparse 之后才发作。
+#
+# 第一版在这里 `sys.exit(1)`，于是没装 Pillow 的机器上连 `--help` 都退出 1 ——
+# 实测被 CI 的「每个入口的 --help 必须是安全的」抓住（同 image_analysis_ext.py
+# 当年那个 traceback 是同一类问题）。读者拿到陌生仓库第一个试的就是 `--help`。
+#
+# 而且 `--list` 与 `--check` 本来就不需要 Pillow：前者只列源图路径，后者只比
+# sha256。把 import 挪到真正要画图的那一步，这两条路在没 Pillow 的机器上照常可用。
 try:
     from PIL import Image, ImageDraw, ImageFont
 except Exception as e:                                    # pragma: no cover
-    print("需要 Pillow：%s" % e)
+    Image = ImageDraw = ImageFont = None
+    _PIL_ERR = str(e)
+else:
+    _PIL_ERR = None
+
+
+def need_pil():
+    """要画图了才检查 Pillow。缺就说明白，并指出哪两条路照样能走。"""
+    if _PIL_ERR is None:
+        return
+    print("需要 Pillow：%s" % _PIL_ERR)
     print("  pip3 install Pillow    或   ARTVAULT_DEPS=<含有 Pillow 的目录>")
+    print("  （--list 与 --check 不需要 Pillow，可以照常跑）")
     sys.exit(1)
 
 OUT_DIR = os.path.join(VAULT, "99-attachments", "readme")
@@ -581,6 +600,8 @@ def main():
         print("总览网格：%d 格，缺 %d 张"
               % (len(GALLERY), sum(1 for p, _n, _a in GALLERY if not p)))
         return 0
+
+    need_pil()                      # 只有走到「真画图」这一步才要求 Pillow
 
     os.makedirs(OUT_DIR, exist_ok=True)
     for name, fn in JOBS.items():

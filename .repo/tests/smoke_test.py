@@ -33,6 +33,7 @@
 
 import json
 import os
+import platform
 import re
 import subprocess
 import sys
@@ -1303,12 +1304,30 @@ class VisionDependencyTests(unittest.TestCase):
                          "自检说可用，但真跑抛了 traceback：%s" % (err + out)[-300:])
 
     def test_unavailable_reason_mentions_numpy_when_missing(self):
-        """缺 numpy 时，原因里要能读到「numpy」——而不是一句笼统的不可用。"""
+        """缺 numpy 时，原因里要能读到「numpy」——而不是一句笼统的不可用。
+
+        ⚠ 只在**平台本身支持**的前提下才成立。这一条原来只判「本机没有 numpy」，
+        于是它在 Linux 上必然失败：
+
+            unavailable_reason() = "依赖 macOS 自带的 Vision 框架，当前系统是 Linux"
+
+        这不是缺陷，是顺序 —— Vision 框架在 Linux 上根本不存在，numpy 缺不缺
+        都轮不到它说话，先报系统才是对的。要守的不变量是「**能跑却没跑成**时
+        不许给一句笼统的不可用」，所以先把「平台不支持」这种**压根跑不了**的
+        情况摘出去，只留下「平台没问题、只差依赖」那一段来判。
+
+        实测来源：修好 CI 的路径之后 CI 第一次真的跑起来，四个平台全红在这一条 ——
+        而它从写下来那天起就没在 Linux 上跑过（因为更早的路径错误让整个 workflow
+        都起不来）。检查项在，却从没执行过，和 README 数字吃过的是同一种亏。
+        """
         sys.path.insert(0, SCRIPTS)
         import artvault_vision as AV
         if AV._have_numpy():
             self.skipTest("本机有 numpy")
-        self.assertIn("numpy", (AV.unavailable_reason() or "").lower())
+        reason = AV.unavailable_reason() or ""
+        if platform.system() != "Darwin":
+            self.skipTest("本平台没有 Vision 框架，原因先报系统不算错：%s" % reason[:60])
+        self.assertIn("numpy", reason.lower())
 
 
 if __name__ == "__main__":
