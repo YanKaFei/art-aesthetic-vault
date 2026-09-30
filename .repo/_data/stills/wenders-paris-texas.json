@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "维姆·文德斯",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#C9A227",
+  "#3E7A9A",
+  "#C42B72",
+  "#2B8C8C",
+  "#B03A2B",
+  "#2E4A3A"
+ ],
+ "palette_written_named": [
+  [
+   "#C9A227",
+   "沙漠土黄"
+  ],
+  [
+   "#3E7A9A",
+   "天蓝"
+  ],
+  [
+   "#C42B72",
+   "霓虹品红"
+  ],
+  [
+   "#2B8C8C",
+   "霓虹青绿"
+  ],
+  [
+   "#B03A2B",
+   "红帽"
+  ],
+  [
+   "#2E4A3A",
+   "绿衬衫"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "wenders-paris-texas",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "德州巴黎",
+ "total_linked": 65
+}

@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "斯坦利·库布里克",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#0F0F0F",
+  "#3E3A34",
+  "#6E6E6E",
+  "#A8A8A8",
+  "#E0E0DC",
+  "#8C7A5C"
+ ],
+ "palette_written_named": [
+  [
+   "#0F0F0F",
+   "战壕黑"
+  ],
+  [
+   "#3E3A34",
+   "泥褐"
+  ],
+  [
+   "#6E6E6E",
+   "中灰"
+  ],
+  [
+   "#A8A8A8",
+   "石膏灰"
+  ],
+  [
+   "#E0E0DC",
+   "高窗白"
+  ],
+  [
+   "#8C7A5C",
+   "制服褐灰"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "kubrick-paths-of-glory",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "光荣之路",
+ "total_linked": 65
+}

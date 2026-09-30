@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "弗朗西斯·福特·科波拉",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#6B4A2B",
+  "#A8843C",
+  "#6B1F1A",
+  "#0F0F0F",
+  "#C4B49A",
+  "#3E3A34"
+ ],
+ "palette_written_named": [
+  [
+   "#6B4A2B",
+   "暖褐"
+  ],
+  [
+   "#A8843C",
+   "暗金"
+  ],
+  [
+   "#6B1F1A",
+   "酒红"
+  ],
+  [
+   "#0F0F0F",
+   "深黑"
+  ],
+  [
+   "#C4B49A",
+   "旧纸米"
+  ],
+  [
+   "#3E3A34",
+   "暗部褐灰"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "coppola-godfather",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "教父",
+ "total_linked": 60
+}

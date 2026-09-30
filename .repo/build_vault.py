@@ -32,7 +32,11 @@ from movements import (MOVEMENTS, CATEGORIES, by_category,  # noqa: E402
                        build_positive)
 import keyword_map  # noqa: E402
 import refs  # noqa: E402
+import mv_handraw as _HW  # noqa: E402  第 7 大类：分组、覆盖率、编号图
 import artvault_core as _AC  # noqa: E402  （层的中文名只在这里定义一次）
+import handraw_note as HWN  # noqa: E402  第 7 大类：卡片模板、总览页、编号图
+from readme_i18n import (README_ZH, README_EN,  # noqa: E402
+                         README_JA, README_FR)
 
 LEGEND_LAYER = dict(_AC.LAYER_ZH)
 
@@ -111,27 +115,91 @@ def publish_stats():
     # （实测那样会得到 92，而真实是 81）。
     mv_dirs = {r.split("images/", 1)[1].split("/")[0] for r in img_rel if "images/" in r}
     note_rel = shipped(glob.glob(os.path.join(VAULT, "*", "**", "*.md"), recursive=True))
-    n_with_img = len(mv_dirs & {m["slug"] for m in MOVEMENTS})
+    # 手绘类的「有图」是编号参考图，不在 _data/<slug>.json 里（它没有抓取结果）。
+    # 两者语义不同，但回答的是同一个问题：这张卡有没有图可看。
+    n_with_img = (len(mv_dirs & {m["slug"] for m in MOVEMENTS})
+                  + sum(1 for m in MOVEMENTS if HWN.ref_image(m)))
+
+    # 镜头配方卡库（45-shots/）：第三条轴。技法描述版权归上游（Apache-2.0），
+    # 所以 README 里必须写明来源 —— 混进「本库有多少东西」而不标来源，
+    # 读起来就变成本站原创。模块缺失时退回 0，不让统计把构建炸掉。
+    n_shots = n_shot_cats = 0
+    shot_source = ""
+    try:
+        import shot_core as _SH
+        _ss = _SH.shots()
+        n_shots = len(_ss)
+        n_shot_cats = len(_SH.categories())
+        if _ss:
+            shot_source = _ss[0]["source_repo"]
+    except Exception:
+        pass
+
     # 关键词图谱的规模必须**现算**。README 里那句「218 styles / 189 movements /
     # 68 genres」曾经是真的，但它描述的是 WikiArt 的跨界对照表，而那张表随着
     # 「只讲数据从哪来、不讲知识」的清理一起删掉了 —— 数字留在 README 上，
     # 就变成一句没人守得住的宣传语（实测图谱现在只剩 4 组概念）。
     import keyword_map as KM
+    # **两种图要分开数。** 博物馆实图是 CC0 / 公共领域；第 7 大类的编号参考图
+    # 来自 handraw-style（MIT），是风格参考而不是公共领域作品。合成一个「实图」
+    # 数字，读者会据此做出错误的授权判断 —— 而授权正是这个库最在意的东西。
+    n_ref_img = len([r for r in img_rel
+                     if r.startswith("99-attachments/images/handraw/")])
+    # 电影风格库的规模。**必须现算**：这两个数我手写过两次、错两次 ——
+    # 先写「394 条剧照外链」（估的），后写「1001」（抓取器把嵌套缩略图
+    # 也当成了剧照，每张记两遍）。手写的数字一旦进 README 就没人守得住，
+    # 正好是这一项存在的理由。模块缺失时退回 0，不让统计炸掉整个构建。
+    n_films = n_film_directors = n_film_stills = 0
+    _hn_named = _hn_total = _hn_traits = _hn_gen = 0
+    try:
+        import handraw_name as _HN
+        _st = _HN.stats()
+        _hn_total = _st["total"]
+        _hn_traits = _st["from_traits"]
+        _hn_gen = _st["from_generation_name"]
+        _hn_named = _hn_total          # CURATED 覆盖全部 274 条
+    except Exception:
+        pass
+    try:
+        import fv_core as _FV
+        _fs = _FV.films()
+        n_films = len(_fs)
+        n_film_directors = len(_FV.directors())
+        n_film_stills = sum(len(f.get("stills") or []) for f in _fs)
+    except Exception:
+        pass
     return {
         "n_img": len(img_rel),
+        "n_work_img": len(img_rel) - n_ref_img,
+        "n_ref_img": n_ref_img,
         "img_mb": int(round(sum(os.path.getsize(os.path.join(VAULT, r))
                                 for r in img_rel) / 1048576.0)),
         "n_mv": len(MOVEMENTS),
+        "n_cats": len(CATEGORIES),
         "n_mv_with_img": n_with_img,
         "n_mv_no_img": len(MOVEMENTS) - n_with_img,
         "n_guides": len(shipped(glob.glob(os.path.join(VAULT, "00-guides", "*.md")))),
         "n_scripts": len(shipped(glob.glob(os.path.join(HERE, "*.py")))),
         "n_notes": len([r for r in note_rel
                         if r.split("/", 1)[0] in ("00-guides", "10-movements",
-                                                  "20-my-prompts", "90-templates")]),
+                                                  "20-my-prompts", "90-templates",
+                                                  "40-films")]),
         "n_concepts": len(KM.CLUSTERS),
         "n_synonyms": sum(len(c.get("synonyms") or []) for c in KM.CLUSTERS),
         "n_templates": len(TEMPLATES),
+        # 手绘卡命名覆盖率：现算，不写死
+        "n_hn_named": _hn_named,
+        "n_hn": _hn_total,
+        "n_hn_traits": _hn_traits,
+        "n_hn_gen": _hn_gen,
+        "n_films": n_films,
+        "n_film_directors": n_film_directors,
+        "n_film_stills": n_film_stills,
+        "n_shots": n_shots,
+        "n_shot_cats": n_shot_cats,
+        # 这一项一直漏在返回字典外，于是发布出去的 README 里
+        # 字面留着 `{shot_source}`（中文英文两份都是）。
+        "shot_source": shot_source,
     }
 
 
@@ -234,6 +302,11 @@ def _clean_meta(wk, mv=None):
 
 
 def movement_note(mv, works, local_map=None):
+    # 第 7 大类走自己的模板 —— 它的字段来源和别的卡不同（七层是从 handraw
+    # 的 traits 里抽的 + 组级默认，不是手写的艺术史结论），卡上必须把这件事
+    # 印出来。用同一个模板只换数据，就是那种「看着统一、读起来骗人」的做法。
+    if mv.get("kind") == "handraw":
+        return HWN.card(mv)
     slug = mv["slug"]
     lines = []
     A = lines.append
@@ -504,16 +577,24 @@ CAT_COVER_EN = {
  "先锋·当代·后现代": "Avant-garde, contemporary, postmodern, installation / performance / digital",
  "东亚·南亚·伊斯兰": "Dunhuang murals, Tibetan thangka, ukiyo-e, Persian miniature, Islamic geometry",
  "摄影与图像": "Pictorialism, straight photography, documentary, street, surrealist photography",
+ "手绘艺术风格": "274 numbered hand-drawn illustration styles (handraw-style), groups A-H",
 }
 
-
-def category_table_en():
-    cats = by_category()
-    L = ["| Category | Movements | Covers |", "|---|---|---|"]
-    for c in CATEGORIES:
-        L.append("| %s | %d | %s |" % (CAT_EN.get(c, c), len(cats[c]), CAT_COVER_EN.get(c, "")))
-    L.append("| **Total** | **%d** | 6 categories |" % len(MOVEMENTS))
-    return "\n".join(L)
+# ---------------------------------------------------- 第 7 大类：手绘艺术风格
+# 分类名 / 图标 / 英文名 / 覆盖说明 / 组内分组**全部从这里现算**，不重抄一遍。
+# 重抄就会漂移：handraw 加一组、加一条，抄下来的那份不会知道。
+if _HW.CATEGORY not in CATEGORIES:
+    raise SystemExit("mv_handraw.CATEGORY=%r 不在 CATEGORIES 里 —— "
+                     "检查 movements.MODULES 是否接上了 mv_handraw" % _HW.CATEGORY)
+CAT_ICON[_HW.CATEGORY] = "✏️"
+CAT_EN[_HW.CATEGORY] = "Hand-drawn Illustration Styles"
+CAT_COVER_EN[_HW.CATEGORY] = (
+    "274 numbered hand-drawn illustration styles - editorial cartoon, picture book, "
+    "modern graphic, Japanese / Chinese contemporary illustration")
+SUBGROUPS[_HW.CATEGORY] = [("%s %s" % (g, label), [m["slug"] for m in ms])
+                           for g, label, ms in _HW.groups()]
+for _g, _label, _ms in _HW.groups():
+    SUBGROUPS_EN["%s %s" % (_g, _label)] = _HW.GROUPS[_g]["label_en"]
 
 
 def skill_tree_en():
@@ -539,6 +620,11 @@ def skill_tree_en():
                                   SUBGROUPS_EN.get(gname, gname)))
             sub = prefix + ("    " if last_g else "│  ")
             names = [by[x]["name_en"] for x in slugs]
+            # 同 skill_tree()：大类只报条数，不铺名字。
+            if len(names) > 24:
+                L.append("%s└ %d entries (see the category index)"
+                         % (sub, len(names)))
+                continue
             for i in range(0, len(names), 3):
                 L.append("%s%s %s" % (sub, "└" if i + 3 >= len(names) else "├",
                                       " . ".join(names[i:i + 3])))
@@ -568,6 +654,14 @@ def skill_tree():
             L.append("%s%s %s" % (prefix, "└─" if last_g else "├─", gname))
             sub = prefix + ("   " if last_g else "│  ")
             names = [by[x]["name_zh"] for x in slugs]
+            # **大类不铺名字。** 274 条手绘风格全列出来会把 README 撑大一倍，
+            # 而读者在树里扫 274 个编号也没有意义 —— 想知道具体有哪几条，
+            # 分类索引页一次列全。阈值 24：现有各组最多 17 条，行为不变。
+            if len(names) > 24:
+                # 组名上一行已经印过了，这里只补条数 —— 再印一遍会让技能树里
+                # 出现「A 国际社论漫画 / 幽默手绘」连着两行。
+                L.append("%s└ 共 %d 条（见分类索引）" % (sub, len(names)))
+                continue
             for i in range(0, len(names), 4):
                 L.append("%s%s %s" % (sub, "└" if i + 4 >= len(names) else "├",
                                       " · ".join(names[i:i + 4])))
@@ -588,11 +682,22 @@ def overview_note(works_map):
     A.append("")
     A.append("> [!tip] 先读方法，再抄模板")
     A.append("> 方法在 [[提示词拆解方法]]，视频结构在 [[视频提示词结构]]，")
-    A.append("> 配色速查在 [[配色速查]]，")
-    A.append("> 图片可自由使用与再分发。")
+    A.append("> 配色速查在 [[配色速查]]。")
+    A.append(">")
+    A.append("> **图片有两种来源，授权不同：**")
+    A.append("> 博物馆抓来的实图是 CC0 / 公共领域，可自由使用与再分发；")
+    A.append("> 第 7 大类「手绘艺术风格」的 %d 张编号参考图来自 "
+             "[handraw-style](https://github.com/yang0/handraw-style)（MIT），"
+             % sum(1 for m in MOVEMENTS if HWN.ref_image(m)))
+    A.append("> 是**风格参考图**，不是公共领域艺术作品 —— 转载时请遵守上游授权。")
     A.append("")
-    n_img = sum(1 for m in MOVEMENTS if works_map.get(m["slug"]))
-    A.append("**共 %d 个流派**，其中 %d 个配了实图，%d 个为纯提示词卡。"
+    # 「配了图」在这个库里是两种东西：其它 6 类是博物馆实图，手绘类是
+    # **编号参考图**。两者都不等于「没图」—— 不把手绘类算进来，总览就会
+    # 声称 274 张手绘卡是「纯提示词卡」，而它们每张都带一张编号图。
+    n_img = sum(1 for m in MOVEMENTS
+                if works_map.get(m["slug"]) or HWN.ref_image(m))
+    A.append("**共 %d 个流派**，其中 %d 个配了图（其它 6 类为博物馆实图，"
+             "手绘类为编号参考图），%d 个为纯提示词卡。"
              % (len(MOVEMENTS), n_img, len(MOVEMENTS) - n_img))
     A.append("")
     A.append("## 分类")
@@ -604,10 +709,12 @@ def overview_note(works_map):
         "东亚·南亚·伊斯兰": "中国、日本、韩国、波斯、莫卧儿、伊斯兰装饰",
         "现代主义与战后": "野兽派 → 新表现主义，20 世纪实验",
         "数字·亚文化·摄影美学": "赛博朋克、蒸汽波、胶片工艺、网络亚文化",
+        "手绘艺术风格": "handraw-style 274 个编号风格：社论漫画 → 绘本 → 现代平面 → 日/中当代插画",
     }
     for c in CATEGORIES:
         ms = by_category()[c]
-        got = sum(1 for m in ms if works_map.get(m["slug"]))
+        got = sum(1 for m in ms
+                  if works_map.get(m["slug"]) or HWN.ref_image(m))
         A.append(r"| [[分类索引-%s\|%s]] | %d | %d | %s |"
                  % (c, c, len(ms), got, covers.get(c, "")))
     A.append("")
@@ -617,6 +724,14 @@ def overview_note(works_map):
         A.append("")
         A.append(r"[[分类索引-%s\|查看本类索引 →]]" % c)
         A.append("")
+        # **大类不铺开。** 274 条手绘风格连着中文一句话列在总览页上，
+        # 会把这一页撑成一份没法读的清单；它的分类索引页本来就是干这件事的。
+        if len(ms) > 60:
+            A.append("> 这一大类共 %d 条，**不在本页铺开** —— "
+                     "见 [[分类索引-%s]]（全部条目）与 [[手绘风格总览]]（分组导读）。"
+                     % (len(ms), c))
+            A.append("")
+            continue
         A.append("| 流派 | English | 时期 | 配图 | 一句话 |")
         A.append("|---|---|---|---|---|")
         for m in ms:
@@ -644,9 +759,14 @@ def category_note(cat, works_map):
     A.append("|---|---|---|---|---|")
     for m in ms:
         n = len(works_map.get(m["slug"]) or [])
+        if HWN.ref_image(m):
+            pic = "编号参考图"
+        elif n:
+            pic = "%d 张" % n
+        else:
+            pic = "—"
         A.append("| [[%s]] | %s | %s | %s | %s |"
-                 % (m["name_zh"], m["name_en"], m["period"], m["region"],
-                    ("%d 张" % n) if n else "—"))
+                 % (m["name_zh"], m["name_en"], m["period"], m["region"], pic))
     A.append("")
     A.append("## 一句话速览")
     A.append("")
@@ -1113,11 +1233,85 @@ type: 说明
 
 三者共用 `.repo/artvault_core.py` 的同一套逻辑，行为一致。
 
+## 一之二、电影风格库（按「导演 → 电影」的另一条轴）
+
+`10-movements/` 是**艺术流派**（按风格命名），`40-films/` 是**电影**（按导演命名）。
+两者**共用同一套七层词表**，所以可以跨源混搭 —— 这不是文档里的一句口号，
+`artvault.py compose` 的层解析里真的挂了电影库的兜底。
+
+```bash
+python3 .repo/artvault.py film list              # 列出全部片子
+python3 .repo/artvault.py film directors         # 按导演分组
+python3 .repo/artvault.py film search "霓虹 雨夜"  # 按画面特征找片（也可按导演/片名）
+python3 .repo/artvault.py film layers 银翼杀手2049 # 只要七层（最省 token）
+python3 .repo/artvault.py film show dune          # 整张卡
+python3 .repo/artvault.py film palette 闪灵        # 配色
+
+# 跨源混搭：拿电影的光照层 + 艺术流派的配色
+python3 .repo/artvault.py compose \
+    --lighting villeneuve-dune --color baroque --subject "a lone figure on a dune"
+```
+
+> [!note] 这 14 部片是**逐片看过画面**才定稿的
+>
+> 每部片都跑过一遍「全量实测 → k-medoids 选代表帧 → 拼 3×3 印相图 → 人眼精读」，
+> 再把看到的与卡上写的核对。结果是**大部分描述站得住**，只有少数偏窄的被改：
+>
+> - 已按画面修正：《镜子》的色温漂移、《潜行者》的雨夜单色段与湿地饱和、
+>   《寄生虫》的「光＝阶级标记」、《未麻的部屋》的两套打光对撞
+> - 看过确认无误、未改：《乱》《未麻的部屋》《银翼杀手 2049》《七宗罪》
+>   《重庆森林》《闪灵》《刺客聂隐娘》《沙丘》《精疲力尽》《巴里·林登》
+>
+> 自己复现：`python3 .repo/contact_sheet.py <片名>` 出印相图。
+> 为何必须做这一步：实测页给的是「明度 65.9、饱和 0.31」这类数字，
+> **如实但冷** —— 数字能告诉你偏暗，告诉不了你「暗得脏还是暗得神圣」。
+
+> [!warning] 电影卡与艺术流派卡的**证据强度不一样**
+>
+> - **班底与年份**：抓自 film-grab 画廊页，卡片上标 ✅ 且带外链，可回查
+> - **七层拆解**：**手写解读**，依据是这部片公认的摄影特征 —— 不是逐帧测量结果
+> - **剧照**：卡片**本地嵌入**每部 6 张代表帧（约 15 MB 随仓库走，clone 后能看图）；
+>   版权属原片方，**仅供个人研究**，公开分发/商用前请自行取得授权。
+>   其余语料留在本地做分析（`image_analysis` / CLIP 重选代表帧），不随仓库发布。
+>
+> 引用时别说成「量出来的」。
+
+## 一之三、镜头配方卡库（`45-shots/`，第三条轴：运镜招式）
+
+前两条轴回答「长什么样」，这一条回答「**这一下怎么做出来**」：
+
+| 模块 | 轴 | 回答的问题 |
+|---|---|---|
+| `10-movements/` | 风格 | 这个流派长什么样、提示词怎么拼 |
+| `40-films/` | 导演-电影 | 这部片长什么样、怎么模仿它 |
+| `45-shots/` | **运镜招式** | **这一下动效怎么做出来** |
+
+```bash
+python3 .repo/artvault.py shots list              # 157 张 / 10 类
+python3 .repo/artvault.py shots categories
+python3 .repo/artvault.py shots search "急推 冲击"  # 按「我想做什么」找
+python3 .repo/artvault.py shots show crash-zoom-punch
+```
+
+> [!warning] 这一轴**没有七层**，而且是故意的
+>
+> 前两条轴共用七层，所以能跨源混搭。镜头卡讲的是帧数与缓动
+> （`zoom 6f ease-in，1→2.6`、`震屏 14px·e^(−t/1.8)`）——
+> **157 张里一张都没有色彩或光照字段**。套七层只能靠编，而
+> `compose --style crash-zoom-punch` 会拼出一段看起来能用、实际在编的提示词。
+> 所以它按上游自己的四字段（适用/时长/能量/标签）排，并且**刻意不参与
+> `compose` 的层解析**。
+>
+> 这些卡来自上游 [video-shotcraft](https://github.com/Vincentwei1021/video-shotcraft)
+> （Apache-2.0），**技法描述不是本库原创**，本库只做归类与排版。
+> 上游另写明：手法研究自公开作品，但实现全部从零重写、不含原片素材，
+> 且「公开发布**不等于**授权」。详见 [[出处与许可]]。
+
 ## 二、命令行（推荐先从这个开始）
 
 ```bash
 cd ".repo"
-python3 artvault.py categories                 # 6 大分类
+python3 artvault.py categories                 # {n_cats} 大分类
 python3 artvault.py list --with-images          # 有实图的流派
 python3 artvault.py search "霓虹 雨夜"           # 模糊检索
 python3 artvault.py search "压抑但华丽的光" --semantic   # 语义检索（需下过 CLIP 模型）
@@ -1258,275 +1452,6 @@ python3 .repo/ingest_inbox.py --archive  ← 图移到 pinterest/_已归档/
 
 """
 
-README_EN = """<div align="center">
-
-# Art Aesthetic Style Library
-
-[![DeepSeek Harness](https://img.shields.io/badge/DeepSeek%20Harness-dsh--plugin-4D6BFE?style=flat-square)](https://github.com/deepseek-ai/deepseek-harness)
-[![Agent Skill](https://img.shields.io/badge/Agent-Skill-7C3AED?style=flat-square)](.repo/skill)
-[![License](https://img.shields.io/github/license/{REPO_SLUG}?style=flat-square)](LICENSE)
-
-**{n_mv} art movements, decomposed into swappable AI prompt layers**
-
-Byzantine to Y2K ｜ East & South Asia · Islamic ｜ Photography ｜ Digital subcultures
-
-{n_notes} notes · {n_img} images · {n_scripts} ready-to-run scripts
-
-**English** ｜ [中文](README.md)
-
-</div>
-
----
-
-## What is this
-
-Most "art style reference" collections are just image folders. You save a few hundred
-pictures, and then when it's time to actually use them you don't know what to look at
-or how to describe it. The images are dead weight.
-
-This library does something different: **it breaks each movement's visual language into
-seven layers that can be swapped independently.**
-
-```
-Subject  +  Style  +  Lighting  +  Color
-         +  Composition  +  Medium  +  Mood  +  Camera
-```
-
-Once it's layered, you can take the **lighting** from one painting and put it on the
-**subject** of a completely different one. That's what a reference library is actually for.
-
-> ### A note on language
-> **The prompt layers are already in English** - they're what you paste into a model.
-> Only the explanations (visual breakdowns, pitfalls, why-it-works notes) are in Chinese.
-> If you only want the prompts, you can use this library as-is.
-
-### See it work
-
-Say you want a bounty hunter in a neon-lit alley, but with classical painting light:
-
-```
-python3 artvault.py compose "雨夜霓虹街头的赏金猎人，要巴洛克的光照，赛博朋克的构图" --subject "a female bounty hunter in a wet neon alley"
-```
-
-It recognises that "巴洛克" (Baroque) is followed by "光照" (lighting) and takes
-Baroque's lighting layer; Cyberpunk supplies style and composition. Output:
-
-```
-a female bounty hunter in a wet neon alley,             <- your subject
-cyberpunk, neo-noir concept art, dense neon signage,    <- Style layer (Cyberpunk)
-single hard light source from off-frame,                <- Lighting layer (Baroque)
-deep crushed shadows, candlelight rim light,
-cyan and magenta clash, amber accent, deep black,       <- Color layer (Cyberpunk)
-low angle looking up at megastructures,                 <- Composition layer (Cyberpunk)
-alienated, oppressive, intoxicating                     <- Mood layer
-```
-
-**Same subject, every layer independently replaceable.** That's the difference between
-this and piling up style keywords.
-
----
-
-## Skill tree
-
-```
-{skill_tree_en}
-```
-
----
-
-## What's inside
-
-| | |
-|---|---|
-| **Movement cards** | **{n_mv}**, in 6 categories. Each has a 6-axis visual breakdown, 7 prompt layers, a 6-color palette, a video layer, and known failure modes |
-| **Images** | **{n_img}** ({img_mb} MB), covering {n_mv_with_img} movements |
-| **Guides & methodology** | {n_guides} notes (overview, keyword atlas, the 7-layer method, video structure, palette index, reverse-engineering toolkit...) |
-| **Keyword atlas** | The **{n_concepts} most-confused concept groups**, **{n_synonyms} synonyms** in total - search any of them and land on the same card |
-| **Note templates** | {n_templates} |
-| **Scripts** | {n_scripts} - fetch, generate, search, compose, MCP server |
-
-> **{n_mv_no_img} movements are "prompt-only cards."** Abstract Expressionism, Pop Art, Minimalism,
-> Conceptual Art, Cyberpunk, Vaporwave and others are still in copyright, so no open data
-> source will supply images. Their visual language and 7-layer structure are documented
-> exactly the same way - just without pictures. This is deliberate, not a gap.
-
----
-
-## How to use
-
-### 1. As an Obsidian vault
-
-Open the folder in Obsidian. Recommended entry points:
-
-- `00-guides/提示词拆解方法.md` - **start here**, it explains the 7 layers
-- `00-guides/流派总览.md` - overview of all {n_mv} movements
-- `10-movements/` - pick a movement, read its full breakdown
-- `00-guides/关键词图谱.md` - look up any unfamiliar style term
-
-### 2. From the command line (or let an AI drive it)
-
-```bash
-cd .repo
-
-python3 artvault.py categories              # 6 categories, {n_mv} movements
-python3 artvault.py search "neon rain"      # fuzzy search, Chinese or English
-python3 artvault.py search "oppressive but ornate light" --semantic   # semantic (needs the CLIP model)
-python3 artvault.py layers baroque          # just the 7 prompt layers
-python3 artvault.py show ukiyo-e            # full card
-python3 artvault.py palette cyberpunk       # 6-color palette
-python3 artvault.py related cubism          # find related movements
-python3 artvault.py --json layers baroque   # machine-readable
-```
-
-**The core feature is composition:**
-
-```bash
-# Explicit cross-era mixing
-python3 artvault.py compose --style ukiyo-e --lighting baroque --color vaporwave --composition precisionism --subject "a lone samurai"
-```
-
-It **resolves layer conflicts for you.** When you mix movements, their negative prompts
-fight each other - ukiyo-e forbids `cast shadows` while Baroque lighting *requires*
-`deep crushed shadows`; Precisionism forbids `people` while your subject is a person.
-**The model won't error**, it just produces subtly worse images that are very hard to debug.
-So the conflicting negative terms are **dropped automatically** and listed under
-"resolved conflicts", with the rule stated plainly: *intent wins, guardrails yield*.
-Want the raw union instead? Pass `--keep-conflicts`.
-
-### 3. Install as an AI skill (recommended)
-
-The repo ships **two** skills, installed together:
-
-| Skill | Purpose | Triggers when |
-|---|---|---|
-| `art-aesthetic-vault` | **Use** the library: search movements, pull the 7 layers, compose prompts | you ask "what style should this character be" |
-| `build-art-aesthetic-vault` | **Build** a library from scratch | you say "I want one of these too" |
-
-> [!note] Neither skill bundles data
-> Both are **symlinks** into this repo - the data exists in exactly one place.
-> If `mv_*.py` ({n_mv} movement definitions) were bundled into a skill there would be
-> two copies, and they would drift. Measured: the bundled copy had 4 files out of
-> sync with the repo, and libraries built from it had **wrong category assignments**.
-
-```bash
-cd .repo/skill && ./install.sh
-```
-
-It **symlinks** the skill into every skill directory present on your machine:
-
-| Directory | Read by |
-|---|---|
-| `~/.agents/skills/` | DSH / Codex / general convention |
-| `~/.claude/skills/` | Claude Code |
-| `~/.codex/skills/` | Codex |
-
-**Why symlink:** the skill resolves its own real path via `pwd -P`, derives the repo
-root from it, and therefore **finds the vault wherever it lives - no configuration,
-survives moving the repo**. No path is hardcoded anywhere in the skill.
-
-```bash
-.repo/skill/install.sh --copy        # copy instead of symlink (breaks if you move the repo)
-.repo/skill/install.sh --uninstall   # remove
-bash locate.sh             # manual vault lookup (for troubleshooting)
-```
-
-Start a **new AI session** for it to take effect.
-
-### 4. As an MCP server (Claude Desktop / Cursor)
-
-```json
-{
-  "mcpServers": {
-    "artvault": {
-      "command": "python3",
-      "args": ["<absolute path to this repo>/.repo/mcp_server.py"]
-    }
-  }
-}
-```
-
-10 tools: `search_movements` `get_movement` `get_layers` `compose_prompt`
-`get_palette` `find_related` `list_categories` `analyze_image` `match_movement`
-`get_video_prompt`.
-The last two need Pillow and the CLIP model; when unavailable they say why
-and the other seven keep working.
-
----
-
-## Why it's different
-
-### 1. Not an image pack - a composable structure
-
-An image pack gives you "what this feels like." This gives you "how to make it."
-Every layer can be lifted out on its own. Swap the subject but keep the style layer,
-and you have a style-transfer template.
-
-### 2. Lighting is pulled out as its own layer
-
-Most people write prompts as one undifferentiated blob and then debug by trial and error.
-This library makes an explicit claim: **lighting affects the final texture more than the
-style keywords do.** Every movement's lighting layer is a separate snippet you can drop
-onto an unrelated subject.
-
-### 3. Every movement has *targeted* negative prompts
-
-**The specific failure modes of that movement**:
-
-- Impressionism → `black shadows, smooth blending, photorealistic`
-- Renaissance → `visible brushstrokes, impasto` (AI defaults to thick oil paint; Renaissance surfaces are smooth)
-- Ukiyo-e → `3d shading, cast shadows, gradient` (AI adds volume automatically; ukiyo-e is flat)
-
-**Note that different movements' negative prompts are often opposites** - which is exactly
-why mixing them breaks, and exactly what this library manages for you.
-
-### 4. Usable by AI, not just by you
-
-LLMs have fuzzy memories about art movements and routinely confuse Art Nouveau with
-Art Deco, or Barbizon with Impressionism. This library pins down concrete terminology
-for {n_mv} movements, so an AI calling it won't make things up.
-
-### 5. Terminology is pinned down, not invented
-
-The keyword atlas covers the **{n_concepts} concept groups** people confuse most -
-avant-garde, contemporary art, postmodernism, surrealism. Each one gets a definition,
-the boundaries ("this is *not* the same as X"), and **{n_synonyms} synonyms** that all
-resolve to the same card.
-
-### 6. Public domain only - no second thoughts
-
-All images come from CC0 / public-domain open sources. Free to use, modify,
-redistribute, and train on.
-
-### 7. Extensible
-
-Adding a movement means adding one entry to one Python file. Image fetching, note
-generation, keyword mapping and the AI interfaces all follow automatically.
-
----
-
-## Three principles
-
-1. **Better fewer than wrong.**
-   Filtering deliberately does *not* have a "top up with whatever's available" fallback -
-   if a movement yields one image, it gets one image.
-   > The worst thing for a reference library isn't too few images, it's wrong ones.
-   > Wrong references corrupt your instincts, and you won't notice.
-
-2. **Lighting matters more than style keywords.**
-   If you can only tune one layer, tune lighting.
-
-3. **Don't invent movement terminology from memory.**
-   LLM recall on art movements is unreliable and blurs related schools together.
-   Use the concrete terms in the library.
-
----
-
-<div align="center">
-
-If this is useful, a star is appreciated - PRs adding more movements are welcome
-
-</div>
-"""
 
 # ------------------------------------------------------------------ 许可
 LICENSE_TEXT = """MIT License
@@ -1763,285 +1688,6 @@ type: 作品
 """,
 }
 
-README = """<div align="center">
-
-# 艺术审美风格库
-
-[![DeepSeek Harness](https://img.shields.io/badge/DeepSeek%20Harness-dsh--plugin-4D6BFE?style=flat-square)](https://github.com/deepseek-ai/deepseek-harness)
-[![Agent Skill](https://img.shields.io/badge/Agent-Skill-7C3AED?style=flat-square)](.repo/skill)
-[![License](https://img.shields.io/github/license/{REPO_SLUG}?style=flat-square)](LICENSE)
-
-**把 {n_mv} 个艺术流派的视觉语言，拆成可以直接用的 AI 提示词层**
-
-从拜占庭到 Y2K ｜ 东亚 · 南亚 · 伊斯兰 ｜ 摄影谱系 ｜ 数字亚文化
-
-{n_notes} 篇笔记 · {n_img} 张实图 · {n_scripts} 个即用脚本
-
-[English](README.en.md) ｜ **中文**
-
-</div>
-
----
-
-## 这是什么
-
-大部分人收集「艺术风格参考」的方式是存图——存了几百张，但真要用的时候不知道该看什么、
-该怎么描述。图是死的。
-
-这个库换个做法：**把每个流派的视觉语言拆成七个可以独立替换的层**。
-
-```
-主体 Subject  +  风格 Style  +  光照 Lighting  +  色彩 Color
-              +  构图 Composition  +  媒介 Medium  +  情绪 Mood  +  镜头 Camera
-```
-
-拆成层之后，你才能把 A 图的光照套到 B 图的主体上。**这才是参考库真正的用处。**
-
-### 看一眼它怎么工作
-
-假设你想画「雨夜霓虹街头的赏金猎人」，同时想要古典绘画的光影质感：
-
-```bash
-python3 artvault.py compose \\
-  "雨夜霓虹街头的赏金猎人，要巴洛克的光照，赛博朋克的构图" \\
-  --subject "a female bounty hunter in a wet neon alley"
-```
-
-它会自动识别出「巴洛克」后面跟着「光照」→ 取巴洛克的光照层；
-「赛博朋克」→ 取风格与构图层。然后拼成：
-
-```
-a female bounty hunter in a wet neon alley,        <- 你的主体
-cyberpunk, neo-noir concept art, dense neon signage,   <- 风格层 · 赛博朋克
-single hard light source from off-frame,               <- 光照层 · 巴洛克
-deep crushed shadows, candlelight rim light,
-cyan and magenta clash, amber accent, deep black,      <- 色彩层 · 赛博朋克
-low angle looking up at megastructures,                <- 构图层 · 赛博朋克
-alienated, oppressive, intoxicating                    <- 情绪层
-```
-
-**同一个主体，每一层都可以单独换掉。** 这是这个库和「风格词堆砌」的根本区别。
-
----
-
-## 技能树
-
-```
-{skill_tree}
-```
-
----
-
-## 有多少东西
-
-| | 数量 |
-|---|---|
-| **流派卡** | **{n_mv} 张**，6 大分类，每张含六维视觉拆解 + 七层提示词 + 配色 + 视频层 |
-| **实图** | **{n_img} 张**（{img_mb} MB），{n_mv_with_img} 个流派配了图 |
-| **导航与方法论** | {n_guides} 篇（流派总览、关键词图谱、七层方法、视频结构、配色速查…） |
-| **关键词图谱** | 最容易混的 **{n_concepts} 组**概念，共 **{n_synonyms} 个**同义说法，搜任何一个都落到同一张卡 |
-| **笔记模板** | {n_templates} 个（流派卡 / 提示词卡 / 作品拆解） |
-| **脚本** | {n_scripts} 个，抓图、生成、检索、提示词合成、MCP 服务 |
-
-> **{n_mv_no_img} 个流派是「纯提示词卡」**——抽象表现主义、波普、极简主义、观念艺术、
-> 赛博朋克、蒸汽波这些，几乎找不到可自由分发的实图。
-> 它们的视觉语言与七层结构照常拆解，只是不配图。这是刻意的设计，不是缺失。
-
----
-
-## 怎么用
-
-### 方式一：当作 Obsidian 仓库读
-
-用 Obsidian 打开这个文件夹。建议从这个顺序进入：
-
-1. `00-guides/提示词拆解方法.md` —— **先读这个**，理解七层是怎么回事
-2. `00-guides/流派总览.md` —— 全部流派的总入口
-3. `10-movements/` —— 挑一个你喜欢的流派，看它的完整拆解
-4. `00-guides/关键词图谱.md` —— 以后看到陌生风格词就来这里查
-
-### 方式二：让 AI 直接调用它
-
-库不只是一堆给人看的 Markdown，还有一层**给机器用的接口**：
-
-```bash
-cd .repo
-
-python3 artvault.py categories              # 看 6 大分类
-python3 artvault.py search "霓虹 雨夜"       # 模糊检索，中英文都行
-python3 artvault.py search "压抑但华丽的光" --semantic   # 描述性说法：关键词抓不住，语义能
-python3 artvault.py layers 巴洛克            # 只要七层提示词（最省 token）
-python3 artvault.py show 浮世绘              # 完整卡片
-python3 artvault.py palette 赛博朋克         # 六色配色
-python3 artvault.py related 立体主义         # 找关联流派
-python3 artvault.py --json layers 巴洛克     # 机器可读
-```
-
-**核心能力是组合**：
-
-```bash
-# 自然语言，自动分层
-python3 artvault.py compose "雨夜霓虹的赏金猎人，要巴洛克的光照" --subject "a bounty hunter"
-
-# 显式指定，跨时代混搭
-python3 artvault.py compose --style ukiyo-e --lighting baroque \\
-  --color vaporwave --composition precisionism --subject "a lone samurai"
-```
-
-它会**自动消解层级冲突**。跨流派混搭时负向词会互相打架——
-浮世绘禁止 `cast shadows`，巴洛克光照却要求 `deep crushed shadows`；
-精确主义禁止 `people`，而你的主体是个人物。
-**模型不会报错**，只会表现为「出图质量莫名地差」，极难排查。
-所以打架的负向词会被**自动从负向提示词里拿掉**，并在「已自动消解的冲突」里
-逐条说明拿掉了什么、让位给谁。规则一句话：**正向是意图，负向是护栏，护栏让位于意图。**
-想要原样合集自己判断，加 `--keep-conflicts`。
-
-### 方式三：装成 AI skill（推荐）
-
-仓库自带一个 skill，装上之后**任何支持 skill 的 AI 助手**在遇到视觉/审美类任务时
-会自动查这个库，而不是凭记忆编造流派术语。
-
-```bash
-cd .repo/skill && ./install.sh
-```
-
-仓库提供**两个** skill，一次装好：
-
-| skill | 干什么 | 什么时候触发 |
-|---|---|---|
-| `art-aesthetic-vault` | **用**库：检索流派、取七层提示词、跨流派拼提示词 | 你问「这个角色该用什么风格」 |
-| `build-art-aesthetic-vault` | **建**库：从零建一套新的 | 你说「我也想要一套这样的库」 |
-
-> [!note] 为什么两个 skill 都不自带数据
-> 它们都是**软链**指向本仓库 —— 数据只有仓库这一份。
-> `mv_*.py`（流派定义）如果被打包进 skill，就会出现两份、
-> 必然会分叉。实测过：打包版本里有 4 个文件与仓库不同步，
-> 用它建出来的库分类是错的。
-
-它会把这些软链建到本机所有可用的 skill 目录：
-
-| 目录 | 谁读它 |
-|---|---|
-| `~/.agents/skills/` | DSH / Codex / 通用约定 |
-| `~/.claude/skills/` | Claude Code |
-| `~/.codex/skills/` | Codex |
-
-**为什么用软链**：skill 可以用 `pwd -P` 解析出自己的真实位置，
-从而推断出仓库根目录 —— **仓库放在哪、移不移动都能自动找到**，不需要任何配置。
-skill 里**没有写死任何路径**。
-
-其他用法：
-
-```bash
-.repo/skill/install.sh --copy        # 复制安装（不用软链，但仓库移动后要重装）
-.repo/skill/install.sh --uninstall   # 卸载
-bash .repo/skill/locate.sh           # 手动定位仓库（排查用）
-```
-
-装完**新开一个 AI 会话**才会生效。
-
-### 方式四：接入 MCP（Claude Desktop / Cursor）
-
-```json
-{
-  "mcpServers": {
-    "artvault": {
-      "command": "python3",
-      "args": ["<本仓库绝对路径>/.repo/mcp_server.py"]
-    }
-  }
-}
-```
-
-暴露 10 个工具：`search_movements` `get_movement` `get_layers` `compose_prompt`
-`get_palette` `find_related` `list_categories` `analyze_image` `match_movement`
-`get_video_prompt`。
-后两个工具另需 Pillow / CLIP 模型；条件不满足时会说明原因，不影响前七个。
-
----
-
-## 它好在哪里
-
-### 1. 不是图包，是可组合的结构
-
-图包给你「这是什么感觉」，这个库给你「怎么做出这种感觉」。
-每一层都可以单独摘出来复用，换主体不换风格层，就是风格迁移模板。
-
-### 2. 光照层被单独拎出来了
-
-大多数人写提示词时把一切混在一起，靠试错调。这个库明确告诉你：
-**光照对最终质感的影响比风格词本身更大。**
-每个流派的光照层都是独立一段，可以直接搬到别的主题上。
-
-### 3. 每个流派都有「针对性负向词」
-
-**针对这个流派的典型翻车点**：
-
-- 印象派 → `black shadows, smooth blending, photorealistic`
-- 文艺复兴 → `visible brushstrokes, impasto`（AI 默认会给油画加厚涂）
-- 浮世绘 → `3d shading, cast shadows, gradient`（AI 会自动加立体感）
-
-**注意不同流派的负向词经常是相反的**——这正是混搭会打架的原因，也是库帮你管住的东西。
-
-### 4. AI 可以用，不只是你能看
-
-大模型对艺术流派的记忆是模糊的，常把 Art Nouveau 和 Art Deco、
-巴比松和印象派搞混。这个库把每个流派的具体术语固化下来，
-AI 调用时不会瞎编。
-
-### 5. 术语是钉住的，不是编的
-
-关键词图谱挑出最容易混的 **{n_concepts} 组**概念 —— 先锋、当代、后现代、超现实。
-每组给一条定义、若干条「它不等于什么」的边界，以及 **{n_synonyms} 个**同义说法，
-搜任何一个都落到同一张卡。
-
-### 6. 能扩展
-
-加一个新流派只需要在一个 Python 文件里加一条定义。
-抓图、生成笔记、关键词映射、AI 接口都会自动跟上。
-
-### 7. 每一层的说法都追得到出处
-
-流派卡的「九、出处」逐层列出该概念在权威术语表里的定义页，
-用的是 Tate 的艺术术语词典。
-
-### 8. 你手里那张图，也能直接变成视频提示词
-
-流派卡上的视频提示词是**通用**的 —— 主体那一行是占位符。但你真正要干的事
-通常是「我有这张图，让它动起来」。所以反推卡上的视频块走的是另一条路：
-
-```bash
-python3 i2v_prompt.py 你的图.jpg --slug baroque
-```
-
-主体的景别、在画面哪个位置、画面内部的动势方向、光要不要动、镜头推还是移，
-全部从**这张图的客观测量**推出来（人脸景别 / 显著性中心 / 线条方向 /
-细节密度 / 明暗结构），并附一份「推导依据」让你核对。
-生成出来仍留着「谁、在做什么，你自己补一句」—— 内容只有看图的人知道，
-脚本不替你编。
-
----
-
-## 三条原则
-
-1. **宁可少，不要错。**
-   筛选时刻意不做「放宽补充」——某个流派只有 1 张图就 1 张。
-   一个参考库最怕的不是图少，是图错。错的参考会污染你的直觉，而且你自己不会发现。
-
-2. **光照比风格词更重要。**
-   如果你只有一个层可以调，调光照。
-
-3. **不要凭记忆编造流派术语。**
-   以大模型对艺术流派的记忆为准，容易把相近的画派搞混。以库里的具体术语为准。
-
----
-
-<div align="center">
-
-如果这个库对你有用，欢迎 Star ⭐ 或提交 PR 补充更多流派
-
-</div>
-"""
 
 
 # ---------------------------------------------------------------- 本地图库（层 2）
@@ -2368,6 +2014,7 @@ def main():
     w("20-my-prompts/Pinterest.md", pinterest_hub_note(local_map))
 
     w("00-guides/流派总览.md", overview_note(works_map))
+    w("00-guides/手绘风格总览.md", HWN.overview())
     w("00-guides/关键词图谱.md", keyword_graph_note(works_map))
     _sig = signature_note(works_map)
     if _sig:
@@ -2378,8 +2025,8 @@ def main():
     w("00-guides/视频提示词结构.md", VIDEO)
     # 注意：这里刻意用占位符而不是本机绝对路径。
     # 仓库是要发布的，写死 /Users/xxx 对任何人（包括作者换个位置 clone）都是错的。
-    _guide = AI_GUIDE.replace(
-        "{MCP_PATH}", "<仓库绝对路径>/.repo/mcp_server.py")
+    _guide = (AI_GUIDE.replace("{MCP_PATH}", "<仓库绝对路径>/.repo/mcp_server.py")
+              .replace("{n_cats}", str(len(CATEGORIES))))
     w("00-guides/AI 调用指南.md", _guide)
     body = []
     for cat in CATEGORIES:
@@ -2408,18 +2055,23 @@ def main():
             t = t.replace("{%s}" % k, str(v))
         return t
 
-    _rm = _fill(README.replace("{n_mv}", str(len(MOVEMENTS)))
-                 .replace("{REPO_URL}", REPO_URL)
-                 .replace("{REPO_SLUG}", REPO_SLUG)
-                 .replace("{skill_tree}", skill_tree()))
-    w("README.md", _rm)
+    # 四份 README 一次写完。模板在 readme_i18n.py，章节顺序一一对应 ——
+    # 改一份就该改四份，放在同一个文件里漂移会难受得多。
+    _tree_zh = skill_tree()
+    _tree_en = skill_tree_en()
+
+    def _doc(tpl, tree):
+        return _fill(tpl.replace("{n_mv}", str(len(MOVEMENTS)))
+                        .replace("{REPO_URL}", REPO_URL)
+                        .replace("{REPO_SLUG}", REPO_SLUG)
+                        .replace("{skill_tree_en}", tree)
+                        .replace("{skill_tree}", tree))
+
+    w("README.md", _doc(README_ZH, _tree_zh))
     w("LICENSE", LICENSE_TEXT)
-    _en = _fill(README_EN.replace("{n_mv}", str(len(MOVEMENTS)))
-                    .replace("{REPO_URL}", REPO_URL)
-                    .replace("{REPO_SLUG}", REPO_SLUG)
-                    .replace("{skill_tree_en}", skill_tree_en())
-                    .replace("{cat_table_en}", category_table_en()))
-    w("README.en.md", _en)
+    w("README.en.md", _doc(README_EN, _tree_en))
+    w("README.ja.md", _doc(README_JA, _tree_en))
+    w("README.fr.md", _doc(README_FR, _tree_en))
     w(".gitignore", """# Obsidian 运行时文件
 .DS_Store
 .trash/
@@ -2488,9 +2140,77 @@ def main():
 # 对读者没有意义 —— 一并不发布。
 pinterest/
 
-# 本地推送助手（含个人仓库名，不必发布）
-push-to-github.sh
+# 电影剧照（策略反转，留档说明）
+#
+# 原设计是「卡片只记外链 + 本地图 gitignore」，理由是版权图不随仓库分发。
+# 用户要求「把画面放入卡片」后改成卡片**本地嵌入**——嵌入用的是
+# Obsidian 的 `![[库内路径]]` 语法，只认本地文件，所以图必须随仓库走，
+# 否则别人 clone 下来全是断图。
+#
+# ## 为什么是「整目录一行忽略」而不是逐文件清单
+#
+# 需求是「语料留本地（约 160 MB），但卡片嵌入的那 84 张要随仓库走」。
+#
+# 直觉写法 `99-attachments/images-films/*` + `!…/某张.jpg` **不生效**：
+# git 规定「父目录被排除时，无法再重新包含其中的文件」（实测 `git add`
+# 报 "paths are ignored"）。我一度改成逐文件列出 797 条要忽略的路径 ——
+# 能用，但 `.gitignore` 涨到 900 行，而且清单依赖「当前嵌了哪 84 张」，
+# 换代表帧就会漂移。
+#
+# 现在改成：**整目录一行忽略 + 对嵌入的那批执行 `git add -f`**。
+# 文件一旦进入索引，gitignore 就管不着它了 —— 规则只有一行，也不随
+# 代表帧变化而改写。`build_vault.py` 会自动做这个 `add -f`。
+#
+# ⚠ 版权仍属原片方（film-grab 写明 non-commercial）。公开分发前请自行判断；
+# 每张卡上都有版权声明。
+#
+# 重建方式：python3 .repo/fv_fetch.py --download --per 0
+99-attachments/images-films/
+
+# ⚠ 这里**不再忽略** push-to-github.sh。原来忽略它的理由是「含个人仓库名」，
+# 但那个问题早已修掉：脚本现在只是转发给 .repo/github_setup.py，仓库地址由
+# `git remote` 推导（fork 后不用改），不含任何个人信息。
+# 继续忽略的后果是**用户没有推送入口** —— 而它引用的 github_setup.py 反而是
+# 入库的，等于把门锁了还留着钥匙。
+
+# Obsidian 的空画布草稿（内容就是 `{}`）—— 本地手滑产物，不是库的内容
+未命名.canvas
+
+# 通用备份/临时后缀。`fv_merge.py --merge` 会留一份 `fv_data.py.bak` 作
+# 回滚安全网（合并把 86 部片写进 fv_data.py，出问题要能退回去）。
+# 那是本地安全网，不该进版本库。
+*.bak
+*.orig
+*.rej
 """)
+
+    # 剧照：把**卡片嵌入的那批**强制加进 git 索引（`git add -f`）。
+    #
+    # 语料目录在 .gitignore 里整目录忽略（一行），但嵌入的 84 张必须随仓库走，
+    # 否则别人 clone 下来卡片全是断图。git 的 `!` 例外救不了这种情况
+    # （父目录被忽略时无法重新包含文件），而 `git add -f` 可以 ——
+    # 文件一旦进入索引，gitignore 就管不着它了。
+    #
+    # 这也是把 .gitignore 从 900 行降回一百来行的关键：不需要逐文件列清单。
+    try:
+        _emb = set()
+        for _md in glob.glob(os.path.join(VAULT, "40-films", "**", "*.md"), recursive=True):
+            _t = open(_md, encoding="utf-8").read()
+            for _m in re.findall(r"!\[\[([^\]|]+?\.(?:jpe?g|png|webp))", _t, re.I):
+                if _m.startswith("99-attachments/images-films/"):
+                    _emb.add(_m)
+        if _emb and os.path.isdir(os.path.join(VAULT, ".git")):
+            import subprocess as _sp
+            _r = _sp.run(["git", "add", "-f", "--"] + sorted(_emb),
+                         cwd=VAULT, capture_output=True, text=True)
+            if _r.returncode == 0:
+                print("  git add -f：%d 张卡片嵌入的剧照已确保入库（其余语料仍忽略）" % len(_emb))
+            else:
+                print("  ! 剧照入库失败：%s" % (_r.stderr or "").strip()[:100])
+        elif _emb:
+            print("  （非 git 工作树，跳过剧照入库：%d 张）" % len(_emb))
+    except Exception as e:
+        print("  ! 剧照入库出错：%s" % e)
 
     # 清理本次没生成的旧文件（见 sweep_generated 的说明）
     swept = sweep_generated()
@@ -2513,17 +2233,33 @@ push-to-github.sh
     # 可自由分发的实图，就只在卡上留条目、不配图（实测 2 件）。原来这里把前者
     # 印成「入库作品图」，比 README 里的 {n_img} 多 2 —— 两个数各自都没错，
     # 错的是标签。所以分开印，并且和 README 用**同一个来源**（STATS）。
+    # **不能再用 STATS["n_img"] 当「作品配图数」。** 那个数现在含着 274 张
+    # 手绘编号参考图（它们不是抓来的作品），拿它去减 n_works 会印出负数 ——
+    # 实测过：`代表作品 454 件（配图 746 件，仅条目 -292 件）`。数字没错，
+    # 错的是把它当成了同一件事。所以作品图和参考图分开数、分开印。
     n_works = sum(len(v) for v in works_map.values())
+    n_work_img = sum(1 for v in works_map.values() for w in v if w.get("local_image"))
+    n_ref_img = STATS["n_img"] - n_work_img
     print("生成完成：")
     print("  流派卡      %d 张" % len(MOVEMENTS))
     _nav = [r for r in _WRITTEN if r.startswith("00-guides/")]
     print("  导航与方法  %d 篇" % len(_nav))
     print("  模板        %d 个" % len(TEMPLATES))
-    print("  代表作品    %d 件（配图 %d 件，仅条目 %d 件）"
-          % (n_works, STATS["n_img"], n_works - STATS["n_img"]))
-    empty = [m["name_zh"] for m in MOVEMENTS if not works_map[m["slug"]]]
-    if empty:
-        print("  无 CC0 图的流派（纯提示词卡）：%s" % "、".join(empty))
+    print("  代表作品    %d 件（其中 %d 件配了实图，%d 件仅条目）"
+          % (n_works, n_work_img, n_works - n_work_img))
+    print("  发布视图实图 %d 张 = 作品 %d 张 + 手绘编号参考图 %d 张"
+          % (STATS["n_img"], n_work_img, n_ref_img))
+    # 「没有抓来的 CC0 实图」和「没有图可看」是两件事：手绘类每张都带一张
+    # 编号参考图。把它们混进「纯提示词卡」名单，构建输出就会和 README 里的
+    # {n_mv_no_img} 自相矛盾（README 已经把这一类算作有图）。
+    no_cc0 = [m["name_zh"] for m in MOVEMENTS if not works_map[m["slug"]]]
+    no_pic = [m["name_zh"] for m in MOVEMENTS
+              if not works_map[m["slug"]] and not HWN.ref_image(m)]
+    if no_pic:
+        print("  无 CC0 图的流派（纯提示词卡）：%s" % "、".join(no_pic))
+    if len(no_cc0) - len(no_pic):
+        print("  只有编号参考图、没有抓取实图的：%d 条（第 7 大类）"
+              % (len(no_cc0) - len(no_pic)))
 
 
 if __name__ == "__main__":

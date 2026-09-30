@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "雷德利·斯科特",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#2E7A3A",
+  "#C9A227",
+  "#8C1F1F",
+  "#F2F2F0",
+  "#4A3A2A",
+  "#8FA35A"
+ ],
+ "palette_written_named": [
+  [
+   "#2E7A3A",
+   "翠绿"
+  ],
+  [
+   "#C9A227",
+   "金"
+  ],
+  [
+   "#8C1F1F",
+   "深红"
+  ],
+  [
+   "#F2F2F0",
+   "白"
+  ],
+  [
+   "#4A3A2A",
+   "暗褐"
+  ],
+  [
+   "#8FA35A",
+   "苔绿"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "ridley-scott-legend",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "诡秘怪谈",
+ "total_linked": 65
+}

@@ -56,6 +56,22 @@ def _has(mod):
         return False
 
 
+def _mcp_tool_count():
+    """MCP 工具数**现算**，不写死。写死过一次「10 个」，实际已经 16 个 ——
+    本库因为写死统计数字吃过亏（README 那四组）。算不出来就退回一句话，
+    不让 doctor 因此崩掉。"""
+    try:
+        import ast as _ast
+        src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "mcp_server.py"), encoding="utf-8").read()
+        for node in _ast.walk(_ast.parse(src)):
+            if isinstance(node, _ast.Assign) and getattr(node.targets[0], "id", "") == "TOOLS":
+                return len(node.value.elts)
+    except Exception:
+        pass
+    return 0
+
+
 def doctor():
     """环境自检：现在能用什么、缺什么、装了能多什么。
 
@@ -78,7 +94,7 @@ def doctor():
         ("拼提示词与冲突消解", True, "compose（跨流派混搭自动消解矛盾负向词）"),
         ("视频提示词 / 图生视频", True, "video / i2v_prompt 的文本部分"),
         ("重建整个仓库", True, "build_vault"),
-        ("MCP 服务", True, "mcp_server（10 个工具）"),
+        ("MCP 服务", True, "mcp_server（%d 个工具）" % _mcp_tool_count()),
     ]
     opt = []
 
@@ -152,6 +168,228 @@ def doctor():
     return 0
 
 
+def film_cmd(a):
+    """`artvault.py film ...` —— 电影风格库（40-films/）的入口。
+
+    单独一个函数而不是塞进 main 的 if 链里：电影卡的字段比流派卡多
+    （导演、年份、班底、剧照），分支已经有八种，混在 main 里会看不清。
+    """
+    import fv_core as F
+
+    sub = a.sub
+    if sub == "stats":
+        s = F.stats()
+        if out(s, a.json):
+            return 0
+        print("电影风格库：%d 部片 / %d 位导演" % (s["films"], s["directors"]))
+        print("  手写解读 %d 部，已抓剧照 %d 部" % (s["curated"], s["with_stills"]))
+        return 0
+
+    if sub == "list":
+        fs = F.films()
+        if out([{k: f[k] for k in ("slug", "director_zh", "title_zh", "title_en",
+                                   "year", "source")} | {"stills": len(f["stills"])}
+                for f in fs], a.json):
+            return 0
+        cur = None
+        for f in fs:
+            if f["director_zh"] != cur:
+                cur = f["director_zh"]
+                print("\n【%s · %s】" % (f["director_zh"], f["director_en"]))
+            print("  %-38s %-14s %s  %s"
+                  % (f["slug"], f["title_zh"], f["year"],
+                     ("[%d 剧照]" % len(f["stills"])) if f["stills"] else ""))
+        return 0
+
+    if sub == "directors":
+        ds = F.directors()
+        if out([{k: d[k] for k in ("director_slug", "director_zh", "director_en")}
+                | {"films": [f["slug"] for f in d["films"]]} for d in ds], a.json):
+            return 0
+        for d in ds:
+            print("  %-16s %-12s %d 部  %s"
+                  % (d["director_slug"], d["director_zh"], len(d["films"]),
+                     "、".join(f["title_zh"] for f in d["films"])))
+        return 0
+
+    if sub == "search":
+        if not a.query:
+            print("用法：artvault.py film search \"霓虹 雨夜\"")
+            return 1
+        r = F.search(a.query)
+        if out([{k: f[k] for k in ("slug", "director_zh", "title_zh", "year")}
+                | {"one_liner": f["one_liner"]} for f in r], a.json):
+            return 0
+        if not r:
+            print("  没找到。试试换词：可以按导演（王家卫）、片名（花样年华）、")
+            print("  或画面特征（霓虹/逆光/对称/手持/单色）来搜。")
+            return 0
+        for f in r:
+            print("  %-38s %-12s %-12s %s"
+                  % (f["slug"], f["director_zh"], f["title_zh"], f["one_liner"]))
+        return 0
+
+    # 实测页先处理：它不需要先解析出一张卡（stills 不带 slug 时列全部）
+    if sub == "stills":
+        import still_analysis as SA
+        if not a.query:
+            out_rows = []
+            for x in F.films():
+                m = SA.load_measurements(x["slug"]) or {}
+                out_rows.append({
+                    "slug": x["slug"], "title_zh": x["title_zh"],
+                    "director_zh": x["director_zh"],
+                    "measured": m.get("measured", 0),
+                    "total_linked": len(x.get("stills") or []),
+                    "palette_measured": m.get("palette_measured", []),
+                })
+            if out(out_rows, a.json):
+                return 0
+            print("%-38s %-8s %-8s %s" % ("片", "已量", "共", "实测主色"))
+            for r in out_rows:
+                print("%-38s %-8d %-8d %s"
+                      % (r["slug"], r["measured"], r["total_linked"],
+                         "、".join(h for h, _ in r["palette_measured"][:4]) or "—"))
+            print("\n提示：没量过的先跑 `python3 still_analysis.py`（有缓存，增量）。")
+            return 0
+
+    # show / layers / palette / related 都要一张卡
+    f, hints = F.resolve(a.query)
+    if not f:
+        print("没找到片子：%s" % a.query)
+        if hints:
+            print("你是不是想找：")
+            for x in hints:
+                print("  %-38s %-12s %s" % (x["slug"], x["director_zh"], x["title_zh"]))
+        else:
+            print("用 `artvault.py film list` 看全部，或 `film search <词>` 模糊找。")
+        return 1
+
+    if sub == "stills":
+        import still_analysis as SA
+        m = SA.load_measurements(f["slug"])
+        if not m:
+            print("这部片还没实测过：%s" % f["slug"])
+            print("跑：python3 still_analysis.py --slug %s" % f["slug"])
+            return 1
+        if out(m, a.json):
+            return 0
+        ag = m.get("aggregate") or {}
+        print("%s · %s（已量 %d / 共 %d 张）"
+              % (f["director_zh"], f["title_zh"], m["measured"], m["total_linked"]))
+        if ag.get("metrics"):
+            for k, mm in ag["metrics"].items():
+                print("  %-6s 均值 %-8s  p10 %-8s p90 %s"
+                      % (mm["zh"], mm["mean"], mm["p10"], mm["p90"]))
+        print("  实测主色：%s" % "、".join("%s(%.1f%%)" % (h, p)
+                                          for h, p in m["palette_measured"]))
+        print("  手写配色：%s" % "、".join(m["palette_written"]))
+        print("  比对：%s" % m["palette_diff"]["verdict"])
+        return 0
+
+    if sub == "show":
+        if out(f, a.json):
+            return 0
+        import fv_build
+        print(fv_build.film_note(f))
+    elif sub == "layers":
+        if out(f["layers"], a.json):
+            return 0
+        for l in A.LAYERS:
+            print("%-4s %s" % (A.LAYER_ZH[l], f["layers"][l]))
+    elif sub == "palette":
+        if out(F.palette(f), a.json):
+            return 0
+        for h, n in f["palette"]:
+            print("  %s  %s" % (h, n))
+    else:  # related
+        rel = F.related(f)
+        if out([{k: c[k] for k in ("slug", "name_zh", "name_en")} for c in rel], a.json):
+            return 0
+        for c in rel:
+            print("  %-18s %-10s %s" % (c["slug"], c["name_zh"], c["one_liner"]))
+    return 0
+
+
+def shots_cmd(a):
+    """`artvault.py shots ...` —— 镜头配方卡库（45-shots/）的入口。"""
+    import shot_core as S
+
+    sub = a.sub
+    if sub == "stats":
+        st = S.stats()
+        if out(st, a.json):
+            return 0
+        print("镜头配方卡库：%d 张 / %d 类" % (st["shots"], st["categories"]))
+        print("  来源：%s @ %s（%s）"
+              % (st["source"], st["commit"][:12], st["license"]))
+        print("  ⚠ 技法描述版权归上游，本库只做归类与排版")
+        return 0
+
+    if sub == "list":
+        ss = S.shots()
+        brief = [{"name": x["name"], "category": x["category"],
+                  "category_zh": S.CATEGORY_ZH.get(x["category"], ""),
+                  "one_liner": x["one_liner"], "duration": x["duration"],
+                  "energy": x["energy"], "tags": x["tags"]} for x in ss]
+        if out(brief, a.json):
+            return 0
+        cur = None
+        for x in ss:
+            if x["category"] != cur:
+                cur = x["category"]
+                print("\n【%s · %s】" % (cur, S.CATEGORY_ZH.get(cur, "")))
+            print("  %-42s %s" % (x["name"], x["one_liner"][:56]))
+        return 0
+
+    if sub == "categories":
+        cs = S.categories()
+        if out(cs, a.json):
+            return 0
+        for c in cs:
+            print("  %-14s %-8s %3d 张"
+                  % (c["category"], c["name_zh"], c["count"]))
+        return 0
+
+    if sub == "search":
+        if not a.query:
+            print("用法：artvault.py shots search \"急推 冲击\"")
+            return 1
+        r = S.search(a.query)
+        brief = [{"name": x["name"], "category": x["category"],
+                  "category_zh": S.CATEGORY_ZH.get(x["category"], ""),
+                  "one_liner": x["one_liner"], "duration": x["duration"],
+                  "energy": x["energy"], "tags": x["tags"]} for x in r]
+        if out(brief, a.json):
+            return 0
+        if not r:
+            print("  没找到。可以按「我想做什么」搜（急推/擦除/卡点/遮罩），")
+            print("  或直接给卡名（crash-zoom-punch）。")
+            return 0
+        for x in r:
+            print("  %-42s %-10s %s"
+                  % (x["name"], S.CATEGORY_ZH.get(x["category"], ""),
+                     x["one_liner"][:50]))
+        return 0
+
+    # show
+    x, hints = S.resolve(a.query)
+    if not x:
+        print("没找到招式：%s" % a.query)
+        if hints:
+            print("你是不是想找：")
+            for h in hints:
+                print("  %-42s %s" % (h["name"], h["one_liner"][:40]))
+        else:
+            print("用 `artvault.py shots list` 看全部，或 `shots search <词>` 模糊找。")
+        return 1
+    if out(x, a.json):
+        return 0
+    import shot_build
+    print(shot_build.card_note(x))
+    return 0
+
+
 def main():
     # `--json` 要能放在命令**前面或后面**。
     # 原来只在顶层定义，于是 `artvault.py dump --json` 直接报
@@ -181,6 +419,21 @@ def main():
     p = add("palette"); p.add_argument("slug")
     p = add("related"); p.add_argument("slug")
     p = add("video"); p.add_argument("slug")   # 两块可粘贴的视频提示词
+    # 电影风格库（40-films/）：按「导演-电影」组织的另一条轴。
+    # 挂在同一个 CLI 下而不是另起一个脚本：用的人（和 AI）已经知道
+    # artvault.py 这一个入口，多一个入口就多一次「我该调哪个」的犹豫。
+    p = add("film"); p.add_argument("sub", nargs="?", default="list",
+                                    choices=["list", "directors", "search", "show",
+                                             "layers", "palette", "related", "stats",
+                                             "stills"])
+    p.add_argument("query", nargs="?", default="")
+    # 镜头配方卡库（45-shots/）：第三条并列的轴 —— 运镜招式。
+    # **故意不放进 compose 的层解析**：这些卡没有色彩/光照语义，
+    # 混进去会拼出「看起来能用、其实在编」的提示词。
+    p = add("shots"); p.add_argument(
+        "sub", nargs="?", default="list",
+        choices=["list", "categories", "search", "show", "stats"])
+    p.add_argument("query", nargs="?", default="")
     p = add("compose")
     p.add_argument("brief", nargs="?", default="")
     p.add_argument("--subject")
@@ -195,6 +448,11 @@ def main():
     if not a.cmd:
         ap.print_help(); return 0
     A.cards()
+
+    if a.cmd == "film":
+        return film_cmd(a)
+    if a.cmd == "shots":
+        return shots_cmd(a)
 
     if a.cmd == "categories":
         if out(A._CACHE["cats"], a.json): return 0

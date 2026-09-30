@@ -34,11 +34,35 @@ import artvault_core as A
 PROTOCOL = "2024-11-05"
 SERVER = {"name": "artvault", "version": "1.0.0"}
 
+# 工具描述里的数字**现算**，不写死。这个库已经因为写死的统计数字吃过一次亏
+# （README 声称 654 张实图，别人克隆下来只有 442 张）。
+_N_CARDS = len(A.cards())
+_N_CATS = len({c["category"] for c in A.cards()})
+
+# 电影风格库的片数也现算。电影模块缺失（或 fv_data 读不到）时退回 0，
+# 工具描述里就会显示 0 部 —— 比在 import 期把整个 MCP 服务炸掉好。
+try:
+    import fv_core as _F
+
+    _N_FILMS = len(_F.films())
+except Exception:
+    _N_FILMS = 0
+
+# 镜头配方卡的张数也现算。注意这一轴**不参与** compose 的层解析：
+# 它没有色彩/光照语义，混进去只会拼出在编的提示词。
+try:
+    import shot_core as _S
+
+    _N_SHOTS = len(_S.shots())
+except Exception:
+    _N_SHOTS = 0
+
 TOOLS = [
     {
         "name": "search_movements",
-        "description": ("在 141 个艺术流派/风格里检索。返回 slug、中英文名、分类、一句话定义。"
-                        "当用户提到某种画风、某个艺术家、某种视觉效果时，先用这个找候选。"),
+        "description": ("在 %d 个艺术流派/风格里检索。返回 slug、中英文名、分类、一句话定义。"
+                        "当用户提到某种画风、某个艺术家、某种视觉效果时，先用这个找候选。"
+                        % _N_CARDS),
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -95,7 +119,7 @@ TOOLS = [
     },
     {
         "name": "list_categories",
-        "description": "列出仓库的 6 大分类及各自的流派数量。",
+        "description": "列出仓库的 %d 大分类及各自的流派数量。" % _N_CATS,
         "inputSchema": {"type": "object", "properties": {}},
     },
     {
@@ -136,6 +160,95 @@ TOOLS = [
                                                 "description": "流派 slug 或中文名，例如 baroque / 巴洛克"}},
                         "required": ["slug"]},
     },
+    {
+        "name": "search_films",
+        "description": ("在电影风格库里检索（按「导演-电影」组织的 %d 部片）。"
+                        "当用户说「像某某电影那种画面」「要王家卫的光」「那种霓虹雨夜的感觉」时，"
+                        "先用这个找候选片。可以按导演（王家卫）、片名（花样年华）、"
+                        "或画面特征（霓虹/逆光/对称/手持/单色/烛光）来搜。" % _N_FILMS),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string",
+                          "description": "关键词，中英文均可。例如「霓虹 雨夜」「王家卫」「bleach bypass」"},
+                "limit": {"type": "integer", "description": "返回条数，默认 8", "default": 8},
+            },
+            "required": ["query"],
+        },
+    },
+    {
+        "name": "get_film",
+        "description": ("取一部电影的完整卡：核心主张、六维视觉拆解、七层提示词、配色、"
+                        "视频层、剧照外链、翻车点、关联艺术流派、拍摄班底。"
+                        "注意：班底与年份来自 film-grab 可回查；七层是**手写解读**，"
+                        "不是逐帧测量结果 —— 返回里的 evidence_note 写明了这一点。"),
+        "inputSchema": {
+            "type": "object",
+            "properties": {"slug": {"type": "string",
+                                    "description": "电影 slug / 中文名 / 英文名，例如 dune / 沙丘 / villeneuve-dune"}},
+            "required": ["slug"],
+        },
+    },
+    {
+        "name": "get_film_layers",
+        "description": ("只取一部电影的七层提示词片段（风格/光照/色彩/构图/媒介/情绪/镜头）。"
+                        "比 get_film 省很多 token，适合你要自己组装提示词时用。"
+                        "这些层名与艺术流派卡**完全一致**，所以可以跨源混搭："
+                        "用 compose_prompt 的 lighting 层传电影 slug、color 层传流派 slug。"),
+        "inputSchema": {
+            "type": "object",
+            "properties": {"slug": {"type": "string"}},
+            "required": ["slug"],
+        },
+    },
+    {
+        "name": "search_shots",
+        "description": ("在镜头配方卡库里检索（%d 张运镜/动效招式，来自上游 "
+                        "video-shotcraft，Apache-2.0）。当用户问「这个动效怎么做」"
+                        "「急推那一下怎么落地」「转场用什么手法」时用这个。"
+                        "可以按意图（急推/擦除/卡点/遮罩）、类别（运镜/转场/文字排版）"
+                        "或卡名（crash-zoom-punch）搜。"
+                        "注意：这些卡讲的是**帧数与缓动参数**，不是画面风格 —— "
+                        "要风格请用 search_movements 或 search_films。" % _N_SHOTS),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string",
+                          "description": "关键词，中英文均可。例如「急推 冲击」「crash-zoom-punch」「转场」"},
+                "limit": {"type": "integer", "description": "返回条数，默认 8", "default": 8},
+            },
+            "required": ["query"],
+        },
+    },
+    {
+        "name": "get_film_stills",
+        "description": ("取一部片的**剧照实测**结果：逐张客观测量（明度/对比/饱和度/"
+                        "暖度/信息熵/边缘密度/溢出）的全片聚合、实测主色、代表帧"
+                        "（k-medoids 选出的真实画面）、景别与构图分布，以及与卡上"
+                        "**手写配色**的差异比对。"
+                        "注意：返回里的 measured/total_linked 是覆盖度 —— "
+                        "未下齐时均值只代表已量的那部分，别当成全片结论。"
+                        "实测是**信号不是结论**，它不会覆盖手写的七层与配色。"),
+        "inputSchema": {
+            "type": "object",
+            "properties": {"slug": {"type": "string",
+                                    "description": "电影 slug / 中文名 / 英文名"}},
+            "required": ["slug"],
+        },
+    },
+    {
+        "name": "get_shot",
+        "description": ("取一张镜头配方卡的完整内容：适用场景、时长、能量、"
+                        "意图、动效核心、**参数表**（帧数/缓动/幅度）、已知坑、"
+                        "Remotion 参考实现，以及上游出处与许可。"
+                        "这张卡不是本库原创，技法描述来自上游 video-shotcraft（Apache-2.0）。"),
+        "inputSchema": {
+            "type": "object",
+            "properties": {"slug": {"type": "string",
+                                    "description": "卡名或中文意图，例如 crash-zoom-punch / 急推"}},
+            "required": ["slug"],
+        },
+    },
 ]
 
 
@@ -159,6 +272,143 @@ def _card_brief(c):
     return {"slug": c["slug"], "name_zh": c["name_zh"], "name_en": c["name_en"],
             "category": c["category"], "period": c["period"], "has_images": c["has_images"],
             "one_liner": c["one_liner"]}
+
+
+# ------------------------------------------------------------------ 电影风格库
+# 电影卡与流派卡的字段名不同（导演而非时期/地区），所以单独一组辅助函数，
+# 而不是硬把它塞进 _card_brief —— 那会让流派卡的调用方收到陌生的键。
+
+def _film_brief(f):
+    return {"slug": f["slug"], "title_zh": f["title_zh"], "title_en": f["title_en"],
+            "director_zh": f["director_zh"], "year": f["year"],
+            "one_liner": f["one_liner"], "stills": len(f.get("stills") or []),
+            "evidence": f["source"]}
+
+
+def _film_card(f):
+    """整张电影卡。字段与 `artvault.py film show` 一致。"""
+    import fv_core as F
+    return {
+        "slug": f["slug"],
+        "title_zh": f["title_zh"], "title_en": f["title_en"],
+        "title_original": f.get("title_original"),
+        "director_zh": f["director_zh"], "director_en": f["director_en"],
+        "year": f["year"],
+        "one_liner": f["one_liner"],
+        "core": f["core"],
+        "visual": f["visual"],
+        "palette": ["%s %s" % (h, n) for h, n in f["palette"]],
+        "layers": {A.LAYER_ZH[k]: f["layers"][k] for k in F.LAYERS},
+        "positive": f["positive"],
+        "negative": f["negative"],
+        "video": f["video"],
+        "pitfalls": f["pitfalls"],
+        "see_also": f.get("see_also", []),
+        "crew": f.get("crew") or {},
+        "crew_verified": f.get("crew_verified", False),
+        "filmgrab": f["filmgrab"],
+        "stills_sample": (f.get("stills") or [])[:8],
+        "stills_total": len(f.get("stills") or []),
+        "evidence": f["source"],
+        "evidence_note": ("班底与年份已用 film-grab 画廊页核对；七层与视觉拆解是基于"
+                          "该片公认摄影特征的**手写解读**，不是逐帧测量结果。"
+                          "剧照版权属原片方，这里只给外链不转载。"
+                          if f["source"] == "curated" else
+                          "从有限信息（片名/导演/年份/剧照）推断，未经画廊页逐项核对。"),
+    }
+
+
+def _film_stills(m, film):
+    """剧照实测的精简返回。**必须带上覆盖度** —— 缺了它，调用方会把
+    176 张的均值当成 1001 张的结论。"""
+    ag = m.get("aggregate") or {}
+    n, total = m.get("measured", 0), m.get("total_linked", 0)
+    return {
+        "slug": m.get("slug"), "title_zh": m.get("title_zh"),
+        "director_zh": m.get("director_zh"),
+        "measured": n, "total_linked": total,
+        "coverage_note": ("已量 %d / 共 %d 张。未下齐时均值只代表已量的那部分，"
+                          "不要当成全片结论。" % (n, total) if n < total
+                          else "全部 %d 张都已量到。" % n),
+        "aggregate": {
+            "metrics": {k: {"zh": v["zh"], "mean": v["mean"], "p10": v["p10"],
+                            "p50": v["p50"], "p90": v["p90"]}
+                        for k, v in (ag.get("metrics") or {}).items()},
+            "ratios": ag.get("ratios"), "framing": ag.get("framing"),
+            "keys": ag.get("keys"), "temperatures": ag.get("temperatures"),
+            "harmonies": ag.get("harmonies"),
+            "framing_note": ag.get("framing_note"),
+        },
+        "palette_written": ["%s %s" % (h, nm) for h, nm in
+                            (m.get("palette_written_named") or [])],
+        "palette_measured": ["%s %.1f%%" % (h, p) for h, p in
+                             (m.get("palette_measured") or [])],
+        "palette_diff": m.get("palette_diff"),
+        "representative": [{k: x[k] for k in ("index", "file", "luminance",
+                                              "saturation", "temperature",
+                                              "framing", "key")}
+                           for x in (m.get("representative") or [])],
+        "skipped": m.get("skipped") or [],
+        "note": "实测是信号不是结论：它**不会**覆盖手写的七层与配色。"
+                "剧照版权属原片方，本地副本仅供个人研究（gitignore）。",
+    }
+
+
+def _shot_brief(x):
+    import shot_core as S
+    return {"name": x["name"], "category": x["category"],
+            "category_zh": S.CATEGORY_ZH.get(x["category"], ""),
+            "one_liner": x["one_liner"], "duration": x["duration"],
+            "energy": x["energy"], "tags": x["tags"]}
+
+
+def _shot_card(x):
+    """整张镜头卡。**带上游出处与许可** —— Apache-2.0 的要求，
+    也是「不得读起来像本站原创」的底线。"""
+    import shot_core as S
+    return {
+        "name": x["name"],
+        "category": x["category"],
+        "category_zh": S.CATEGORY_ZH.get(x["category"], ""),
+        "one_liner": x["one_liner"],
+        "purpose": x["purpose"],
+        "duration": x["duration"],
+        "energy": x["energy"],
+        "tags": x["tags"],
+        "intent": x["intent"],
+        "motion": x["motion"],
+        "params": x["params"],
+        "pitfalls": x["pitfalls"],
+        "reference_impl": x["reference"],
+        "sections": [{"title": s2["title"], "body": s2["body"]} for s2 in x["sections"]],
+        "source_repo": x["source_repo"],
+        "source_url": x["source_url"],
+        "source_path": x["source_path"],
+        "source_commit": x["source_commit"],
+        "license": x["license"],
+        "note": "技法描述版权归上游 video-shotcraft（Apache-2.0），本库只做归类与排版。"
+                "这些卡讲的是动效时序与参数，不是画面风格，因此不参与风格层混搭。",
+    }
+
+
+def _shot_not_found(ident, hints):
+    out = {"error": "未找到镜头卡：%s" % ident}
+    if hints:
+        out["did_you_mean"] = [{"name": h["name"], "one_liner": h["one_liner"][:50]}
+                               for h in hints]
+    else:
+        out["hint"] = "用 search_shots 按意图或卡名检索（如「急推」「转场」「crash-zoom-punch」）"
+    return out
+
+
+def _film_not_found(ident, hints):
+    out = {"error": "未找到电影：%s" % ident}
+    if hints:
+        out["did_you_mean"] = [{"slug": x["slug"], "title_zh": x["title_zh"],
+                                "director_zh": x["director_zh"]} for x in hints]
+    else:
+        out["hint"] = "用 search_films 按风格词/导演/片名做模糊检索"
+    return out
 
 
 def call_tool(name, args):
@@ -216,6 +466,45 @@ def call_tool(name, args):
                 "seedance_2_5": r["seedance"], "minimax_h3": r["h3"],
                 "note": "两块格式不同不能混用：H3 官网/API 用 minimax_h3（自然语言），"
                         "Seedance 用 seedance_2_5（五段式）。"}
+
+    # ---------------------------------------------------------- 电影风格库
+    if name in ("search_films", "get_film", "get_film_layers"):
+        import fv_core as F
+        if name == "search_films":
+            return [_film_brief(f) for f in F.search(args.get("query", ""),
+                                                     int(args.get("limit", 8)))]
+        f, hints = F.resolve(args.get("slug", ""))
+        if not f:
+            return _film_not_found(args.get("slug"), hints)
+        if name == "get_film_layers":
+            return {"slug": f["slug"], "title_zh": f["title_zh"],
+                    "director": f["director_zh"], "year": f["year"],
+                    "layers": {A.LAYER_ZH[k]: f["layers"][k] for k in F.LAYERS},
+                    "negative": f["negative"]}
+        return _film_card(f)
+
+    if name == "get_film_stills":
+        import fv_core as F2
+        f, hints = F2.resolve(args.get("slug", ""))
+        if not f:
+            return _film_not_found(args.get("slug"), hints)
+        import still_analysis as SA
+        m = SA.load_measurements(f["slug"])
+        if not m:
+            return {"error": "这部片还没实测过：%s" % f["slug"],
+                    "hint": "跑 python3 still_analysis.py --slug %s" % f["slug"]}
+        return _film_stills(m, f)
+
+    # ---------------------------------------------------------- 镜头配方卡库
+    if name in ("search_shots", "get_shot"):
+        import shot_core as S
+        if name == "search_shots":
+            return [_shot_brief(x) for x in S.search(args.get("query", ""),
+                                                     int(args.get("limit", 8)))]
+        x, hints = S.resolve(args.get("slug", ""))
+        if not x:
+            return _shot_not_found(args.get("slug"), hints)
+        return _shot_card(x)
     raise ValueError("未知工具：" + name)
 
 

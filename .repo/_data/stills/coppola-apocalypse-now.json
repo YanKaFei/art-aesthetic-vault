@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "弗朗西斯·福特·科波拉",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#D97426",
+  "#8A6A3E",
+  "#2E4A32",
+  "#141618",
+  "#E8E8E4",
+  "#B0722B"
+ ],
+ "palette_written_named": [
+  [
+   "#D97426",
+   "火橙"
+  ],
+  [
+   "#8A6A3E",
+   "烟褐"
+  ],
+  [
+   "#2E4A32",
+   "丛林暗绿"
+  ],
+  [
+   "#141618",
+   "深黑"
+  ],
+  [
+   "#E8E8E4",
+   "天光白"
+  ],
+  [
+   "#B0722B",
+   "夕阳金"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "coppola-apocalypse-now",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "现代启示录",
+ "total_linked": 64
+}

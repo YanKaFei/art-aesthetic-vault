@@ -492,7 +492,7 @@ class I2vTests(unittest.TestCase):
         """拿一份真图的分析结果；拿不到（缺 Pillow）就 skip 并说明。
 
         刻意**不用** `has_module("PIL")` 判断：脚本会自己往
-        `_scripts/vendor/libs` 找 Pillow，测试进程 import 失败不代表脚本用不了。
+        `.repo/vendor/libs` 找 Pillow，测试进程 import 失败不代表脚本用不了。
         第一版就是这么写的，结果本机明明能跑却跳过两条测试 —— 假阴性。
         改成看行为：真的调一次分析，只有当它说缺 Pillow 时才跳过。
         """
@@ -658,6 +658,295 @@ class McpTests(unittest.TestCase):
         self.assertTrue(got, "不存在的工具应当返回一条错误，而不是让服务崩掉")
 
 
+# ------------------------------------------- 5b. 电影风格库（40-films）
+
+class FilmCliTests(unittest.TestCase):
+    """电影风格库的 CLI 契约。
+
+    这一层必须**真的把命令跑一遍**：电影卡是生成物，模块化的单元测试
+    证明不了 `artvault.py film show` 真的能把它们读出来。
+    """
+
+    def _json(self, args):
+        rc, out, err = run(["artvault.py", "--json", "film"] + args)
+        self.assertEqual(0, rc, "artvault.py film %s 失败：%s" % (args, err[-400:]))
+        return json.loads(out)
+
+    def test_film_list(self):
+        data = self._json(["list"])
+        self.assertIsInstance(data, list)
+        self.assertGreaterEqual(len(data), 12, "电影卡不该少于 12 部")
+        self.assertIn("slug", data[0])
+
+    def test_film_directors_grouping(self):
+        data = self._json(["directors"])
+        self.assertIsInstance(data, list)
+        self.assertGreaterEqual(len(data), 8)
+        self.assertIn("films", data[0])
+
+    def test_film_show_by_chinese_title(self):
+        data = self._json(["show", "花样年华"])
+        self.assertEqual(data["title_zh"], "花样年华")
+        self.assertEqual(data["year"], 2000)
+
+    def test_film_layers_has_seven(self):
+        data = self._json(["layers", "dune"])
+        for layer in ("style", "lighting", "color", "composition", "medium", "mood", "camera"):
+            self.assertTrue(data.get(layer), "七层里缺 %s" % layer)
+
+    def test_film_palette_six_colors(self):
+        rc, out, _ = run(["artvault.py", "film", "palette", "银翼杀手 2049"])
+        self.assertEqual(0, rc, out[-300:])
+        self.assertEqual(6, len(re.findall(r"#[0-9A-Fa-f]{6}", out)),
+                         "配色应当是六色")
+
+    def test_film_search_by_style_word(self):
+        data = self._json(["search", "霓虹 雨夜"])
+        self.assertTrue(data, "「霓虹 雨夜」应至少命中一部电影")
+
+    def test_film_not_found_is_an_error(self):
+        rc, out, err = run(["artvault.py", "film", "show", "不存在的片子xyz"])
+        self.assertNotEqual(0, rc, "找不到片子应当是非零退出，而不是猜一部给你")
+        self.assertIn("没找到", out + err)
+
+    def test_cross_source_compose_lighting(self):
+        """跨源混搭：电影的**光照层**接到艺术流派的配色上。
+
+        这是电影模块与艺术库共用七层词表的**真正目的**所在，
+        所以必须有一条测试真的把这条命令跑通。
+        """
+        rc, out, err = run(["artvault.py", "compose",
+                            "--lighting", "villeneuve-dune",
+                            "--color", "baroque",
+                            "--subject", "a lone figure on a dune"])
+        self.assertEqual(0, rc, err[-400:])
+        self.assertIn("a lone figure on a dune", out)
+        self.assertIn("backlight", out.lower())
+
+
+class FilmCliHelpSafetyTests(unittest.TestCase):
+    """新命令也要遵守「裸跑给人话」的约定。"""
+
+    def test_film_without_subcommand_is_help(self):
+        rc, out, err = run(["artvault.py", "film"])
+        self.assertEqual(0, rc)
+        self.assertTrue(out.strip() or err.strip(), "裸跑 film 应当打印用法")
+
+
+class FilmStillsCliTests(unittest.TestCase):
+    """剧照实测的 CLI 契约。"""
+
+    def test_stills_lists_all_films(self):
+        rc, out, err = run(["artvault.py", "--json", "film", "stills"])
+        self.assertEqual(0, rc, err[-300:])
+        data = json.loads(out)
+        # 现算，不写死：片数从 14 扩到 100 后，硬编码会让这条测试假红
+        # （本库因为写死数字吃过亏 —— README 那四组就是这么漏过去的）。
+        import fv_core
+        self.assertEqual(len(data), len(fv_core.films()),
+                         "film stills 列出的片数与库里的片数不一致")
+        for row in data:
+            self.assertIn("measured", row)
+            self.assertIn("total_linked", row)
+            self.assertLessEqual(row["measured"], row["total_linked"],
+                                 "已量不该超过链接总数")
+
+    def test_stills_for_one_film(self):
+        rc, out, err = run(["artvault.py", "--json", "film", "stills", "dune"])
+        self.assertEqual(0, rc, err[-300:])
+        d = json.loads(out)
+        self.assertEqual(d["slug"], "villeneuve-dune")
+        self.assertIn("aggregate", d)
+        self.assertIn("palette_written", d)
+        self.assertIn("palette_measured", d)
+        self.assertIn("representative", d)
+
+    def test_stills_unknown_film_is_an_error(self):
+        rc, out, err = run(["artvault.py", "film", "stills", "不存在的片zzz"])
+        self.assertNotEqual(0, rc)
+        self.assertIn("没找到", out + err)
+
+
+class FilmStillsMcpTests(unittest.TestCase):
+    def _rpc(self, *messages):
+        stdin = "\n".join(json.dumps(m) for m in messages) + "\n"
+        rc, out, err = run(["mcp_server.py"], stdin_text=stdin, timeout=120)
+        self.assertEqual(0, rc, err[-400:])
+        return [json.loads(l) for l in out.splitlines() if l.strip()]
+
+    def test_tool_is_listed(self):
+        resp = self._rpc(
+            {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}},
+            {"jsonrpc": "2.0", "id": 2, "method": "tools/list"},
+        )
+        tools = [t["name"] for t in {r.get("id"): r for r in resp}[2]["result"]["tools"]]
+        self.assertIn("get_film_stills", tools)
+
+    def test_roundtrip_reports_coverage_and_both_palettes(self):
+        resp = self._rpc(
+            {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}},
+            {"jsonrpc": "2.0", "id": 2, "method": "tools/call",
+             "params": {"name": "get_film_stills",
+                        "arguments": {"slug": "巴里·林登"}}},
+        )
+        got = {r.get("id"): r for r in resp}[2]
+        self.assertIn("result", got, got)
+        d = json.loads(got["result"]["content"][0]["text"])
+        self.assertIn("measured", d)
+        self.assertIn("total_linked", d)
+        self.assertIn("palette_written", d)
+        self.assertIn("palette_measured", d)
+        self.assertIn("coverage_note", d, "必须让调用方看到覆盖度提示")
+
+
+class FilmMcpTests(unittest.TestCase):
+    """MCP 侧的三个电影工具。"""
+
+    def _rpc(self, *messages):
+        stdin = "\n".join(json.dumps(m) for m in messages) + "\n"
+        rc, out, err = run(["mcp_server.py"], stdin_text=stdin, timeout=60)
+        self.assertEqual(0, rc, err[-400:])
+        return [json.loads(l) for l in out.splitlines() if l.strip()]
+
+    def test_film_tools_are_listed(self):
+        resp = self._rpc(
+            {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}},
+            {"jsonrpc": "2.0", "id": 2, "method": "tools/list"},
+        )
+        by_id = {r.get("id"): r for r in resp}
+        tools = [t["name"] for t in by_id[2]["result"]["tools"]]
+        for expect in ("search_films", "get_film", "get_film_layers"):
+            self.assertIn(expect, tools, "MCP 缺工具 %s" % expect)
+
+    def test_get_film_roundtrip(self):
+        resp = self._rpc(
+            {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}},
+            {"jsonrpc": "2.0", "id": 2, "method": "tools/call",
+             "params": {"name": "get_film", "arguments": {"slug": "寄生虫"}}},
+        )
+        got = [r for r in resp if r.get("id") == 2]
+        self.assertTrue(got, "tools/call 没有返回")
+        self.assertIn("result", got[0], "get_film 返回了错误：%s" % got[0])
+        text = got[0]["result"]["content"][0]["text"]
+        self.assertIn("奉俊昊", text)
+
+    def test_get_film_layers_only_layers(self):
+        resp = self._rpc(
+            {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}},
+            {"jsonrpc": "2.0", "id": 2, "method": "tools/call",
+             "params": {"name": "get_film_layers", "arguments": {"slug": "闪灵"}}},
+        )
+        got = [r for r in resp if r.get("id") == 2][0]
+        text = got["result"]["content"][0]["text"]
+        self.assertIn("lighting", text)
+        # 省 token 是它的存在理由：不该把整张卡（翻车点/出处）也塞回来
+        self.assertNotIn("常见翻车点", text)
+
+    def test_unknown_film_is_an_error_not_a_wrong_film(self):
+        resp = self._rpc(
+            {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}},
+            {"jsonrpc": "2.0", "id": 2, "method": "tools/call",
+             "params": {"name": "get_film", "arguments": {"slug": "完全不存在的片子"}}},
+        )
+        got = [r for r in resp if r.get("id") == 2][0]
+        self.assertTrue(got["result"].get("isError"),
+                        "找不到片子时应当 isError=true，而不是给一张别的卡")
+
+
+class ShotCliTests(unittest.TestCase):
+    """镜头配方卡库（45-shots/）的 CLI 契约。"""
+
+    def _json(self, args):
+        rc, out, err = run(["artvault.py", "--json", "shots"] + args)
+        self.assertEqual(0, rc, "artvault.py shots %s 失败：%s" % (args, err[-400:]))
+        return json.loads(out)
+
+    def test_shots_list(self):
+        data = self._json(["list"])
+        self.assertIsInstance(data, list)
+        self.assertEqual(len(data), 157, "上游 157 张镜头卡应全部收录")
+
+    def test_shots_categories(self):
+        data = self._json(["categories"])
+        self.assertEqual(len(data), 10)
+        self.assertEqual({c["category"] for c in data},
+                         {"opening", "camera", "interaction", "data", "typography",
+                          "ui-entrance", "transition", "effects", "rhythm", "outro"})
+
+    def test_shots_search_by_intention(self):
+        data = self._json(["search", "急推 冲击"])
+        self.assertTrue(data, "按意图搜应该能命中")
+        self.assertEqual(data[0]["name"], "crash-zoom-punch")
+
+    def test_shots_show_has_five_sections(self):
+        data = self._json(["show", "crash-zoom-punch"])
+        self.assertEqual(data["name"], "crash-zoom-punch")
+        titles = [s["title"] for s in data["sections"]]
+        self.assertIn("意图", titles)
+        self.assertIn("参数表", titles)
+        self.assertIn("已知坑", titles)
+        self.assertIn("参考实现", titles)
+
+    def test_shots_not_found_is_an_error(self):
+        rc, out, err = run(["artvault.py", "shots", "show", "不存在的招式zzz"])
+        self.assertNotEqual(0, rc, "找不到招式应当非零退出，而不是猜一张给你")
+        self.assertIn("没找到", out + err)
+
+    def test_shots_are_not_exposed_as_style_layers(self):
+        """镜头卡**不能**被当成风格层。
+
+        这是本模块最重要的一条边界：镜头卡没有色彩/光照语义，
+        要是混进 compose 的层解析，`--style crash-zoom-punch` 会拼出
+        一段看起来能用、实际在编的提示词。宁可报「未找到」。
+        """
+        rc, out, _ = run(["artvault.py", "layers", "crash-zoom-punch"])
+        self.assertNotEqual(0, rc, "镜头卡不该出现在艺术的 layers 里")
+        rc2, out2, _ = run(["artvault.py", "film", "show", "crash-zoom-punch"])
+        self.assertNotEqual(0, rc2, "镜头卡也不该出现在电影的 show 里")
+
+
+class ShotMcpTests(unittest.TestCase):
+    """MCP 侧的两个镜头工具。"""
+
+    def _rpc(self, *messages):
+        stdin = "\n".join(json.dumps(m) for m in messages) + "\n"
+        rc, out, err = run(["mcp_server.py"], stdin_text=stdin, timeout=60)
+        self.assertEqual(0, rc, err[-400:])
+        return [json.loads(l) for l in out.splitlines() if l.strip()]
+
+    def test_shot_tools_are_listed(self):
+        resp = self._rpc(
+            {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}},
+            {"jsonrpc": "2.0", "id": 2, "method": "tools/list"},
+        )
+        tools = [t["name"] for t in {r.get("id"): r for r in resp}[2]["result"]["tools"]]
+        for expect in ("search_shots", "get_shot"):
+            self.assertIn(expect, tools, "MCP 缺工具 %s" % expect)
+
+    def test_get_shot_roundtrip_and_provenance(self):
+        resp = self._rpc(
+            {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}},
+            {"jsonrpc": "2.0", "id": 2, "method": "tools/call",
+             "params": {"name": "get_shot", "arguments": {"slug": "急推"}}},
+        )
+        got = {r.get("id"): r for r in resp}[2]
+        self.assertIn("result", got, "get_shot 返回了错误：%s" % got)
+        data = json.loads(got["result"]["content"][0]["text"])
+        self.assertEqual(data["name"], "crash-zoom-punch")
+        self.assertIn("license", data)
+        self.assertEqual(data["license"], "Apache-2.0")
+
+    def test_unknown_shot_is_an_error(self):
+        resp = self._rpc(
+            {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}},
+            {"jsonrpc": "2.0", "id": 2, "method": "tools/call",
+             "params": {"name": "get_shot", "arguments": {"slug": "完全不存在的招式"}}},
+        )
+        got = {r.get("id"): r for r in resp}[2]
+        self.assertTrue(got["result"].get("isError"),
+                        "找不到招式时应当 isError=true")
+
+
 # ------------------------------------------- 6. 缺可选依赖时必须优雅降级
 
 class OptionalDegradationTests(unittest.TestCase):
@@ -686,7 +975,7 @@ class OptionalDegradationTests(unittest.TestCase):
     def test_image_analysis_degrades_or_works(self):
         """Pillow 要么可用、要么给出可读的提示 —— 两者都可以，traceback 不可以。
 
-        这里**不去猜** Pillow 在不在：脚本会自己往 `_scripts/vendor/libs`
+        这里**不去猜** Pillow 在不在：脚本会自己往 `.repo/vendor/libs`
         里找（本仓库推荐装在那里），所以测试进程 `import PIL` 失败不代表
         脚本用不了。第一版测试用 `has_module("PIL")` 判断，结果本机有 vendor
         时误判成「应该失败」，是一条假阴性。改成只看**行为**。
@@ -809,12 +1098,23 @@ class PublishingTests(unittest.TestCase):
         p = os.path.join(VAULT, "README.md")
         with open(p, encoding="utf-8") as f:
             orig = f.read()
+        # **这一串数字全部现算。** 原来写死 147 / 36 / 46 / 4 / 452，于是第 7 大类
+        # 一接进来，第一行立刻「测试前提失效」—— 而它守的不变量一个字没变。
+        # 写死数字的测试会跟着它守的文案一起烂掉，正是这个文件自己在骂的那件事。
+        import build_vault as BV
+        _st = BV.publish_stats()
         try:
-            for old, new in (("**147 张**", "**141 张**"),            # 流派卡数
-                             ("| **脚本** | 36 个", "| **脚本** | 21 个"),  # 脚本数
-                             ("**46 个**同义说法", "**68 个**同义说法"),  # 同义词数
-                             ("**4 组**概念", "**9 组**概念"),          # 概念组数
-                             ("**452 张**", "**654 张**")):          # 实图数
+            for old, new in (
+                    ("**%d 张**，" % _st["n_mv"],                    # 流派卡数
+                     "**%d 张**，" % (_st["n_mv"] + 7)),
+                    ("| **脚本** | %d 个" % _st["n_scripts"],        # 脚本数
+                     "| **脚本** | %d 个" % (_st["n_scripts"] + 7)),
+                    ("**%d 个**同义说法" % _st["n_synonyms"],        # 同义词数
+                     "**%d 个**同义说法" % (_st["n_synonyms"] + 7)),
+                    ("**%d 组**概念" % _st["n_concepts"],            # 概念组数
+                     "**%d 组**概念" % (_st["n_concepts"] + 7)),
+                    ("**%d 张**（" % _st["n_img"],                   # 实图数
+                     "**%d 张**（" % (_st["n_img"] + 7))):
                 self.assertIn(old, orig, "测试前提失效：README 里找不到 %r" % old)
                 with open(p, "w", encoding="utf-8") as f:
                     f.write(orig.replace(old, new))
@@ -849,6 +1149,166 @@ class PublishingTests(unittest.TestCase):
         finally:
             with open(p, "w", encoding="utf-8") as f:
                 f.write(orig)
+
+
+class FilmVerifyTests(unittest.TestCase):
+    """verify_vault 里的电影模块检查项**必须真的会咬人**。
+
+    这个仓库已经吃过一次「检查项在、却什么也没守住」的亏（README 里四组
+    硬编码数字长期虚报，而第 16 项一直是绿的）。所以这里不只是「跑一下
+    通过」—— 还要**故意把东西弄坏**，证明它报得出来。
+    """
+
+    def test_local_still_embedding_is_detected(self):
+        sys.path.insert(0, SCRIPTS)
+        import verify_vault as VV
+        import glob
+        notes = glob.glob(os.path.join(VAULT, "40-films", "**", "*.md"), recursive=True)
+        if not notes:
+            self.skipTest("40-films 还没生成")
+        self.assertEqual([], VV.check_film_still_isolation() or [],
+                         "干净的生成物不该被报成嵌入了本地剧照")
+        victim = notes[0]
+        orig = open(victim, encoding="utf-8").read()
+        try:
+            with open(victim, "w", encoding="utf-8") as f:
+                f.write(orig + "\n![[99-attachments/images-films/x/01.jpg]]\n")
+            got = VV.check_film_still_isolation() or []
+            self.assertTrue(got, "卡片里嵌入了本地剧照，检查项竟然没报")
+        finally:
+            with open(victim, "w", encoding="utf-8") as f:
+                f.write(orig)
+        self.assertEqual([], VV.check_film_still_isolation() or [],
+                         "还原之后仍在报错，说明测试自己写坏了文件")
+
+    def test_film_cards_are_reported_complete(self):
+        sys.path.insert(0, SCRIPTS)
+        import verify_vault as VV
+        if not os.path.isdir(os.path.join(VAULT, "40-films")):
+            self.skipTest("40-films 还没生成")
+        self.assertEqual([], VV.check_film_cards() or [],
+                         "生成的电影卡应当是完整的")
+
+    def test_film_notes_are_inside_the_verified_dirs(self):
+        """40-films 必须在 NOTE_DIRS 里。
+
+        漏了这一条，frontmatter / 双链 / 生成物新鲜度三项都会**静默跳过**
+        电影卡 —— 检查全绿，而电影卡一个字都没被查过。
+        """
+        sys.path.insert(0, SCRIPTS)
+        import verify_vault as VV
+        self.assertIn("40-films", VV.NOTE_DIRS)
+
+
+class VisionIndexConsumerTests(unittest.TestCase):
+    """索引的**生产端与消费端**必须认同一个文件名。
+
+    实测踩到：`artvault_vision.py build` 早已改成写 `vision_index.npz`
+    （减小体积、加快加载），而验收第 5 项（近重复）还在读
+    `vision_index.json` —— 于是那一项**永远走「跳过」分支**。
+    它一直是绿的，只是从来没真的跑过。这正是本仓库最警惕的那类错：
+    检查项在、看着正常，实际什么都没守。
+    """
+
+    def test_near_duplicate_check_runs_when_npz_index_exists(self):
+        sys.path.insert(0, SCRIPTS)
+        import verify_vault as VV
+        npz = os.path.join(SCRIPTS, "_data", "vision_index.npz")
+        js = os.path.join(SCRIPTS, "_data", "vision_index.json")
+        if not (os.path.exists(npz) or os.path.exists(js)):
+            self.skipTest("还没有索引（先跑 artvault_vision.py build）")
+        got = VV.check_duplicates_visual()
+        self.assertIsNotNone(
+            got, "有索引但第 5 项仍返回 None（说明它读的路径与生产端不一致）")
+        self.assertIsInstance(got, list)
+
+    def test_item5_reports_rather_than_silently_skips(self):
+        """有索引时，验收输出里第 5 项不能是「跳过」。"""
+        npz = os.path.join(SCRIPTS, "_data", "vision_index.npz")
+        js = os.path.join(SCRIPTS, "_data", "vision_index.json")
+        if not (os.path.exists(npz) or os.path.exists(js)):
+            self.skipTest("还没有索引")
+        rc, out, err = run(["verify_vault.py"], timeout=900)
+        line = [l for l in (out + err).splitlines() if "5 近重复" in l]
+        self.assertTrue(line, "验收输出里没有第 5 项")
+        self.assertNotIn("跳过", line[0],
+                         "有索引却仍报跳过：%s" % line[0].strip())
+
+
+class StalePathTests(unittest.TestCase):
+    """目录改过名之后，**引用旧路径的地方必须一起改**。
+
+    实测踩到：`_scripts/` 已重命名为 `.repo/`，而 `push-to-github.sh` 里
+    还写着 `exec python3 "$HERE/_scripts/github_setup.py"` —— 脚本一跑就
+    "No such file or directory"。同一批重命名里有 6 处这样的失效引用
+    （脚本、测试注释、模板注释都有）。
+
+    这类错不会让任何检查变红：文件都在、语法都对，只是**指向不存在的地方**。
+    所以专门守一条。
+    """
+
+    # 允许出现旧路径的地方：解释重命名历史、或明确说「旧路径」
+    ALLOW = ("已重命名", "改名前", "旧路径", "曾经的", "重命名")
+
+    def test_no_stale_scripts_path_references(self):
+        import subprocess
+        tracked = subprocess.run(["git", "ls-files"], cwd=VAULT,
+                                 capture_output=True, text=True).stdout.split()
+        bad = []
+        for rel in tracked:
+            if not rel.endswith((".py", ".sh", ".md", ".yml", ".yaml")):
+                continue
+            if rel.startswith("20-my-prompts/"):      # 用户私有笔记，脚本不碰
+                continue
+            if rel.endswith("tests/smoke_test.py"):    # 这条测试自己的正则与说明里就有旧路径
+                continue
+            p = os.path.join(VAULT, rel)
+            try:
+                # with 打开：不然每个文件都漏一个句柄，测试末尾一堆 ResourceWarning
+                with open(p, encoding="utf-8") as fh:
+                    for i, line in enumerate(fh, 1):
+                        if "_scripts/" not in line:
+                            continue
+                        if any(a in line for a in self.ALLOW):
+                            continue
+                        bad.append("%s:%d" % (rel, i))
+            except Exception:
+                continue
+        self.assertFalse(bad, "这些地方还引用着旧路径 `_scripts/`（现已改名 .repo/）：%s"
+                         % bad[:6])
+
+
+class VisionDependencyTests(unittest.TestCase):
+    """artvault_vision 的依赖判断必须与**实际能不能跑**一致。
+
+    实测踩到：`doctor` 报「近重复检测 ✓ 可用」，但 `artvault_vision.py build`
+    直接抛 `ModuleNotFoundError: No module named 'numpy'`。
+
+    原因是两处口径不同：
+      · `unavailable_reason()` 只看 macOS + 源码在不在，**不看 numpy**
+      · `build_index()` 末尾 `import numpy`（裸 import，不走 vendor 路径）
+
+    这条测试守的是「自检说能用、真跑就该能用」。自检说不能用是**合法状态**
+    （缺依赖不该算失败），但说能用却抛 traceback 不行。
+    """
+
+    def test_doctor_claim_matches_reality(self):
+        sys.path.insert(0, SCRIPTS)
+        import artvault_vision as AV
+        reason = AV.unavailable_reason()
+        if reason:
+            self.skipTest("本机不可用（合法状态）：%s" % reason[:60])
+        rc, out, err = run(["artvault_vision.py", "build"], timeout=300)
+        self.assertNotIn("Traceback (most recent call last)", err + out,
+                         "自检说可用，但真跑抛了 traceback：%s" % (err + out)[-300:])
+
+    def test_unavailable_reason_mentions_numpy_when_missing(self):
+        """缺 numpy 时，原因里要能读到「numpy」——而不是一句笼统的不可用。"""
+        sys.path.insert(0, SCRIPTS)
+        import artvault_vision as AV
+        if AV._have_numpy():
+            self.skipTest("本机有 numpy")
+        self.assertIn("numpy", (AV.unavailable_reason() or "").lower())
 
 
 if __name__ == "__main__":

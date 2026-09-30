@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "奉俊昊",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#5E6B4A",
+  "#C9A227",
+  "#DCE0D8",
+  "#6B5B45",
+  "#141618",
+  "#8C9490"
+ ],
+ "palette_written_named": [
+  [
+   "#5E6B4A",
+   "河滩绿灰"
+  ],
+  [
+   "#C9A227",
+   "帐篷芥末黄"
+  ],
+  [
+   "#DCE0D8",
+   "荧光冷白"
+  ],
+  [
+   "#6B5B45",
+   "江水褐"
+  ],
+  [
+   "#141618",
+   "暗部黑"
+  ],
+  [
+   "#8C9490",
+   "阴天灰"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "bong-the-host",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "汉江怪物",
+ "total_linked": 65
+}

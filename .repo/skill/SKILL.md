@@ -1,13 +1,15 @@
 ---
 name: "art-aesthetic-vault"
-description: "艺术审美风格库：141 个艺术流派的视觉语言与可复用提示词层。角色造型、服装气质、场景氛围、插画/概念图/AI 绘画与视频提示词、配色与光影方案、风格辨认——凡涉及视觉审美方向的任务，先查这个库，不要凭记忆编造流派术语。"
+description: "艺术审美风格库：421 个流派（147 个艺术流派 + 274 个手绘编号风格）的视觉语言与可复用提示词层。角色造型、服装气质、场景氛围、插画/概念图/AI 绘画与视频提示词、配色与光影方案、风格辨认——凡涉及视觉审美方向的任务，先查这个库，不要凭记忆编造流派术语。"
 metadata:
-  short-description: "查 141 个艺术流派的七层提示词，可跨流派组合"
+  short-description: "查 421 个流派的七层提示词，可跨流派组合"
 ---
 
 # 艺术审美风格库
 
-一个 Obsidian 知识库，把 **141 个艺术流派**的视觉语言拆成七层可复用的提示词层。
+一个 Obsidian 知识库，把 **421 个流派**的视觉语言拆成七层可复用的提示词层。
+其中 274 条是 [handraw-style](https://github.com/yang0/handraw-style) 的手绘编号风格
+（第 7 大类「手绘艺术风格」），它们的七层是从原数据推导的，卡上标了 `⟨条⟩`/`⟨组⟩`。
 覆盖拜占庭到 Y2K，含东亚 / 南亚 / 伊斯兰、摄影谱系、数字亚文化。
 
 **提示词层本身就是英文的**，可直接粘进模型；中文只用于解释。
@@ -39,7 +41,7 @@ bash <本skill目录>/locate.sh
 ```bash
 cd "$VAULT/.repo"
 
-python3 artvault.py categories            # 6 大分类 141 流派
+python3 artvault.py categories            # 7 大分类 421 流派
 python3 artvault.py search "霓虹 雨夜"     # 模糊检索，中英文皆可
 python3 artvault.py layers 巴洛克          # 七层提示词 ← 优先用这个，最省 token
 python3 artvault.py show 浮世绘            # 完整卡片（内容多，只在需要时用）

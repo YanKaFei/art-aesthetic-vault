@@ -1,0 +1,48 @@
+{
+ "category": "data",
+ "duration": "各 4–6s",
+ "energy": "中高（数据即剧情）",
+ "intent": "图表不是插图是剧情。三式共同前提（实测判例）：**必须真图表语境**\n——真轴标/真数据/真文案，灰阶占位条测不出数据叙事的表达力。\nA 示波流线：曲线写入点钉在右端上下起伏，旧数据左流出画，中途一次\n突发尖峰（振幅 2.2×、读数跳大变强调色）——\"实时\"不用说出口，还有事件；\nB 点阵重组：320 个点（每点≈40 customers）散布→聚三簇（浮 Free/Pro/\nEnterprise 真标签）→列队成柱（真轴标）→聚成点阵大数字 \"12,847\"——\n同一批点，观众能跟着某一颗看它归队；\nC 轴爆表：折线正常爬升，新值顶破图表上沿冲出卡片 220px（强调色粗线\n插进标题区），停半拍，y 轴\"哗\"地重标（旧刻度飞出/新刻度滑入/网格\n加密/旧线压扁成地平线），新值落回+弹真值标签——用\"坐标轴装不下\"演增长。",
+ "license": "Apache-2.0",
+ "motion": "| 式 | 核心动作 | 适用 |\n|----|----------|------|\n| A oscilloscope-stream | 采样窗平移 8px/f + 余弦包络尖峰 + 刹停真静止 | 监控/实时类产品：\"活着\"的系统 |\n| B unit-dot-swarm-regroup | 三幕 spring 错峰迁徙（stiffness 150、错峰 8f），终幕点阵拼数字 | 用户量/构成叙事：\"每个点是一个人\" |\n| C axis-rescale-shock | 冲出框 220px + 重标三联动（刻度换/网格密/旧线压扁）+ 震 8px | 增长曲线高光：\"off the charts\" 字面化 |",
+ "name": "chart-live-moves",
+ "one_liner": "活体图表三式——oscilloscope-stream 示波流线（曲线右端实时写入+突发尖峰）、unit-dot-swarm-regroup 点阵重组（点群三幕迁徙聚成数字）、axis-rescale-shock 轴爆表重标（新值冲出画框逼 y 轴重标）",
+ "params": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| 真语境 | 真标题/真轴标/真单位/真读数 | **入库前提**：灰阶版三条全数被裁，换真语境后全过 |\n| 主角色 | 强调色（模板片为琥珀）标事件/主角（尖峰读数、Pro 簇、爆表段） | 全灰读不出\"哪里是重点\" |\n| A 流速 | 8px/f | 5.5 已可感，8 更明确；波形纯函数禁随机 |\n| B 点数/点径 | 320 / 9px | 点太少拼不出数字，太小看不见个体 |\n| C 冲出幅度 | 卡顶外 220px | 80px 版不够\"爆\"；真的插进标题区才是事故感 |\n| 收尾 | 三式都要 ≥36f 真静止 | 数据图表尾漂读作还没播完 |",
+ "path": "references/shots/data/chart-live-moves.md",
+ "pitfalls": "- demo 在灰阶/占位素材上调校通过——参数是调校起点非实战定稿，\n  首次实战须以真实素材回验\n- 三式是三种独立手法不是套餐——同片用两式以上时各 ≤1 次且错开段落\n- A 的尖峰事件、C 的重标只能发生一次；重复即廉价\n- B 终幕数字位图字形要预先手算（点数=位点数用满才整齐）\n- 与 dataviz-landscape-open（抽象数据地景开场）分工：那是开场氛围，\n  这三式是段落内的具体数据论证\n- 声音：A 尖峰一声警示 tick；B 每幕迁徙一声 whoosh；C 冲出框\n  一声 riser、重标一声\"哗啦\"",
+ "purpose": "数据叙事段落；分别讲\"实时性\"、\"每个数字是一个人\"、\"增长装不下\"",
+ "reference": "demos/data/chart-live-moves/\n（AxisRescaleShockV2.tsx / OscilloscopeStreamV2.tsx / UnitDotSwarmRegroupV2.tsx）",
+ "sections": [
+  {
+   "body": "图表不是插图是剧情。三式共同前提（实测判例）：**必须真图表语境**\n——真轴标/真数据/真文案，灰阶占位条测不出数据叙事的表达力。\nA 示波流线：曲线写入点钉在右端上下起伏，旧数据左流出画，中途一次\n突发尖峰（振幅 2.2×、读数跳大变强调色）——\"实时\"不用说出口，还有事件；\nB 点阵重组：320 个点（每点≈40 customers）散布→聚三簇（浮 Free/Pro/\nEnterprise 真标签）→列队成柱（真轴标）→聚成点阵大数字 \"12,847\"——\n同一批点，观众能跟着某一颗看它归队；\nC 轴爆表：折线正常爬升，新值顶破图表上沿冲出卡片 220px（强调色粗线\n插进标题区），停半拍，y 轴\"哗\"地重标（旧刻度飞出/新刻度滑入/网格\n加密/旧线压扁成地平线），新值落回+弹真值标签——用\"坐标轴装不下\"演增长。",
+   "key": "intent",
+   "title": "意图"
+  },
+  {
+   "body": "| 式 | 核心动作 | 适用 |\n|----|----------|------|\n| A oscilloscope-stream | 采样窗平移 8px/f + 余弦包络尖峰 + 刹停真静止 | 监控/实时类产品：\"活着\"的系统 |\n| B unit-dot-swarm-regroup | 三幕 spring 错峰迁徙（stiffness 150、错峰 8f），终幕点阵拼数字 | 用户量/构成叙事：\"每个点是一个人\" |\n| C axis-rescale-shock | 冲出框 220px + 重标三联动（刻度换/网格密/旧线压扁）+ 震 8px | 增长曲线高光：\"off the charts\" 字面化 |",
+   "key": "motion",
+   "title": "三式选型"
+  },
+  {
+   "body": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| 真语境 | 真标题/真轴标/真单位/真读数 | **入库前提**：灰阶版三条全数被裁，换真语境后全过 |\n| 主角色 | 强调色（模板片为琥珀）标事件/主角（尖峰读数、Pro 簇、爆表段） | 全灰读不出\"哪里是重点\" |\n| A 流速 | 8px/f | 5.5 已可感，8 更明确；波形纯函数禁随机 |\n| B 点数/点径 | 320 / 9px | 点太少拼不出数字，太小看不见个体 |\n| C 冲出幅度 | 卡顶外 220px | 80px 版不够\"爆\"；真的插进标题区才是事故感 |\n| 收尾 | 三式都要 ≥36f 真静止 | 数据图表尾漂读作还没播完 |",
+   "key": "params",
+   "title": "参数表"
+  },
+  {
+   "body": "- demo 在灰阶/占位素材上调校通过——参数是调校起点非实战定稿，\n  首次实战须以真实素材回验\n- 三式是三种独立手法不是套餐——同片用两式以上时各 ≤1 次且错开段落\n- A 的尖峰事件、C 的重标只能发生一次；重复即廉价\n- B 终幕数字位图字形要预先手算（点数=位点数用满才整齐）\n- 与 dataviz-landscape-open（抽象数据地景开场）分工：那是开场氛围，\n  这三式是段落内的具体数据论证\n- 声音：A 尖峰一声警示 tick；B 每幕迁徙一声 whoosh；C 冲出框\n  一声 riser、重标一声\"哗啦\"",
+   "key": "pitfalls",
+   "title": "已知坑"
+  },
+  {
+   "body": "demos/data/chart-live-moves/\n（AxisRescaleShockV2.tsx / OscilloscopeStreamV2.tsx / UnitDotSwarmRegroupV2.tsx）",
+   "key": "reference",
+   "title": "参考实现"
+  }
+ ],
+ "slug": "chart-live-moves",
+ "source_commit": "5e71af35a2daee492dd3ea93e5e8903f32dcd13c",
+ "source_path": "references/shots/data/chart-live-moves.md",
+ "source_repo": "Vincentwei1021/video-shotcraft",
+ "source_url": "https://github.com/Vincentwei1021/video-shotcraft",
+ "tags": []
+}

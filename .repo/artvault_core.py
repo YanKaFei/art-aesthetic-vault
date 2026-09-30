@@ -2,7 +2,8 @@
 """
 artvault_core.py —— 仓库的「可被调用的那一层」。
 
-把 141 张流派卡从 Markdown 变成**结构化、可检索、可组合**的数据，
+把 421 张流派卡（147 张艺术流派 + 274 条手绘编号风格）从 Markdown 变成
+**结构化、可检索、可组合**的数据，
 让 AI（或你自己）能：
   · search()    按任意词找到相关流派
   · show()      取一张卡的完整提示词层
@@ -68,6 +69,22 @@ def load():
             "pitfalls": m.get("pitfalls", []),
             "see_also": m.get("see_also", []),
             "artist_keys": m.get("artist_keys", []),
+            # 第 7 大类「手绘艺术风格」的编号身份。其它流派没有这几项，读出来
+            # 是 None —— 保留字段名比按分类分支更好：调用方拿到的是统一形状，
+            # 不必先判断 category 才知道能读哪些键。
+            "kind": m.get("kind"),
+            # 手绘卡的中文名（274 条由 handraw_name.py 定名）。
+            # 其它卡没有这一项，读出来是 "" —— 保留字段名比按分类分支更好。
+            # 手绘卡的**编号**（`手绘001`）。名字现在占着 name_zh，
+            # 编号退到这里 —— 检索与引用照旧可用。
+            "alias": m.get("alias", ""),
+            "name_alias": m.get("name_alias", ""),
+            "name_basis": m.get("name_basis", ""),
+            "name_from": m.get("name_from", []),
+            "handraw_number": m.get("handraw_number"),
+            "handraw_group": m.get("handraw_group"),
+            "handraw_reference": m.get("handraw_reference"),
+            "handraw_image": m.get("handraw_image"),
             "has_images": False,
         })
     # 标注哪些有实图
@@ -79,6 +96,11 @@ def load():
                 c["has_images"] = len(json.load(open(p, encoding="utf-8"))) > 0
             except Exception:
                 pass
+    # 手绘类不抓博物馆实图，它的「有图」指的是**编号参考图**。语义不同，
+    # 但回答的是同一个问题：这张卡有没有图可看。
+    for c in cards:
+        if c.get("handraw_image"):
+            c["has_images"] = True
     return cards, CATEGORIES, by_category
 
 
@@ -130,10 +152,71 @@ def lookup(ident):
     for c in cards():
         if q in (c["slug"].lower(), c["name_zh"].lower(), c["name_en"].lower()):
             return c
+    # 手绘卡的**编号别名**（`手绘001`）。名字已经占着 name_zh（走上面那条），
+    # 编号退到 alias —— 两条都通，老习惯与新名字不该有一个失效。
+    for c in cards():
+        if c.get("alias") and q == c["alias"].lower():
+            return c
     s = _aliases().get(q)
     if s:
         return by_slug().get(s)
-    return None
+    # 电影风格库（40-films/）也是同一套七层的合法来源。
+    # 放在最后才找：艺术流派是这张表的主角，电影卡是补充轴。
+    # 这样 `compose --lighting villeneuve-dune` 才能真的取到那部片的光照层 ——
+    # 跨源混搭不是文档里的说法，是这个兜底在支撑。
+    return _film_lookup(ident)
+
+
+# 电影卡的形状与流派卡略有不同（没有 name_zh/one_liner 这两个键名），
+# 在这里做一次适配，让 compose/render 不必知道它来自哪一边。
+_FILM_FIELD_MAP = {
+    "name_zh": "title_zh",
+    "name_en": "title_en",
+    "period": "year",
+    "region": "director_zh",
+    "category": None,
+    "one_liner": "one_liner",
+    "core": "core",
+    "visual": "visual",
+    "palette": "palette",
+    "prompt": "layers",
+    "positive": "positive",
+    "negative": "negative",
+    "video": "video",
+    "pitfalls": "pitfalls",
+    "see_also": "see_also",
+}
+
+
+def _film_lookup(ident):
+    """在电影库里找一张卡，并适配成 compose/render 认得的形状。
+
+    电影库不存在或没装这个模块时安静返回 None —— 艺术库不该因为
+    电影模块缺席而不可用。
+    """
+    try:
+        import fv_core
+    except Exception:
+        return None
+    f, _ = fv_core.resolve(ident)
+    if not f:
+        return None
+    c = {}
+    for k, src in _FILM_FIELD_MAP.items():
+        if src is None:
+            c[k] = "电影风格"
+            continue
+        v = f.get(src, [] if k in ("core", "pitfalls", "see_also") else "")
+        c[k] = v
+    c["slug"] = f["slug"]
+    c["tier"] = "B"
+    c["artists"] = [f.get("director_zh", "")]
+    c["artist_keys"] = []
+    c["kind"] = "film"
+    c["director_zh"] = f.get("director_zh", "")
+    c["year"] = f.get("year")
+    c["source"] = f.get("source")
+    return c
 
 
 def name_matches(ident, limit=5):
@@ -189,6 +272,11 @@ def _aliases():
 def _haystack(c):
     parts = [c["slug"], c["name_zh"], c["name_en"], c["category"], c["one_liner"],
              c["period"], c["region"], c["negative"]]
+    # 手绘卡的**中文别名**必须进检索索引 —— 否则新名字只在 lookup 里能用，
+    # 而 `artvault.py search` 找不到它（实测：别名已进 card 对象，search 仍为空）。
+    for _k in ("alias", "name_alias", "handraw_number", "handraw_reference"):
+        if c.get(_k):
+            parts.append(str(c[_k]))
     parts += c["core"] + list(c["visual"].values()) + c["pitfalls"]
     parts += [a for a, _ in c["artists"]]
     parts += list(c["prompt"].values())
@@ -230,8 +318,15 @@ def search(query, limit=8, category=None, semantic=False):
                 continue
             if term in c["name_zh"].lower() or term in c["name_en"].lower():
                 score += 12
-            if _HAY.setdefault(c["slug"], _haystack(c)).count(term):
-                score += 2
+            # **按出现次数加权，而不是「命中过就一律 2 分」。** 原来的写法让
+            # 123 张卡在同一个词上并列 2 分，于是排序退化成 MOVEMENTS 的顺序：
+            # 实测搜「钢笔速写 留白」，前 8 条全是恰好排在前面的无关卡，而真正
+            # 逐条写着「大量留白」的 274 条手绘风格（排在最后）一条都进不来。
+            # 出现次数是「这个词是不是这张卡的主题」最直接的信号；封顶 4 次是
+            # 为了不让啰嗦重复的卡压过真正切题的卡。
+            _n = _HAY.setdefault(c["slug"], _haystack(c)).count(term)
+            if _n:
+                score += 2 * min(_n, 4)
         if score:
             scored[c["slug"]] = score
 
@@ -366,7 +461,13 @@ def compose(brief="", style=None, lighting=None, color=None, composition=None,
     bs = by_slug()
     out_layers = {}
     for layer, slug in assigned.items():
-        c = bs.get(slug) or (search(slug, 1) or [None])[0]
+        # 用 lookup() 而不是裸 bs.get()：lookup 里挂着电影风格库的兜底，
+        # 所以 `--lighting villeneuve-dune` 能取到那部片的**光照层**。
+        # 这正是「七层词表两边共用」的兑现点 —— 若只查 bs，电影卡永远
+        # 参与不了混搭，共用词表就只是一句没兑现的话。
+        c = bs.get(slug) or lookup(slug)
+        if c is None:
+            c = (search(slug, 1) or [None])[0]
         if not c:
             notes.append("未找到：%s" % slug)
             continue
@@ -497,6 +598,8 @@ def render(result, subject=None):
 
 
 def format_card(c, full=True):
+    # 手绘卡的 name_zh 现在就是中文名（274 条由 handraw_name.py 定名），
+    # 终端里看到「极端比例弯曲绘本」而不是「手绘041」。
     L = ["# %s · %s" % (c["name_zh"], c["name_en"]),
          "分类：%s ｜ 时期：%s ｜ 地区：%s" % (c["category"], c["period"], c["region"]),
          "一句话：%s" % c["one_liner"], ""]

@@ -21,11 +21,84 @@ type: 说明
 
 三者共用 `.repo/artvault_core.py` 的同一套逻辑，行为一致。
 
+## 一之二、电影风格库（按「导演 → 电影」的另一条轴）
+
+`10-movements/` 是**艺术流派**（按风格命名），`40-films/` 是**电影**（按导演命名）。
+两者**共用同一套七层词表**，所以可以跨源混搭 —— 这不是文档里的一句口号，
+`artvault.py compose` 的层解析里真的挂了电影库的兜底。
+
+```bash
+python3 .repo/artvault.py film list              # 列出全部片子
+python3 .repo/artvault.py film directors         # 按导演分组
+python3 .repo/artvault.py film search "霓虹 雨夜"  # 按画面特征找片（也可按导演/片名）
+python3 .repo/artvault.py film layers 银翼杀手2049 # 只要七层（最省 token）
+python3 .repo/artvault.py film show dune          # 整张卡
+python3 .repo/artvault.py film palette 闪灵        # 配色
+
+# 跨源混搭：拿电影的光照层 + 艺术流派的配色
+python3 .repo/artvault.py compose     --lighting villeneuve-dune --color baroque --subject "a lone figure on a dune"
+```
+
+> [!note] 这 14 部片是**逐片看过画面**才定稿的
+>
+> 每部片都跑过一遍「全量实测 → k-medoids 选代表帧 → 拼 3×3 印相图 → 人眼精读」，
+> 再把看到的与卡上写的核对。结果是**大部分描述站得住**，只有少数偏窄的被改：
+>
+> - 已按画面修正：《镜子》的色温漂移、《潜行者》的雨夜单色段与湿地饱和、
+>   《寄生虫》的「光＝阶级标记」、《未麻的部屋》的两套打光对撞
+> - 看过确认无误、未改：《乱》《未麻的部屋》《银翼杀手 2049》《七宗罪》
+>   《重庆森林》《闪灵》《刺客聂隐娘》《沙丘》《精疲力尽》《巴里·林登》
+>
+> 自己复现：`python3 .repo/contact_sheet.py <片名>` 出印相图。
+> 为何必须做这一步：实测页给的是「明度 65.9、饱和 0.31」这类数字，
+> **如实但冷** —— 数字能告诉你偏暗，告诉不了你「暗得脏还是暗得神圣」。
+
+> [!warning] 电影卡与艺术流派卡的**证据强度不一样**
+>
+> - **班底与年份**：抓自 film-grab 画廊页，卡片上标 ✅ 且带外链，可回查
+> - **七层拆解**：**手写解读**，依据是这部片公认的摄影特征 —— 不是逐帧测量结果
+> - **剧照**：卡片**本地嵌入**每部 6 张代表帧（约 15 MB 随仓库走，clone 后能看图）；
+>   版权属原片方，**仅供个人研究**，公开分发/商用前请自行取得授权。
+>   其余语料留在本地做分析（`image_analysis` / CLIP 重选代表帧），不随仓库发布。
+>
+> 引用时别说成「量出来的」。
+
+## 一之三、镜头配方卡库（`45-shots/`，第三条轴：运镜招式）
+
+前两条轴回答「长什么样」，这一条回答「**这一下怎么做出来**」：
+
+| 模块 | 轴 | 回答的问题 |
+|---|---|---|
+| `10-movements/` | 风格 | 这个流派长什么样、提示词怎么拼 |
+| `40-films/` | 导演-电影 | 这部片长什么样、怎么模仿它 |
+| `45-shots/` | **运镜招式** | **这一下动效怎么做出来** |
+
+```bash
+python3 .repo/artvault.py shots list              # 157 张 / 10 类
+python3 .repo/artvault.py shots categories
+python3 .repo/artvault.py shots search "急推 冲击"  # 按「我想做什么」找
+python3 .repo/artvault.py shots show crash-zoom-punch
+```
+
+> [!warning] 这一轴**没有七层**，而且是故意的
+>
+> 前两条轴共用七层，所以能跨源混搭。镜头卡讲的是帧数与缓动
+> （`zoom 6f ease-in，1→2.6`、`震屏 14px·e^(−t/1.8)`）——
+> **157 张里一张都没有色彩或光照字段**。套七层只能靠编，而
+> `compose --style crash-zoom-punch` 会拼出一段看起来能用、实际在编的提示词。
+> 所以它按上游自己的四字段（适用/时长/能量/标签）排，并且**刻意不参与
+> `compose` 的层解析**。
+>
+> 这些卡来自上游 [video-shotcraft](https://github.com/Vincentwei1021/video-shotcraft)
+> （Apache-2.0），**技法描述不是本库原创**，本库只做归类与排版。
+> 上游另写明：手法研究自公开作品，但实现全部从零重写、不含原片素材，
+> 且「公开发布**不等于**授权」。详见 [[出处与许可]]。
+
 ## 二、命令行（推荐先从这个开始）
 
 ```bash
 cd ".repo"
-python3 artvault.py categories                 # 6 大分类
+python3 artvault.py categories                 # 7 大分类
 python3 artvault.py list --with-images          # 有实图的流派
 python3 artvault.py search "霓虹 雨夜"           # 模糊检索
 python3 artvault.py search "压抑但华丽的光" --semantic   # 语义检索（需下过 CLIP 模型）

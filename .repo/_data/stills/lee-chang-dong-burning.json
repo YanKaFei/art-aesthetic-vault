@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "李沧东",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#C97A2B",
+  "#3E5A3A",
+  "#4A5A6B",
+  "#12140F",
+  "#8A7A5C",
+  "#A8B0A0"
+ ],
+ "palette_written_named": [
+  [
+   "#C97A2B",
+   "黄昏橙"
+  ],
+  [
+   "#3E5A3A",
+   "暗绿"
+  ],
+  [
+   "#4A5A6B",
+   "暮蓝"
+  ],
+  [
+   "#12140F",
+   "夜黑"
+  ],
+  [
+   "#8A7A5C",
+   "干草褐"
+  ],
+  [
+   "#A8B0A0",
+   "雾白"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "lee-chang-dong-burning",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "燃烧",
+ "total_linked": 58
+}

@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "罗贝尔·布列松",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#3E3A38",
+  "#8C8880",
+  "#C4C0B8",
+  "#0A0A0A",
+  "#E0DCD4",
+  "#5E5A54"
+ ],
+ "palette_written_named": [
+  [
+   "#3E3A38",
+   "暗灰"
+  ],
+  [
+   "#8C8880",
+   "中灰"
+  ],
+  [
+   "#C4C0B8",
+   "浅灰"
+  ],
+  [
+   "#0A0A0A",
+   "墨黑"
+  ],
+  [
+   "#E0DCD4",
+   "窗光白"
+  ],
+  [
+   "#5E5A54",
+   "石墙灰"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "bresson-a-man-escaped",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "死囚越狱",
+ "total_linked": 50
+}

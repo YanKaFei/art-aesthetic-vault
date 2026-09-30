@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "杨德昌",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#4A5A6B",
+  "#5E6B5A",
+  "#C4C8C9",
+  "#8C9490",
+  "#1E2A32",
+  "#2E4A5A"
+ ],
+ "palette_written_named": [
+  [
+   "#4A5A6B",
+   "灰蓝"
+  ],
+  [
+   "#5E6B5A",
+   "灰绿"
+  ],
+  [
+   "#C4C8C9",
+   "白"
+  ],
+  [
+   "#8C9490",
+   "水泥灰"
+  ],
+  [
+   "#1E2A32",
+   "暗部黑"
+  ],
+  [
+   "#2E4A5A",
+   "玻璃青"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "yang-edward-the-terrorizers",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "恐怖分子",
+ "total_linked": 65
+}

@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "朴赞郁",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#1F3B2C",
+  "#A8843C",
+  "#6B1F1A",
+  "#141210",
+  "#8A9A7A",
+  "#E0D2B4"
+ ],
+ "palette_written_named": [
+  [
+   "#1F3B2C",
+   "深绿"
+  ],
+  [
+   "#A8843C",
+   "赭金"
+  ],
+  [
+   "#6B1F1A",
+   "暗红"
+  ],
+  [
+   "#141210",
+   "墨黑"
+  ],
+  [
+   "#8A9A7A",
+   "苔绿"
+  ],
+  [
+   "#E0D2B4",
+   "纸门米"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "park-chan-wook-the-handmaiden",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "小姐",
+ "total_linked": 65
+}

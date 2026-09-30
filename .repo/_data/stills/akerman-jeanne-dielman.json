@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "香特尔·阿克曼",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#C9A227",
+  "#1F3A8C",
+  "#6B4A2B",
+  "#E8E4DC",
+  "#8C8C86",
+  "#3E3A34"
+ ],
+ "palette_written_named": [
+  [
+   "#C9A227",
+   "芥末黄"
+  ],
+  [
+   "#1F3A8C",
+   "围裙钴蓝"
+  ],
+  [
+   "#6B4A2B",
+   "褐"
+  ],
+  [
+   "#E8E4DC",
+   "米白"
+  ],
+  [
+   "#8C8C86",
+   "瓷灰"
+  ],
+  [
+   "#3E3A34",
+   "暗褐"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "akerman-jeanne-dielman",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "让娜·迪尔曼",
+ "total_linked": 32
+}

@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "斯坦利·库布里克",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#0F0F0F",
+  "#3A3E42",
+  "#6E7276",
+  "#A8ACB0",
+  "#E8E8E4",
+  "#8C7A5C"
+ ],
+ "palette_written_named": [
+  [
+   "#0F0F0F",
+   "暗部黑"
+  ],
+  [
+   "#3A3E42",
+   "钢板灰"
+  ],
+  [
+   "#6E7276",
+   "混凝土灰"
+  ],
+  [
+   "#A8ACB0",
+   "仪表浅灰"
+  ],
+  [
+   "#E8E8E4",
+   "顶灯白"
+  ],
+  [
+   "#8C7A5C",
+   "皮革褐"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "kubrick-dr-strangelove",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "奇爱博士",
+ "total_linked": 55
+}

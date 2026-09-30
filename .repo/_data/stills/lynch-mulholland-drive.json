@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "大卫·林奇",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#C9A227",
+  "#8A5A2B",
+  "#1F3A6E",
+  "#4A5560",
+  "#141618",
+  "#C42B72"
+ ],
+ "palette_written_named": [
+  [
+   "#C9A227",
+   "暖琥珀"
+  ],
+  [
+   "#8A5A2B",
+   "蜜色"
+  ],
+  [
+   "#1F3A6E",
+   "冷蓝"
+  ],
+  [
+   "#4A5560",
+   "钢灰"
+  ],
+  [
+   "#141618",
+   "深黑"
+  ],
+  [
+   "#C42B72",
+   "霓虹粉"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "lynch-mulholland-drive",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "穆赫兰道",
+ "total_linked": 65
+}

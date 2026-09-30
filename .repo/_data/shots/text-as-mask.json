@@ -1,0 +1,50 @@
+{
+ "category": "opening",
+ "duration": "5s（hold 20f + 字内漂移 80f + 放大接管 30f + 静止 20f）",
+ "energy": "中高（漂移段沉稳，接管段一次爆发）",
+ "intent": "标题和产品画面抢屏幕是老问题——先字后画慢，画上压字挤。这一式让\n两者同体：字形就是遮罩，产品只透过笔画显形，观众同时读到词和画面\n质感；结尾字形胀开溢出画幅，产品自然接管全屏——\"从品牌词走进产品\"\n一条镜头说完，兼任章节转场（与 transition-travel C 字腔穿越同族：\n那边是镜头钻进字腔，这边是字形自己胀开，前者相机动、后者门动）。",
+ "license": "Apache-2.0",
+ "motion": "- 深底 + SVG 白字黑底 data-URI 交给 CSS `mask-image`，遮罩层套住产品画面\n- 字内漂移：产品层 scale 1.15 + translateX 匀速漂 ~220px/80f——\n  字形静止、内容流动，\"窗外有世界\"的错觉即手法本体\n- 放大接管 30f 单段 bezier(0.4,0,0.2,1)：mask wrapper `scale(1→26)`，\n  **transform-origin 必须钉在实心笔画内**（demo 取 L 竖笔 61.5% 处）——\n  钉在字腔空洞里则放大后透出的是底色\n- 内容层反向补偿：套一层 `scale(1/maskS)` 抵消 mask 放大，产品画面\n  不随遮罩几何畸变（与 shot-transitions F 式\"窗几何与窗内景同步驱动\"同一命门的镜像）\n- 接管保险：另叠一个共享同一 translateX/scale 变换的无遮罩全屏层在\n  放大后段（endT 0.25–0.9）淡入——纯 mask 放大在字缝处会留深底残余",
+ "name": "text-as-mask",
+ "one_liner": "文字视频遮罩——超粗大标题字内部透出缓慢平移的产品画面，结尾字形放大 26 倍溢出、内部画面接管全屏",
+ "params": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| 字号/字重 | ≥360px / 900 | 笔画就是视口——细字重等于把产品塞进门缝 |\n| 漂移速度 | ~2.75px/f 匀速 | 快了字内画面读不清；漂移方向选画面信息密的轴 |\n| 放大倍率 | 26x（按字形/画幅比配，洞撑满即可） | 不足则接管帧还看得到字边残影 |\n| 收尾 | 接管后真静止 ≥20f | R1；接管完成帧产品应落在标准构图 |",
+ "path": "references/shots/opening/text-as-mask.md",
+ "pitfalls": "- demo 在灰阶/占位素材上调校通过——参数是调校起点非实战定稿，\n  首次实战须以真实素材回验\n- 字内透出的产品画面全程被特写盯着看——真实素材先过\n  审美准则 Q2 的高分辨率栅格化技法，低倍截图在笔画里糊成一片\n- 换词/换字体后 origin 手推值必失效——渲后看放大方向，洞不对中就微调\n  origin（同 transition-travel C 的腔心漂移坑）\n- 与 transition-travel C 字腔穿越同片不并用——同为\"字里长出世界\"，\n  观众读作同一招使两次（P4）\n- mask 层与内容层的 transform 必须分离驱动（wrapper 放大/内容反向补偿），\n  合在一层则产品跟着字形一起胀成 26 倍废片",
+ "purpose": "品牌词/口号与产品画面二合一的开场或章节卡；字是门、产品在门里",
+ "reference": "demos/opening/text-as-mask/\n（TextAsMask.tsx）",
+ "sections": [
+  {
+   "body": "标题和产品画面抢屏幕是老问题——先字后画慢，画上压字挤。这一式让\n两者同体：字形就是遮罩，产品只透过笔画显形，观众同时读到词和画面\n质感；结尾字形胀开溢出画幅，产品自然接管全屏——\"从品牌词走进产品\"\n一条镜头说完，兼任章节转场（与 transition-travel C 字腔穿越同族：\n那边是镜头钻进字腔，这边是字形自己胀开，前者相机动、后者门动）。",
+   "key": "intent",
+   "title": "意图"
+  },
+  {
+   "body": "- 深底 + SVG 白字黑底 data-URI 交给 CSS `mask-image`，遮罩层套住产品画面\n- 字内漂移：产品层 scale 1.15 + translateX 匀速漂 ~220px/80f——\n  字形静止、内容流动，\"窗外有世界\"的错觉即手法本体\n- 放大接管 30f 单段 bezier(0.4,0,0.2,1)：mask wrapper `scale(1→26)`，\n  **transform-origin 必须钉在实心笔画内**（demo 取 L 竖笔 61.5% 处）——\n  钉在字腔空洞里则放大后透出的是底色\n- 内容层反向补偿：套一层 `scale(1/maskS)` 抵消 mask 放大，产品画面\n  不随遮罩几何畸变（与 shot-transitions F 式\"窗几何与窗内景同步驱动\"同一命门的镜像）\n- 接管保险：另叠一个共享同一 translateX/scale 变换的无遮罩全屏层在\n  放大后段（endT 0.25–0.9）淡入——纯 mask 放大在字缝处会留深底残余",
+   "key": "motion",
+   "title": "动效核心"
+  },
+  {
+   "body": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| 字号/字重 | ≥360px / 900 | 笔画就是视口——细字重等于把产品塞进门缝 |\n| 漂移速度 | ~2.75px/f 匀速 | 快了字内画面读不清；漂移方向选画面信息密的轴 |\n| 放大倍率 | 26x（按字形/画幅比配，洞撑满即可） | 不足则接管帧还看得到字边残影 |\n| 收尾 | 接管后真静止 ≥20f | R1；接管完成帧产品应落在标准构图 |",
+   "key": "params",
+   "title": "参数表"
+  },
+  {
+   "body": "- demo 在灰阶/占位素材上调校通过——参数是调校起点非实战定稿，\n  首次实战须以真实素材回验\n- 字内透出的产品画面全程被特写盯着看——真实素材先过\n  审美准则 Q2 的高分辨率栅格化技法，低倍截图在笔画里糊成一片\n- 换词/换字体后 origin 手推值必失效——渲后看放大方向，洞不对中就微调\n  origin（同 transition-travel C 的腔心漂移坑）\n- 与 transition-travel C 字腔穿越同片不并用——同为\"字里长出世界\"，\n  观众读作同一招使两次（P4）\n- mask 层与内容层的 transform 必须分离驱动（wrapper 放大/内容反向补偿），\n  合在一层则产品跟着字形一起胀成 26 倍废片",
+   "key": "pitfalls",
+   "title": "已知坑"
+  },
+  {
+   "body": "demos/opening/text-as-mask/\n（TextAsMask.tsx）",
+   "key": "reference",
+   "title": "参考实现"
+  }
+ ],
+ "slug": "text-as-mask",
+ "source_commit": "5e71af35a2daee492dd3ea93e5e8903f32dcd13c",
+ "source_path": "references/shots/opening/text-as-mask.md",
+ "source_repo": "Vincentwei1021/video-shotcraft",
+ "source_url": "https://github.com/Vincentwei1021/video-shotcraft",
+ "tags": [
+  "typography"
+ ]
+}

@@ -1,0 +1,51 @@
+{
+ "category": "ui-entrance",
+ "duration": "描框 ~0.5s + 旋转&同时贴落 ~2.5s + 落定 ~1s；全段 4–4.5s",
+ "energy": "中高（一次性的大动作，落定即静）",
+ "intent": "neon-frame-forerun 的孪生变体：同样框先行、内容后落，但镜头\n不是固定的——从页面左侧视角连续弧线旋转到右侧视角，旋转进行\n的同时全部组件从空中贴落。命门是**同时贴合**：所有组件和文字\n同帧起落、同帧贴合、软影同步消失——这是\"整体登场\"的语法\n（判例：错峰版被裁\"应该是所有组件和文字同时从空中往下贴合\"）。\n错峰贴落属于巡礼镜（graze-face-tour/runway），一页一次性亮相\n必须齐落，节奏语义不能混用。",
+ "license": "Apache-2.0",
+ "motion": "- 霓虹描框：渐变霓虹框 ~14f 奔画成型（同 neon-frame-forerun）\n- 视角弧线：rotateY +38° → -26° 连续弧线（透视原点 30%→64% 随动\n  近似相机环绕），贯穿全片\n- 同时贴落：全部元素统一 LAND 时刻（归一化 ~0.52）——同帧离地\n  悬空、同帧空中下降、同帧贴合；FloatWrap 同形软影（blur/offset/\n  opacity 随高度）全体同步收敛\n- 背景霓虹管框群衬场，主面板落定后让位",
+ "name": "neon-frame-orbit-drop",
+ "one_liner": "霓虹框先行描框后，镜头绕页面左→右弧线旋转，页面全部组件/文字**同帧**从空中往下贴合（同形软影同步收敛）——整体登场式的框内安放",
+ "params": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| 贴落同时性 | 全元素同帧起落（零错峰） | **命门**；任何错峰都会读成巡礼语法（判例裁决原话见上） |\n| 视角弧线 | rotateY +38°→-26°、透视原点随动 | 弧度小读作抖动；只转不落=空转 |\n| 旋转×贴落耦合 | 贴落窗口居中于旋转行程 | 旋转完才落=两段戏；落完还在转=收不了尾 |\n| 悬浮高度/软影 | 同 graze-face-tour（100–180px、影随高度） | 影不可感=没做（累计判例） |\n| 描框 | ~14f 奔画 | 同 neon-frame-forerun |",
+ "path": "references/shots/ui-entrance/neon-frame-orbit-drop.md",
+ "pitfalls": "- 参数经占位素材两轮调校通过，非实战定稿，首次实战须以真实素材回验\n- **贴落节奏语义判例**（本卡与 graze-face-tour 互为反例）：\n  巡礼镜=错开起点+重叠并行下落；整体登场镜=全体同帧。选错语法\n  两边都会被裁\n- 与 neon-frame-forerun 分工：那张镜头固定、错峰贴落+页面点亮\n  三层咬合；本卡镜头旋转+同帧齐落。同段落二选一，别连用（同框\n  语言重复）\n- 弧线旋转是透视原点近似而非真实 3D 相机环绕，极端角度下框辉光\n  形变略平——实战若需大角度环绕考虑真 3D 场景",
+ "purpose": "单页 UI 的一次性隆重登场（与巡礼/逐区亮相相对）；暗场霓虹调性段落的主视觉揭幕；neon-frame-forerun 的姊妹镜",
+ "reference": "demos/ui-entrance/neon-frame-orbit-drop/\n（NeonFrameForerunOrbit.tsx）\n原片出处：无对应原段",
+ "sections": [
+  {
+   "body": "neon-frame-forerun 的孪生变体：同样框先行、内容后落，但镜头\n不是固定的——从页面左侧视角连续弧线旋转到右侧视角，旋转进行\n的同时全部组件从空中贴落。命门是**同时贴合**：所有组件和文字\n同帧起落、同帧贴合、软影同步消失——这是\"整体登场\"的语法\n（判例：错峰版被裁\"应该是所有组件和文字同时从空中往下贴合\"）。\n错峰贴落属于巡礼镜（graze-face-tour/runway），一页一次性亮相\n必须齐落，节奏语义不能混用。",
+   "key": "intent",
+   "title": "意图"
+  },
+  {
+   "body": "- 霓虹描框：渐变霓虹框 ~14f 奔画成型（同 neon-frame-forerun）\n- 视角弧线：rotateY +38° → -26° 连续弧线（透视原点 30%→64% 随动\n  近似相机环绕），贯穿全片\n- 同时贴落：全部元素统一 LAND 时刻（归一化 ~0.52）——同帧离地\n  悬空、同帧空中下降、同帧贴合；FloatWrap 同形软影（blur/offset/\n  opacity 随高度）全体同步收敛\n- 背景霓虹管框群衬场，主面板落定后让位",
+   "key": "motion",
+   "title": "动效核心"
+  },
+  {
+   "body": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| 贴落同时性 | 全元素同帧起落（零错峰） | **命门**；任何错峰都会读成巡礼语法（判例裁决原话见上） |\n| 视角弧线 | rotateY +38°→-26°、透视原点随动 | 弧度小读作抖动；只转不落=空转 |\n| 旋转×贴落耦合 | 贴落窗口居中于旋转行程 | 旋转完才落=两段戏；落完还在转=收不了尾 |\n| 悬浮高度/软影 | 同 graze-face-tour（100–180px、影随高度） | 影不可感=没做（累计判例） |\n| 描框 | ~14f 奔画 | 同 neon-frame-forerun |",
+   "key": "params",
+   "title": "参数表"
+  },
+  {
+   "body": "- 参数经占位素材两轮调校通过，非实战定稿，首次实战须以真实素材回验\n- **贴落节奏语义判例**（本卡与 graze-face-tour 互为反例）：\n  巡礼镜=错开起点+重叠并行下落；整体登场镜=全体同帧。选错语法\n  两边都会被裁\n- 与 neon-frame-forerun 分工：那张镜头固定、错峰贴落+页面点亮\n  三层咬合；本卡镜头旋转+同帧齐落。同段落二选一，别连用（同框\n  语言重复）\n- 弧线旋转是透视原点近似而非真实 3D 相机环绕，极端角度下框辉光\n  形变略平——实战若需大角度环绕考虑真 3D 场景",
+   "key": "pitfalls",
+   "title": "已知坑"
+  },
+  {
+   "body": "demos/ui-entrance/neon-frame-orbit-drop/\n（NeonFrameForerunOrbit.tsx）\n原片出处：无对应原段",
+   "key": "reference",
+   "title": "参考实现"
+  }
+ ],
+ "slug": "neon-frame-orbit-drop",
+ "source_commit": "5e71af35a2daee492dd3ea93e5e8903f32dcd13c",
+ "source_path": "references/shots/ui-entrance/neon-frame-orbit-drop.md",
+ "source_repo": "Vincentwei1021/video-shotcraft",
+ "source_url": "https://github.com/Vincentwei1021/video-shotcraft",
+ "tags": [
+  "effects",
+  "camera"
+ ]
+}

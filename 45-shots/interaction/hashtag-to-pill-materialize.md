@@ -1,0 +1,101 @@
+---
+type: 镜头卡
+招式: hashtag-to-pill-materialize
+类别: 交互
+类别slug: interaction
+能量: 中（干脆利落，靠硬切给劲，不靠弹跳）
+上游: Vincentwei1021/video-shotcraft
+上游路径: references/shots/interaction/hashtag-to-pill-materialize.md
+上游commit: 5e71af35a2da
+许可: Apache-2.0
+标签:
+  - 镜头
+  - hashtag-to-pill-materialize
+---
+
+# hashtag-to-pill-materialize
+
+> [!abstract] 这一下是什么
+> 话题词打字实体化——居中打出 "#word"（红实心光标恒亮），1 帧硬切变成宽大胶囊标签，hold 后缩小左移落到页面标签位，再 1 帧硬切揭示成品页；"两次硬切一次滑动"的节奏骨架
+
+| 类别 | 适用 | 时长 | 能量 |
+|---|---|---|---|
+| [[镜头总览\|交互]] | 标签/分类/关键词功能的演示段（笔记 app 打 tag、话题聚合）；"输入 → 变成 UI 实体 → 归位到成品"的三段式叙事 | 打字 ~40f + 硬切胶囊 hold ~18f + 缩移 ~14f + 硬切揭示后静置；全段约 3.5s（原片 18–21.5s） | 中（干脆利落，靠硬切给劲，不靠弹跳） |
+
+> [!info] 这张卡不是本库原创
+> 来自 [Vincentwei1021/video-shotcraft](https://github.com/Vincentwei1021/video-shotcraft)（Apache-2.0），原始路径 `references/shots/interaction/hashtag-to-pill-materialize.md`，commit `5e71af35a2da`。
+> 本库只做了归类与排版，**没有改动技法描述**。
+
+---
+
+## 意图
+
+文字变实体的常规做法是渐变/morph/展开，原片帧级拆解证明 Bear 反着
+来：**实体化是 1 帧硬切**——上一帧还是文字+光标，下一帧就是完整
+胶囊，无展开无 cross-fade 无回弹。硬切给的是"啪、成了"的确定感，
+任何渐变都会把"实体"软化成"特效"。全段骨架是**两次硬切夹一次
+滑动**：硬切实体化 → 平滑缩移归位 → 硬切揭示成品页。唯一的连续
+运动（缩移）被两记硬切框住，才显得又快又稳。这个节奏骨架是命门，
+三段挪动任何一段的性质（把硬切改渐变、把滑动改硬切）整卡就塌。
+
+## 动效核心
+
+- 打字段：几何无衬线（Futura 气质）居中打 "#word"，**红实心光标
+  恒亮不闪**（原片实测，别加 blink）；人手节奏 4–6f/字带确定性抖动
+- **实体化 = 1 帧硬切**：文字+光标整层消失，同帧出现无描边浅灰
+  胶囊 + 图标 + 词（字号不变、原位等大，# 被图标替换）；仅允许
+  3f 1.03→1 微落定防死板
+- 胶囊 hold ~0.6s → 一段 bezier easeInOut 缩小左移（~0.55x、
+  ~14f）落到页面标签位，位置/缩放同曲线同起止，中途不分段
+- 落位后**再 1 帧硬切**揭示成品页：底色/标题/正文/胶囊配色同帧
+  全变，之后真静止收尾
+- 实现要点：胶囊按大字号绘制、整体 transform 缩放，且
+  transformOrigin 必须 0 0 + translate 先行，否则落位中心漂移
+
+## 参数表
+
+| 参数 | 典型值 | 调节手感 |
+|------|--------|----------|
+| 打字节奏 | 4–6f/字（原片 ~6 字/秒），mulberry32 抖动 | 均匀间隔读作机打；光标必须恒亮（**原片实测**不闪烁） |
+| 实体化 | **1 帧硬切**（原片帧级实测无任何过渡）+ 3f 1.03→1 微落定 | 加淡入/展开立刻降级成普通 morph；微落定 >4f 读作弹跳 |
+| 胶囊几何 | 740×236@1920（**原片实测** 493×157@720p ×1.5），无描边 | 胶囊要"宽大过头"才有实体感；加描边读作按钮 |
+| hold | ~18f（0.6s，**原片实测**） | <12f 观众没看清胶囊长啥样就飞了 |
+| 缩移 | ~0.55x（**原片实测** 273/493）、14f、bezier(0.5,0,0.25,1) | 缩放与位移必须同曲线；分开调会读作两个动画 |
+| 揭示 | 落位 +3f 再 1 帧硬切全页 | 揭示若做转场，第二记硬切没了，骨架塌一半 |
+
+## 已知坑
+
+- demo 在灰阶/占位素材上调校通过——参数是调校起点非实战定稿，
+  首次实战须以真实素材回验
+- 与 typewriter-moves/ai-stream-response（打字呈现）、
+  morph-from-primitive（图元渐变成形）撞领域：本卡命门是**硬切
+  实体化非渐变变形**——只要你想加过渡，就该去用那几张卡而不是改这张
+- 早期版本曾杜撰"胶囊飞入下方滑入笔记卡"段，原片对照证伪已砍；
+  别复活飞行段
+- transformOrigin 默认 50% 50% 会让缩放落位中心漂移 (1−s)×半宽，
+  必须 origin 0 0 + translate 到目标中心再 scale（demo 内注释）
+- 与原片残余差距：音符图标手绘 SVG 曲线、Futura 回退字重、揭示帧
+  正文间距 ~10px 级别偏差；节奏与硬切时点已密帧对齐
+
+## 参考实现
+
+demos/interaction/hashtag-to-pill-materialize/
+（HashtagToPillMaterialize.tsx）
+原片出处：bear-app.mp4 18–21.5s
+
+## 上游出处
+
+| 项 | 值 |
+|---|---|
+| 仓库 | [Vincentwei1021/video-shotcraft](https://github.com/Vincentwei1021/video-shotcraft) |
+| 原始路径 | `references/shots/interaction/hashtag-to-pill-materialize.md` |
+| commit | `5e71af35a2daee492dd3ea93e5e8903f32dcd13c` |
+| 许可 | Apache-2.0 |
+| 参考实现 | `demos/interaction/hashtag-to-pill-materialize/` |
+
+> [!warning] 用之前先看 [[出处与许可]]
+> 上游写明：动效手法研究自公开作品，**实现全部从零重写**，不含原片片段、截图或美术资产；且「公开发布**不等于**授权」。
+
+---
+
+← [[镜头总览]] · [[电影风格总览]]　|　类别：[[镜头总览\|交互]]

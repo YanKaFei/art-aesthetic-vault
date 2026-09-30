@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "泰伦斯·马力克",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#C9A227",
+  "#D97426",
+  "#6B4A8C",
+  "#4E6B3A",
+  "#3E7A9A",
+  "#8C6A3C"
+ ],
+ "palette_written_named": [
+  [
+   "#C9A227",
+   "麦金"
+  ],
+  [
+   "#D97426",
+   "橙"
+  ],
+  [
+   "#6B4A8C",
+   "紫"
+  ],
+  [
+   "#4E6B3A",
+   "暗绿"
+  ],
+  [
+   "#3E7A9A",
+   "天蓝"
+  ],
+  [
+   "#8C6A3C",
+   "土褐"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "malick-days-of-heaven",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "天堂之日",
+ "total_linked": 62
+}

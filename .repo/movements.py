@@ -14,9 +14,10 @@ import mv_gaps
 import mv_contemporary
 import mv_visual
 import mv_photo
+import mv_handraw          # 第 7 大类：手绘艺术风格（handraw-style 274 条）
 
 MODULES = [mv_core, mv_west, mv_asia, mv_asia2, mv_modern, mv_gaps,
-           mv_contemporary, mv_visual, mv_photo]
+           mv_contemporary, mv_visual, mv_photo, mv_handraw]
 
 # 让 mv_core 里的现代流派归到正确的分类下
 CATEGORY_OVERRIDE = {

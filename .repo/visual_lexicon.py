@@ -227,6 +227,25 @@ LEXICON = {
     "手绘": "hand-drawn illustration",
 }
 
+# ---------------------------------------------------------------- 手绘类词条
+# 第 7 大类「手绘艺术风格」的词表在 handraw_lexicon.py，这里并进来。
+# 为什么归到这里而不是各管各的：这座桥的服务对象是**本库的术语体系** ——
+# 库里多了一整个大类，术语空间就变了，检索也该跟着变。否则
+# `artvault.py search "钢笔速写 留白" --semantic` 会搜不到那 274 条。
+# 单向依赖（本模块读 handraw_lexicon），不存在循环。
+# **只吞 ImportError。** 原来写的是 `except Exception: pass`，它会把
+# handraw_lexicon 里的语法错、拼写错一并吞掉 —— 后果是词表**静静地不再并入**：
+# 中文语义检索悄悄退化成查不到那 274 条，而验收里的过桥探针（霓虹/厚涂/…）
+# 照样全绿。静默降级正是这个库最防的一类错，所以这里收窄到只容忍
+# 「单独把 .repo/ 拷出去跑」这一个合法场景。
+try:
+    import handraw_lexicon as _HL
+except ImportError:
+    _HL = None
+if _HL is not None:
+    for _k, _v in _HL.EXTRA_LEXICON.items():
+        LEXICON.setdefault(_k, _v)
+
 # 长词优先匹配：不然「不对称」会被「对称」先吃掉、「无阴影」会被「阴影」吃掉。
 _KEYS_BY_LEN = sorted(LEXICON, key=len, reverse=True)
 

@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "丹尼斯·维伦纽瓦",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#C9A227",
+  "#A8843C",
+  "#6B5B45",
+  "#4A4A2E",
+  "#141410",
+  "#C4B48C"
+ ],
+ "palette_written_named": [
+  [
+   "#C9A227",
+   "琥珀"
+  ],
+  [
+   "#A8843C",
+   "芥末黄"
+  ],
+  [
+   "#6B5B45",
+   "土褐"
+  ],
+  [
+   "#4A4A2E",
+   "暗黄绿"
+  ],
+  [
+   "#141410",
+   "暗部黑"
+  ],
+  [
+   "#C4B48C",
+   "黄雾米"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "villeneuve-enemy",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "宿敌",
+ "total_linked": 65
+}

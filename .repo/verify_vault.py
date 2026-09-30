@@ -36,6 +36,7 @@ import glob
 import json
 import os
 import re
+import subprocess
 import sys
 from collections import Counter, defaultdict
 
@@ -44,10 +45,18 @@ VAULT = os.path.dirname(HERE)
 IMAGES = os.path.join(VAULT, "99-attachments", "images")
 DATA = os.path.join(HERE, "_data")
 
-NOTE_DIRS = ("00-guides", "10-movements", "15-my-library", "20-my-prompts", "90-templates")
+NOTE_DIRS = ("00-guides", "10-movements", "15-my-library", "20-my-prompts",
+             "90-templates", "40-films", "45-shots")
 # 图片有两个根：权威层的 99-attachments/images/ 和用户自己的 99-attachments/images-local/。
 # 断链与孤儿图两项都要同时认这两个根，否则本地图库的嵌入会被误报成断链。
-IMAGE_ROOTS = ("99-attachments/images", "99-attachments/images-local")
+#
+# ⚠ 2026-09 策略反转：`images-films/` **现在划掉了 gitignore，卡片也本地嵌入了**。
+# 原来它不在这里，理由是「版权图不随仓库分发，卡片只记外链」。用户要求
+# 把画面放进卡片后改成嵌入（Obsidian 的 `![[库内路径]]` 只认本地文件），
+# 于是它必须进 IMAGE_ROOTS —— 否则断链/孤儿/克隆完整性三项会把
+# **14 张卡里 84 个正确嵌入**全报成断链（实测就是这样）。
+IMAGE_ROOTS = ("99-attachments/images", "99-attachments/images-local",
+               "99-attachments/images-films")
 # 模板目录里是给用户抄的骨架，本来就带占位符（如 `![[此处放图]]`），
 # 检查断链时要跳过，否则每次都会报一个假问题。
 TEMPLATE_DIR = "90-templates"
@@ -72,11 +81,15 @@ def _notes(skip_templates=False):
 
 def check_links():
     """1 断链。只看像文件名的嵌入（带图片扩展名），占位符不算。"""
-    have = set()
+    # 两套索引：`have` 是 basename（老的 `![[图.jpg]]` 写法），
+    # `have_path` 是**vault 相对路径**（剧照用的 `![[99-attachments/images-films/…]]`）。
+    # 只按 basename 判会让所有路径式嵌入变成假断链 —— 实测 84 处。
+    have, have_path = set(), set()
     for root in IMAGE_ROOTS:
         for p in glob.glob(os.path.join(VAULT, root, "**", "*"), recursive=True):
             if os.path.isfile(p) and not os.path.basename(p).startswith("."):
                 have.add(os.path.basename(p))
+                have_path.add(os.path.relpath(p, VAULT).replace(os.sep, "/"))
     missing = []
     for md in _notes(skip_templates=True):
         try:
@@ -87,18 +100,27 @@ def check_links():
             name = m.strip()
             if not name.lower().endswith(IMG_EXT):
                 continue                # 占位符 / 非图片嵌入，不算断链
-            if name not in have:
+            if name not in have and name.replace(os.sep, "/") not in have_path:
                 missing.append((os.path.relpath(md, VAULT), name))
     return missing
 
 
 def check_duplicate_names():
-    """2 重名。"""
+    """2 重名。
+
+    ⚠ `images-films/` **不参与**这一项：电影剧照是按 `<片名>/<序号>.jpg`
+    命名的，每部片都有 `01.jpg`，basename 重名是设计如此（实测报 65 处）。
+    它们靠**路径**区分而不是靠 basename，所以这里按路径去重判断。
+    """
     names = []
     for root in IMAGE_ROOTS:
         for p in glob.glob(os.path.join(VAULT, root, "**", "*"), recursive=True):
-            if os.path.isfile(p) and not os.path.basename(p).startswith("."):
-                names.append(os.path.basename(p))
+            if not os.path.isfile(p) or os.path.basename(p).startswith("."):
+                continue
+            rel = os.path.relpath(p, VAULT).replace(os.sep, "/")
+            if rel.startswith("99-attachments/images-films/"):
+                continue
+            names.append(os.path.basename(p))
     return [k for k, v in Counter(names).items() if v > 1]
 
 
@@ -157,17 +179,25 @@ def check_frontmatter():
 
 
 def check_duplicates_visual(thresh=0.08):
-    """5 近重复。需要 vision 索引，没有就跳过。"""
-    idx_path = os.path.join(DATA, "vision_index.json")
-    if not os.path.exists(idx_path):
-        return None
+    """5 近重复。需要 vision 索引，没有就跳过。
+
+    ⚠ 索引的**生产端与消费端必须认同一个文件名**。实测踩到：生产端
+    （`artvault_vision.py build`）早已改成写 `vision_index.npz`，
+    而这里还硬读 `vision_index.json` —— 于是本项**永远走跳过分支**，
+    一直是「绿」的，只是从来没真的跑过。
+
+    现在改为调生产端自己的 `load_index()`（它已处理 npz + 旧 json 回退），
+    两边不可能再漂移。
+    """
     try:
         sys.path.insert(0, HERE)
         import artvault_vision as V
-        idx = json.load(open(idx_path, encoding="utf-8"))
-        vecs = idx.get("vectors") or {}
+        idx = V.load_index()
     except Exception:
         return None
+    if not idx:
+        return None
+    vecs = idx.get("vectors") or {}
     if not vecs:
         return None
     items = sorted(vecs.items())
@@ -209,11 +239,29 @@ def check_license():
 
 
 def check_orphans():
-    """7 孤儿图：在磁盘上但没有任何笔记引用。"""
-    referenced = set()
+    """7 孤儿图：在磁盘上但没有任何笔记引用。
+
+    ⚠ `images-films/` **不参与**这一项，理由是语义变了：
+
+      · 这项原本防的是「抓来一堆图但没写进任何卡」的浪费；
+      · 电影剧照是**全量语料**（14 部 881 张），卡片只嵌 6 张代表帧，
+        其余留在本地供 `image_analysis` / CLIP 匹配 / 以后重选代表帧用；
+      · 它们**不是孤儿，是语料**。
+
+    实测：做成「引用」口径会报 797 张假孤儿。所以这里显式豁免，
+    但豁免的是「未被引用」，不是「不存在」—— 卡片嵌入的文件存在性
+    由第 23 项单独守着。
+    """
+    FILM_STILLS = "99-attachments/images-films/"
+    # 同样两套：basename 与全路径。剧照以路径引用，只比 basename 会把
+    # 881 张全报成孤儿（实测）。
+    referenced, referenced_path = set(), set()
     for md in _notes():
         try:
-            referenced.update(m.strip() for m in EMBED.findall(open(md, encoding="utf-8").read()))
+            for m in EMBED.findall(open(md, encoding="utf-8").read()):
+                m = m.strip()
+                referenced.add(m)
+                referenced_path.add(m.replace(os.sep, "/"))
         except Exception:
             continue
     orphans = []
@@ -221,8 +269,11 @@ def check_orphans():
         for p in glob.glob(os.path.join(VAULT, root, "**", "*"), recursive=True):
             if not os.path.isfile(p) or os.path.basename(p).startswith("."):
                 continue
-            if os.path.basename(p) not in referenced:
-                orphans.append(os.path.relpath(p, VAULT))
+            rel = os.path.relpath(p, VAULT).replace(os.sep, "/")
+            if rel.startswith(FILM_STILLS):
+                continue                      # 剧照是语料，见 docstring
+            if os.path.basename(p) not in referenced and rel not in referenced_path:
+                orphans.append(rel)
     return sorted(orphans)
 
 
@@ -488,7 +539,11 @@ def check_clone_integrity():
 
     notes = [p for p in tracked if p.endswith(".md")]
     have_note = {os.path.splitext(os.path.basename(p))[0] for p in notes}
+    # 两套：basename（老写法 `![[图.jpg]]`）与**全路径**（剧照用
+    # `![[99-attachments/images-films/<片>/01.jpg]]`）。只比 basename 会把
+    # 84 个正确嵌入报成「没发布」—— 实测就是这样。
     have_img = {os.path.basename(p) for p in tracked if p.startswith("99-attachments/")}
+    have_img_path = {p for p in tracked if p.startswith("99-attachments/")}
     IMG_EXT = (".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".tif", ".tiff")
 
     def strip_code(t):
@@ -503,7 +558,8 @@ def check_clone_integrity():
             continue
         for m in re.findall(r"!\[\[([^\]|#]+)", t):
             name = m.strip()
-            if name.lower().endswith(IMG_EXT) and name not in have_img:
+            if (name.lower().endswith(IMG_EXT) and name not in have_img
+                    and name.replace(os.sep, "/") not in have_img_path):
                 problems.append((p, "嵌入的图没发布：" + name[:44]))
         for m in re.findall(r"(?<!!)\[\[([^\]|#\\]+)", t):
             name = m.strip()
@@ -513,7 +569,7 @@ def check_clone_integrity():
 
 
 def check_readme_numbers():
-    """16 README 数字：README 承诺的规模，必须等于 clone 之后真拿到的规模。
+    """README 数字：README 承诺的规模，必须等于 clone 之后真拿到的规模。
 
     为什么单开一项：第 15 项查的是「引用会不会断」，数字对不对它管不着；第 12 项
     只比 **mtime**，不比内容。所以下面这个 bug 能一路全绿：
@@ -555,10 +611,17 @@ def check_readme_numbers():
     CLAIMS = [
         # ---- 中文 README ----
         ("README.md", "笔记数", r"(\d+)\s*篇笔记", "n_notes", 1),
+        ("README.md", "分类数",
+         r"\*\*流派卡\*\*\s*\|\s*\*\*\d+\s*张\*\*，(\d+)\s*大分类",
+         "n_cats", 1),
         ("README.md", "流派卡数", r"\*\*流派卡\*\*\s*\|\s*\*\*(\d+)\s*张\*\*", "n_mv", 1),
         ("README.md", "实图数", r"\*\*实图\*\*\s*\|\s*\*\*(\d+)\s*张\*\*", "n_img", 1),
         ("README.md", "图体积", r"\*\*实图\*\*\s*\|\s*\*\*" + NO + r"\s*张\*\*（(\d+)\s*MB）",
          "img_mb", 1),
+        ("README.md", "公共领域实图数",
+         r"公共领域实图\s*\*\*(\d+)\s*张\*\*", "n_work_img", 1),
+        ("README.md", "编号参考图数",
+         r"handraw-style 编号参考图\s*\*\*(\d+)\s*张\*\*", "n_ref_img", 1),
         ("README.md", "导航篇数", r"\*\*导航与方法论\*\*\s*\|\s*(\d+)\s*篇", "n_guides", 1),
         ("README.md", "概念组数",
          r"\*\*关键词图谱\*\*\s*\|\s*最容易混的\s*\*\*(\d+)\s*组\*\*", "n_concepts", 1),
@@ -566,13 +629,32 @@ def check_readme_numbers():
         ("README.md", "模板数", r"\*\*笔记模板\*\*\s*\|\s*(\d+)\s*个", "n_templates", 1),
         ("README.md", "脚本数", r"\*\*脚本\*\*\s*\|\s*(\d+)\s*个", "n_scripts", 1),
         ("README.md", "纯提示词卡", r"\*\*(\d+)\s*个流派是「纯提示词卡」", "n_mv_no_img", 1),
+        ("README.md", "电影卡数", r"\*\*电影风格卡\*\*\s*\|\s*\*\*(\d+)\s*部\*\*", "n_films", 1),
+        ("README.md", "电影导演数",
+         r"\*\*电影风格卡\*\*\s*\|\s*\*\*" + NO + r"\s*部\*\*（(\d+)\s*位导演）",
+         "n_film_directors", 1),
+        ("README.md", "剧照外链数",
+         r"另有\s*\*\*(\d+)\s*条剧照外链\*\*", "n_film_stills", 1),
+        ("README.md", "镜头卡数", r"\*\*镜头配方卡\*\*\s*\|\s*\*\*(\d+)\s*张\*\*", "n_shots", 1),
+        ("README.md", "镜头卡类别数",
+         r"\*\*镜头配方卡\*\*\s*\|\s*\*\*" + NO + r"\s*张\*\*（(\d+)\s*类）",
+         "n_shot_cats", 1),
         # ---- 英文 README ----
-        ("README.en.md", "notes", r"(\d+)\s*notes\s*·", "n_notes", 1),
+        # 反引号是**故意写进正则**的：头部那行统计数字是行内代码，
+        # 「notes」后面紧跟的是反引号而不是空格 —— 只写 \s*· 会永远失配。
+        ("README.en.md", "notes", r"`(\d+)\s*notes`", "n_notes", 1),
+        ("README.en.md", "categories",
+         r"\*\*Movement cards\*\*\s*\|\s*\*\*" + NO + r"\*\*,\s*in\s+(\d+)\s+categories",
+         "n_cats", 1),
         ("README.en.md", "movement cards",
          r"\*\*Movement cards\*\*\s*\|\s*\*\*(\d+)\*\*", "n_mv", 1),
         ("README.en.md", "images", r"\*\*Images\*\*\s*\|\s*\*\*(\d+)\*\*", "n_img", 1),
         ("README.en.md", "image MB",
          r"\*\*Images\*\*\s*\|\s*\*\*" + NO + r"\*\*\s*\((\d+)\s*MB\)", "img_mb", 1),
+        ("README.en.md", "museum images",
+         r"\*\*(\d+)\*\* public-domain museum images", "n_work_img", 1),
+        ("README.en.md", "reference sheets",
+         r"\*\*(\d+)\*\* handraw-style numbered reference sheets", "n_ref_img", 1),
         ("README.en.md", "guides",
          r"\*\*Guides & methodology\*\*\s*\|\s*(\d+)\s*notes", "n_guides", 1),
         ("README.en.md", "concept groups",
@@ -581,8 +663,47 @@ def check_readme_numbers():
         ("README.en.md", "templates",
          r"\*\*Note templates\*\*\s*\|\s*(\d+)\s*\|", "n_templates", 1),
         ("README.en.md", "scripts", r"\*\*Scripts\*\*\s*\|\s*(\d+)\s*-", "n_scripts", 1),
+        ("README.en.md", "film cards",
+         r"\*\*Film style cards\*\*\s*\|\s*\*\*(\d+)\*\*", "n_films", 1),
+        ("README.en.md", "film directors",
+         r"\*\*Film style cards\*\*\s*\|\s*\*\*" + NO + r"\*\*\s*\((\d+)\s*directors\)",
+         "n_film_directors", 1),
+        ("README.en.md", "still links",
+         r"plus\s*\*\*(\d+)\s*external still links\*\*", "n_film_stills", 1),
+        ("README.en.md", "shot cards",
+         r"\*\*Shot recipe cards\*\*\s*\|\s*\*\*(\d+)\*\*", "n_shots", 1),
+        ("README.en.md", "shot categories",
+         r"\*\*Shot recipe cards\*\*\s*\|\s*\*\*" + NO + r"\*\*\s*\((\d+)\s*categories\)",
+         "n_shot_cats", 1),
         ("README.en.md", "prompt-only",
          r"\*\*(\d+) movements are \"prompt-only cards\.\"\*\*", "n_mv_no_img", 1),
+        # ---- 日文 README ----
+        # 多一份 README 就是多一处会烂的数字。四份各挂几项，覆盖面不必完全相同
+        # （各语种正文详略本来就有别），但**每一份都得有几项被守着** ——
+        # 一份完全没人守的 README，数字想怎么写就怎么写。
+        ("README.ja.md", "流派カード数",
+         r"\*\*流派カード\*\*\s*\|\s*\*\*(\d+)\s*枚\*\*", "n_mv", 1),
+        ("README.ja.md", "実画像数",
+         r"\*\*実画像\*\*\s*\|\s*\*\*(\d+)\s*枚\*\*", "n_img", 1),
+        ("README.ja.md", "映画カード数",
+         r"\*\*映画スタイルカード\*\*\s*\|\s*\*\*(\d+)\s*本\*\*", "n_films", 1),
+        ("README.ja.md", "ショットカード数",
+         r"\*\*ショットレシピカード\*\*\s*\|\s*\*\*(\d+)\s*枚\*\*", "n_shots", 1),
+        ("README.ja.md", "ノート数", r"(\d+)\s*本のノート", "n_notes", 1),
+        ("README.ja.md", "スクリプト数",
+         r"\*\*スクリプト\*\*\s*\|\s*(\d+)\s*本", "n_scripts", 1),
+        # ---- 法文 README ----
+        ("README.fr.md", "fiches de mouvement",
+         r"\*\*Fiches de mouvement\*\*\s*\|\s*\*\*(\d+)\s*fiches\*\*", "n_mv", 1),
+        ("README.fr.md", "images",
+         r"\*\*Images\*\*\s*\|\s*\*\*(\d+)\*\*", "n_img", 1),
+        ("README.fr.md", "fiches de film",
+         r"\*\*Fiches de film\*\*\s*\|\s*\*\*(\d+)\s*fiches\*\*", "n_films", 1),
+        ("README.fr.md", "fiches de plan",
+         r"\*\*Fiches de plan\*\*\s*\|\s*\*\*(\d+)\s*fiches\*\*", "n_shots", 1),
+        ("README.fr.md", "notes", r"(\d+)\s*notes\b", "n_notes", 1),
+        ("README.fr.md", "scripts",
+         r"\*\*Scripts\*\*\s*\|\s*(\d+)\s*—", "n_scripts", 1),
     ]
 
     problems = []
@@ -916,6 +1037,201 @@ def _pillow_ok():
         return False
 
 
+def check_film_still_isolation():
+    """23 剧照的版权处理 —— **策略已反转**，检查项跟着换方向。
+
+    ## 反转留档
+
+    原设计：本地剧照 gitignore、卡片只记外链、这一项**禁止**卡片嵌入本地图。
+    用户要求「把画面放入卡片」后改成**本地嵌入**（Obsidian 的
+    `![[库内路径]]` 只认本地文件，外链在库内不会渲染成图）。
+
+    于是这一项从「禁止」改为「**嵌入的安全条件**」：
+
+      · 嵌入的每一张必须真实存在（否则 Obsidian 里是断图，而只查文本的
+        检查全都会通过 —— 这是最隐蔽的一种错）
+      · 卡片必须带版权声明（版权属原片方，公开分发前自行判断）
+      · 剧照目录**不得**被 gitignore（否则 clone 后整套嵌入变断图）
+    """
+    d = os.path.join(VAULT, "40-films")
+    if not os.path.isdir(d):
+        return []
+    bad = []
+    embed = re.compile(r"!\[\[([^\]|]+?\.(?:jpe?g|png|webp))(?::[^\]]*)?\]\]", re.I)
+
+    for md in glob.glob(os.path.join(d, "**", "*.md"), recursive=True):
+        try:
+            t = open(md, encoding="utf-8").read()
+        except Exception:
+            continue
+        rel_md = os.path.relpath(md, VAULT)
+        imgs = embed.findall(t)
+        for rel in imgs:
+            if not os.path.exists(os.path.join(VAULT, rel)):
+                bad.append((rel_md, "嵌入了不存在的图：%s" % rel))
+        # 嵌了剧照的卡必须有版权声明
+        if any(rel.startswith("99-attachments/images-films/") for rel in imgs):
+            if "版权属原片方" not in t:
+                bad.append((rel_md, "嵌入了剧照但没有版权声明"))
+
+    # 判据：**嵌入的每一张都必须在 git 索引里**（clone 后要能看到图）。
+    #
+    # ⚠ 这条判据换过方向，值得记下：
+    #   原来查「99-attachments/images-films/ 不得出现在 .gitignore 里」。
+    #   那时语料是逐文件列出忽略的，目录本身不出现，所以「目录没被忽略」等价于
+    #   「嵌入的图会随仓库走」。
+    #   后来 .gitignore 瘦身成**整目录一行忽略**（900 行 → 100 行），靠
+    #   `git add -f` 把嵌入的那 84 张强制入库 —— 此时「目录被忽略」是**对的**，
+    #   原来那条检查立刻变成假阳性。
+    #   所以改成直接查索引：文件一旦被跟踪，gitignore 就管不着它。
+    if os.path.isdir(os.path.join(VAULT, ".git")):
+        emb = set()
+        for md in glob.glob(os.path.join(d, "**", "*.md"), recursive=True):
+            try:
+                for m in embed.findall(open(md, encoding="utf-8").read()):
+                    if m.startswith("99-attachments/images-films/"):
+                        emb.add(m)
+            except Exception:
+                continue
+        if emb:
+            r = subprocess.run(["git", "ls-files", "--"] + sorted(emb),
+                               cwd=VAULT, capture_output=True, text=True)
+            tracked = set(r.stdout.split())
+            missing = sorted(emb - tracked)
+            if missing:
+                bad.append(("99-attachments/images-films",
+                            "%d 张嵌入式剧照没被 git 跟踪（clone 后是断图）：%s —— "
+                            "跑 `python3 .repo/build_vault.py` 会自动 git add -f"
+                            % (len(missing), missing[:3])))
+    return bad
+
+
+def check_film_cards():
+    """24 电影卡完整性 —— 每部片的七层、配色、出处都得在。
+
+    这一项守的是「别让抓取失败或数据缺失**静默**变成一张空卡」。
+    卡片是生成物，生成器少一层不会报错，只会安静地少一层。
+    """
+    try:
+        sys.path.insert(0, HERE)
+        import fv_core
+    except Exception as e:
+        return [("fv_core", "电影模块不可用：%s" % str(e)[:60])]
+    bad = []
+    for f in fv_core.films():
+        slug = f["slug"]
+        miss = [l for l in fv_core.LAYERS if not (f["layers"].get(l) or "").strip()]
+        if miss:
+            bad.append((slug, "缺提示词层：%s" % "、".join(miss)))
+        if len(f["palette"]) != 6:
+            bad.append((slug, "配色 %d 色（应为 6）" % len(f["palette"])))
+        if not (f.get("filmgrab") or "").startswith("http"):
+            bad.append((slug, "缺 film-grab 画廊页外链"))
+        if not (f.get("filmgrab_director") or "").startswith("http"):
+            bad.append((slug, "缺 film-grab 导演索引外链"))
+        if f["source"] not in ("curated", "inferred"):
+            bad.append((slug, "证据强度标记不合法：%r" % f["source"]))
+        # 生成物必须真的落在磁盘上（生成器可能没跑）
+        p = os.path.join(VAULT, "40-films", f["director_slug"], "%s.md" % f["title_zh"])
+        if not os.path.exists(p):
+            bad.append((os.path.join(f["director_slug"], f["title_zh"] + ".md"),
+                        "卡片文件不存在（跑 python3 fv_build.py）"))
+    return bad
+
+
+def check_shot_cards():
+    """25 镜头配方卡完整性 + 出处完整性。
+
+    镜头卡不是本库原创（上游 Apache-2.0），所以这一项有两个职责：
+
+      · **完整性**：157 张都解析出来了，且生成物落盘（生成器可能没跑）；
+      · **出处**：每张都带上游仓库/路径/commit/许可 —— Apache-2.0 要求保留
+        出处，而「卡片读起来像本站原创」是比缺字段更糟的一种错。
+
+    顺带守一条边界：镜头卡**不能**混进风格库（它们没有色彩/光照语义，
+    混进去会让 compose 拼出在编的提示词）。
+    """
+    try:
+        sys.path.insert(0, HERE)
+        import shot_core
+    except Exception as e:
+        return [("shot_core", "镜头模块不可用：%s" % str(e)[:60])]
+    bad = []
+    shots = shot_core.shots()
+    if not shots:
+        bad.append(("45-shots", "一张镜头卡都没有（跑 python3 shot_import.py --import）"))
+        return bad
+    for x in shots:
+        for field in ("name", "category", "one_liner"):
+            if not x.get(field):
+                bad.append((x.get("name") or "?", "缺字段：%s" % field))
+        for field in ("source_repo", "source_path", "source_commit", "license"):
+            if not x.get(field):
+                bad.append((x["name"], "缺出处字段：%s" % field))
+        if not x["sections"]:
+            bad.append((x["name"], "正文一个段落都没有"))
+        p = os.path.join(VAULT, "45-shots", x["category"], x["name"] + ".md")
+        if not os.path.exists(p):
+            bad.append((os.path.join(x["category"], x["name"] + ".md"),
+                        "卡片文件不存在（跑 python3 shot_build.py）"))
+    # 边界：镜头卡的 slug 不得混进风格库
+    import artvault_core as A
+    for x in shots:
+        if A.by_slug().get(x["name"]):
+            bad.append((x["name"], "镜头卡混进了风格库 —— compose 会把它当风格层"))
+    return bad
+
+
+def check_still_measurements():
+    """26 剧照实测完整性 + 覆盖度如实。
+
+    两件事：
+
+      · **完整**：每部片的实测页都在盘上（跑了 still_build.py），且页上
+        同时有「已量」与「共链接」两个数；
+      · **如实**：`measured <= total_linked`，且当没下齐时页上必须出现
+        「这不是全量」的告警 —— 用部分样本冒充全片均值是最能骗人的一种错，
+        算出来的数字全对，只有样本不对。
+
+    顺带守一条版权线：实测页不得**嵌入**本地剧照（只准写路径说明）。
+    """
+    import glob as _g
+    try:
+        sys.path.insert(0, HERE)
+        import fv_core
+        import still_analysis as SA
+    except Exception as e:
+        return [("still_analysis", "剧照实测模块不可用：%s" % str(e)[:60])]
+    d = os.path.join(VAULT, "40-films")
+    if not os.path.isdir(d):
+        return []
+    bad = []
+    for f in fv_core.films():
+        m = SA.load_measurements(f["slug"])
+        if not m:
+            # 还没跑实测不算错（剧照可能还没下），但要能看出「没跑过」
+            continue
+        n, total = m.get("measured", 0), m.get("total_linked", 0)
+        if n > total:
+            bad.append((f["slug"], "已量 %d > 共链接 %d（数不对）" % (n, total)))
+        p = os.path.join(d, f["director_slug"], "%s-实测.md" % f["title_zh"])
+        if not os.path.exists(p):
+            bad.append((f["slug"], "实测页不在盘上（跑 python3 still_build.py）"))
+            continue
+        t = open(p, encoding="utf-8").read()
+        if "已量" not in t or "共链接" not in t:
+            bad.append((f["slug"], "实测页没写明覆盖度"))
+        if n < total and "这不是全量" not in t:
+            bad.append((f["slug"], "没下齐却没有「这不是全量」的告警"))
+        if re.search(r"!\[[^\]]*images-films|!\[[^\]]*\]\([^)]*images-films", t):
+            bad.append((f["slug"], "实测页嵌入了本地剧照（版权图不得随卡片分发）"))
+    # 总览页
+    ov = os.path.join(d, "剧照实测总览.md")
+    if any(SA.load_measurements(f["slug"]) for f in fv_core.films()) and not os.path.exists(ov):
+        bad.append(("剧照实测总览.md", "总览页不在盘上"))
+    return bad
+
+
 def check_image_card_fit():
     """22 图与卡自洽 —— 用视觉签名把「最不像本流派的图」挑出来，供人工分诊。
 
@@ -1079,6 +1395,11 @@ def main():
         print("%s 22 图与卡自洽：跳过（原因见上一行）" % WARN)
     else:
         print("%s 22 图与卡自洽：已分诊（提示性，不计入失败）" % OK)
+
+    report("23 剧照版权隔离", check_film_still_isolation())
+    report("24 电影卡完整性", check_film_cards())
+    report("25 镜头卡完整性", check_shot_cards())
+    report("26 剧照实测", check_still_measurements())
 
     print("=" * 70)
     if failed:

@@ -1,0 +1,48 @@
+{
+ "category": "camera",
+ "duration": "A 5s（炸开-悬停-合体全程）；C 3–5s 单向俯冲",
+ "energy": "高",
+ "intent": "depth-layer 卡是给平移加纵深——层在动、页面还是页面。这两式更进一步：\n整页被当成一个 3D 实体，相机（或世界）绕着它做实拍级机动。两式叙事\n语义各占一格：A 说\"看看它由什么组成\"（拆解展示，Apple 发布片语言）；\nC 说\"从全局俯瞰砸到主角\"（上帝视角一头扎进 hero 特写，全景→焦点）。",
+ "license": "Apache-2.0",
+ "motion": "| 式 | 做法 | 适用段落 |\n|----|------|----------|\n| A exploded-view | 整页 3D 倾斜后构件沿 Z 轴错峰炸开悬停，一拍后逆序合体震屏收口 | 架构/组成展示：\"这个产品里有什么\"；模块总览段 |\n| C drone-dive-landing | 近垂直俯角悬停 → 猛扎俯冲 → 气垫减速停在 hero 卡特写 | 开场定场→入题；全局地图砸进单点的章节启动 |",
+ "name": "space-camera-moves",
+ "one_liner": "3D 空间化运镜两式——exploded-view 爆炸分解（构件沿 Z 炸开再合体）、drone-dive-landing 无人机俯冲降落",
+ "params": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| A 空间基座 | perspective 1600 + 整组 scale 0.76 + rotateX 18° rotateY -12° + preserve-3d | 倾角是空间感来源；正视炸开读不出深度 |\n| A 炸开 | 各构件 translateZ 60–320px 错落分布，错峰 3f，每层 14f ease-out-back(1.7) | back 回弹给\"咔\"一声的机械感；深度全同读作整页浮起 |\n| A 合体 | 逆序 ease-in 12f，归位帧 2f 指数衰减震屏（幅 ~13px） | 震屏是落锤——没有它合体读作软趴趴的淡入 |\n| A 深度锚 | 投影随 z·p 下移变虚 + 底板压暗 22% + 远层 brightness ↓28% | 三个线索缺一层间关系就糊 |\n| C 行程 | 同一条 p 驱动 rotateX 72°→0 + scale 0.42→1.35 + translate 收拢；origin 钉死 hero 卡中心（如 518,335） | 一条 p = 一台相机一次机动；分开驱动读作三个动画打架 |\n| C 速度曲线 | 主俯冲 25f Easing.in(cubic) 吃 82% 行程 → 气垫 20f Easing.out(poly(5)) 走 18% | 切换帧速度骤降 = 气垫顶住的体感；82/18 比例比帧数更关键 |\n| C 氛围 | 全场包 CameraMotionBlur(shutterAngle 220, samples 9)；俯视期页面下方椭圆软影随落地收干 | 软影卖\"悬空高度\"；blur 卖速度，缺一维就假 |",
+ "path": "references/shots/camera/space-camera-moves.md",
+ "pitfalls": "- demo 在灰阶/占位素材上调校通过——参数是调校起点非实战定稿，\n  首次实战须以真实素材回验\n- 两式都吃真实截图分层/高清纹理：A 需页面按构件切块截图（顶栏/侧栏/\n  卡各自独立成图，整页一张图炸不开）；C 终点是特写，素材先按\n  审美准则 Q2 的高分辨率栅格化技法处理\n- C 式易错：Remotion 无 Easing.quint，写 Easing.poly(5)（本批实渲踩坑）\n- A 式构件布局要绝对定位复刻原页面网格（demo 里 8 层复刻 FakeDashboard\n  A），流式布局做不了 per-构件 translateZ",
+ "purpose": "把平面页面当 3D 实体拍的高光段落；两式都是\"大动作\"，一支片合计 ≤2 次",
+ "reference": "demos/camera/space-camera-moves/\n（DroneDiveLanding.tsx / ExplodedView.tsx）",
+ "sections": [
+  {
+   "body": "depth-layer 卡是给平移加纵深——层在动、页面还是页面。这两式更进一步：\n整页被当成一个 3D 实体，相机（或世界）绕着它做实拍级机动。两式叙事\n语义各占一格：A 说\"看看它由什么组成\"（拆解展示，Apple 发布片语言）；\nC 说\"从全局俯瞰砸到主角\"（上帝视角一头扎进 hero 特写，全景→焦点）。",
+   "key": "intent",
+   "title": "意图"
+  },
+  {
+   "body": "| 式 | 做法 | 适用段落 |\n|----|------|----------|\n| A exploded-view | 整页 3D 倾斜后构件沿 Z 轴错峰炸开悬停，一拍后逆序合体震屏收口 | 架构/组成展示：\"这个产品里有什么\"；模块总览段 |\n| C drone-dive-landing | 近垂直俯角悬停 → 猛扎俯冲 → 气垫减速停在 hero 卡特写 | 开场定场→入题；全局地图砸进单点的章节启动 |",
+   "key": "motion",
+   "title": "两式选型"
+  },
+  {
+   "body": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| A 空间基座 | perspective 1600 + 整组 scale 0.76 + rotateX 18° rotateY -12° + preserve-3d | 倾角是空间感来源；正视炸开读不出深度 |\n| A 炸开 | 各构件 translateZ 60–320px 错落分布，错峰 3f，每层 14f ease-out-back(1.7) | back 回弹给\"咔\"一声的机械感；深度全同读作整页浮起 |\n| A 合体 | 逆序 ease-in 12f，归位帧 2f 指数衰减震屏（幅 ~13px） | 震屏是落锤——没有它合体读作软趴趴的淡入 |\n| A 深度锚 | 投影随 z·p 下移变虚 + 底板压暗 22% + 远层 brightness ↓28% | 三个线索缺一层间关系就糊 |\n| C 行程 | 同一条 p 驱动 rotateX 72°→0 + scale 0.42→1.35 + translate 收拢；origin 钉死 hero 卡中心（如 518,335） | 一条 p = 一台相机一次机动；分开驱动读作三个动画打架 |\n| C 速度曲线 | 主俯冲 25f Easing.in(cubic) 吃 82% 行程 → 气垫 20f Easing.out(poly(5)) 走 18% | 切换帧速度骤降 = 气垫顶住的体感；82/18 比例比帧数更关键 |\n| C 氛围 | 全场包 CameraMotionBlur(shutterAngle 220, samples 9)；俯视期页面下方椭圆软影随落地收干 | 软影卖\"悬空高度\"；blur 卖速度，缺一维就假 |",
+   "key": "params",
+   "title": "参数表"
+  },
+  {
+   "body": "- demo 在灰阶/占位素材上调校通过——参数是调校起点非实战定稿，\n  首次实战须以真实素材回验\n- 两式都吃真实截图分层/高清纹理：A 需页面按构件切块截图（顶栏/侧栏/\n  卡各自独立成图，整页一张图炸不开）；C 终点是特写，素材先按\n  审美准则 Q2 的高分辨率栅格化技法处理\n- C 式易错：Remotion 无 Easing.quint，写 Easing.poly(5)（本批实渲踩坑）\n- A 式构件布局要绝对定位复刻原页面网格（demo 里 8 层复刻 FakeDashboard\n  A），流式布局做不了 per-构件 translateZ",
+   "key": "pitfalls",
+   "title": "已知坑"
+  },
+  {
+   "body": "demos/camera/space-camera-moves/\n（DroneDiveLanding.tsx / ExplodedView.tsx）",
+   "key": "reference",
+   "title": "参考实现"
+  }
+ ],
+ "slug": "space-camera-moves",
+ "source_commit": "5e71af35a2daee492dd3ea93e5e8903f32dcd13c",
+ "source_path": "references/shots/camera/space-camera-moves.md",
+ "source_repo": "Vincentwei1021/video-shotcraft",
+ "source_url": "https://github.com/Vincentwei1021/video-shotcraft",
+ "tags": []
+}

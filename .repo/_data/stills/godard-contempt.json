@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "让-吕克·戈达尔",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#1F5A8C",
+  "#F2F2F0",
+  "#B0241F",
+  "#D9A32B",
+  "#1F3A6E",
+  "#C4BCA8"
+ ],
+ "palette_written_named": [
+  [
+   "#1F5A8C",
+   "地中海蓝"
+  ],
+  [
+   "#F2F2F0",
+   "白墙"
+  ],
+  [
+   "#B0241F",
+   "正红"
+  ],
+  [
+   "#D9A32B",
+   "正黄"
+  ],
+  [
+   "#1F3A6E",
+   "正蓝"
+  ],
+  [
+   "#C4BCA8",
+   "石灰米"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "godard-contempt",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "蔑视",
+ "total_linked": 62
+}

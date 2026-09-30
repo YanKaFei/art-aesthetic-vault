@@ -1,0 +1,50 @@
+{
+ "category": "ui-entrance",
+ "duration": "~4.7s（呼吸 20f + 变形 24f + 内容淡入 12f）",
+ "energy": "中低",
+ "intent": "入场库全是\"从外面进来\"——飞入、砸落、翻面，主体都预先存在于画外；\n本卡是**就地长出来**：画面中心一个描边正圆先鼓一口气（scale\n1→1.12→1），随即轮廓连续变形为圆角矩形卡片，内容再淡入。原型\n停留加呼吸这一拍就是预备动作——迪士尼 anticipation 的图形学翻译：\n圆先\"吸气\"，观众就知道它要变，变形本身因此不需要任何解释。\n仅适用图形/图标/卡轮廓类主体——位图截图不能 morph。",
+ "license": "Apache-2.0",
+ "motion": "- **圆与圆角矩形写成同构 path**：M + 8 段 cubic（4 直边段三等分点\n  做退化 cubic + 4 圆角段 kappa 公式 k=4/3·tan(Δθ/4)），逐命令\n  数值 lerp 生成 d 字符串，帧驱动全确定性\n- 圆锚点取矩形锚点同方位角，保证 t=0 是标准正圆、中途无自交\n- 呼吸拍 scale 1→1.12→1（spec 1.06 看不清，加码后可感——可感性\n  判例同族）；呼吸与变形都用 Easing.inOut(cubic)，interpolate 全 clamp\n- 内容是 HTML 层叠在 SVG 上，变形完成后 12f 淡入，不做 path 内嵌\n- 时间轴 140f：0–10 静置｜10–30 呼吸｜30–54 变形｜56–68 内容\n  淡入｜68–140 真静止 72f",
+ "name": "morph-from-primitive",
+ "one_liner": "原型变形——正圆呼吸一拍（anticipation）后 SVG path 插值 24f 长成圆角卡轮廓，内容淡入",
+ "params": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| 呼吸幅度 | 1→1.12→1，20f inOut cubic | <1.1 读不出\"吸气\"；>1.2 像要爆炸不是要变形 |\n| 原型停留 | 静置 10f + 呼吸 20f，合计 30f 才起变形 | 停留 <15f 读不出\"预备\"，变形显得突兀 |\n| 变形时长 | 24f | 太快像切换、太慢像融化；24f 是\"生长\"的速度 |\n| 目标形态 | 520×300 圆角矩形卡（demo 值） | 圆角越大与圆同构性越好、中段越顺 |\n| 内容淡入 | 变形落定后 2f 起，12f 淡入 | 变形没完就进内容 = 内容跟着轮廓扭 |",
+ "path": "references/shots/ui-entrance/morph-from-primitive.md",
+ "pitfalls": "- demo 在灰阶/占位素材上调校通过——参数是调校起点非实战定稿，\n  首次实战须以真实素材回验\n- **变形中途别叠其他动画**——morph 本身就是全部信息，同时飞入/\n  变色/晃动会把\"长出来\"稀释成\"乱动\"\n- 位图截图不能 morph：本卡只对矢量轮廓成立，页面截图请回\n  入场库常规手法\n- path 插值两端命令数必须严格同构（同为 M+8C），命令数不齐\n  中途会闪跳；改目标形状时先对齐锚点数再调参\n- 变形中段呈\"桶形\"过渡是正常形态（QA 判例），不是穿帮；\n  出现自交/尖刺才是锚点方位角没对齐",
+ "purpose": "图形/图标/卡轮廓类主体的入场；logo→UI 容器的经典原语",
+ "reference": "demos/ui-entrance/morph-from-primitive/\n（MorphFromPrimitive.tsx）",
+ "sections": [
+  {
+   "body": "入场库全是\"从外面进来\"——飞入、砸落、翻面，主体都预先存在于画外；\n本卡是**就地长出来**：画面中心一个描边正圆先鼓一口气（scale\n1→1.12→1），随即轮廓连续变形为圆角矩形卡片，内容再淡入。原型\n停留加呼吸这一拍就是预备动作——迪士尼 anticipation 的图形学翻译：\n圆先\"吸气\"，观众就知道它要变，变形本身因此不需要任何解释。\n仅适用图形/图标/卡轮廓类主体——位图截图不能 morph。",
+   "key": "intent",
+   "title": "意图"
+  },
+  {
+   "body": "- **圆与圆角矩形写成同构 path**：M + 8 段 cubic（4 直边段三等分点\n  做退化 cubic + 4 圆角段 kappa 公式 k=4/3·tan(Δθ/4)），逐命令\n  数值 lerp 生成 d 字符串，帧驱动全确定性\n- 圆锚点取矩形锚点同方位角，保证 t=0 是标准正圆、中途无自交\n- 呼吸拍 scale 1→1.12→1（spec 1.06 看不清，加码后可感——可感性\n  判例同族）；呼吸与变形都用 Easing.inOut(cubic)，interpolate 全 clamp\n- 内容是 HTML 层叠在 SVG 上，变形完成后 12f 淡入，不做 path 内嵌\n- 时间轴 140f：0–10 静置｜10–30 呼吸｜30–54 变形｜56–68 内容\n  淡入｜68–140 真静止 72f",
+   "key": "motion",
+   "title": "动效核心"
+  },
+  {
+   "body": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| 呼吸幅度 | 1→1.12→1，20f inOut cubic | <1.1 读不出\"吸气\"；>1.2 像要爆炸不是要变形 |\n| 原型停留 | 静置 10f + 呼吸 20f，合计 30f 才起变形 | 停留 <15f 读不出\"预备\"，变形显得突兀 |\n| 变形时长 | 24f | 太快像切换、太慢像融化；24f 是\"生长\"的速度 |\n| 目标形态 | 520×300 圆角矩形卡（demo 值） | 圆角越大与圆同构性越好、中段越顺 |\n| 内容淡入 | 变形落定后 2f 起，12f 淡入 | 变形没完就进内容 = 内容跟着轮廓扭 |",
+   "key": "params",
+   "title": "参数表"
+  },
+  {
+   "body": "- demo 在灰阶/占位素材上调校通过——参数是调校起点非实战定稿，\n  首次实战须以真实素材回验\n- **变形中途别叠其他动画**——morph 本身就是全部信息，同时飞入/\n  变色/晃动会把\"长出来\"稀释成\"乱动\"\n- 位图截图不能 morph：本卡只对矢量轮廓成立，页面截图请回\n  入场库常规手法\n- path 插值两端命令数必须严格同构（同为 M+8C），命令数不齐\n  中途会闪跳；改目标形状时先对齐锚点数再调参\n- 变形中段呈\"桶形\"过渡是正常形态（QA 判例），不是穿帮；\n  出现自交/尖刺才是锚点方位角没对齐",
+   "key": "pitfalls",
+   "title": "已知坑"
+  },
+  {
+   "body": "demos/ui-entrance/morph-from-primitive/\n（MorphFromPrimitive.tsx）",
+   "key": "reference",
+   "title": "参考实现"
+  }
+ ],
+ "slug": "morph-from-primitive",
+ "source_commit": "5e71af35a2daee492dd3ea93e5e8903f32dcd13c",
+ "source_path": "references/shots/ui-entrance/morph-from-primitive.md",
+ "source_repo": "Vincentwei1021/video-shotcraft",
+ "source_url": "https://github.com/Vincentwei1021/video-shotcraft",
+ "tags": [
+  "opening"
+ ]
+}

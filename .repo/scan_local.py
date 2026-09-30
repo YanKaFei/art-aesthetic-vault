@@ -5,7 +5,8 @@ scan_local.py —— 把你**自己文件夹里的图**扫进库，按流派归�
 
 ## 它解决什么
 
-权威层的 141 张流派卡是从博物馆抓的 CC0 图（`fetch_art.py`）。
+权威层的艺术流派卡配的是从博物馆抓的 CC0 图（`fetch_art.py`）；
+第 7 大类「手绘艺术风格」配的是 handraw-style 的编号参考图（不是公共领域作品）。
 但你自己的参考图在你自己硬盘上，是另一回事：私人收集、可能没授权、
 数量不定、而且**你希望它们和流派卡挂在同一张图谱里**。
 
@@ -26,7 +27,7 @@ scan_local.py —— 把你**自己文件夹里的图**扫进库，按流派归�
 
 ## 三层结构
 
-    层 1 · 权威    10-movements/            141 张流派卡 + 99-attachments/images/<流派>/   随仓库发布
+    层 1 · 权威    10-movements/            全部流派卡 + 99-attachments/images/<流派>/   随仓库发布
     层 2 · 你的图库 15-my-library/          ← 本脚本产出，链回 [[流派卡]]         gitignore
                    99-attachments/images-local/<流派>/                               gitignore
     暂存            pinterest/          丢图区，不进图谱

@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "米开朗基罗·安东尼奥尼",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#8C8C86",
+  "#3E3E3A",
+  "#C4C0B4",
+  "#5E5E58",
+  "#E8E8E4",
+  "#6E6A60"
+ ],
+ "palette_written_named": [
+  [
+   "#8C8C86",
+   "海天中灰"
+  ],
+  [
+   "#3E3E3A",
+   "岩石深灰"
+  ],
+  [
+   "#C4C0B4",
+   "浅灰衣"
+  ],
+  [
+   "#5E5E58",
+   "石墙灰"
+  ],
+  [
+   "#E8E8E4",
+   "天光白"
+  ],
+  [
+   "#6E6A60",
+   "风蚀褐"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "antonioni-l-avventura",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "奇遇",
+ "total_linked": 65
+}

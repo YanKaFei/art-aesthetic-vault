@@ -66,26 +66,48 @@ def detect_slug():
 
 REPO_SLUG = detect_slug()
 
-def _n_movements():
-    """流派数量**从数据里取**，不写死。
+def _counts():
+    """四个轴的规模**从数据里取**，不写死。
 
-    这里原来写着 "141 art movements"，补到 147 张之后它就变成错的了 ——
-    和 README 统计数字、冒烟里的「141 张卡」是同一类坑：写死的数字，
+    这里原来只数流派，于是「421 art movements」这种说法在加进手绘、电影、
+    镜头三条轴之后立刻就过期了。和 README 的统计数字同一个道理：写死的数字，
     唯一的作用就是某天变成错的。
     """
+    out = {}
     try:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
         from movements import MOVEMENTS
-        return len(MOVEMENTS)
+        out["movements"] = len(MOVEMENTS)
     except Exception:
-        return None
+        pass
+    for key, mod, fn in (("hand-drawn styles", "handraw_name", "stats"),
+                         ("director/film styles", "fv_core", "films"),
+                         ("camera-move recipes", "shot_core", "shots")):
+        try:
+            m = __import__(mod)
+            v = getattr(m, fn)()
+            out[key] = v["total"] if isinstance(v, dict) else len(v)
+        except Exception:
+            pass
+    return out
 
 
-_N_MV = _n_movements()
-DESCRIPTION = ("%s art movements decomposed into 7 swappable AI prompt layers — "
-               "style, lighting, color, composition, medium, mood, camera. "
-               "CLI + MCP server. Obsidian vault with public-domain artworks."
-               % (_N_MV if _N_MV else "100+"))
+_C = _counts()
+
+
+def _bit(key, fallback):
+    n = _C.get(key)
+    return "%d %s" % (n, key) if n else fallback
+
+
+DESCRIPTION = (
+    "%s, %s, %s and %s - each decomposed into 7 swappable AI prompt layers "
+    "(style / lighting / color / composition / medium / mood / camera). "
+    "CLI + MCP + Agent Skill. Obsidian vault, public-domain artworks."
+    % (_bit("movements", "400+ art movements"),
+       _bit("hand-drawn styles", "270+ hand-drawn styles"),
+       _bit("director/film styles", "100 film styles"),
+       _bit("camera-move recipes", "150+ camera-move recipes")))
 
 # GitHub 限制：最多 20 个，小写字母/数字/连字符
 #
@@ -95,15 +117,21 @@ DESCRIPTION = ("%s art movements decomposed into 7 swappable AI prompt layers �
 # 是官方仓库自己也在用的配套标识，`agent-skills` / `skills` 说明本仓库
 # 提供的到底是什么。技能型仓库普遍也挂 dsh-plugin（ruvlo 挂 ai-skills、
 # distilly 挂 claude-skills/codex-skills），所以这不是蹭词。
+#
+# 后 15 个要覆盖**四条轴**，而不是只覆盖画派那一条：加进手绘、电影、运镜
+# 之后，原来那套「art / art-history / ai-art」已经名不副实 —— 一个找运镜
+# 配方的人不会去 art 标签下翻。20 个是硬上限，所以砍掉了几个同义或太泛的
+# （artificial-intelligence 与 ai-art 重复，design-tools / digital-art /
+# reference 太泛且不指向本库的任何一条轴）。
 TOPICS = [
     # —— DSH / DeepSeek 生态标识 ——
     "dsh-plugin", "deepseek-harness", "dsh", "agent-skills", "skills",
-    # —— 这个库本身是什么 ——
-    "art", "art-history", "aesthetics", "ai-art", "artificial-intelligence",
-    "design-tools", "digital-art", "prompt-engineering", "text-to-image",
-    "style-reference", "public-domain",
+    # —— 这个库本身是什么（四条轴） ——
+    "art", "art-history", "aesthetics", "film", "cinematography",
+    "illustration", "motion-design", "ai-art", "prompt-engineering",
+    "text-to-image", "style-reference",
     # —— 它跑在什么上面、给谁用 ——
-    "knowledge-base", "obsidian", "mcp", "reference",
+    "knowledge-base", "obsidian", "mcp", "public-domain",
 ]
 
 

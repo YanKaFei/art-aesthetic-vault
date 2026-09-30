@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "斯坦利·库布里克",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#F2F2F0",
+  "#B0241F",
+  "#121316",
+  "#8C9296",
+  "#2E4A6B",
+  "#D8D2C4"
+ ],
+ "palette_written_named": [
+  [
+   "#F2F2F0",
+   "纯白"
+  ],
+  [
+   "#B0241F",
+   "正红"
+  ],
+  [
+   "#121316",
+   "黑"
+  ],
+  [
+   "#8C9296",
+   "冷灰"
+  ],
+  [
+   "#2E4A6B",
+   "深蓝"
+  ],
+  [
+   "#D8D2C4",
+   "米白"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "kubrick-2001",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "2001 太空漫游",
+ "total_linked": 63
+}

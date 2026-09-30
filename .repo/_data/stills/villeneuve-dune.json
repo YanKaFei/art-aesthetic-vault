@@ -1,0 +1,4450 @@
+{
+ "aggregate": {
+  "framing": [
+   [
+    "未检出面部",
+    51
+   ],
+   [
+    "半身 / 近景",
+    9
+   ],
+   [
+    "特写（脸部占画面主体）",
+    5
+   ]
+  ],
+  "framing_note": "人脸检测是 Haar，只认正面；风格化人脸会漏检，「未检出面部」不等于没有脸",
+  "harmonies": [
+   [
+    "邻近色（有限调色板）",
+    28
+   ],
+   [
+    "单色调（一个色相贯穿）",
+    27
+   ],
+   [
+    "中等多色",
+    8
+   ],
+   [
+    "单色 / 中性（画面几乎无色相）",
+    1
+   ],
+   [
+    "多色相（丰富或杂乱）",
+    1
+   ]
+  ],
+  "keys": [
+   [
+    "低明调（暗）",
+    50
+   ],
+   [
+    "中间调",
+    13
+   ],
+   [
+    "高明调（亮）",
+    2
+   ]
+  ],
+  "lowlight": [
+   {
+    "file": "06.jpg",
+    "index": 6,
+    "luminance": 11.4,
+    "saturation": 0.304
+   },
+   {
+    "file": "19.jpg",
+    "index": 19,
+    "luminance": 8.6,
+    "saturation": 0.136
+   },
+   {
+    "file": "29.jpg",
+    "index": 29,
+    "luminance": 7.8,
+    "saturation": 0.456
+   },
+   {
+    "file": "41.jpg",
+    "index": 41,
+    "luminance": 9.8,
+    "saturation": 0.128
+   },
+   {
+    "file": "43.jpg",
+    "index": 43,
+    "luminance": 12.2,
+    "saturation": 0.392
+   },
+   {
+    "file": "49.jpg",
+    "index": 49,
+    "luminance": 11.2,
+    "saturation": 0.852
+   },
+   {
+    "file": "50.jpg",
+    "index": 50,
+    "luminance": 13.1,
+    "saturation": 0.763
+   }
+  ],
+  "lowlight_note": "以下 7 张近全黑（明度 < 15）。它们的主色接近纯黑，会**污染**饱和度均值与实测主色 —— 别把这些帧的色彩当成风格特征。",
+  "metrics": {
+   "contrast": {
+    "max": 89.9,
+    "mean": 34.44,
+    "min": 7.1,
+    "p10": 11.2,
+    "p50": 30.5,
+    "p90": 56.74,
+    "zh": "对比"
+   },
+   "edge_density": {
+    "max": 29.6,
+    "mean": 9.31,
+    "min": 2.7,
+    "p10": 3.34,
+    "p50": 7.2,
+    "p90": 18.86,
+    "zh": "边缘密度"
+   },
+   "entropy": {
+    "max": 7.55,
+    "mean": 6.2,
+    "min": 3.83,
+    "p10": 4.61,
+    "p50": 6.41,
+    "p90": 7.18,
+    "zh": "信息熵"
+   },
+   "highlight_clip_pct": {
+    "max": 13.67,
+    "mean": 0.23,
+    "min": 0.0,
+    "p10": 0.0,
+    "p50": 0.0,
+    "p90": 0.02,
+    "zh": "高光溢出"
+   },
+   "luminance": {
+    "max": 191.1,
+    "mean": 65.51,
+    "min": 7.8,
+    "p10": 14.26,
+    "p50": 55.7,
+    "p90": 141.28,
+    "zh": "明度"
+   },
+   "saturation": {
+    "max": 0.87,
+    "mean": 0.34,
+    "min": 0.06,
+    "p10": 0.13,
+    "p50": 0.29,
+    "p90": 0.64,
+    "zh": "饱和度"
+   },
+   "shadow_clip_pct": {
+    "max": 65.87,
+    "mean": 9.14,
+    "min": 0.0,
+    "p10": 0.0,
+    "p50": 0.72,
+    "p90": 36.0,
+    "zh": "暗部溢出"
+   },
+   "warm_score": {
+    "max": 146.6,
+    "mean": 13.04,
+    "min": -30.8,
+    "p10": -14.76,
+    "p50": 8.4,
+    "p90": 42.52,
+    "zh": "暖度"
+   }
+  },
+  "n": 65,
+  "orientations": [
+   [
+    "横构图",
+    65
+   ]
+  ],
+  "ratios": [
+   [
+    2.4,
+    65
+   ]
+  ],
+  "temperatures": [
+   [
+    "暖",
+    33
+   ],
+   [
+    "中性",
+    21
+   ],
+   [
+    "冷",
+    11
+   ]
+  ]
+ },
+ "director_zh": "丹尼斯·维伦纽瓦",
+ "local_files": 65,
+ "measured": 65,
+ "palette_diff": {
+  "distance": 17.2,
+  "pairs": [
+   {
+    "distance": 38.6,
+    "nearest_measured": "#DDDACC",
+    "written": "#C29A5B"
+   },
+   {
+    "distance": 29.7,
+    "nearest_measured": "#65625C",
+    "written": "#8A6236"
+   },
+   {
+    "distance": 9.1,
+    "nearest_measured": "#475C68",
+    "written": "#4A4E52"
+   },
+   {
+    "distance": 5.7,
+    "nearest_measured": "#080809",
+    "written": "#14161A"
+   },
+   {
+    "distance": 9.6,
+    "nearest_measured": "#475C68",
+    "written": "#3B5A75"
+   },
+   {
+    "distance": 10.3,
+    "nearest_measured": "#DDDACC",
+    "written": "#E2D3B4"
+   }
+  ],
+  "verdict": "基本一致（实测色都在手写色附近）",
+  "距离": 17.2
+ },
+ "palette_measured": [
+  [
+   "#080809",
+   1.5
+  ],
+  [
+   "#9BA5A0",
+   1.1
+  ],
+  [
+   "#272522",
+   1.1
+  ],
+  [
+   "#65625C",
+   0.9
+  ],
+  [
+   "#DDDACC",
+   0.9
+  ],
+  [
+   "#475C68",
+   0.8
+  ]
+ ],
+ "palette_written": [
+  "#C29A5B",
+  "#8A6236",
+  "#4A4E52",
+  "#14161A",
+  "#3B5A75",
+  "#E2D3B4"
+ ],
+ "palette_written_named": [
+  [
+   "#C29A5B",
+   "沙黄"
+  ],
+  [
+   "#8A6236",
+   "赭石"
+  ],
+  [
+   "#4A4E52",
+   "铁灰"
+  ],
+  [
+   "#14161A",
+   "沥青黑"
+  ],
+  [
+   "#3B5A75",
+   "冷蓝"
+  ],
+  [
+   "#E2D3B4",
+   "尘光米"
+  ]
+ ],
+ "representative": [
+  {
+   "file": "16.jpg",
+   "framing": "未检出面部",
+   "index": 16,
+   "key": "低明调（暗）",
+   "luminance": 62.6,
+   "ratio": 2.4,
+   "saturation": 0.076,
+   "temperature": "中性"
+  },
+  {
+   "file": "17.jpg",
+   "framing": "未检出面部",
+   "index": 17,
+   "key": "低明调（暗）",
+   "luminance": 46.5,
+   "ratio": 2.4,
+   "saturation": 0.304,
+   "temperature": "冷"
+  },
+  {
+   "file": "27.jpg",
+   "framing": "未检出面部",
+   "index": 27,
+   "key": "低明调（暗）",
+   "luminance": 43.0,
+   "ratio": 2.4,
+   "saturation": 0.511,
+   "temperature": "暖"
+  },
+  {
+   "file": "29.jpg",
+   "framing": "未检出面部",
+   "index": 29,
+   "key": "低明调（暗）",
+   "luminance": 7.8,
+   "ratio": 2.4,
+   "saturation": 0.456,
+   "temperature": "中性"
+  },
+  {
+   "file": "36.jpg",
+   "framing": "未检出面部",
+   "index": 36,
+   "key": "低明调（暗）",
+   "luminance": 54.3,
+   "ratio": 2.4,
+   "saturation": 0.38,
+   "temperature": "冷"
+  },
+  {
+   "file": "40.jpg",
+   "framing": "未检出面部",
+   "index": 40,
+   "key": "低明调（暗）",
+   "luminance": 51.0,
+   "ratio": 2.4,
+   "saturation": 0.668,
+   "temperature": "暖"
+  },
+  {
+   "file": "47.jpg",
+   "framing": "半身 / 近景",
+   "index": 47,
+   "key": "中间调",
+   "luminance": 111.2,
+   "ratio": 2.4,
+   "saturation": 0.135,
+   "temperature": "中性"
+  },
+  {
+   "file": "56.jpg",
+   "framing": "未检出面部",
+   "index": 56,
+   "key": "中间调",
+   "luminance": 107.0,
+   "ratio": 2.4,
+   "saturation": 0.867,
+   "temperature": "暖"
+  },
+  {
+   "file": "58.jpg",
+   "framing": "半身 / 近景",
+   "index": 58,
+   "key": "低明调（暗）",
+   "luminance": 30.9,
+   "ratio": 2.4,
+   "saturation": 0.326,
+   "temperature": "暖"
+  },
+  {
+   "file": "62.jpg",
+   "framing": "未检出面部",
+   "index": 62,
+   "key": "低明调（暗）",
+   "luminance": 81.2,
+   "ratio": 2.4,
+   "saturation": 0.193,
+   "temperature": "暖"
+  }
+ ],
+ "schema": 3,
+ "skipped": [],
+ "slug": "villeneuve-dune",
+ "stability": {
+  "all_mean": 65.5,
+  "delta_luminance": 5.2,
+  "delta_saturation": -0.066,
+  "first_quarter_mean": 70.7,
+  "k": 16,
+  "n": 65,
+  "note": "前 16 张与全量的对比。**稳定**说明「先下前 N 张」的抽样可用；**有偏**说明画廊开头与整体差异明显，此时全片均值不可外推。阈值：明度差 15 或饱和度差 0.08。",
+  "verdict": "稳定"
+ },
+ "stills": [
+  {
+   "_sig": "99767:1789968041",
+   "busyness": "适中",
+   "colored_ratio": 0.991,
+   "contrast": 31.6,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#4F3627",
+     45.0
+    ],
+    [
+     "#634732",
+     29.1
+    ],
+    [
+     "#34231C",
+     16.1
+    ],
+    [
+     "#8A7054",
+     4.1
+    ],
+    [
+     "#735D48",
+     3.4
+    ],
+    [
+     "#A78E6F",
+     2.3
+    ]
+   ],
+   "dynamic_range": 99.0,
+   "edge_density": 5.0,
+   "entropy": 6.53,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "01.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 1,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 71.8,
+   "luminance_median": 66.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.49,
+   "saliency_y": 0.46,
+   "saturation": 0.47,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 27.5,
+   "symmetry_hint": "纵向对称",
+   "temperature": "暖",
+   "warm_score": 41.3,
+   "width": 1920
+  },
+  {
+   "_sig": "85904:1789968042",
+   "busyness": "适中",
+   "colored_ratio": 1.0,
+   "contrast": 12.9,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#4C3425",
+     53.7
+    ],
+    [
+     "#64472E",
+     31.6
+    ],
+    [
+     "#39281E",
+     14.0
+    ],
+    [
+     "#875A32",
+     0.6
+    ],
+    [
+     "#846140",
+     0.1
+    ],
+    [
+     "#D2A163",
+     0.0
+    ]
+   ],
+   "dynamic_range": 41.0,
+   "edge_density": 3.5,
+   "entropy": 5.63,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "02.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 2,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 62.5,
+   "luminance_median": 61.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.47,
+   "saliency_y": 0.51,
+   "saturation": 0.515,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 6.0,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 42.8,
+   "width": 1920
+  },
+  {
+   "_sig": "154741:1789968043",
+   "busyness": "繁杂",
+   "colored_ratio": 0.609,
+   "contrast": 64.2,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#E1D7CB",
+     47.8
+    ],
+    [
+     "#D7C8B6",
+     19.4
+    ],
+    [
+     "#6A5C4C",
+     11.1
+    ],
+    [
+     "#524639",
+     8.5
+    ],
+    [
+     "#201D19",
+     7.0
+    ],
+    [
+     "#9D8B74",
+     6.2
+    ]
+   ],
+   "dynamic_range": 171.0,
+   "edge_density": 20.1,
+   "entropy": 7.07,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "03.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 3,
+   "key": "中间调",
+   "line_orientation": "以对角线为主",
+   "luminance": 154.2,
+   "luminance_median": 184.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.46,
+   "saliency_y": 0.61,
+   "saturation": 0.193,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 56.6,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 28.6,
+   "width": 1920
+  },
+  {
+   "_sig": "86957:1789968045",
+   "busyness": "适中",
+   "colored_ratio": 0.486,
+   "contrast": 25.2,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#1A1813",
+     84.8
+    ],
+    [
+     "#453727",
+     8.4
+    ],
+    [
+     "#524531",
+     2.8
+    ],
+    [
+     "#5C5A4E",
+     2.6
+    ],
+    [
+     "#A9A08D",
+     0.7
+    ],
+    [
+     "#998972",
+     0.7
+    ]
+   ],
+   "dynamic_range": 67.0,
+   "edge_density": 6.4,
+   "entropy": 6.09,
+   "face_count": 1,
+   "face_pct": 44.7,
+   "features_available": true,
+   "file": "04.jpg",
+   "framing": "半身 / 近景",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 4,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 33.2,
+   "luminance_median": 28.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.55,
+   "saliency_y": 0.61,
+   "saturation": 0.315,
+   "shadow_clip_pct": 1.09,
+   "symmetry_h": 18.2,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 10.5,
+   "width": 1920
+  },
+  {
+   "_sig": "89945:1789968046",
+   "busyness": "适中",
+   "colored_ratio": 0.507,
+   "contrast": 50.9,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#100C0A",
+     68.3
+    ],
+    [
+     "#654A36",
+     8.9
+    ],
+    [
+     "#4B3528",
+     8.2
+    ],
+    [
+     "#8F6E53",
+     7.0
+    ],
+    [
+     "#AB8B6F",
+     4.4
+    ],
+    [
+     "#785B44",
+     3.2
+    ]
+   ],
+   "dynamic_range": 150.0,
+   "edge_density": 4.5,
+   "entropy": 6.41,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "05.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 5,
+   "key": "低明调（暗）",
+   "line_orientation": "以横线为主",
+   "luminance": 45.8,
+   "luminance_median": 24.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.52,
+   "saliency_y": 0.44,
+   "saturation": 0.258,
+   "shadow_clip_pct": 22.09,
+   "symmetry_h": 47.4,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 21.2,
+   "width": 1920
+  },
+  {
+   "_sig": "67959:1789968047",
+   "busyness": "简洁",
+   "colored_ratio": 0.094,
+   "contrast": 12.2,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#0D0907",
+     98.6
+    ],
+    [
+     "#4F3217",
+     1.2
+    ],
+    [
+     "#6A451C",
+     0.1
+    ],
+    [
+     "#EEE4D7",
+     0.0
+    ],
+    [
+     "#B09E95",
+     0.0
+    ],
+    [
+     "#715D51",
+     0.0
+    ]
+   ],
+   "dynamic_range": 29.0,
+   "edge_density": 4.2,
+   "entropy": 4.62,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "06.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.01,
+   "index": 6,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 11.4,
+   "luminance_median": 7.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.5,
+   "saliency_y": 0.5,
+   "saturation": 0.304,
+   "shadow_clip_pct": 44.15,
+   "symmetry_h": 8.9,
+   "symmetry_hint": "横向对称",
+   "temperature": "中性",
+   "warm_score": 6.0,
+   "width": 1920
+  },
+  {
+   "_sig": "137691:1789968048",
+   "busyness": "繁杂",
+   "colored_ratio": 0.4,
+   "contrast": 73.0,
+   "contrast_level": "高对比",
+   "dominant": [
+    [
+     "#1D1A16",
+     61.1
+    ],
+    [
+     "#DFD7D3",
+     12.9
+    ],
+    [
+     "#686052",
+     10.0
+    ],
+    [
+     "#ADA294",
+     7.6
+    ],
+    [
+     "#524738",
+     4.6
+    ],
+    [
+     "#998974",
+     3.9
+    ]
+   ],
+   "dynamic_range": 211.0,
+   "edge_density": 29.6,
+   "entropy": 7.54,
+   "face_count": 2,
+   "face_pct": 47.4,
+   "features_available": true,
+   "file": "07.jpg",
+   "framing": "特写（脸部占画面主体）",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 7,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 87.6,
+   "luminance_median": 58.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.46,
+   "saliency_y": 0.43,
+   "saturation": 0.199,
+   "shadow_clip_pct": 1.68,
+   "symmetry_h": 59.2,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 14.6,
+   "width": 1920
+  },
+  {
+   "_sig": "182098:1789968049",
+   "busyness": "繁杂",
+   "colored_ratio": 0.387,
+   "contrast": 58.9,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#1B1815",
+     72.7
+    ],
+    [
+     "#675F55",
+     7.7
+    ],
+    [
+     "#A6A097",
+     6.4
+    ],
+    [
+     "#45382A",
+     4.8
+    ],
+    [
+     "#554836",
+     4.4
+    ],
+    [
+     "#E1DAD4",
+     3.9
+    ]
+   ],
+   "dynamic_range": 186.0,
+   "edge_density": 23.7,
+   "entropy": 7.19,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "08.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.02,
+   "index": 8,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 60.6,
+   "luminance_median": 38.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.51,
+   "saliency_y": 0.51,
+   "saturation": 0.201,
+   "shadow_clip_pct": 3.1,
+   "symmetry_h": 54.6,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 11.9,
+   "width": 1920
+  },
+  {
+   "_sig": "148119:1789975529",
+   "busyness": "繁杂",
+   "colored_ratio": 0.219,
+   "contrast": 41.3,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#A0A6A6",
+     51.7
+    ],
+    [
+     "#5A6B6D",
+     20.1
+    ],
+    [
+     "#74888B",
+     13.0
+    ],
+    [
+     "#CACAC9",
+     10.2
+    ],
+    [
+     "#080909",
+     3.0
+    ],
+    [
+     "#667C82",
+     2.0
+    ]
+   ],
+   "dynamic_range": 115.0,
+   "edge_density": 14.4,
+   "entropy": 7.08,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "09.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 9,
+   "key": "中间调",
+   "line_orientation": "以竖线为主",
+   "luminance": 146.4,
+   "luminance_median": 151.0,
+   "mean_hue_name": "青",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.43,
+   "saliency_y": 0.48,
+   "saturation": 0.085,
+   "shadow_clip_pct": 2.03,
+   "symmetry_h": 31.0,
+   "symmetry_hint": "非对称",
+   "temperature": "冷",
+   "warm_score": -10.0,
+   "width": 1920
+  },
+  {
+   "_sig": "173216:1789975531",
+   "busyness": "繁杂",
+   "colored_ratio": 0.922,
+   "contrast": 37.9,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#162227",
+     34.6
+    ],
+    [
+     "#4F686F",
+     28.8
+    ],
+    [
+     "#324F57",
+     20.3
+    ],
+    [
+     "#698C9B",
+     6.6
+    ],
+    [
+     "#567787",
+     6.2
+    ],
+    [
+     "#243B43",
+     3.6
+    ]
+   ],
+   "dynamic_range": 116.0,
+   "edge_density": 18.5,
+   "entropy": 7.15,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "10.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 10,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 74.8,
+   "luminance_median": 77.0,
+   "mean_hue_name": "青",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.53,
+   "saliency_y": 0.51,
+   "saturation": 0.369,
+   "shadow_clip_pct": 0.45,
+   "symmetry_h": 34.0,
+   "symmetry_hint": "非对称",
+   "temperature": "冷",
+   "warm_score": -30.8,
+   "width": 1920
+  },
+  {
+   "_sig": "140224:1789975534",
+   "busyness": "适中",
+   "colored_ratio": 0.846,
+   "contrast": 34.6,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#132329",
+     58.8
+    ],
+    [
+     "#314B52",
+     17.9
+    ],
+    [
+     "#4E6066",
+     11.0
+    ],
+    [
+     "#233B43",
+     5.9
+    ],
+    [
+     "#587788",
+     3.3
+    ],
+    [
+     "#6C8A9B",
+     3.1
+    ]
+   ],
+   "dynamic_range": 113.0,
+   "edge_density": 19.8,
+   "entropy": 6.87,
+   "face_count": 3,
+   "face_pct": 23.4,
+   "features_available": true,
+   "file": "11.jpg",
+   "framing": "半身 / 近景",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 11,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 55.7,
+   "luminance_median": 48.0,
+   "mean_hue_name": "青",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.52,
+   "saliency_y": 0.51,
+   "saturation": 0.448,
+   "shadow_clip_pct": 0.49,
+   "symmetry_h": 25.9,
+   "symmetry_hint": "非对称",
+   "temperature": "冷",
+   "warm_score": -25.9,
+   "width": 1920
+  },
+  {
+   "_sig": "196787:1789975537",
+   "busyness": "繁杂",
+   "colored_ratio": 0.177,
+   "contrast": 53.5,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#1F1D1D",
+     58.8
+    ],
+    [
+     "#5D5B59",
+     19.3
+    ],
+    [
+     "#A4A19D",
+     16.7
+    ],
+    [
+     "#443B36",
+     2.0
+    ],
+    [
+     "#48423C",
+     1.9
+    ],
+    [
+     "#857973",
+     1.4
+    ]
+   ],
+   "dynamic_range": 163.0,
+   "edge_density": 21.6,
+   "entropy": 7.33,
+   "face_count": 1,
+   "face_pct": 62.2,
+   "features_available": true,
+   "file": "12.jpg",
+   "framing": "特写（脸部占画面主体）",
+   "harmony": "中等多色",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 12,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 71.4,
+   "luminance_median": 53.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.48,
+   "saliency_y": 0.6,
+   "saturation": 0.121,
+   "shadow_clip_pct": 1.09,
+   "symmetry_h": 49.6,
+   "symmetry_hint": "非对称",
+   "temperature": "中性",
+   "warm_score": 4.0,
+   "width": 1920
+  },
+  {
+   "_sig": "128895:1789975539",
+   "busyness": "繁杂",
+   "colored_ratio": 0.596,
+   "contrast": 50.2,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#252B2B",
+     46.9
+    ],
+    [
+     "#8FA4B5",
+     21.9
+    ],
+    [
+     "#728CA1",
+     11.1
+    ],
+    [
+     "#485354",
+     7.9
+    ],
+    [
+     "#5C768B",
+     7.8
+    ],
+    [
+     "#3C413B",
+     4.2
+    ]
+   ],
+   "dynamic_range": 141.0,
+   "edge_density": 8.8,
+   "entropy": 7.09,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "13.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 13,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 88.5,
+   "luminance_median": 67.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.47,
+   "saliency_y": 0.59,
+   "saturation": 0.223,
+   "shadow_clip_pct": 0.25,
+   "symmetry_h": 50.4,
+   "symmetry_hint": "非对称",
+   "temperature": "冷",
+   "warm_score": -21.1,
+   "width": 1920
+  },
+  {
+   "_sig": "174514:1789975542",
+   "busyness": "繁杂",
+   "colored_ratio": 0.394,
+   "contrast": 65.8,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#1E1916",
+     71.1
+    ],
+    [
+     "#DDDBD8",
+     8.6
+    ],
+    [
+     "#A5A09D",
+     7.7
+    ],
+    [
+     "#655D58",
+     7.2
+    ],
+    [
+     "#46362D",
+     3.8
+    ],
+    [
+     "#50443A",
+     1.7
+    ]
+   ],
+   "dynamic_range": 208.0,
+   "edge_density": 24.4,
+   "entropy": 7.14,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "14.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.1,
+   "index": 14,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 65.1,
+   "luminance_median": 38.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.65,
+   "saliency_y": 0.49,
+   "saturation": 0.219,
+   "shadow_clip_pct": 1.24,
+   "symmetry_h": 40.1,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 9.5,
+   "width": 1920
+  },
+  {
+   "_sig": "105417:1789975544",
+   "busyness": "适中",
+   "colored_ratio": 0.636,
+   "contrast": 25.5,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#161B21",
+     72.0
+    ],
+    [
+     "#4D5661",
+     13.3
+    ],
+    [
+     "#3A444D",
+     7.4
+    ],
+    [
+     "#323B43",
+     6.9
+    ],
+    [
+     "#677484",
+     0.4
+    ],
+    [
+     "#8D9499",
+     0.1
+    ]
+   ],
+   "dynamic_range": 79.0,
+   "edge_density": 6.9,
+   "entropy": 6.4,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "15.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 15,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 39.7,
+   "luminance_median": 32.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.54,
+   "saliency_y": 0.57,
+   "saturation": 0.328,
+   "shadow_clip_pct": 0.49,
+   "symmetry_h": 24.8,
+   "symmetry_hint": "纵向对称",
+   "temperature": "冷",
+   "warm_score": -13.5,
+   "width": 1920
+  },
+  {
+   "_sig": "69424:1789975547",
+   "busyness": "适中",
+   "colored_ratio": 0.011,
+   "contrast": 37.4,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#202020",
+     55.5
+    ],
+    [
+     "#5B5D62",
+     34.5
+    ],
+    [
+     "#787B82",
+     5.2
+    ],
+    [
+     "#7E8187",
+     2.0
+    ],
+    [
+     "#808288",
+     1.8
+    ],
+    [
+     "#3D4144",
+     1.0
+    ]
+   ],
+   "dynamic_range": 112.0,
+   "edge_density": 2.9,
+   "entropy": 6.87,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "16.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 16,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 62.6,
+   "luminance_median": 55.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.47,
+   "saliency_y": 0.53,
+   "saturation": 0.076,
+   "shadow_clip_pct": 0.01,
+   "symmetry_h": 11.7,
+   "symmetry_hint": "横向对称",
+   "temperature": "中性",
+   "warm_score": -3.8,
+   "width": 1920
+  },
+  {
+   "_sig": "83799:1789975549",
+   "busyness": "适中",
+   "colored_ratio": 0.309,
+   "contrast": 52.3,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#111619",
+     79.8
+    ],
+    [
+     "#95A0A6",
+     9.9
+    ],
+    [
+     "#525D65",
+     5.5
+    ],
+    [
+     "#3A434A",
+     1.8
+    ],
+    [
+     "#DBDFE4",
+     1.5
+    ],
+    [
+     "#79858D",
+     1.5
+    ]
+   ],
+   "dynamic_range": 155.0,
+   "edge_density": 3.4,
+   "entropy": 6.28,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "17.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.05,
+   "index": 17,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 46.5,
+   "luminance_median": 22.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.49,
+   "saliency_y": 0.62,
+   "saturation": 0.304,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 51.8,
+   "symmetry_hint": "非对称",
+   "temperature": "冷",
+   "warm_score": -10.3,
+   "width": 1920
+  },
+  {
+   "_sig": "81252:1789975552",
+   "busyness": "适中",
+   "colored_ratio": 0.362,
+   "contrast": 30.6,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#0F1114",
+     81.6
+    ],
+    [
+     "#4E575F",
+     9.6
+    ],
+    [
+     "#3A4349",
+     5.0
+    ],
+    [
+     "#353C43",
+     2.7
+    ],
+    [
+     "#979EA6",
+     0.7
+    ],
+    [
+     "#6E7984",
+     0.4
+    ]
+   ],
+   "dynamic_range": 86.0,
+   "edge_density": 3.7,
+   "entropy": 6.12,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "18.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 18,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 29.5,
+   "luminance_median": 17.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.72,
+   "saliency_y": 0.7,
+   "saturation": 0.306,
+   "shadow_clip_pct": 16.79,
+   "symmetry_h": 23.3,
+   "symmetry_hint": "非对称",
+   "temperature": "中性",
+   "warm_score": -7.7,
+   "width": 1920
+  },
+  {
+   "_sig": "80270:1789975554",
+   "busyness": "简洁",
+   "colored_ratio": 0.021,
+   "contrast": 9.0,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#080809",
+     99.9
+    ],
+    [
+     "#413939",
+     0.1
+    ],
+    [
+     "#4A4546",
+     0.0
+    ],
+    [
+     "#433D41",
+     0.0
+    ],
+    [
+     "#44403D",
+     0.0
+    ],
+    [
+     "#3F3D44",
+     0.0
+    ]
+   ],
+   "dynamic_range": 27.0,
+   "edge_density": 5.8,
+   "entropy": 4.24,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "19.jpg",
+   "framing": "未检出面部",
+   "harmony": "中等多色",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 19,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 8.6,
+   "luminance_median": 5.0,
+   "mean_hue_name": "品红",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.44,
+   "saliency_y": 0.48,
+   "saturation": 0.136,
+   "shadow_clip_pct": 55.27,
+   "symmetry_h": 7.0,
+   "symmetry_hint": "横向对称",
+   "temperature": "中性",
+   "warm_score": -0.6,
+   "width": 1920
+  },
+  {
+   "_sig": "144094:1789975556",
+   "busyness": "繁杂",
+   "colored_ratio": 0.996,
+   "contrast": 52.3,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#D99E66",
+     43.7
+    ],
+    [
+     "#F5CBA5",
+     19.3
+    ],
+    [
+     "#E5B58E",
+     13.6
+    ],
+    [
+     "#A2704A",
+     10.0
+    ],
+    [
+     "#B38B64",
+     6.7
+    ],
+    [
+     "#975D34",
+     6.7
+    ]
+   ],
+   "dynamic_range": 173.0,
+   "edge_density": 10.5,
+   "entropy": 7.55,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "20.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 20,
+   "key": "中间调",
+   "line_orientation": "以竖线为主",
+   "luminance": 159.6,
+   "luminance_median": 169.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.54,
+   "saliency_y": 0.55,
+   "saturation": 0.455,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 43.5,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 85.4,
+   "width": 1920
+  },
+  {
+   "_sig": "90367:1789975558",
+   "busyness": "简洁",
+   "colored_ratio": 0.171,
+   "contrast": 30.4,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#0C0E11",
+     96.7
+    ],
+    [
+     "#D7DFE3",
+     1.3
+    ],
+    [
+     "#4C5C64",
+     0.6
+    ],
+    [
+     "#38474E",
+     0.5
+    ],
+    [
+     "#95A5AE",
+     0.5
+    ],
+    [
+     "#2E3B42",
+     0.4
+    ]
+   ],
+   "dynamic_range": 44.0,
+   "edge_density": 6.9,
+   "entropy": 5.31,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "21.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 21,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 19.6,
+   "luminance_median": 11.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.5,
+   "saliency_y": 0.56,
+   "saturation": 0.276,
+   "shadow_clip_pct": 19.13,
+   "symmetry_h": 26.7,
+   "symmetry_hint": "非对称",
+   "temperature": "中性",
+   "warm_score": -5.8,
+   "width": 1920
+  },
+  {
+   "_sig": "122099:1789975561",
+   "busyness": "繁杂",
+   "colored_ratio": 0.309,
+   "contrast": 48.1,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#292823",
+     38.4
+    ],
+    [
+     "#9097A0",
+     33.4
+    ],
+    [
+     "#5D6366",
+     19.3
+    ],
+    [
+     "#394B54",
+     3.6
+    ],
+    [
+     "#707A83",
+     2.9
+    ],
+    [
+     "#7A858E",
+     2.4
+    ]
+   ],
+   "dynamic_range": 136.0,
+   "edge_density": 9.4,
+   "entropy": 7.11,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "22.jpg",
+   "framing": "未检出面部",
+   "harmony": "中等多色",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 22,
+   "key": "中间调",
+   "line_orientation": "以竖线为主",
+   "luminance": 95.2,
+   "luminance_median": 97.0,
+   "mean_hue_name": "绿",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.46,
+   "saliency_y": 0.62,
+   "saturation": 0.144,
+   "shadow_clip_pct": 1.24,
+   "symmetry_h": 32.9,
+   "symmetry_hint": "非对称",
+   "temperature": "中性",
+   "warm_score": -6.5,
+   "width": 1920
+  },
+  {
+   "_sig": "110778:1789975563",
+   "busyness": "适中",
+   "colored_ratio": 0.477,
+   "contrast": 49.0,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#0E0D0C",
+     61.3
+    ],
+    [
+     "#8F6434",
+     9.5
+    ],
+    [
+     "#6A482A",
+     9.4
+    ],
+    [
+     "#523621",
+     8.8
+    ],
+    [
+     "#B38A53",
+     7.3
+    ],
+    [
+     "#9F7546",
+     3.8
+    ]
+   ],
+   "dynamic_range": 142.0,
+   "edge_density": 5.7,
+   "entropy": 6.42,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "23.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 23,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 49.6,
+   "luminance_median": 33.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.47,
+   "saliency_y": 0.28,
+   "saturation": 0.45,
+   "shadow_clip_pct": 29.3,
+   "symmetry_h": 38.0,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 31.7,
+   "width": 1920
+  },
+  {
+   "_sig": "117911:1789975565",
+   "busyness": "适中",
+   "colored_ratio": 0.256,
+   "contrast": 89.9,
+   "contrast_level": "高对比",
+   "dominant": [
+    [
+     "#131210",
+     66.0
+    ],
+    [
+     "#FAF9F4",
+     16.9
+    ],
+    [
+     "#695E51",
+     7.6
+    ],
+    [
+     "#ABA292",
+     3.9
+    ],
+    [
+     "#524739",
+     3.7
+    ],
+    [
+     "#D2C6B5",
+     2.0
+    ]
+   ],
+   "dynamic_range": 253.0,
+   "edge_density": 16.9,
+   "entropy": 6.77,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "24.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 13.67,
+   "index": 24,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 80.1,
+   "luminance_median": 33.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.49,
+   "saliency_y": 0.42,
+   "saturation": 0.156,
+   "shadow_clip_pct": 13.22,
+   "symmetry_h": 76.7,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 8.4,
+   "width": 1920
+  },
+  {
+   "_sig": "108243:1789975568",
+   "busyness": "适中",
+   "colored_ratio": 0.386,
+   "contrast": 39.2,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#DDDACC",
+     60.6
+    ],
+    [
+     "#B2A392",
+     13.4
+    ],
+    [
+     "#C7B7A7",
+     11.2
+    ],
+    [
+     "#6F5D52",
+     7.7
+    ],
+    [
+     "#877567",
+     3.9
+    ],
+    [
+     "#D2C4B3",
+     3.2
+    ]
+   ],
+   "dynamic_range": 121.0,
+   "edge_density": 12.0,
+   "entropy": 6.07,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "25.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 25,
+   "key": "高明调（亮）",
+   "line_orientation": "以对角线为主",
+   "luminance": 191.1,
+   "luminance_median": 214.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.52,
+   "saliency_y": 0.7,
+   "saturation": 0.125,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 37.6,
+   "symmetry_hint": "纵向对称",
+   "temperature": "暖",
+   "warm_score": 22.6,
+   "width": 1920
+  },
+  {
+   "_sig": "128362:1789975570",
+   "busyness": "适中",
+   "colored_ratio": 0.524,
+   "contrast": 50.7,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#62574F",
+     48.0
+    ],
+    [
+     "#CCCCC5",
+     21.8
+    ],
+    [
+     "#ADA495",
+     15.7
+    ],
+    [
+     "#D0C2B5",
+     6.0
+    ],
+    [
+     "#CABBAD",
+     5.8
+    ],
+    [
+     "#85776C",
+     2.7
+    ]
+   ],
+   "dynamic_range": 127.0,
+   "edge_density": 11.6,
+   "entropy": 6.46,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "26.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 26,
+   "key": "中间调",
+   "line_orientation": "以竖线为主",
+   "luminance": 140.5,
+   "luminance_median": 140.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.51,
+   "saliency_y": 0.52,
+   "saturation": 0.146,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 45.2,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 18.9,
+   "width": 1920
+  },
+  {
+   "_sig": "128729:1789975573",
+   "busyness": "适中",
+   "colored_ratio": 0.768,
+   "contrast": 23.6,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#231811",
+     60.8
+    ],
+    [
+     "#4A3724",
+     22.3
+    ],
+    [
+     "#61482F",
+     15.8
+    ],
+    [
+     "#735C43",
+     0.6
+    ],
+    [
+     "#855F37",
+     0.3
+    ],
+    [
+     "#8B6A47",
+     0.2
+    ]
+   ],
+   "dynamic_range": 75.0,
+   "edge_density": 12.4,
+   "entropy": 6.48,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "27.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 27,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 43.0,
+   "luminance_median": 42.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.38,
+   "saliency_y": 0.51,
+   "saturation": 0.511,
+   "shadow_clip_pct": 3.86,
+   "symmetry_h": 19.4,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 27.6,
+   "width": 1920
+  },
+  {
+   "_sig": "120775:1789975575",
+   "busyness": "适中",
+   "colored_ratio": 0.757,
+   "contrast": 36.2,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#241D18",
+     64.2
+    ],
+    [
+     "#695A4F",
+     13.7
+    ],
+    [
+     "#46382E",
+     9.7
+    ],
+    [
+     "#554639",
+     8.1
+    ],
+    [
+     "#887367",
+     2.9
+    ],
+    [
+     "#A7978F",
+     1.4
+    ]
+   ],
+   "dynamic_range": 112.0,
+   "edge_density": 13.4,
+   "entropy": 6.94,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "28.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 28,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 52.7,
+   "luminance_median": 45.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.54,
+   "saliency_y": 0.52,
+   "saturation": 0.33,
+   "shadow_clip_pct": 2.91,
+   "symmetry_h": 29.4,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 17.8,
+   "width": 1920
+  },
+  {
+   "_sig": "52825:1789975577",
+   "busyness": "简洁",
+   "colored_ratio": 0.073,
+   "contrast": 10.2,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#030406",
+     83.2
+    ],
+    [
+     "#141A21",
+     11.0
+    ],
+    [
+     "#0D1218",
+     4.9
+    ],
+    [
+     "#4F585E",
+     0.4
+    ],
+    [
+     "#2E3A43",
+     0.2
+    ],
+    [
+     "#3B4447",
+     0.2
+    ]
+   ],
+   "dynamic_range": 26.0,
+   "edge_density": 3.1,
+   "entropy": 3.83,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "29.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 29,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 7.8,
+   "luminance_median": 4.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.49,
+   "saliency_y": 0.64,
+   "saturation": 0.456,
+   "shadow_clip_pct": 65.87,
+   "symmetry_h": 10.3,
+   "symmetry_hint": "横向对称",
+   "temperature": "中性",
+   "warm_score": -4.8,
+   "width": 1920
+  },
+  {
+   "_sig": "88508:1789975579",
+   "busyness": "适中",
+   "colored_ratio": 0.595,
+   "contrast": 15.3,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#111921",
+     96.5
+    ],
+    [
+     "#313A43",
+     1.3
+    ],
+    [
+     "#3B4347",
+     1.2
+    ],
+    [
+     "#484F54",
+     1.0
+    ],
+    [
+     "#757B82",
+     0.0
+    ],
+    [
+     "#7D8189",
+     0.0
+    ]
+   ],
+   "dynamic_range": 48.0,
+   "edge_density": 5.7,
+   "entropy": 5.66,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "30.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 30,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 25.5,
+   "luminance_median": 28.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.49,
+   "saliency_y": 0.59,
+   "saturation": 0.482,
+   "shadow_clip_pct": 11.22,
+   "symmetry_h": 15.1,
+   "symmetry_hint": "横向对称",
+   "temperature": "冷",
+   "warm_score": -15.6,
+   "width": 1920
+  },
+  {
+   "_sig": "72325:1789975581",
+   "busyness": "简洁",
+   "colored_ratio": 0.14,
+   "contrast": 32.3,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#0B0C0F",
+     91.3
+    ],
+    [
+     "#5B585D",
+     4.9
+    ],
+    [
+     "#9C959E",
+     2.3
+    ],
+    [
+     "#343B41",
+     0.6
+    ],
+    [
+     "#433B3B",
+     0.5
+    ],
+    [
+     "#3A444A",
+     0.5
+    ]
+   ],
+   "dynamic_range": 95.0,
+   "edge_density": 5.2,
+   "entropy": 5.15,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "31.jpg",
+   "framing": "未检出面部",
+   "harmony": "中等多色",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 31,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 21.4,
+   "luminance_median": 8.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.52,
+   "saliency_y": 0.44,
+   "saturation": 0.387,
+   "shadow_clip_pct": 43.19,
+   "symmetry_h": 26.9,
+   "symmetry_hint": "非对称",
+   "temperature": "中性",
+   "warm_score": -4.2,
+   "width": 1920
+  },
+  {
+   "_sig": "106585:1789975584",
+   "busyness": "适中",
+   "colored_ratio": 0.998,
+   "contrast": 24.5,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#B6A48B",
+     40.4
+    ],
+    [
+     "#C6B59E",
+     27.0
+    ],
+    [
+     "#A38F75",
+     18.1
+    ],
+    [
+     "#8B745D",
+     6.3
+    ],
+    [
+     "#725E4C",
+     5.2
+    ],
+    [
+     "#CDC0AB",
+     2.9
+    ]
+   ],
+   "dynamic_range": 85.0,
+   "edge_density": 6.3,
+   "entropy": 6.36,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "32.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 32,
+   "key": "中间调",
+   "line_orientation": "以竖线为主",
+   "luminance": 161.8,
+   "luminance_median": 167.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.55,
+   "saliency_y": 0.5,
+   "saturation": 0.243,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 17.7,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 42.1,
+   "width": 1920
+  },
+  {
+   "_sig": "150474:1789975586",
+   "busyness": "繁杂",
+   "colored_ratio": 0.786,
+   "contrast": 61.2,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#201E1B",
+     39.6
+    ],
+    [
+     "#A08D74",
+     19.4
+    ],
+    [
+     "#B5A288",
+     14.0
+    ],
+    [
+     "#C8B39B",
+     10.7
+    ],
+    [
+     "#897760",
+     10.0
+    ],
+    [
+     "#716351",
+     6.3
+    ]
+   ],
+   "dynamic_range": 167.0,
+   "edge_density": 17.2,
+   "entropy": 7.19,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "33.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 33,
+   "key": "中间调",
+   "line_orientation": "以竖线为主",
+   "luminance": 104.3,
+   "luminance_median": 123.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.52,
+   "saliency_y": 0.48,
+   "saturation": 0.222,
+   "shadow_clip_pct": 0.08,
+   "symmetry_h": 45.5,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 28.6,
+   "width": 1920
+  },
+  {
+   "_sig": "140143:1789975607",
+   "busyness": "繁杂",
+   "colored_ratio": 0.969,
+   "contrast": 41.2,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#9E6213",
+     36.8
+    ],
+    [
+     "#552F0B",
+     22.6
+    ],
+    [
+     "#2C170D",
+     22.1
+    ],
+    [
+     "#D69322",
+     9.4
+    ],
+    [
+     "#76450B",
+     7.3
+    ],
+    [
+     "#C5791A",
+     1.8
+    ]
+   ],
+   "dynamic_range": 128.0,
+   "edge_density": 10.9,
+   "entropy": 7.27,
+   "face_count": 1,
+   "face_pct": 61.6,
+   "features_available": true,
+   "file": "34.jpg",
+   "framing": "特写（脸部占画面主体）",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 34,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 80.8,
+   "luminance_median": 80.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.47,
+   "saliency_y": 0.5,
+   "saturation": 0.832,
+   "shadow_clip_pct": 0.16,
+   "symmetry_h": 27.0,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 102.6,
+   "width": 1920
+  },
+  {
+   "_sig": "117912:1789975609",
+   "busyness": "适中",
+   "colored_ratio": 0.712,
+   "contrast": 17.7,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#1B110D",
+     50.8
+    ],
+    [
+     "#4A311D",
+     29.3
+    ],
+    [
+     "#372519",
+     19.1
+    ],
+    [
+     "#634223",
+     0.8
+    ],
+    [
+     "#3B4846",
+     0.0
+    ],
+    [
+     "#313B40",
+     0.0
+    ]
+   ],
+   "dynamic_range": 55.0,
+   "edge_density": 8.2,
+   "entropy": 6.03,
+   "face_count": 1,
+   "face_pct": 38.4,
+   "features_available": true,
+   "file": "35.jpg",
+   "framing": "半身 / 近景",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 35,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 34.9,
+   "luminance_median": 36.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.56,
+   "saliency_y": 0.45,
+   "saturation": 0.547,
+   "shadow_clip_pct": 3.78,
+   "symmetry_h": 11.4,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 26.4,
+   "width": 1920
+  },
+  {
+   "_sig": "178199:1789975611",
+   "busyness": "适中",
+   "colored_ratio": 0.834,
+   "contrast": 27.2,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#141E23",
+     46.2
+    ],
+    [
+     "#374C55",
+     29.6
+    ],
+    [
+     "#475C69",
+     18.1
+    ],
+    [
+     "#2B3B43",
+     4.5
+    ],
+    [
+     "#607685",
+     1.4
+    ],
+    [
+     "#6E848F",
+     0.2
+    ]
+   ],
+   "dynamic_range": 77.0,
+   "edge_density": 12.6,
+   "entropy": 6.48,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "36.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 36,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 54.3,
+   "luminance_median": 58.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.55,
+   "saliency_y": 0.63,
+   "saturation": 0.38,
+   "shadow_clip_pct": 0.02,
+   "symmetry_h": 26.6,
+   "symmetry_hint": "纵向对称",
+   "temperature": "冷",
+   "warm_score": -23.5,
+   "width": 1920
+  },
+  {
+   "_sig": "103898:1789975613",
+   "busyness": "适中",
+   "colored_ratio": 0.878,
+   "contrast": 27.7,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#475C68",
+     54.3
+    ],
+    [
+     "#11171C",
+     23.2
+    ],
+    [
+     "#394F59",
+     21.5
+    ],
+    [
+     "#657882",
+     0.4
+    ],
+    [
+     "#2C3B43",
+     0.3
+    ],
+    [
+     "#74878C",
+     0.2
+    ]
+   ],
+   "dynamic_range": 84.0,
+   "edge_density": 5.3,
+   "entropy": 5.93,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "37.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 37,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 69.7,
+   "luminance_median": 81.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.47,
+   "saliency_y": 0.5,
+   "saturation": 0.342,
+   "shadow_clip_pct": 0.03,
+   "symmetry_h": 25.8,
+   "symmetry_hint": "非对称",
+   "temperature": "冷",
+   "warm_score": -27.5,
+   "width": 1920
+  },
+  {
+   "_sig": "98928:1789975615",
+   "busyness": "适中",
+   "colored_ratio": 0.399,
+   "contrast": 24.6,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#170D08",
+     86.3
+    ],
+    [
+     "#4E2E17",
+     11.5
+    ],
+    [
+     "#6E4522",
+     1.1
+    ],
+    [
+     "#8E5B30",
+     0.6
+    ],
+    [
+     "#FBF8F1",
+     0.4
+    ],
+    [
+     "#A67449",
+     0.2
+    ]
+   ],
+   "dynamic_range": 56.0,
+   "edge_density": 5.7,
+   "entropy": 5.72,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "38.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.27,
+   "index": 38,
+   "key": "低明调（暗）",
+   "line_orientation": "以横线为主",
+   "luminance": 22.5,
+   "luminance_median": 15.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.56,
+   "saliency_y": 0.45,
+   "saturation": 0.648,
+   "shadow_clip_pct": 22.93,
+   "symmetry_h": 22.0,
+   "symmetry_hint": "纵向对称",
+   "temperature": "暖",
+   "warm_score": 20.3,
+   "width": 1920
+  },
+  {
+   "_sig": "110845:1789975617",
+   "busyness": "适中",
+   "colored_ratio": 0.429,
+   "contrast": 27.9,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#15100E",
+     77.4
+    ],
+    [
+     "#582C15",
+     17.0
+    ],
+    [
+     "#9D4D13",
+     3.7
+    ],
+    [
+     "#853C0D",
+     1.1
+    ],
+    [
+     "#CA7321",
+     0.5
+    ],
+    [
+     "#DE8C30",
+     0.3
+    ]
+   ],
+   "dynamic_range": 72.0,
+   "edge_density": 7.2,
+   "entropy": 5.92,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "39.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 39,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 29.6,
+   "luminance_median": 19.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.74,
+   "saliency_y": 0.64,
+   "saturation": 0.393,
+   "shadow_clip_pct": 0.72,
+   "symmetry_h": 15.7,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 25.3,
+   "width": 1920
+  },
+  {
+   "_sig": "90006:1789975620",
+   "busyness": "适中",
+   "colored_ratio": 0.893,
+   "contrast": 41.8,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#2A160F",
+     51.4
+    ],
+    [
+     "#522E16",
+     40.9
+    ],
+    [
+     "#975721",
+     2.2
+    ],
+    [
+     "#76421A",
+     2.0
+    ],
+    [
+     "#F6D1A6",
+     1.7
+    ],
+    [
+     "#DC9F5F",
+     1.6
+    ]
+   ],
+   "dynamic_range": 136.0,
+   "edge_density": 8.6,
+   "entropy": 6.5,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "40.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.03,
+   "index": 40,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 51.0,
+   "luminance_median": 43.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.53,
+   "saliency_y": 0.49,
+   "saturation": 0.668,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 30.9,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 47.0,
+   "width": 1920
+  },
+  {
+   "_sig": "66572:1789975622",
+   "busyness": "简洁",
+   "colored_ratio": 0.0,
+   "contrast": 7.1,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#050605",
+     71.1
+    ],
+    [
+     "#141513",
+     17.6
+    ],
+    [
+     "#11110D",
+     3.9
+    ],
+    [
+     "#0E1110",
+     3.7
+    ],
+    [
+     "#0D100D",
+     3.2
+    ],
+    [
+     "#1C1E1C",
+     0.5
+    ]
+   ],
+   "dynamic_range": 21.0,
+   "edge_density": 3.0,
+   "entropy": 4.3,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "41.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色 / 中性（画面几乎无色相）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 41,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 9.8,
+   "luminance_median": 8.0,
+   "mean_hue_name": "—",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.5,
+   "saliency_y": 0.51,
+   "saturation": 0.128,
+   "shadow_clip_pct": 42.81,
+   "symmetry_h": 6.4,
+   "symmetry_hint": "横向对称",
+   "temperature": "中性",
+   "warm_score": 0.3,
+   "width": 1920
+  },
+  {
+   "_sig": "71522:1789975624",
+   "busyness": "简洁",
+   "colored_ratio": 0.324,
+   "contrast": 12.9,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#0A211D",
+     40.4
+    ],
+    [
+     "#010504",
+     40.2
+    ],
+    [
+     "#01150B",
+     16.6
+    ],
+    [
+     "#273943",
+     2.1
+    ],
+    [
+     "#04472D",
+     0.7
+    ],
+    [
+     "#2A4049",
+     0.0
+    ]
+   ],
+   "dynamic_range": 40.0,
+   "edge_density": 3.3,
+   "entropy": 5.18,
+   "face_count": 1,
+   "face_pct": 35.4,
+   "features_available": true,
+   "file": "42.jpg",
+   "framing": "半身 / 近景",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 42,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 16.2,
+   "luminance_median": 14.0,
+   "mean_hue_name": "青",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.43,
+   "saliency_y": 0.49,
+   "saturation": 0.756,
+   "shadow_clip_pct": 29.03,
+   "symmetry_h": 9.9,
+   "symmetry_hint": "横向对称",
+   "temperature": "冷",
+   "warm_score": -11.5,
+   "width": 1920
+  },
+  {
+   "_sig": "64709:1789975626",
+   "busyness": "简洁",
+   "colored_ratio": 0.118,
+   "contrast": 10.7,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#050607",
+     67.0
+    ],
+    [
+     "#1F1A1D",
+     24.1
+    ],
+    [
+     "#16090B",
+     8.4
+    ],
+    [
+     "#60051A",
+     0.3
+    ],
+    [
+     "#A6175B",
+     0.2
+    ],
+    [
+     "#8A0433",
+     0.1
+    ]
+   ],
+   "dynamic_range": 31.0,
+   "edge_density": 3.1,
+   "entropy": 4.47,
+   "face_count": 1,
+   "face_pct": 32.1,
+   "features_available": true,
+   "file": "43.jpg",
+   "framing": "半身 / 近景",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 43,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 12.2,
+   "luminance_median": 8.0,
+   "mean_hue_name": "红",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.5,
+   "saliency_y": 0.52,
+   "saturation": 0.392,
+   "shadow_clip_pct": 34.38,
+   "symmetry_h": 9.4,
+   "symmetry_hint": "横向对称",
+   "temperature": "中性",
+   "warm_score": 0.6,
+   "width": 1920
+  },
+  {
+   "_sig": "81682:1789975628",
+   "busyness": "适中",
+   "colored_ratio": 0.351,
+   "contrast": 28.7,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#181D1D",
+     79.2
+    ],
+    [
+     "#5C645B",
+     15.8
+    ],
+    [
+     "#374745",
+     3.0
+    ],
+    [
+     "#49453A",
+     0.9
+    ],
+    [
+     "#38413C",
+     0.7
+    ],
+    [
+     "#47382F",
+     0.4
+    ]
+   ],
+   "dynamic_range": 92.0,
+   "edge_density": 5.3,
+   "entropy": 6.14,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "44.jpg",
+   "framing": "未检出面部",
+   "harmony": "中等多色",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 44,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 40.9,
+   "luminance_median": 32.0,
+   "mean_hue_name": "青",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.61,
+   "saliency_y": 0.38,
+   "saturation": 0.235,
+   "shadow_clip_pct": 0.48,
+   "symmetry_h": 23.2,
+   "symmetry_hint": "纵向对称",
+   "temperature": "中性",
+   "warm_score": -4.5,
+   "width": 1920
+  },
+  {
+   "_sig": "93107:1789975630",
+   "busyness": "简洁",
+   "colored_ratio": 0.268,
+   "contrast": 16.8,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#060403",
+     56.6
+    ],
+    [
+     "#150A07",
+     13.8
+    ],
+    [
+     "#2C1A11",
+     13.2
+    ],
+    [
+     "#4E2D17",
+     9.6
+    ],
+    [
+     "#25130C",
+     5.9
+    ],
+    [
+     "#6E431E",
+     0.8
+    ]
+   ],
+   "dynamic_range": 50.0,
+   "edge_density": 3.4,
+   "entropy": 5.05,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "45.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 45,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 16.0,
+   "luminance_median": 8.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.62,
+   "saliency_y": 0.48,
+   "saturation": 0.544,
+   "shadow_clip_pct": 37.08,
+   "symmetry_h": 11.1,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 14.6,
+   "width": 1920
+  },
+  {
+   "_sig": "77758:1789975633",
+   "busyness": "繁杂",
+   "colored_ratio": 0.073,
+   "contrast": 51.1,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#D8DFDC",
+     57.1
+    ],
+    [
+     "#A3AEB0",
+     21.3
+    ],
+    [
+     "#BAC3C4",
+     9.3
+    ],
+    [
+     "#595252",
+     9.1
+    ],
+    [
+     "#2D2B2C",
+     2.3
+    ],
+    [
+     "#8A7467",
+     0.9
+    ]
+   ],
+   "dynamic_range": 173.0,
+   "edge_density": 8.8,
+   "entropy": 7.2,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "46.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.6,
+   "index": 46,
+   "key": "高明调（亮）",
+   "line_orientation": "以对角线为主",
+   "luminance": 186.1,
+   "luminance_median": 200.0,
+   "mean_hue_name": "红",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.49,
+   "saliency_y": 0.68,
+   "saturation": 0.064,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 41.8,
+   "symmetry_hint": "非对称",
+   "temperature": "中性",
+   "warm_score": -4.1,
+   "width": 1920
+  },
+  {
+   "_sig": "119956:1789975635",
+   "busyness": "适中",
+   "colored_ratio": 0.309,
+   "contrast": 29.9,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#65625C",
+     60.7
+    ],
+    [
+     "#919899",
+     16.5
+    ],
+    [
+     "#788389",
+     6.9
+    ],
+    [
+     "#85796D",
+     6.0
+    ],
+    [
+     "#727C84",
+     5.0
+    ],
+    [
+     "#968975",
+     5.0
+    ]
+   ],
+   "dynamic_range": 100.0,
+   "edge_density": 9.3,
+   "entropy": 6.86,
+   "face_count": 1,
+   "face_pct": 33.0,
+   "features_available": true,
+   "file": "47.jpg",
+   "framing": "半身 / 近景",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 47,
+   "key": "中间调",
+   "line_orientation": "以竖线为主",
+   "luminance": 111.2,
+   "luminance_median": 110.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.3,
+   "saliency_y": 0.59,
+   "saturation": 0.135,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 21.9,
+   "symmetry_hint": "非对称",
+   "temperature": "中性",
+   "warm_score": 6.4,
+   "width": 1920
+  },
+  {
+   "_sig": "147894:1789975638",
+   "busyness": "适中",
+   "colored_ratio": 0.742,
+   "contrast": 49.1,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#1C2425",
+     71.9
+    ],
+    [
+     "#8CB6C6",
+     7.7
+    ],
+    [
+     "#73A7B9",
+     6.3
+    ],
+    [
+     "#4E5C5C",
+     6.3
+    ],
+    [
+     "#36484B",
+     6.0
+    ],
+    [
+     "#7AADC1",
+     1.8
+    ]
+   ],
+   "dynamic_range": 158.0,
+   "edge_density": 19.1,
+   "entropy": 6.75,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "48.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 48,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 62.0,
+   "luminance_median": 42.0,
+   "mean_hue_name": "青",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.52,
+   "saliency_y": 0.54,
+   "saturation": 0.282,
+   "shadow_clip_pct": 0.83,
+   "symmetry_h": 34.6,
+   "symmetry_hint": "非对称",
+   "temperature": "冷",
+   "warm_score": -20.0,
+   "width": 1920
+  },
+  {
+   "_sig": "79816:1789975641",
+   "busyness": "简洁",
+   "colored_ratio": 0.381,
+   "contrast": 11.2,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#040001",
+     48.5
+    ],
+    [
+     "#170204",
+     14.2
+    ],
+    [
+     "#270609",
+     13.3
+    ],
+    [
+     "#500B0E",
+     12.7
+    ],
+    [
+     "#36090D",
+     11.3
+    ],
+    [
+     "#83130F",
+     0.1
+    ]
+   ],
+   "dynamic_range": 32.0,
+   "edge_density": 5.3,
+   "entropy": 4.61,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "49.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 49,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 11.2,
+   "luminance_median": 6.0,
+   "mean_hue_name": "红",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.47,
+   "saliency_y": 0.46,
+   "saturation": 0.852,
+   "shadow_clip_pct": 48.62,
+   "symmetry_h": 9.5,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 21.3,
+   "width": 1920
+  },
+  {
+   "_sig": "106031:1789975643",
+   "busyness": "简洁",
+   "colored_ratio": 0.428,
+   "contrast": 7.1,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#170506",
+     30.2
+    ],
+    [
+     "#080302",
+     29.1
+    ],
+    [
+     "#27080A",
+     21.6
+    ],
+    [
+     "#35080B",
+     11.8
+    ],
+    [
+     "#4A0409",
+     6.8
+    ],
+    [
+     "#330910",
+     0.4
+    ]
+   ],
+   "dynamic_range": 22.0,
+   "edge_density": 6.7,
+   "entropy": 4.6,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "50.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 50,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 13.1,
+   "luminance_median": 13.0,
+   "mean_hue_name": "红",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.44,
+   "saliency_y": 0.41,
+   "saturation": 0.763,
+   "shadow_clip_pct": 21.27,
+   "symmetry_h": 5.0,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 22.7,
+   "width": 1920
+  },
+  {
+   "_sig": "101802:1789975645",
+   "busyness": "简洁",
+   "colored_ratio": 0.906,
+   "contrast": 12.9,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#494239",
+     33.0
+    ],
+    [
+     "#332C26",
+     30.3
+    ],
+    [
+     "#433B32",
+     20.0
+    ],
+    [
+     "#554C41",
+     8.5
+    ],
+    [
+     "#52493D",
+     8.1
+    ],
+    [
+     "#3E4037",
+     0.1
+    ]
+   ],
+   "dynamic_range": 45.0,
+   "edge_density": 4.8,
+   "entropy": 5.48,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "51.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 51,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 61.2,
+   "luminance_median": 65.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.46,
+   "saliency_y": 0.55,
+   "saturation": 0.235,
+   "shadow_clip_pct": 0.06,
+   "symmetry_h": 10.8,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 15.9,
+   "width": 1920
+  },
+  {
+   "_sig": "115451:1789975647",
+   "busyness": "适中",
+   "colored_ratio": 0.509,
+   "contrast": 29.2,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#282A23",
+     52.5
+    ],
+    [
+     "#555D58",
+     26.1
+    ],
+    [
+     "#464B36",
+     10.4
+    ],
+    [
+     "#384630",
+     7.4
+    ],
+    [
+     "#3C4743",
+     1.9
+    ],
+    [
+     "#909B9A",
+     1.7
+    ]
+   ],
+   "dynamic_range": 95.0,
+   "edge_density": 10.1,
+   "entropy": 6.79,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "52.jpg",
+   "framing": "未检出面部",
+   "harmony": "多色相（丰富或杂乱）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 52,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 64.1,
+   "luminance_median": 61.0,
+   "mean_hue_name": "黄绿",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.54,
+   "saliency_y": 0.36,
+   "saturation": 0.209,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 20.2,
+   "symmetry_hint": "纵向对称",
+   "temperature": "中性",
+   "warm_score": 3.9,
+   "width": 1920
+  },
+  {
+   "_sig": "74642:1789975649",
+   "busyness": "适中",
+   "colored_ratio": 0.088,
+   "contrast": 30.1,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#161916",
+     93.5
+    ],
+    [
+     "#58594F",
+     2.6
+    ],
+    [
+     "#44453B",
+     1.5
+    ],
+    [
+     "#E3DFD8",
+     1.0
+    ],
+    [
+     "#3D4139",
+     0.7
+    ],
+    [
+     "#A2A095",
+     0.6
+    ]
+   ],
+   "dynamic_range": 62.0,
+   "edge_density": 4.9,
+   "entropy": 5.95,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "53.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 53,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 30.2,
+   "luminance_median": 22.0,
+   "mean_hue_name": "黄",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.54,
+   "saliency_y": 0.45,
+   "saturation": 0.202,
+   "shadow_clip_pct": 0.97,
+   "symmetry_h": 27.2,
+   "symmetry_hint": "非对称",
+   "temperature": "中性",
+   "warm_score": 0.6,
+   "width": 1920
+  },
+  {
+   "_sig": "128490:1789975651",
+   "busyness": "繁杂",
+   "colored_ratio": 0.883,
+   "contrast": 42.6,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#20150F",
+     26.7
+    ],
+    [
+     "#956F2F",
+     24.0
+    ],
+    [
+     "#6A4A22",
+     21.4
+    ],
+    [
+     "#51341B",
+     12.6
+    ],
+    [
+     "#AD8E4F",
+     8.5
+    ],
+    [
+     "#A4823B",
+     6.7
+    ]
+   ],
+   "dynamic_range": 131.0,
+   "edge_density": 8.0,
+   "entropy": 7.17,
+   "face_count": 1,
+   "face_pct": 49.2,
+   "features_available": true,
+   "file": "54.jpg",
+   "framing": "特写（脸部占画面主体）",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 54,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 80.4,
+   "luminance_median": 79.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.5,
+   "saliency_y": 0.58,
+   "saturation": 0.622,
+   "shadow_clip_pct": 0.94,
+   "symmetry_h": 23.3,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 66.9,
+   "width": 1920
+  },
+  {
+   "_sig": "145961:1789975654",
+   "busyness": "适中",
+   "colored_ratio": 1.0,
+   "contrast": 25.1,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#A08D73",
+     38.5
+    ],
+    [
+     "#B5A48A",
+     26.9
+    ],
+    [
+     "#89765F",
+     18.9
+    ],
+    [
+     "#73614D",
+     7.9
+    ],
+    [
+     "#C3B49D",
+     4.3
+    ],
+    [
+     "#5B4B3A",
+     3.5
+    ]
+   ],
+   "dynamic_range": 86.0,
+   "edge_density": 11.2,
+   "entropy": 6.59,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "55.jpg",
+   "framing": "未检出面部",
+   "harmony": "单色调（一个色相贯穿）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 55,
+   "key": "中间调",
+   "line_orientation": "以竖线为主",
+   "luminance": 141.8,
+   "luminance_median": 145.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.48,
+   "saliency_y": 0.54,
+   "saturation": 0.278,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 17.9,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 42.8,
+   "width": 1920
+  },
+  {
+   "_sig": "98616:1789975656",
+   "busyness": "适中",
+   "colored_ratio": 1.0,
+   "contrast": 42.7,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#AC500F",
+     31.7
+    ],
+    [
+     "#9C3506",
+     21.3
+    ],
+    [
+     "#62330F",
+     16.5
+    ],
+    [
+     "#C86213",
+     13.5
+    ],
+    [
+     "#DF9E31",
+     9.7
+    ],
+    [
+     "#F9D25E",
+     7.3
+    ]
+   ],
+   "dynamic_range": 147.0,
+   "edge_density": 5.0,
+   "entropy": 6.99,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "56.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 56,
+   "key": "中间调",
+   "line_orientation": "以竖线为主",
+   "luminance": 107.0,
+   "luminance_median": 97.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.39,
+   "saliency_y": 0.41,
+   "saturation": 0.867,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 22.6,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 146.6,
+   "width": 1920
+  },
+  {
+   "_sig": "90677:1789975658",
+   "busyness": "适中",
+   "colored_ratio": 0.313,
+   "contrast": 24.9,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#16140E",
+     91.0
+    ],
+    [
+     "#626051",
+     5.1
+    ],
+    [
+     "#4A4639",
+     2.0
+    ],
+    [
+     "#8A8775",
+     0.9
+    ],
+    [
+     "#433A2E",
+     0.6
+    ],
+    [
+     "#9B9886",
+     0.3
+    ]
+   ],
+   "dynamic_range": 80.0,
+   "edge_density": 5.6,
+   "entropy": 5.76,
+   "face_count": 1,
+   "face_pct": 39.3,
+   "features_available": true,
+   "file": "57.jpg",
+   "framing": "半身 / 近景",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 57,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 27.2,
+   "luminance_median": 21.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.53,
+   "saliency_y": 0.48,
+   "saturation": 0.385,
+   "shadow_clip_pct": 2.66,
+   "symmetry_h": 19.5,
+   "symmetry_hint": "横向对称",
+   "temperature": "暖",
+   "warm_score": 9.4,
+   "width": 1920
+  },
+  {
+   "_sig": "109720:1789975660",
+   "busyness": "适中",
+   "colored_ratio": 0.407,
+   "contrast": 29.0,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#171311",
+     85.2
+    ],
+    [
+     "#9C5F20",
+     8.8
+    ],
+    [
+     "#4E3521",
+     3.6
+    ],
+    [
+     "#6D4823",
+     2.2
+    ],
+    [
+     "#C27C29",
+     0.2
+    ],
+    [
+     "#C6822F",
+     0.1
+    ]
+   ],
+   "dynamic_range": 96.0,
+   "edge_density": 8.8,
+   "entropy": 5.93,
+   "face_count": 1,
+   "face_pct": 40.5,
+   "features_available": true,
+   "file": "58.jpg",
+   "framing": "半身 / 近景",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 58,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 30.9,
+   "luminance_median": 20.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.49,
+   "saliency_y": 0.46,
+   "saturation": 0.326,
+   "shadow_clip_pct": 0.3,
+   "symmetry_h": 22.1,
+   "symmetry_hint": "纵向对称",
+   "temperature": "暖",
+   "warm_score": 19.2,
+   "width": 1920
+  },
+  {
+   "_sig": "102006:1789975681",
+   "busyness": "适中",
+   "colored_ratio": 0.911,
+   "contrast": 64.3,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#26241D",
+     51.0
+    ],
+    [
+     "#AE9C89",
+     19.7
+    ],
+    [
+     "#CAB29B",
+     15.6
+    ],
+    [
+     "#938779",
+     10.9
+    ],
+    [
+     "#847D72",
+     1.6
+    ],
+    [
+     "#DAC1AA",
+     1.1
+    ]
+   ],
+   "dynamic_range": 158.0,
+   "edge_density": 5.6,
+   "entropy": 6.38,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "59.jpg",
+   "framing": "未检出面部",
+   "harmony": "中等多色",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 59,
+   "key": "中间调",
+   "line_orientation": "以对角线为主",
+   "luminance": 98.5,
+   "luminance_median": 51.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.5,
+   "saliency_y": 0.5,
+   "saturation": 0.217,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 59.7,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 22.7,
+   "width": 1920
+  },
+  {
+   "_sig": "65286:1789975683",
+   "busyness": "简洁",
+   "colored_ratio": 0.527,
+   "contrast": 10.5,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#1D2124",
+     36.9
+    ],
+    [
+     "#191B1C",
+     36.5
+    ],
+    [
+     "#2A3335",
+     26.3
+    ],
+    [
+     "#535756",
+     0.2
+    ],
+    [
+     "#3B4344",
+     0.0
+    ],
+    [
+     "#383E40",
+     0.0
+    ]
+   ],
+   "dynamic_range": 27.0,
+   "edge_density": 3.1,
+   "entropy": 4.61,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "60.jpg",
+   "framing": "未检出面部",
+   "harmony": "中等多色",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 60,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 35.0,
+   "luminance_median": 30.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.53,
+   "saliency_y": 0.44,
+   "saturation": 0.164,
+   "shadow_clip_pct": 0.18,
+   "symmetry_h": 10.1,
+   "symmetry_hint": "横向对称",
+   "temperature": "中性",
+   "warm_score": -6.4,
+   "width": 1920
+  },
+  {
+   "_sig": "59673:1789975685",
+   "busyness": "简洁",
+   "colored_ratio": 0.222,
+   "contrast": 11.2,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#121418",
+     35.7
+    ],
+    [
+     "#06080B",
+     29.1
+    ],
+    [
+     "#1A1F23",
+     11.1
+    ],
+    [
+     "#0C0D11",
+     9.1
+    ],
+    [
+     "#21282B",
+     9.0
+    ],
+    [
+     "#1D2327",
+     6.0
+    ]
+   ],
+   "dynamic_range": 37.0,
+   "edge_density": 2.7,
+   "entropy": 5.02,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "61.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 61,
+   "key": "低明调（暗）",
+   "line_orientation": "以对角线为主",
+   "luminance": 19.8,
+   "luminance_median": 19.0,
+   "mean_hue_name": "蓝",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.55,
+   "saliency_y": 0.42,
+   "saturation": 0.292,
+   "shadow_clip_pct": 5.96,
+   "symmetry_h": 10.4,
+   "symmetry_hint": "横向对称",
+   "temperature": "中性",
+   "warm_score": -6.3,
+   "width": 1920
+  },
+  {
+   "_sig": "154338:1789975687",
+   "busyness": "适中",
+   "colored_ratio": 0.68,
+   "contrast": 30.5,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#62564E",
+     43.8
+    ],
+    [
+     "#302E29",
+     23.6
+    ],
+    [
+     "#4E443B",
+     12.7
+    ],
+    [
+     "#453A33",
+     8.7
+    ],
+    [
+     "#88746A",
+     6.4
+    ],
+    [
+     "#A3998C",
+     4.7
+    ]
+   ],
+   "dynamic_range": 103.0,
+   "edge_density": 12.6,
+   "entropy": 6.89,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "62.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 62,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 81.2,
+   "luminance_median": 77.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.47,
+   "saliency_y": 0.55,
+   "saturation": 0.193,
+   "shadow_clip_pct": 0.0,
+   "symmetry_h": 25.6,
+   "symmetry_hint": "非对称",
+   "temperature": "暖",
+   "warm_score": 17.4,
+   "width": 1920
+  },
+  {
+   "_sig": "131120:1789975690",
+   "busyness": "适中",
+   "colored_ratio": 0.364,
+   "contrast": 19.6,
+   "contrast_level": "低对比",
+   "dominant": [
+    [
+     "#272522",
+     69.8
+    ],
+    [
+     "#4D4845",
+     15.3
+    ],
+    [
+     "#49423C",
+     9.3
+    ],
+    [
+     "#433C37",
+     5.5
+    ],
+    [
+     "#3E403B",
+     0.1
+    ],
+    [
+     "#3D4142",
+     0.1
+    ]
+   ],
+   "dynamic_range": 61.0,
+   "edge_density": 9.2,
+   "entropy": 6.17,
+   "face_count": 0,
+   "face_pct": 0.0,
+   "features_available": true,
+   "file": "63.jpg",
+   "framing": "未检出面部",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 63,
+   "key": "低明调（暗）",
+   "line_orientation": "以竖线为主",
+   "luminance": 47.3,
+   "luminance_median": 50.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "注意力分散（群像 / 满构图 / 装饰性图案）",
+   "saliency_x": 0.5,
+   "saliency_y": 0.55,
+   "saturation": 0.152,
+   "shadow_clip_pct": 0.53,
+   "symmetry_h": 15.8,
+   "symmetry_hint": "横向对称",
+   "temperature": "中性",
+   "warm_score": 7.0,
+   "width": 1920
+  },
+  {
+   "_sig": "148089:1789975692",
+   "busyness": "适中",
+   "colored_ratio": 0.399,
+   "contrast": 50.4,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#909F9D",
+     48.3
+    ],
+    [
+     "#211E1B",
+     21.3
+    ],
+    [
+     "#685E54",
+     12.1
+    ],
+    [
+     "#7A8D91",
+     11.5
+    ],
+    [
+     "#877669",
+     3.5
+    ],
+    [
+     "#4E4539",
+     3.3
+    ]
+   ],
+   "dynamic_range": 146.0,
+   "edge_density": 13.9,
+   "entropy": 6.92,
+   "face_count": 1,
+   "face_pct": 33.9,
+   "features_available": true,
+   "file": "64.jpg",
+   "framing": "半身 / 近景",
+   "harmony": "中等多色",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 64,
+   "key": "中间调",
+   "line_orientation": "以竖线为主",
+   "luminance": 113.3,
+   "luminance_median": 138.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "主体较明确，但有次要元素",
+   "saliency_x": 0.41,
+   "saliency_y": 0.54,
+   "saturation": 0.151,
+   "shadow_clip_pct": 0.16,
+   "symmetry_h": 36.0,
+   "symmetry_hint": "非对称",
+   "temperature": "中性",
+   "warm_score": -2.6,
+   "width": 1920
+  },
+  {
+   "_sig": "148604:1789975695",
+   "busyness": "适中",
+   "colored_ratio": 0.185,
+   "contrast": 53.0,
+   "contrast_level": "中等对比",
+   "dominant": [
+    [
+     "#9BA5A0",
+     71.8
+    ],
+    [
+     "#211E1A",
+     18.6
+    ],
+    [
+     "#788A8C",
+     3.3
+    ],
+    [
+     "#A58C6F",
+     2.3
+    ],
+    [
+     "#5E4937",
+     2.0
+    ],
+    [
+     "#907256",
+     2.0
+    ]
+   ],
+   "dynamic_range": 157.0,
+   "edge_density": 10.5,
+   "entropy": 6.55,
+   "face_count": 1,
+   "face_pct": 51.7,
+   "features_available": true,
+   "file": "65.jpg",
+   "framing": "特写（脸部占画面主体）",
+   "harmony": "邻近色（有限调色板）",
+   "height": 800,
+   "highlight_clip_pct": 0.0,
+   "index": 65,
+   "key": "中间调",
+   "line_orientation": "以竖线为主",
+   "luminance": 130.7,
+   "luminance_median": 155.0,
+   "mean_hue_name": "橙",
+   "orientation": "横构图",
+   "ratio": 2.4,
+   "saliency_focus": "单一主体，重心明确",
+   "saliency_x": 0.45,
+   "saliency_y": 0.61,
+   "saturation": 0.121,
+   "shadow_clip_pct": 0.04,
+   "symmetry_h": 40.8,
+   "symmetry_hint": "非对称",
+   "temperature": "中性",
+   "warm_score": 0.9,
+   "width": 1920
+  }
+ ],
+ "title_zh": "沙丘",
+ "total_linked": 65
+}

@@ -17,7 +17,17 @@
 set -euo pipefail
 
 SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-REPO_ROOT="$(dirname "$SKILL_DIR")"
+
+# 仓库根：从 skill 目录往上找第一个含 .repo/artvault.py 的目录。
+# 兼容两种布局：<repo>/skill/（旧）与 <repo>/.repo/skill/（现）。
+REPO_ROOT=""
+_d="$SKILL_DIR"
+for _ in 1 2 3; do
+  _d="$(dirname "$_d")"
+  if [ -f "$_d/.repo/artvault.py" ]; then REPO_ROOT="$_d"; break; fi
+  [ "$_d" = "/" ] && break
+done
+[ -n "$REPO_ROOT" ] || REPO_ROOT="$(dirname "$SKILL_DIR")"
 
 # 名称:源目录
 SKILLS=(
@@ -121,5 +131,5 @@ else
   echo "    bash \"$SKILL_DIR/locate.sh\"     # 应打印 $REPO_ROOT"
   echo
   echo "  新建一个 AI 会话后，skill 才会出现在可用列表里。"
-  [ "$MODE" = "copy" ] && echo "  ⚠ 复制模式：仓库移动后需重跑本脚本。"
+  if [ "$MODE" = "copy" ]; then echo "  ⚠ 复制模式：仓库移动后需重跑本脚本。"; fi
 fi

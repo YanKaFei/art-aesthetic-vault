@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "杨德昌",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#C4CCD0",
+  "#5A6B78",
+  "#7A9A8C",
+  "#A8A79E",
+  "#1E2A32",
+  "#D8DCDD"
+ ],
+ "palette_written_named": [
+  [
+   "#C4CCD0",
+   "冷白"
+  ],
+  [
+   "#5A6B78",
+   "灰蓝"
+  ],
+  [
+   "#7A9A8C",
+   "玻璃绿"
+  ],
+  [
+   "#A8A79E",
+   "米灰"
+  ],
+  [
+   "#1E2A32",
+   "夜蓝黑"
+  ],
+  [
+   "#D8DCDD",
+   "荧光白"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "yang-edward-yi-yi",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "一一",
+ "total_linked": 65
+}

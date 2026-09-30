@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "小林正树",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#8C1F1F",
+  "#0A0A0A",
+  "#C9A227",
+  "#F2F2F0",
+  "#1F3A6E",
+  "#6B1F1A"
+ ],
+ "palette_written_named": [
+  [
+   "#8C1F1F",
+   "血红"
+  ],
+  [
+   "#0A0A0A",
+   "漆黑"
+  ],
+  [
+   "#C9A227",
+   "金"
+  ],
+  [
+   "#F2F2F0",
+   "雪白"
+  ],
+  [
+   "#1F3A6E",
+   "靛蓝"
+  ],
+  [
+   "#6B1F1A",
+   "暗红"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "kobayashi-kwaidan",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "怪谈",
+ "total_linked": 65
+}

@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "米开朗基罗·安东尼奥尼",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#DCE0DC",
+  "#6E8C5A",
+  "#A8AEA8",
+  "#B0241F",
+  "#C4C0B4",
+  "#4A4E52"
+ ],
+ "palette_written_named": [
+  [
+   "#DCE0DC",
+   "混凝土白"
+  ],
+  [
+   "#6E8C5A",
+   "草地绿"
+  ],
+  [
+   "#A8AEA8",
+   "冷灰"
+  ],
+  [
+   "#B0241F",
+   "点缀红"
+  ],
+  [
+   "#C4C0B4",
+   "纸米"
+  ],
+  [
+   "#4A4E52",
+   "金属灰"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "antonioni-blow-up",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "放大",
+ "total_linked": 65
+}

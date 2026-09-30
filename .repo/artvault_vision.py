@@ -31,7 +31,7 @@ HuggingFace 也被挡（http=000）。Vision 是系统自带、完全离线。
     python3 artvault_vision.py dups [--thresh 0.3]    # 近重复检测
 
 非 macOS 或编译失败时**所有功能优雅降级**：CLI 给出明确原因，不抛栈。
-索引是生成物，已 gitignore（`.repo/_data/vision_index.json`）。
+索引是生成物，已 gitignore（`.repo/_data/vision_index.npz`；旧 json 仍可读作回退）。
 """
 
 import argparse
@@ -57,11 +57,20 @@ EXPECTED_DIM = 768
 
 # ------------------------------------------------------------ 可用性
 def unavailable_reason():
-    """返回不可用的原因；可用则返回 None。"""
+    """返回不可用的原因；可用则返回 None。
+
+    ⚠ 必须把 **numpy** 算进来。实测踩到：这一项原来只检查 macOS 与源码，
+    于是 `doctor` 报「近重复检测 ✓ 可用」，而 `artvault_vision.py build`
+    真跑时抛 `ModuleNotFoundError: No module named 'numpy'` —— 自检说能用、
+    真跑就炸，是最误导人的一种自检。
+    """
     if platform.system() != "Darwin":
         return "图像语义检索依赖 macOS 自带的 Vision 框架，当前系统是 %s" % platform.system()
     if not os.path.exists(SOURCE):
         return "缺少源码 %s" % SOURCE
+    if not _have_numpy():
+        return ("缺少 numpy（建索引需要它）。装到 vendor/libs 避免污染系统 Python：\n"
+                "  pip3 install --target ./vendor/libs numpy")
     return None
 
 
@@ -176,7 +185,17 @@ def iter_images():
 
 
 def load_index():
-    """读语义索引（npz，回退旧 json）。"""
+    """读语义索引（npz，回退旧 json）。
+
+    ⚠ 读 npz **需要 numpy**（zip 里的 array 要靠它解析），而 numpy 在
+    `vendor/libs` 下、不在默认 sys.path 上。所以这里必须先过
+    `_have_numpy()`（它会设路径）—— 否则 read_vectors 静默读不到，
+    返回 None，调用方以为「没有索引」。
+
+    实测踩到：`artvault_vision.py build` 写得出 958 张的索引，
+    而 `load_index()` 读回 None，于是验收第 5 项永远跳过。
+    """
+    _have_numpy()          # 关键：设好 vendor 路径，npz 才读得动
     import safefile as SF
     keys, vecs, meta = SF.read_vectors(INDEX)
     if keys is None:
@@ -233,6 +252,12 @@ def build_index(force=False, verbose=True):
     for k in dropped:
         del vecs[k]
 
+    # 先过依赖闸门：缺 numpy 时给一句人话，而不是让 ModuleNotFoundError
+    # 直接冒到用户面前（这正是 unavailable_reason 现在检查 numpy 的原因）。
+    _reason = unavailable_reason()
+    if _reason:
+        print("无法建索引：%s" % _reason)
+        return False
     import numpy as np
     import safefile as SF
     ks = list(vecs)

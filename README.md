@@ -1,18 +1,20 @@
 <div align="center">
 
+<img src="99-attachments/readme/hero.jpg" width="100%" alt="画派、手绘与电影剧照：本库覆盖的四条轴">
+
 # 艺术审美风格库
+
+**把「视觉风格」拆成可以直接调用的提示词层**
+
+画派 · 手绘 · 导演 · 运镜 —— 四条轴，同一套结构
 
 [![DeepSeek Harness](https://img.shields.io/badge/DeepSeek%20Harness-dsh--plugin-4D6BFE?style=flat-square)](https://github.com/deepseek-ai/deepseek-harness)
 [![Agent Skill](https://img.shields.io/badge/Agent-Skill-7C3AED?style=flat-square)](.repo/skill)
 [![License](https://img.shields.io/github/license/YanKaFei/art-aesthetic-vault?style=flat-square)](LICENSE)
 
-**把 147 个艺术流派的视觉语言，拆成可以直接用的 AI 提示词层**
+`421 个画派` · `274 个手绘风格` · `100 部电影` · `157 张运镜配方` · `686 篇笔记` · `746 张图`
 
-从拜占庭到 Y2K ｜ 东亚 · 南亚 · 伊斯兰 ｜ 摄影谱系 ｜ 数字亚文化
-
-163 篇笔记 · 452 张实图 · 36 个即用脚本
-
-[English](README.en.md) ｜ **中文**
+[English](README.en.md) ｜ [日本語](README.ja.md) ｜ [Français](README.fr.md) ｜ **中文**
 
 </div>
 
@@ -20,21 +22,14 @@
 
 ## 这是什么
 
-大部分人收集「艺术风格参考」的方式是存图——存了几百张，但真要用的时候不知道该看什么、
+大多数人收集「风格参考」的方式是存图 —— 存了几百张，真要用的时候不知道该看什么、
 该怎么描述。图是死的。
 
-这个库换个做法：**把每个流派的视觉语言拆成七个可以独立替换的层**。
+这个库换个做法：**把每一种视觉语言的构成，拆成七个可以独立替换的层**。
 
-```
-主体 Subject  +  风格 Style  +  光照 Lighting  +  色彩 Color
-              +  构图 Composition  +  媒介 Medium  +  情绪 Mood  +  镜头 Camera
-```
+<img src="99-attachments/readme/layers.png" width="100%" alt="七层：风格 / 光照 / 色彩 / 构图 / 媒介 / 情绪 / 镜头">
 
 拆成层之后，你才能把 A 图的光照套到 B 图的主体上。**这才是参考库真正的用处。**
-
-### 看一眼它怎么工作
-
-假设你想画「雨夜霓虹街头的赏金猎人」，同时想要古典绘画的光影质感：
 
 ```bash
 python3 artvault.py compose \
@@ -42,26 +37,241 @@ python3 artvault.py compose \
   --subject "a female bounty hunter in a wet neon alley"
 ```
 
-它会自动识别出「巴洛克」后面跟着「光照」→ 取巴洛克的光照层；
-「赛博朋克」→ 取风格与构图层。然后拼成：
+它会自动识别「巴洛克」后面跟着「光照」→ 取巴洛克的光照层；「赛博朋克」→ 取风格与构图层。
+输出是分好层的正向提示词、负向提示词、配色、视频层，以及一份**冲突消解记录**。
 
-```
-a female bounty hunter in a wet neon alley,        <- 你的主体
-cyberpunk, neo-noir concept art, dense neon signage,   <- 风格层 · 赛博朋克
-single hard light source from off-frame,               <- 光照层 · 巴洛克
-deep crushed shadows, candlelight rim light,
-cyan and magenta clash, amber accent, deep black,      <- 色彩层 · 赛博朋克
-low angle looking up at megastructures,                <- 构图层 · 赛博朋克
-alienated, oppressive, intoxicating                    <- 情绪层
-```
-
-**同一个主体，每一层都可以单独换掉。** 这是这个库和「风格词堆砌」的根本区别。
+> **同一个主体，每一层都可以单独换掉。** 这是这个库和「风格词堆砌」的根本区别。
 
 ---
 
-## 技能树
+## 四条轴
 
+四条轴共用同一套卡片结构与同一套七层词表，所以可以跨轴混搭 ——
+电影的光照 + 画派的配色 + 手绘的媒介。
+
+| | 轴 · 规模 | 它回答什么 |
+|---|---|---|
+| <img src="99-attachments/readme/axis-1-movements.jpg" width="300" alt="画派风格"> | **画派风格 · 421 个**<br>（7 大分类） | 从拜占庭到 Y2K，从浮世绘到赛博朋克。每个流派一张卡：六维视觉拆解 + 七层提示词 + 六色配色 + 针对性负向词 + 视频层<br>`python3 artvault.py layers 巴洛克` |
+| <img src="99-attachments/readme/axis-2-handraw.jpg" width="300" alt="手绘风格"> | **手绘风格 · 274 个**<br>（A–H 八组） | 绘本、社论漫画、当代插画、国风……来自 [handraw-style](https://github.com/yang0/handraw-style)（MIT），整块并入本库。卡片以中文名命名，编号作别名保留<br>`python3 artvault.py layers 极端比例弯曲绘本` |
+| <img src="99-attachments/readme/axis-3-films.jpg" width="300" alt="导演与电影"> | **导演与电影 · 100 部**<br>（44 位导演） | 不只是「长什么样」，而是「谁拍的、怎么拍的」。按「导演 → 电影」组织：代表帧 + 六维拆解 + 七层提示词 + 配色 + 视频层，另索引 **6142 条剧照外链**（只索引不转载）<br>`python3 artvault.py film show dune` |
+| <img src="99-attachments/readme/axis-4-shots.jpg" width="300" alt="运镜配方"> | **运镜配方 · 157 张**<br>（10 类） | 前三条轴回答「长什么样」，这一条回答「**这一下怎么做出来**」。帧数、缓动、幅度写成参数表，附已知坑。来自 [video-shotcraft](https://github.com/Vincentwei1021/video-shotcraft)（Apache-2.0，本库只做归类与排版）<br>`python3 artvault.py shots show crash-zoom-punch` |
+
+> ⚠ **镜头卡没有色彩与光照字段，这是故意的。** 它讲的是帧数与缓动
+> （`zoom 6f ease-in，1→2.6`），套七层只能靠编。所以它按自己的四字段排，
+> 并且**刻意不参与 `compose` 的层解析** —— 有测试守着这条边界。
+
+---
+
+## 一眼看规模
+
+<img src="99-attachments/readme/gallery.jpg" width="100%" alt="本库覆盖的画派、手绘与电影示例">
+
+| | 数量 |
+|---|---|
+| **流派卡** | **421 张**，7 大分类，每张含六维视觉拆解 + 七层提示词 + 配色 + 视频层 |
+| **实图** | **746 张**（167 MB）：公共领域实图 **452 张** + handraw-style 编号参考图 **294 张**（MIT）；359 个流派配了图 |
+| **手绘卡中文名** | **274 / 274** 张已有名字（其中 249 张由 `traits` 逐字抽出、25 张因无 traits 由英文生图名回译） |
+| **导航与方法论** | 15 篇（流派总览、关键词图谱、七层方法、视频结构、配色速查…） |
+| **关键词图谱** | 最容易混的 **4 组**概念，共 **46 个**同义说法，搜任何一个都落到同一张卡 |
+| **电影风格卡** | **100 部**（44 位导演）：按「导演 → 电影」组织，每张含剧照索引 + 六维拆解 + 七层提示词 + 配色 + 视频层，另有 **6142 条剧照外链**（只索引不转载） |
+| **镜头配方卡** | **157 张**（10 类）：运镜与动效招式，含参数表（帧数/缓动/幅度）与已知坑。来自 [Vincentwei1021/video-shotcraft](https://github.com/Vincentwei1021/video-shotcraft)，**Apache-2.0，本库只做归类与排版** |
+| **笔记模板** | 3 个（流派卡 / 提示词卡 / 作品拆解） |
+| **脚本** | 65 个，抓图、生成、检索、提示词合成、MCP 服务 |
+
+> **62 个流派是「纯提示词卡」** —— 抽象表现主义、波普、极简主义、观念艺术、
+> 赛博朋克、蒸汽波这些，几乎找不到可自由分发的实图。它们的视觉语言与七层结构照常
+> 拆解，只是不配图。这是刻意的设计，不是缺失。
+
+---
+
+## 怎么用
+
+### 一、当作 Obsidian 仓库读
+
+直接用 Obsidian 打开这个文件夹。建议按这个顺序进入：
+
+1. `00-guides/提示词拆解方法.md` —— **先读这个**，理解七层是怎么回事
+2. `00-guides/流派总览.md` —— 全部流派的总入口
+3. `10-movements/` —— 挑一个你喜欢的流派，看它的完整拆解
+4. `00-guides/关键词图谱.md` —— 以后看到陌生风格词就来这里查
+
+### 二、让 AI 直接调用它
+
+库不只是一堆给人看的 Markdown，还有一层**给机器用的接口**：
+
+```bash
+cd .repo
+
+python3 artvault.py categories              # 看 7 大分类
+python3 artvault.py search "霓虹 雨夜"       # 模糊检索，中英文都行
+python3 artvault.py search "压抑但华丽的光" --semantic   # 描述性说法：关键词抓不住，语义能
+python3 artvault.py layers 巴洛克            # 只要七层提示词（最省 token）
+python3 artvault.py show 浮世绘              # 完整卡片
+python3 artvault.py palette 赛博朋克         # 六色配色
+python3 artvault.py related 立体主义         # 找关联流派
+
+python3 artvault.py film list               # 100 部电影
+python3 artvault.py shots search "急推 冲击"  # 按「我想做什么」找运镜
+
+python3 artvault.py --json layers 巴洛克     # 机器可读
 ```
+
+**核心能力是组合**：
+
+```bash
+# 自然语言，自动分层
+python3 artvault.py compose "雨夜霓虹的赏金猎人，要巴洛克的光照" --subject "a bounty hunter"
+
+# 显式指定，跨时代混搭
+python3 artvault.py compose --style ukiyo-e --lighting baroque \
+  --color vaporwave --composition precisionism --subject "a lone samurai"
+
+# 跨轴：电影的光照 + 画派的配色
+python3 artvault.py compose --lighting villeneuve-dune --color baroque \
+  --subject "a lone figure on a dune"
+```
+
+它会**自动消解层级冲突**。跨流派混搭时负向词会互相打架 ——
+浮世绘禁止 `cast shadows`，巴洛克光照却要求 `deep crushed shadows`；
+精确主义禁止 `people`，而你的主体是个人物。
+**模型不会报错**，只会表现为「出图质量莫名地差」，极难排查。
+所以打架的负向词会被**自动从负向提示词里拿掉**，并在「已自动消解的冲突」里
+逐条说明拿掉了什么、让位给谁。规则一句话：**正向是意图，负向是护栏，护栏让位于意图。**
+想要原样合集自己判断，加 `--keep-conflicts`。
+
+### 三、装成 AI skill（推荐）
+
+仓库自带两个 skill，装上之后**任何支持 skill 的 AI 助手**在遇到视觉 / 审美类任务时
+会自动查这个库，而不是凭记忆编造流派术语。
+
+```bash
+cd .repo/skill && ./install.sh
+```
+
+| skill | 干什么 | 什么时候触发 |
+|---|---|---|
+| `art-aesthetic-vault` | **用**库：检索流派、取七层提示词、跨流派拼提示词 | 你问「这个角色该用什么风格」 |
+| `build-art-aesthetic-vault` | **建**库：从零建一套新的 | 你说「我也想要一套这样的库」 |
+
+> [!note] 为什么两个 skill 都不自带数据
+> 它们都是**软链**指向本仓库 —— 数据只有仓库这一份。
+> `mv_*.py`（流派定义）如果被打包进 skill，就会出现两份、必然会分叉。
+> 实测过：打包版本里有 4 个文件与仓库不同步，用它建出来的库分类是错的。
+
+它会把这些软链建到本机所有可用的 skill 目录：
+
+| 目录 | 谁读它 |
+|---|---|
+| `~/.agents/skills/` | DSH / Codex / 通用约定 |
+| `~/.claude/skills/` | Claude Code |
+| `~/.codex/skills/` | Codex |
+
+**为什么用软链**：skill 可以用 `pwd -P` 解析出自己的真实位置，从而推断出仓库根目录
+—— **仓库放在哪、移不移动都能自动找到**，不需要任何配置。
+
+```bash
+.repo/skill/install.sh --copy        # 复制安装（不用软链，但仓库移动后要重装）
+.repo/skill/install.sh --uninstall   # 卸载
+bash .repo/skill/locate.sh           # 手动定位仓库（排查用）
+```
+
+装完**新开一个 AI 会话**才会生效。
+
+### 四、接入 MCP（Claude Desktop / Cursor）
+
+```json
+{
+  "mcpServers": {
+    "artvault": {
+      "command": "python3",
+      "args": ["<本仓库绝对路径>/.repo/mcp_server.py"]
+    }
+  }
+}
+```
+
+暴露 16 个工具：`search_movements` `get_movement` `get_layers` `compose_prompt`
+`get_palette` `find_related` `list_categories` `analyze_image` `match_movement`
+`get_video_prompt`，电影库 `search_films` `get_film` `get_film_layers` `get_film_stills`，
+镜头库 `search_shots` `get_shot`。
+后几个工具另需 Pillow / CLIP 模型；条件不满足时会说明原因，不影响前七个。
+
+---
+
+## 它好在哪里
+
+### 1. 不是图包，是可组合的结构
+
+图包给你「这是什么感觉」，这个库给你「怎么做出这种感觉」。
+每一层都可以单独摘出来复用：换主体不换风格层，就是风格迁移模板。
+
+### 2. 光照层被单独拎出来了
+
+大多数人写提示词时把一切混在一起，靠试错调。这个库明确告诉你：
+**光照对最终质感的影响比风格词本身更大。**
+每个流派的光照层都是独立一段，可以直接搬到别的主题上。
+
+### 3. 每条轴都有「针对性负向词」
+
+针对**这个流派**的典型翻车点，而不是一份通用负面清单：
+
+- 印象派 → `black shadows, smooth blending, photorealistic`
+- 文艺复兴 → `visible brushstrokes, impasto`（AI 默认会给油画加厚涂）
+- 浮世绘 → `3d shading, cast shadows, gradient`（AI 会自动加立体感）
+
+**注意不同流派的负向词经常是相反的** —— 这正是混搭会打架的原因，
+也是库帮你管住的东西。
+
+### 4. AI 可以用，不只是你能看
+
+大模型对艺术流派的记忆是模糊的，常把 Art Nouveau 和 Art Deco、
+巴比松和印象派搞混。这个库把每个流派的具体术语固化下来，AI 调用时不会瞎编。
+
+### 5. 术语是钉住的，不是编的
+
+关键词图谱挑出最容易混的 **4 组**概念 —— 先锋、当代、后现代、超现实。
+每组给一条定义、若干条「它不等于什么」的边界，以及 **46 个**同义说法，
+搜任何一个都落到同一张卡。
+
+### 6. 你手里那张图，也能直接变成视频提示词
+
+卡片上的视频提示词是**通用**的 —— 主体那一行是占位符。但你真正要干的事
+通常是「我有这张图，让它动起来」：
+
+```bash
+python3 i2v_prompt.py 你的图.jpg --slug baroque
+```
+
+主体的景别、在画面哪个位置、画面内部的动势方向、光要不要动、镜头推还是移，
+全部从**这张图的客观测量**推出来（人脸景别 / 显著性中心 / 线条方向 / 细节密度 /
+明暗结构），并附一份「推导依据」让你核对。生成出来仍留着「谁、在做什么，
+你自己补一句」—— 内容只有看图的人知道，脚本不替你编。
+
+### 7. 数字是现算的，不是写死的
+
+README 上每一个「这个库有多少东西」的数字，都由 `publish_stats()` 按**发布视图**
+（git 跟踪了什么，而不是作者机上有什么）现算，再被 `verify_vault.py` 逐条核对。
+写死的数字唯一的作用，就是某天变成错的 —— 这个库在这一点上栽过，所以加了锁。
+
+---
+
+## 三条原则
+
+1. **宁可少，不要错。**
+   筛选时刻意不做「放宽补充」—— 某个流派只有 1 张图就 1 张。
+   一个参考库最怕的不是图少，是图错。错的参考会污染你的直觉，而且你自己不会发现。
+
+2. **光照比风格词更重要。**
+   如果你只有一个层可以调，调光照。
+
+3. **不要凭记忆编造流派术语。**
+   大模型对艺术流派的记忆是模糊的，容易把相近的画派搞混。以库里的具体术语为准。
+
+---
+
+<details>
+<summary><b>展开完整技能树（421 个流派 / 7 大分类）</b></summary>
+
 艺术审美风格库
 │
 ├─ 🏛 西方古典与近代 · 48 个流派
@@ -157,218 +367,77 @@ alienated, oppressive, intoxicating                    <- 情绪层
 │  └─ 其他
 │     ├ 新几何 · 后极简主义 · 空间主义 · 无形式艺术
 │     └ 斑点主义 · 抒情抽象
-└─ 📷 摄影与图像 · 6 个流派
-   ├─ 两大传统
-   │  └ 画意摄影 · 直接摄影
-   ├─ 社会与街头
-   │  └ 纪实摄影 · 街头摄影
-   └─ 观念与时尚
-      └ 超现实摄影 · 时尚编辑摄影
-```
+├─ 📷 摄影与图像 · 6 个流派
+│  ├─ 两大传统
+│  │  └ 画意摄影 · 直接摄影
+│  ├─ 社会与街头
+│  │  └ 纪实摄影 · 街头摄影
+│  └─ 观念与时尚
+│     └ 超现实摄影 · 时尚编辑摄影
+└─ ✏️ 手绘艺术风格 · 274 个流派
+   ├─ A 国际社论漫画 / 幽默手绘
+   │  └ 共 35 条（见分类索引）
+   ├─ B 国际绘本 / 叙事型手绘
+   │  ├ 墨线水彩松散绘本 · 北欧细线奇幻小人物 · 拟人动物职业绘本 · 复古水彩暖调绘本
+   │  ├ 交叉排线怪物绘本 · 极端比例弯曲绘本 · 自然主义水彩动物绘本 · 钢笔淡彩古典绘本
+   │  ├ 怪趣墨线水彩童话 · 极简诗意手写绘本 · 几何剪影高饱和绘本 · 低饱和冷面动物绘本
+   │  ├ 民俗线描装饰绘本 · 梦境超现实柔和绘本 · 复古拼贴纸感绘本 · 速写式夸张人物漫画
+   │  └ 清线科幻梦境人物 · 欧式清线平涂漫画 · 几何清线欧洲人物
+   ├─ C 现代平面 / 艺术化人物体系
+   │  └ 共 28 条（见分类索引）
+   ├─ D 日本作者 / 当代插画体系
+   │  └ 共 41 条（见分类索引）
+   ├─ E 中国作者 / 当代插画体系
+   │  └ 共 31 条（见分类索引）
+   ├─ F 通用网感 / 媒介 / 地域手绘
+   │  └ 共 46 条（见分类索引）
+   ├─ G 附件新增 / 中国当代插画补充
+   │  ├ 萌系圆润治愈插画 · 诗意青春清透插画 · 唯美漫画柔和插画 · 水墨新国风插画
+   │  ├ Q版轻幽默魔性漫画 · 都市生活轻漫画 · 极简温暖叙事插画 · 东方美学商业插画
+   │  ├ 童趣水彩绘本 · 东方奇幻绘本 · 清新文艺插画 · 复古潮流插画
+   │  └ 萌系圆润可爱插画 · 国风幻想插画 · 治愈生活插画 · 时尚女性插画
+   └─ H 其他
+      └ 共 58 条（见分类索引）
+
+</details>
 
 ---
 
-## 有多少东西
+## 贡献者与来源
 
-| | 数量 |
-|---|---|
-| **流派卡** | **147 张**，6 大分类，每张含六维视觉拆解 + 七层提示词 + 配色 + 视频层 |
-| **实图** | **452 张**（152 MB），85 个流派配了图 |
-| **导航与方法论** | 13 篇（流派总览、关键词图谱、七层方法、视频结构、配色速查…） |
-| **关键词图谱** | 最容易混的 **4 组**概念，共 **46 个**同义说法，搜任何一个都落到同一张卡 |
-| **笔记模板** | 3 个（流派卡 / 提示词卡 / 作品拆解） |
-| **脚本** | 36 个，抓图、生成、检索、提示词合成、MCP 服务 |
+这个库能成立，靠的是一批**愿意把成果开放出来的人**。下面每一处都不是「参考了一下」，
+而是**整块搬进来、按同一套结构重排**的：
 
-> **62 个流派是「纯提示词卡」**——抽象表现主义、波普、极简主义、观念艺术、
-> 赛博朋克、蒸汽波这些，几乎找不到可自由分发的实图。
-> 它们的视觉语言与七层结构照常拆解，只是不配图。这是刻意的设计，不是缺失。
-
----
-
-## 怎么用
-
-### 方式一：当作 Obsidian 仓库读
-
-用 Obsidian 打开这个文件夹。建议从这个顺序进入：
-
-1. `00-guides/提示词拆解方法.md` —— **先读这个**，理解七层是怎么回事
-2. `00-guides/流派总览.md` —— 全部流派的总入口
-3. `10-movements/` —— 挑一个你喜欢的流派，看它的完整拆解
-4. `00-guides/关键词图谱.md` —— 以后看到陌生风格词就来这里查
-
-### 方式二：让 AI 直接调用它
-
-库不只是一堆给人看的 Markdown，还有一层**给机器用的接口**：
-
-```bash
-cd .repo
-
-python3 artvault.py categories              # 看 6 大分类
-python3 artvault.py search "霓虹 雨夜"       # 模糊检索，中英文都行
-python3 artvault.py search "压抑但华丽的光" --semantic   # 描述性说法：关键词抓不住，语义能
-python3 artvault.py layers 巴洛克            # 只要七层提示词（最省 token）
-python3 artvault.py show 浮世绘              # 完整卡片
-python3 artvault.py palette 赛博朋克         # 六色配色
-python3 artvault.py related 立体主义         # 找关联流派
-python3 artvault.py --json layers 巴洛克     # 机器可读
-```
-
-**核心能力是组合**：
-
-```bash
-# 自然语言，自动分层
-python3 artvault.py compose "雨夜霓虹的赏金猎人，要巴洛克的光照" --subject "a bounty hunter"
-
-# 显式指定，跨时代混搭
-python3 artvault.py compose --style ukiyo-e --lighting baroque \
-  --color vaporwave --composition precisionism --subject "a lone samurai"
-```
-
-它会**自动消解层级冲突**。跨流派混搭时负向词会互相打架——
-浮世绘禁止 `cast shadows`，巴洛克光照却要求 `deep crushed shadows`；
-精确主义禁止 `people`，而你的主体是个人物。
-**模型不会报错**，只会表现为「出图质量莫名地差」，极难排查。
-所以打架的负向词会被**自动从负向提示词里拿掉**，并在「已自动消解的冲突」里
-逐条说明拿掉了什么、让位给谁。规则一句话：**正向是意图，负向是护栏，护栏让位于意图。**
-想要原样合集自己判断，加 `--keep-conflicts`。
-
-### 方式三：装成 AI skill（推荐）
-
-仓库自带一个 skill，装上之后**任何支持 skill 的 AI 助手**在遇到视觉/审美类任务时
-会自动查这个库，而不是凭记忆编造流派术语。
-
-```bash
-cd .repo/skill && ./install.sh
-```
-
-仓库提供**两个** skill，一次装好：
-
-| skill | 干什么 | 什么时候触发 |
+| 来源 | 贡献了什么 | 许可 |
 |---|---|---|
-| `art-aesthetic-vault` | **用**库：检索流派、取七层提示词、跨流派拼提示词 | 你问「这个角色该用什么风格」 |
-| `build-art-aesthetic-vault` | **建**库：从零建一套新的 | 你说「我也想要一套这样的库」 |
+| [yang0/handraw-style](https://github.com/yang0/handraw-style) | **274 个手绘风格**与编号参考图，构成本库第 7 大类 | **MIT** |
+| [Vincentwei1021/video-shotcraft](https://github.com/Vincentwei1021/video-shotcraft) | **157 张运镜配方卡**（10 类），本库只做归类与排版 | **Apache-2.0** |
+| [film-grab.com](https://film-grab.com/) | 电影剧照索引；卡片内嵌的代表帧**版权属原片方** | 站点声明：*images are not permitted for commercial use*。仅个人研究参考 |
+| [Tate 艺术术语表](https://www.tate.org.uk/art/art-terms) | 每张流派卡「出处」一节的术语定义页 —— 七层的说法追得到权威出处 | 术语版权归 Tate，本库**仅作出处引用** |
+| [克利夫兰艺术博物馆](https://openaccess-api.clevelandart.org) · [芝加哥艺术博物馆](https://api.artic.edu/docs/) · [大都会艺术博物馆](https://collectionapi.metmuseum.org) · [维基共享资源](https://commons.wikimedia.org) | **452 张公共领域实图** | **CC0 / 公共领域** |
 
-> [!note] 为什么两个 skill 都不自带数据
-> 它们都是**软链**指向本仓库 —— 数据只有仓库这一份。
-> `mv_*.py`（流派定义）如果被打包进 skill，就会出现两份、
-> 必然会分叉。实测过：打包版本里有 4 个文件与仓库不同步，
-> 用它建出来的库分类是错的。
+**三条要说明白的边界**：
 
-它会把这些软链建到本机所有可用的 skill 目录：
+1. **镜头卡不是本库原创。** 那 157 张的技法描述版权归上游（Apache-2.0），
+   本库只做归类与排版，逐卡带上游路径与 commit。上游自己写明：动效手法研究自公开作品，
+   但**实现全部从零重写**、不含任何原片素材；且「公开发布**不等于**授权」。
+   别拿这些卡去复刻某一支具体作品的可辨识整体视听呈现。
+2. **电影剧照版权属原片方。** 卡片内嵌的代表帧仅供**个人研究参考**；
+   film-grab 写明不得商用。公开分发或商用前请自行取得授权。
+3. **「参考作者 / 风格名称」是索引标签**，不是对作者本人的描述，也不是模仿指令。
+   编号参考图只取画风 —— 不要把图里的主体、构图、文字一起搬走。
 
-| 目录 | 谁读它 |
-|---|---|
-| `~/.agents/skills/` | DSH / Codex / 通用约定 |
-| `~/.claude/skills/` | Claude Code |
-| `~/.codex/skills/` | Codex |
-
-**为什么用软链**：skill 可以用 `pwd -P` 解析出自己的真实位置，
-从而推断出仓库根目录 —— **仓库放在哪、移不移动都能自动找到**，不需要任何配置。
-skill 里**没有写死任何路径**。
-
-其他用法：
-
-```bash
-.repo/skill/install.sh --copy        # 复制安装（不用软链，但仓库移动后要重装）
-.repo/skill/install.sh --uninstall   # 卸载
-bash .repo/skill/locate.sh           # 手动定位仓库（排查用）
-```
-
-装完**新开一个 AI 会话**才会生效。
-
-### 方式四：接入 MCP（Claude Desktop / Cursor）
-
-```json
-{
-  "mcpServers": {
-    "artvault": {
-      "command": "python3",
-      "args": ["<本仓库绝对路径>/.repo/mcp_server.py"]
-    }
-  }
-}
-```
-
-暴露 10 个工具：`search_movements` `get_movement` `get_layers` `compose_prompt`
-`get_palette` `find_related` `list_categories` `analyze_image` `match_movement`
-`get_video_prompt`。
-后两个工具另需 Pillow / CLIP 模型；条件不满足时会说明原因，不影响前七个。
+本库自己的部分（七层拆解、卡片结构、CLI / MCP、检索与合成逻辑）以 MIT 发布。
 
 ---
 
-## 它好在哪里
+## 许可
 
-### 1. 不是图包，是可组合的结构
-
-图包给你「这是什么感觉」，这个库给你「怎么做出这种感觉」。
-每一层都可以单独摘出来复用，换主体不换风格层，就是风格迁移模板。
-
-### 2. 光照层被单独拎出来了
-
-大多数人写提示词时把一切混在一起，靠试错调。这个库明确告诉你：
-**光照对最终质感的影响比风格词本身更大。**
-每个流派的光照层都是独立一段，可以直接搬到别的主题上。
-
-### 3. 每个流派都有「针对性负向词」
-
-**针对这个流派的典型翻车点**：
-
-- 印象派 → `black shadows, smooth blending, photorealistic`
-- 文艺复兴 → `visible brushstrokes, impasto`（AI 默认会给油画加厚涂）
-- 浮世绘 → `3d shading, cast shadows, gradient`（AI 会自动加立体感）
-
-**注意不同流派的负向词经常是相反的**——这正是混搭会打架的原因，也是库帮你管住的东西。
-
-### 4. AI 可以用，不只是你能看
-
-大模型对艺术流派的记忆是模糊的，常把 Art Nouveau 和 Art Deco、
-巴比松和印象派搞混。这个库把每个流派的具体术语固化下来，
-AI 调用时不会瞎编。
-
-### 5. 术语是钉住的，不是编的
-
-关键词图谱挑出最容易混的 **4 组**概念 —— 先锋、当代、后现代、超现实。
-每组给一条定义、若干条「它不等于什么」的边界，以及 **46 个**同义说法，
-搜任何一个都落到同一张卡。
-
-### 6. 能扩展
-
-加一个新流派只需要在一个 Python 文件里加一条定义。
-抓图、生成笔记、关键词映射、AI 接口都会自动跟上。
-
-### 7. 每一层的说法都追得到出处
-
-流派卡的「九、出处」逐层列出该概念在权威术语表里的定义页，
-用的是 Tate 的艺术术语词典。
-
-### 8. 你手里那张图，也能直接变成视频提示词
-
-流派卡上的视频提示词是**通用**的 —— 主体那一行是占位符。但你真正要干的事
-通常是「我有这张图，让它动起来」。所以反推卡上的视频块走的是另一条路：
-
-```bash
-python3 i2v_prompt.py 你的图.jpg --slug baroque
-```
-
-主体的景别、在画面哪个位置、画面内部的动势方向、光要不要动、镜头推还是移，
-全部从**这张图的客观测量**推出来（人脸景别 / 显著性中心 / 线条方向 /
-细节密度 / 明暗结构），并附一份「推导依据」让你核对。
-生成出来仍留着「谁、在做什么，你自己补一句」—— 内容只有看图的人知道，
-脚本不替你编。
-
----
-
-## 三条原则
-
-1. **宁可少，不要错。**
-   筛选时刻意不做「放宽补充」——某个流派只有 1 张图就 1 张。
-   一个参考库最怕的不是图少，是图错。错的参考会污染你的直觉，而且你自己不会发现。
-
-2. **光照比风格词更重要。**
-   如果你只有一个层可以调，调光照。
-
-3. **不要凭记忆编造流派术语。**
-   以大模型对艺术流派的记忆为准，容易把相近的画派搞混。以库里的具体术语为准。
+- **代码与卡片文本**：[MIT](LICENSE)
+- **公共领域实图**：CC0 / 公共领域，来源与授权写在每张卡的「出处」一节
+- **handraw-style 编号参考图**：MIT（上游）
+- **镜头配方卡**：Apache-2.0（上游），本库只做归类与排版
+- **电影剧照**：版权属原片方，仅个人研究参考
 
 ---
 

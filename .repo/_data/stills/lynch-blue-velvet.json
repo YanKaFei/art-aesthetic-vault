@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "大卫·林奇",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#B01F1F",
+  "#1F3A8C",
+  "#2E4A2E",
+  "#F2F2F0",
+  "#141618",
+  "#6B4A2B"
+ ],
+ "palette_written_named": [
+  [
+   "#B01F1F",
+   "艳红"
+  ],
+  [
+   "#1F3A8C",
+   "宝蓝"
+  ],
+  [
+   "#2E4A2E",
+   "暗绿草坪"
+  ],
+  [
+   "#F2F2F0",
+   "白栅栏"
+  ],
+  [
+   "#141618",
+   "夜黑"
+  ],
+  [
+   "#6B4A2B",
+   "木褐"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "lynch-blue-velvet",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "蓝丝绒",
+ "total_linked": 61
+}

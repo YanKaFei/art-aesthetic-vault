@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "黑泽明",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#0F0F0F",
+  "#3E3E38",
+  "#6E6E64",
+  "#A8A89C",
+  "#E8E8E0",
+  "#55503E"
+ ],
+ "palette_written_named": [
+  [
+   "#0F0F0F",
+   "树影黑"
+  ],
+  [
+   "#3E3E38",
+   "林间灰"
+  ],
+  [
+   "#6E6E64",
+   "土灰"
+  ],
+  [
+   "#A8A89C",
+   "麻布米"
+  ],
+  [
+   "#E8E8E0",
+   "过曝天光"
+  ],
+  [
+   "#55503E",
+   "树皮褐"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "kurosawa-rashomon",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "罗生门",
+ "total_linked": 64
+}

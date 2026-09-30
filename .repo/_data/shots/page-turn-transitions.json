@@ -1,0 +1,48 @@
+{
+ "category": "transition",
+ "duration": "单式 前态建立 30f + 转场 20–38f + 收尾 ≥40f，约 4.4–4.7s",
+ "energy": "中高",
+ "intent": "shot-transitions 六式和 transition-travel/hidden-cut 都把页面当\"场景\"\n——相机在场景间移动。本卡把页面当**实体**：它有厚度、有重量、会翻面\n会裂开。体块隐喻的仪式感更强，适合章节级大换页（功能 A 讲完→功能 B）\n而非镜头级小交棒。A 立方体是\"空间上并列\"——两页是盒子的两面，\n暗示同级关系；B 对开门是\"旧的让位\"——旧页从正中撕开滑走、新页\n从底下迎上来，暗示取代关系。按语义选：并列翻篇用 A，新旧交替用 B。",
+ "license": "Apache-2.0",
+ "motion": "| 式 | 做法 | 适用 |\n|----|------|------|\n| A cube-rotate | 两页贴立方体相邻面（rotateY 0/90° + translateZ W/2），场景层转 -90°；旧面转出压暗、新面转进变亮，45° 时两面夹一条暗棱 | 并列章节翻篇；产品两大功能区切换 |\n| B barn-door-split | 旧页两个 960px overflow 容器对位拼合，同时向外 Easing.in(cubic) 滑出画外；裂缝内边缘亮线+投影，新页底层 scale 1.06→1 迎上 | 新旧交替：改版前后、方案 A→方案 B |",
+ "name": "page-turn-transitions",
+ "one_liner": "整页体块转场两式——cube-rotate 立方体翻转（两页贴盒子相邻面转 90°）与 barn-door-split 对开门裂幕（旧页裂两半滑出、新页迎上）",
+ "params": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| A 结构命门 | 场景层 `translateZ(−W/2) rotateY(θ)` 把正面拉回 z=0 | 少了这层 hold 段页面尺度不对（被 perspective 推远） |\n| A 转速 | θ 0→−90° / 38f inOut cubic；中段叠 blur 1.5px 落定摘 | <28f 读不出体块感；>50f 读作慢慢挪 |\n| A 亮度对切 | 旧面 1→0.55、新面 0.55→1 + 接缝竖向渐变阴影 sin(pπ) | 无明暗对切两面读作同一张图在转 |\n| B 预告 | 裂前中缝 2px 细线闪现两次（18–22/25–29f） | 直接裂开观众没看到裂点在哪 |\n| B 滑出 | 各 translateX ∓980px / 20f Easing.in(cubic) 加速 | ease-out 滑出是\"被推走\"，ease-in 才是\"让位\" |\n| B 撕裂边 | 内边缘 3px G.ink 亮线 + 8px 投影 | 无边线两半读作普通左右擦除 |\n| 收尾 | 新页落定真静止 ≥40f | R1 |",
+ "path": "references/shots/transition/page-turn-transitions.md",
+ "pitfalls": "- demo 在灰阶/占位素材上调校通过——参数是调校起点非实战定稿，\n  首次实战须以真实素材回验\n- 一缝一式规矩同 shot-transitions；体块转场比镜头交棒更重，\n  **全片 ≤2 次**，连续两缝都用体块读作 PPT 翻页\n- A 式官方 `@remotion/transitions` cube() 是付费件——本卡是 CSS 自实现，\n  backlog 已有\"评估官方转场原语\"待选项，若引入官方件可对照\n- B 式两半必须**对位拼合无缝**（右半内层 translateX(−960px)）——\n  静止时看出接缝就穿帮；真实截图注意奇数宽度取整\n- 转场前后两页都要有 ≥30f 静止建立/收尾——两端都在动，体块感被\n  运动淹没",
+ "purpose": "章节级换页：两个并列大段落之间的\"翻篇\"仪式；与 shot-transitions 系（镜头交棒）分工——那是\"航拍机移过去\"，这是\"页面自己是实体\"",
+ "reference": "demos/transition/page-turn-transitions/\n（BarnDoorSplit.tsx / CubeRotate.tsx）",
+ "sections": [
+  {
+   "body": "shot-transitions 六式和 transition-travel/hidden-cut 都把页面当\"场景\"\n——相机在场景间移动。本卡把页面当**实体**：它有厚度、有重量、会翻面\n会裂开。体块隐喻的仪式感更强，适合章节级大换页（功能 A 讲完→功能 B）\n而非镜头级小交棒。A 立方体是\"空间上并列\"——两页是盒子的两面，\n暗示同级关系；B 对开门是\"旧的让位\"——旧页从正中撕开滑走、新页\n从底下迎上来，暗示取代关系。按语义选：并列翻篇用 A，新旧交替用 B。",
+   "key": "intent",
+   "title": "意图"
+  },
+  {
+   "body": "| 式 | 做法 | 适用 |\n|----|------|------|\n| A cube-rotate | 两页贴立方体相邻面（rotateY 0/90° + translateZ W/2），场景层转 -90°；旧面转出压暗、新面转进变亮，45° 时两面夹一条暗棱 | 并列章节翻篇；产品两大功能区切换 |\n| B barn-door-split | 旧页两个 960px overflow 容器对位拼合，同时向外 Easing.in(cubic) 滑出画外；裂缝内边缘亮线+投影，新页底层 scale 1.06→1 迎上 | 新旧交替：改版前后、方案 A→方案 B |",
+   "key": "motion",
+   "title": "两式选型"
+  },
+  {
+   "body": "| 参数 | 典型值 | 调节手感 |\n|------|--------|----------|\n| A 结构命门 | 场景层 `translateZ(−W/2) rotateY(θ)` 把正面拉回 z=0 | 少了这层 hold 段页面尺度不对（被 perspective 推远） |\n| A 转速 | θ 0→−90° / 38f inOut cubic；中段叠 blur 1.5px 落定摘 | <28f 读不出体块感；>50f 读作慢慢挪 |\n| A 亮度对切 | 旧面 1→0.55、新面 0.55→1 + 接缝竖向渐变阴影 sin(pπ) | 无明暗对切两面读作同一张图在转 |\n| B 预告 | 裂前中缝 2px 细线闪现两次（18–22/25–29f） | 直接裂开观众没看到裂点在哪 |\n| B 滑出 | 各 translateX ∓980px / 20f Easing.in(cubic) 加速 | ease-out 滑出是\"被推走\"，ease-in 才是\"让位\" |\n| B 撕裂边 | 内边缘 3px G.ink 亮线 + 8px 投影 | 无边线两半读作普通左右擦除 |\n| 收尾 | 新页落定真静止 ≥40f | R1 |",
+   "key": "params",
+   "title": "参数表"
+  },
+  {
+   "body": "- demo 在灰阶/占位素材上调校通过——参数是调校起点非实战定稿，\n  首次实战须以真实素材回验\n- 一缝一式规矩同 shot-transitions；体块转场比镜头交棒更重，\n  **全片 ≤2 次**，连续两缝都用体块读作 PPT 翻页\n- A 式官方 `@remotion/transitions` cube() 是付费件——本卡是 CSS 自实现，\n  backlog 已有\"评估官方转场原语\"待选项，若引入官方件可对照\n- B 式两半必须**对位拼合无缝**（右半内层 translateX(−960px)）——\n  静止时看出接缝就穿帮；真实截图注意奇数宽度取整\n- 转场前后两页都要有 ≥30f 静止建立/收尾——两端都在动，体块感被\n  运动淹没",
+   "key": "pitfalls",
+   "title": "已知坑"
+  },
+  {
+   "body": "demos/transition/page-turn-transitions/\n（BarnDoorSplit.tsx / CubeRotate.tsx）",
+   "key": "reference",
+   "title": "参考实现"
+  }
+ ],
+ "slug": "page-turn-transitions",
+ "source_commit": "5e71af35a2daee492dd3ea93e5e8903f32dcd13c",
+ "source_path": "references/shots/transition/page-turn-transitions.md",
+ "source_repo": "Vincentwei1021/video-shotcraft",
+ "source_url": "https://github.com/Vincentwei1021/video-shotcraft",
+ "tags": []
+}

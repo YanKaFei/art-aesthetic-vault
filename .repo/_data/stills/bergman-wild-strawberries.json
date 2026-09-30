@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "英格玛·伯格曼",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#E8E8E4",
+  "#0A0A0A",
+  "#8C8C86",
+  "#3E3A34",
+  "#C4C0B4",
+  "#5E5A54"
+ ],
+ "palette_written_named": [
+  [
+   "#E8E8E4",
+   "梦境过曝白"
+  ],
+  [
+   "#0A0A0A",
+   "剪影黑"
+  ],
+  [
+   "#8C8C86",
+   "现实中灰"
+  ],
+  [
+   "#3E3A34",
+   "暗褐"
+  ],
+  [
+   "#C4C0B4",
+   "帘布米"
+  ],
+  [
+   "#5E5A54",
+   "石街灰"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "bergman-wild-strawberries",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "野草莓",
+ "total_linked": 65
+}

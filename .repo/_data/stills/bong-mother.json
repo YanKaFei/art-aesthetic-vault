@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "奉俊昊",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#4E6B3A",
+  "#A8843C",
+  "#5A6B78",
+  "#3E3A34",
+  "#C4C0B4",
+  "#141618"
+ ],
+ "palette_written_named": [
+  [
+   "#4E6B3A",
+   "草药绿"
+  ],
+  [
+   "#A8843C",
+   "土黄"
+  ],
+  [
+   "#5A6B78",
+   "灰蓝"
+  ],
+  [
+   "#3E3A34",
+   "暗褐"
+  ],
+  [
+   "#C4C0B4",
+   "干草米"
+  ],
+  [
+   "#141618",
+   "暗部黑"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "bong-mother",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "母亲",
+ "total_linked": 53
+}

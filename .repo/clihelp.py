@@ -5,7 +5,7 @@
 为什么需要这一个模块：本仓库早期几个脚本用「argv 里不是 -- 开头的东西就是
 流派名」这种手写解析，于是**不认识 `--help`，把它当成普通参数往下走**：
 
-    python3 build_vault.py --help   →  真的重建了整个仓库（141 张卡片全部重写）
+    python3 build_vault.py --help   →  真的重建了整个仓库（全部卡片重写）
     python3 fetch_art.py --help     →  真的开始联网抓图
     python3 mcp_server.py --help    →  真的起了一个 stdio MCP 服务，卡住不返回
     python3 video_prompt.py --help  →  报「未知流派: --help」

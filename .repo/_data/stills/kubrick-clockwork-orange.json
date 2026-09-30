@@ -1,0 +1,62 @@
+{
+ "aggregate": {},
+ "director_zh": "斯坦利·库布里克",
+ "local_files": 0,
+ "measured": 0,
+ "palette_diff": {
+  "distance": null,
+  "pairs": [],
+  "verdict": "无法比对（缺一侧）",
+  "距离": null
+ },
+ "palette_measured": [],
+ "palette_written": [
+  "#F2F2F0",
+  "#D97426",
+  "#1F3A6E",
+  "#4E8C3A",
+  "#121212",
+  "#B0241F"
+ ],
+ "palette_written_named": [
+  [
+   "#F2F2F0",
+   "纯白"
+  ],
+  [
+   "#D97426",
+   "橙红"
+  ],
+  [
+   "#1F3A6E",
+   "钴蓝"
+  ],
+  [
+   "#4E8C3A",
+   "草绿"
+  ],
+  [
+   "#121212",
+   "黑"
+  ],
+  [
+   "#B0241F",
+   "正红"
+  ]
+ ],
+ "representative": [],
+ "schema": 3,
+ "skipped": [],
+ "slug": "kubrick-clockwork-orange",
+ "stability": {
+  "all_mean": null,
+  "delta_luminance": null,
+  "delta_saturation": null,
+  "first_quarter_mean": null,
+  "n": 0,
+  "verdict": "样本还太少，别下结论"
+ },
+ "stills": [],
+ "title_zh": "发条橙",
+ "total_linked": 64
+}
