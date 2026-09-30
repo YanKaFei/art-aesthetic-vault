@@ -1,10 +1,14 @@
 name: CI
 
-# 这个仓库有两层检查，职责不重叠：
-#   tests/smoke_test.py   把命令真的跑一遍 —— 退出码、副作用、可复现性、发布卫生
-#   _scripts/verify_vault.py  查内容一致性 —— 断链、授权、README 数字、双链
-# 两层都要跑。曾经 README 虚报 48% 的 bug 穿过了当时的全部验收，
+# 这个仓库有三层检查，职责不重叠：
+#   .repo/tests/smoke_test.py       把命令真的跑一遍 —— 退出码、副作用、可复现性、发布卫生
+#   .repo/verify_vault.py           查内容一致性 —— 断链、授权、README 数字、双链
+#   .repo/tests/readme_i18n_test.py 查四语 README —— 都在、互相链得上、数字都被守着、配图可复现
+# 三层都要跑。曾经 README 虚报 48% 的 bug 穿过了当时的全部验收，
 # 就是因为那些检查都在「读文件」，没有一项会真的执行一遍。
+#
+# 第三层是加日/法两份 README 时补的：多一份 README 就是多一处会漂移的说法，
+# 而**单语读者永远看不见漂移**（他只看自己那份）。
 #
 # 零 pip 安装是**故意**的：本仓库的卖点之一是核心只用标准库，
 # 那么 CI 也必须能在不装任何东西的情况下跑通 —— 否则环境差异会伪装成代码问题。
@@ -39,10 +43,13 @@ jobs:
           uname -a
 
       - name: 冒烟测试（真的执行命令）
-        run: python tests/smoke_test.py -v
+        run: python .repo/tests/smoke_test.py -v
 
       - name: 验收（内容一致性）
-        run: python _scripts/verify_vault.py
+        run: python .repo/verify_vault.py
+
+      - name: 四语 README（都在、互链、数字有人守、配图有出处）
+        run: python .repo/tests/readme_i18n_test.py -v
 
       - name: 发布卫生 —— 仓库里不许有个人绝对路径
         if: runner.os == 'Linux'
