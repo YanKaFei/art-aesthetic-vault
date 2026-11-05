@@ -479,3 +479,15 @@ MIT で公開します。
 このライブラリが役に立ったら、Star ⭐ や PR での流派追加を歓迎します
 
 </div>
+
+<p align="center" data-ecosystem-nav="1"><sub><a href="https://github.com/YanKaFei/Costume-Director-Vault-Starter">Costume</a> · <a href="https://github.com/YanKaFei/art-aesthetic-vault">Art</a> · <a href="https://github.com/YanKaFei/ascii-cinema-engine">ASCII Cinema</a> · <a href="https://github.com/YanKaFei/ascii-h3-director">ASCII H3</a> · <a href="https://github.com/YanKaFei/2d-limited-mv-studio">2D MV</a> · <a href="https://github.com/YanKaFei/virtual-heroine-atlas">Virtual Heroine</a></sub></p>
+
+
+## DSH ecosystem
+
+- [Costume](https://github.com/YanKaFei/Costume-Director-Vault-Starter) — 衣装の視覚知識
+- [Art](https://github.com/YanKaFei/art-aesthetic-vault) — 美術・映画スタイルのレイヤー
+- [ASCII Cinema](https://github.com/YanKaFei/ascii-cinema-engine) — 文字グリッド・シネマ
+- [ASCII H3](https://github.com/YanKaFei/ascii-h3-director) — ASCII / キネティック・タイポグラフィ演出
+- [2D MV](https://github.com/YanKaFei/2d-limited-mv-studio) — 2D アニメ MV プロンプト
+- [Virtual Heroine](https://github.com/YanKaFei/virtual-heroine-atlas) — バーチャルキャラクター研究
