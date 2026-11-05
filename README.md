@@ -14,7 +14,7 @@
 
 `421 个画派` · `274 个手绘风格` · `100 部电影` · `157 张运镜配方` · `686 篇笔记` · `746 张图`
 
-[English](README.en.md) ｜ [日本語](README.ja.md) ｜ [Français](README.fr.md) ｜ **中文**
+[English](README.en.md) ｜ [한국어](README.ko.md) ｜ [日本語](README.ja.md) ｜ [Français](README.fr.md) ｜ **中文**
 
 </div>
 
