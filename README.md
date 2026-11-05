@@ -446,3 +446,12 @@ README 上每一个「这个库有多少东西」的数字，都由 `publish_sta
 如果这个库对你有用，欢迎 Star ⭐ 或提交 PR 补充更多流派
 
 </div>
+
+## DSH ecosystem
+
+- [Costume Director Vault Starter](https://github.com/YanKaFei/Costume-Director-Vault-Starter) — costume visual knowledge skill
+- [Art Aesthetic Vault](https://github.com/YanKaFei/art-aesthetic-vault) — visual style layers
+- [ASCII H3 Director](https://github.com/YanKaFei/ascii-h3-director) — ASCII / kinetic-typography direction
+- [2D Limited MV Studio](https://github.com/YanKaFei/2d-limited-mv-studio) — 2D anime MV prompt package
+- [Virtual Heroine Atlas](https://github.com/YanKaFei/virtual-heroine-atlas) — virtual character design research
+- [SmartStaff AI](https://github.com/YanKaFei/smartstaff-ai-deepseek-plugin) — restaurant workforce SaaS test framework
